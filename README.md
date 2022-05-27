@@ -29,3 +29,6 @@ CPSC 455 2022S **Team 405 Found**
    - [ ] Link with Google Map API to show instructors nearby me
    - [ ] User quiz and recommend a instructor
    - [ ] Write comments/reviews anonymously, and anonymous posts are only visible to us
+
+## Sketch
+![Screenshot](mainPage.png)
