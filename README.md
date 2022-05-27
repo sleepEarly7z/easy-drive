@@ -32,3 +32,6 @@ CPSC 455 2022S **Team 405 Found**
 
 ## Sketch
 ![Screenshot](mainPage.png)
+![MainpageScrolldown](Mainpage-Scrolldown.png)
+![Profile-Intructor](Profile-Intructor.png)
+![Viewpage-InstructorInfoReview](Viewpage-InstructorInfoReview.png)
