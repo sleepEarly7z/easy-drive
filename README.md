@@ -8,27 +8,27 @@ CPSC 455 2022S **Team 405 Found**
 
 ## Project Task Requirements
 **Minimal Requirements**
-  - [ ] Adding/Deleting/Modifiying new instructor profiles
-  - [ ] Adding/Deleting/Modifiying a review 
-  - [ ] User registration/login/authentication
- - [ ] Main page to show all the instructors
-  - [ ] Student profile page (editing profile, see all the reviews)
+  - [ ] Have instructor/student profile pages
+  - [ ] Display instructors' reviews
+  - [ ] Implement React sliding window effect in the main page
+  - [ ] Display instructor profile cards in the main page
+  - [ ] Have a sign-in/sign-up page
 
 **Standard Requirements**
-
+  - [ ] User registration/login/authentication
+  - [ ] Edit instructor/student profile page
+  - [ ] Add/Delete/Update user reviews
+  - [ ] Like and save instructors to "My Favourite Instructors List"
   - [ ] Filter instructors according to a search criteria
-  - [ ] Instructor profile page (editing profile)
-  - [ ]  Like and save instructors to "My Favourite Instructors List"
-  - [ ]  Advanced search for instructors
-  - [ ]  List instructor availability in a calendar view
-  - [ ]  Link instructors to driving school/company\
+  - [ ] Sort reviews according to rating
+  - [ ] List instructor availability in a calendar view
  
  **Stretch Requirements**
  
-
-   - [ ] Link with Google Map API to show instructors nearby me
-   - [ ] User quiz and recommend a instructor
-   - [ ] Write comments/reviews anonymously, and anonymous posts are only visible to us
+  - [ ] Contact instructor panel
+  - [ ] Link with map API to show instructors nearby me
+  - [ ] User quiz and recommend a instructor (ML/AI)
+  - [ ] Write comments/reviews anonymously, and anonymous posts are only visible to us
 
 ## Sketch
 ![Screenshot](mainPage.png)
