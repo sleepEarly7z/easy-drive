@@ -11,7 +11,7 @@ CPSC 455 2022S **Team 405 Found**
   - [ ] Have instructor/student profile pages
   - [ ] Display instructors' reviews
   - [ ] Implement React sliding window effect in the main page
-  - [ ] Display instructor profile cards in the main page
+  - [ ] Main page to show the instructors profile cards
   - [ ] Have a sign-in/sign-up page
 
 **Standard Requirements**
@@ -33,7 +33,7 @@ CPSC 455 2022S **Team 405 Found**
 
 ## Requirements breakdown
 
-  - [ ] Main page to show all the instructors
+  - [ ] Main page to show the instructors profile cards
     - Have a Search bar
     - Display Top 3 recommended instructor profile card on the top of main page using React sliding window effect
     - Add filter panel on the left of webpage to help users search for ideal instructors
