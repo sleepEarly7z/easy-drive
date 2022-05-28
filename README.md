@@ -29,33 +29,39 @@ CPSC 455 2022S **Team 405 Found**
   - [ ] Link with map API to show instructors nearby me
   - [ ] User quiz and recommend a instructor (ML/AI)
   - [ ] Write comments/reviews anonymously, and anonymous posts are only visible to us
+  - [ ] Implement an instructor profile page preview
 
 ## Requirements breakdown
+
   - [ ] Main page to show all the instructors
-    - Display Top 3 recommended instructor profile card on the top of main page
+    - Have a Search bar
+    - Display Top 3 recommended instructor profile card on the top of main page using React sliding window effect
     - Add filter panel on the left of webpage to help users search for ideal instructors
     - Diplay query results based on filters
+    - Click on cards and redirect to instructors' review pages
+  - [ ] Have instructor/student profile pages
+    - Display user's name, language, location, availibility, contact email, and etc in the profile page
+    - Be able to edit user's personal information
+    - Upload/Update user's profile image
+    - Have a tab to view student's favourite instructors
+    - Have a tab to view student's written reviews
+
+## Future requirements breakdown
+  - [ ] Edit a review 
+    - Add a review in the instructor's profile page listed in the mainpage
+    - Rate the instructor in the instructor's profile page listed in the mainpage
+  - [ ] Adding/Deleting/Modifiying new instructor profiles
+    - Display instructor's name, language, location, availibility, contact email, and etc in the profile page
+    - Edit instructor's personal information
+    - Upload/Update instructor's profile image
   - [ ] User registration/login/authentication
     - Register with email and password as student/instructor
     - Register with google account as student/instructor
     - Login with email and password as student/instructor
     - Login with google account as student/instructor
-  - [ ] Adding/Deleting/Modifiying new instructor profiles
-    - Display instructor's name, language, location, availibility, contact email, and etc in the profile page
-    - Edit instructor's personal information
-    - Upload/Update instructor's profile image
-  - [ ] Student profile page (editing profile, see all the reviews)
-    - Display student's name, language, location, availibility, contact email, and etc in the profile page
-    - Edit student's personal information
-    - Upload/Update student's profile image
-    - Have a tab to view student's favourite instructors
-    - Have a tab to view student's written reviews
-  - [ ] Edit a review 
-    - Add a review in the instructor's profile page listed in the mainpage
-    - Rate the instructor in the instructor's profile page listed in the mainpage
-    
+
 ## Sketch
-![Screenshot](mainPage.png)
-![MainpageScrolldown](Mainpage-Scrolldown.png)
-![Profile-Intructor](Profile-Intructor.png)
-![Viewpage-InstructorInfoReview](Viewpage-InstructorInfoReview.png)
+![Screenshot](/docs/mainPage.png)
+![MainpageScrolldown](/docs/Mainpage-Scrolldown.png)
+![Profile-Intructor](/docs/Profile-Intructor.png)
+![Viewpage-InstructorInfoReview](/docs/Viewpage-InstructorInfoReview.png)
