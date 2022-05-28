@@ -30,5 +30,32 @@ CPSC 455 2022S **Team 405 Found**
   - [ ] User quiz and recommend a instructor (ML/AI)
   - [ ] Write comments/reviews anonymously, and anonymous posts are only visible to us
 
+## Requirements breakdown
+  - [ ] Main page to show all the instructors
+    - Display Top 3 recommended instructor profile card on the top of main page
+    - Add filter panel on the left of webpage to help users search for ideal instructors
+    - Diplay query results based on filters
+  - [ ] User registration/login/authentication
+    - Register with email and password as student/instructor
+    - Register with google account as student/instructor
+    - Login with email and password as student/instructor
+    - Login with google account as student/instructor
+  - [ ] Adding/Deleting/Modifiying new instructor profiles
+    - Display instructor's name, language, location, availibility, contact email, and etc in the profile page
+    - Edit instructor's personal information
+    - Upload/Update instructor's profile image
+  - [ ] Student profile page (editing profile, see all the reviews)
+    - Display student's name, language, location, availibility, contact email, and etc in the profile page
+    - Edit student's personal information
+    - Upload/Update student's profile image
+    - Have a tab to view student's favourite instructors
+    - Have a tab to view student's written reviews
+  - [ ] Edit a review 
+    - Add a review in the instructor's profile page listed in the mainpage
+    - Rate the instructor in the instructor's profile page listed in the mainpage
+    
 ## Sketch
 ![Screenshot](mainPage.png)
+![MainpageScrolldown](Mainpage-Scrolldown.png)
+![Profile-Intructor](Profile-Intructor.png)
+![Viewpage-InstructorInfoReview](Viewpage-InstructorInfoReview.png)
