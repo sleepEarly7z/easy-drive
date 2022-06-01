@@ -1,0 +1,27 @@
+$primary-color: #F88AB4;
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('./assets/fonts/helvetica-neu.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: 'La Belle Aurore';
+    src: url('./assets/fonts/LaBelleAurore.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Coolvetica';
+    src: url('./assets/fonts/CoolveticaRg-Regular.woff2') format('woff2');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap');
+  
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&family=Pacifico&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Kaushan+Script&family=Montserrat+Alternates:wght@500&family=Pacifico&display=swap');
+
+input,
+textarea {
+  font-family: 'Helvetica Neue', sans-serif;
+}
