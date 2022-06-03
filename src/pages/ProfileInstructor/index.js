@@ -11,9 +11,14 @@ const ProfileInstructor = () => {
         </div>
         <div className='sideAndInfo'>
             <SidebarInstructor />
+            <div className='sideAndInfo2'>
             <InformationInstructor />
-            <InstructorViewedReviews/>
         </div>
+        </div>
+        
+        {/* <div className='sideAndInfo' style="position:relative; left:80px; top:2px;">
+            <InformationInstructor />
+        </div> */}
       </>
   )
 }
