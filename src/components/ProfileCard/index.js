@@ -1,7 +1,7 @@
 import './index.scss'
 import React, { useState } from 'react'
 
-function ProfileCard ({name,location,years,rate}) {
+function ProfileCard ({name,location,years,rate,imgSrc}) {
     const [rating, setRating] = useState(rate);
     const [hover, setHover] = useState(rate);
 
@@ -9,7 +9,7 @@ function ProfileCard ({name,location,years,rate}) {
         <div className='ProfileCard'>
             <div className='upper-container'>
                 <div className='image-container'>
-                    <img src={require("./you're tricked.png")} alt='profilePicture' height='100px' width='100px' />
+                    <img src={imgSrc} alt='profilePicture' height='100px' width='100px' />
                 </div>
             </div>
             <div className="lower-container">
