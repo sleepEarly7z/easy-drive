@@ -6,9 +6,9 @@ const FilterList = () => {
       <>
         <div className='FilterList'>
             <h1>FilterList</h1>
-            <ProfileCard />
-            <ProfileCard />
-            <ProfileCard />
+            <ProfileCard /><br />
+            <ProfileCard /><br />
+            <ProfileCard /><br />
         </div>
       </>
   )
