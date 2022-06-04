@@ -14,9 +14,6 @@ const Home = () => {
               <Slider />
               <FilterPanel />
               <FilterList />
-              {/* TODO: can write ReviewForm and ReviewList into one component or not */}
-              <ReviewForm />
-              <ReviewList />
           </div>
       </>
   )
