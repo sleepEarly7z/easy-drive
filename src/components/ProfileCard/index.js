@@ -1,13 +1,9 @@
 import './index.scss'
 import React, { useState } from 'react'
 
-const ProfileCard = () => {
-    const [name, setName] = useState('Name: Rick Astley');
-    const [location, setLocation] = useState('Location: Earth');
-    const [years, setYears] = useState('Years of Experience: 10+years');
-    const [rate, setRate] = useState('Rate: ');
-    const [rating, setRating] = useState(0);
-    const [hover, setHover] = useState(0);
+function ProfileCard ({name,location,years,rate}) {
+    const [rating, setRating] = useState(rate);
+    const [hover, setHover] = useState(rate);
 
     return (
         <div className='ProfileCard'>
@@ -17,11 +13,11 @@ const ProfileCard = () => {
                 </div>
             </div>
             <div className="lower-container">
-                <h2> {name} </h2>
-                <h4> {location} </h4>
-                <h4> {years} </h4>
+                <h2> {"Name: " + name} </h2>
+                <h4> {"Location: " + location} </h4>
+                <h4> {"Years of Experience: " + years} </h4>
                 <div className="star-rating">
-                    {rate}
+                    {"Rate: "}
                     {[...Array(5)].map((star, index) => {
                         index += 1;
                         return (
@@ -41,8 +37,8 @@ const ProfileCard = () => {
 
             </div>
             <div className='buttons'>
-                <button>See Profile</button><br />
-                <button>Add as favourite</button>
+                <button className='profileButton'>See Profile</button><br />
+                <button className='favouriteButton'>Add as favourite</button>
             </div>
         </div>
     )

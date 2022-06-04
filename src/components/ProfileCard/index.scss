@@ -1,7 +1,7 @@
 .ProfileCard {
     // font-family: 'Kaushan Script', cursive;
     display:flex;
-    width:60%;
+    width:95%;
     height:200px;
     background:white;
     border-radius:10px;
@@ -47,10 +47,16 @@ img{
 }
 .buttons{
     display:flex;
-    width:20%;
+    width:23%;
     flex-direction: column;
     justify-content: center;
 }
+// .profileButton{
+//     width:90%;
+// }
+// .favouriteButton{
+//     width:90%;
+// }
 .star-rating{
     color:purple;
     font-weight: 600;
@@ -70,4 +76,40 @@ img{
     outline: none;
     cursor: pointer;
     color: #ccc;
+}
+.profileButton{
+    width:90%;
+    height:20%;
+    color:black;
+    font:bold;
+    background-color:white;
+    border: 2px solid #8e00b9;
+    padding:0.4rem;
+    border-radius:6px;
+    transition-duration:0.5s;
+    animation:ease-in-out;
+}
+.profileButton:hover{
+    background: linear-gradient(to left, #2d00f7, #ff0291);
+    transform: scale(1.2);
+    border: none;
+    color:white;
+}
+.favouriteButton{
+    width:90%;
+    height:20%;
+    color:black;
+    font:bold;
+    background-color:white;
+    border: 2px solid #8e00b9;
+    padding:0.4rem;
+    border-radius:6px;
+    transition-duration:0.5s;
+    animation:ease-in-out;
+}
+.favouriteButton:hover{
+    background: linear-gradient(to left, #2d00f7, #ff0291);
+    transform: scale(1.2);
+    border: none;
+    color:white;
 }
