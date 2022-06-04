@@ -1,3 +1,45 @@
 .ProfileCard {
-    font-family: 'Kaushan Script', cursive;
+    // font-family: 'Kaushan Script', cursive;
+    margin-right: 1%;
+    width:60%;
+    height:480px;
+    background:white;
+    border-radius:10px;
+    box-shadow: 0px 1px 10px 1px black;
+}
+.upper-container{
+    height: 100px;
+    background: linear-gradient(to left, #2d00f7, #ff0291)
+}
+.image-container img{
+    background: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding:5px;
+    transform: translate(100%,100%);
+}
+img{
+    border: 2px solid #8e00b9;
+}
+.lower-container{
+    margin-top:60px;
+    height:300px;
+    background: white;
+    text-align:center;
+    font-family: 'Titillium Web',sans-serif;
+}
+.lower-container h3, h4, p{
+    margin:0;
+    padding: 0;
+}
+.lower-container h3 {
+    color:black;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+.lower-container h4 {
+    color:purple;
+    font-weight: 600;
+    font-size: 1.5rem;
 }
