@@ -16,9 +16,9 @@ const ProfileInstructor = () => {
         </div>
         </div>
         
-        {/* <div className='sideAndInfo' style="position:relative; left:80px; top:2px;">
-            <InformationInstructor />
-        </div> */}
+        <div>
+            <InstructorViewedReviews />
+        </div>
       </>
   )
 }
