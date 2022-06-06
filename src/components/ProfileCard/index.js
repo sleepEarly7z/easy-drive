@@ -36,7 +36,7 @@ function ProfileCard ({name,location,years,rate,imgSrc}) {
                 </div>
 
             </div>
-            <div className='buttons'>
+            <div className='profilecard-buttons'>
                 <button className='profileButton'>See Profile</button><br />
                 <button className='favouriteButton'>Add as favourite</button>
             </div>

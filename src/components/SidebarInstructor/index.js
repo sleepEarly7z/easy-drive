@@ -10,7 +10,7 @@ const SidebarInstructor = () => {
 	<h6>Vancouver</h6>
 	<p>xxx@gmail.com</p>
   <p>604-123-4567</p>
-	<div class="buttons">
+	<div class="sidebarstudent-buttons">
     <div>
       <button class="primary">
         My profile
