@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 // https://codepen.io/FlorinPop17/pen/EJKgKB
-* {
-	box-sizing: border-box;
-}
+// * {
+// 	box-sizing: border-box;
+// }
 
 
 h3 {
@@ -51,7 +51,7 @@ p {
 	padding: 7px;
 }
 
-button.primary {
+.primary {
 	background-color: #03BFCB;
 	border: 1px solid #03BFCB;
 	border-radius: 3px;
@@ -61,7 +61,7 @@ button.primary {
 	padding: 10px 25px;
 }
 
-button.primary.ghost {
+.primary.ghost {
 	background-color: transparent;
 	color: #02899C;
 }
