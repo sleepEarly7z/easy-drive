@@ -7,8 +7,12 @@ const ProfileStudent = () => {
       <>
         <div className='ProfileStudent'>
             <h1>ProfileStudent</h1>
+        </div>
+        <div className='sideAndInfo'>
             <SidebarStudent />
+            <div className='sideAndInfo2'>
             <InformationStudent />
+        </div>
         </div>
       </>
   )
