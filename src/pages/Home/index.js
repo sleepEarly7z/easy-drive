@@ -1,6 +1,6 @@
 import './index.scss'
 import Slider from '../../components/Slider'
-import FilterPanel from '../../components/FilterPanel'
+import FilterPanel from '../../components/FilterPanel/FilterPanel'
 import FilterList from '../../components/FilterList'
 import ReviewForm from '../../components/ReviewForm'
 import ReviewList from '../../components/ReviewList'

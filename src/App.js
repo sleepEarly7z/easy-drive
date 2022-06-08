@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.scss';
-import {Routes, Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Layout from './pages/Layout';
 import Home from './pages/Home';
 import ProfileRateReview from './pages/ProfileRateReview';
@@ -21,14 +20,14 @@ function App() {
           <Route index element={<Home />} />
           <Route path='profile-ratereview' element={<ProfileRateReview />} />
           <Route path="explore" element={<Explore />} />
-          
-            <Route path="about" element={<About />} /> 
-         
+
+          <Route path="about" element={<About />} />
+
           {/* <Route path='/profilestudent' element={<PrivateRoute />}> */}
-            <Route path='profile-student' element={<ProfileStudent />} />
+          <Route path='profile-student' element={<ProfileStudent />} />
           {/* </Route> */}
           {/* <Route path='/profileinstructor' element={<PrivateRoute />}> */}
-            <Route path='profile-instructor' element={<ProfileInstructor />} />
+          <Route path='profile-instructor' element={<ProfileInstructor />} />
           {/* </Route> */}
           <Route path="sign-in" element={<SignIn />} />
           <Route path="sign-up" element={<SignUp />} />
