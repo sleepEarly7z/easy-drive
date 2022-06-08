@@ -1,35 +1,57 @@
-import { NavLink } from 'react-router-dom'
-import './index.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faList, faUser, faQuestion } from '@fortawesome/free-solid-svg-icons'
+import React, { useState } from "react";
+import "./index.scss";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  const [showMediaIcons, setShowMediaIcons] = useState(false);
   return (
     <>
-        <div className='nav-bar'>
-            <nav className='left-top'>
-                <NavLink exact="true" activeclassname="active" className="home-link" to="/">
-                    <FontAwesomeIcon icon={faHome} color="#ffffff" size="2x" />
-                </NavLink>
-                <NavLink exact="true" activeclassname="active" className="list-link" to="/explore">
-                    <FontAwesomeIcon icon={faList} color="#ffffff" size="2x" />
-                </NavLink>
-            </nav>
-            <nav className='right-top'>
-                <NavLink exact="true" activeclassname="active" className="profile-link" to="/sign-in">
-                    <FontAwesomeIcon icon={faUser} color="#ffffff" size="2x" />
-                </NavLink>
-            </nav>
+      <nav className="navbar-main-nav">
+        {/* 1st logo part  */}
+        <div className="navbar-logo">
+          <h2>
+            <span>E</span>asy
+            <span>D</span>rive
+          </h2>
         </div>
-        <div className='bottom-bar'>
-            <nav className='bottom'>
-              <NavLink exact="true" activeclassname="active" className="about-link" to="/about">
-                  <FontAwesomeIcon icon={faQuestion} color='#808080' size="lg" />
-              </NavLink>
-            </nav>
-        </div>
-    </>
-  )
-}
 
-export default Navbar
+        {/* 2nd menu part  */}
+        <div
+          className={
+            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+          }>
+          <ul>
+            <li className="navbar-list-itm">
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li className="navbar-list-itm">
+              <NavLink to="/profile-ratereview">Review</NavLink>
+            </li>
+            <li className="navbar-list-itm">
+              <NavLink to="/profile-instructor">ProfileIns</NavLink>
+            </li>
+            <li className="navbar-list-itm">
+              <NavLink to="/profile-student">ProfileStu</NavLink>
+            </li>
+            <li className="navbar-list-itm">
+              <NavLink to="/about">About</NavLink>
+            </li>
+          </ul>
+        </div>
+
+        {/* 3rd social media links */}
+        <div className="social-media">
+          {/* hamburget menu start  */}
+          <div className="hamburger-menu">
+            <a className="hamburger-menu-icon" href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
+              <GiHamburgerMenu style={{ fill: '#c65b52', marginRight: '3rem' }}/>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+};
+
+export default Navbar;
