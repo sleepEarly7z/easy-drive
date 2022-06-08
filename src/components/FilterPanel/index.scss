@@ -1,3 +1,16 @@
 .FilterPanel {
     font-family: 'Kalam', cursive;
+    border: 30px;
+    border-color: black;
+    max-width: 20vw;
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.FilterCategory {
+    list-style: none;
+
 }
