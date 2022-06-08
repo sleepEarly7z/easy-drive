@@ -2,6 +2,8 @@ import './index.scss'
 import Carousel from "react-elastic-carousel";
 import ProfileCard from '../ProfileCard'
 
+// https://www.youtube.com/watch?v=eBKcGAhkZUI&t=526s
+// https://www.npmjs.com/package/react-elastic-carousel
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 1 },
