@@ -6,20 +6,17 @@ import ReviewForm from '../../components/ReviewForm'
 import ReviewList from '../../components/ReviewList'
 
 const Home = () => {
-    return (
-        <>
-            <div className='Home'>
-                <h1>Home</h1>
-                {/* TODO: create a Search bar component */}
-                <Slider />
-                <FilterPanel />
-                <FilterList />
-                {/* TODO: can write ReviewForm and ReviewList into one component or not */}
-                <ReviewForm />
-                <ReviewList />
-            </div>
-        </>
-    )
+  return (
+      <>
+          <div className='Home'>
+              <h1>Home</h1>
+              {/* TODO: create a Search bar component */}
+              <Slider />
+              <FilterPanel />
+              <FilterList />
+          </div>
+      </>
+  )
 }
 
 export default Home
