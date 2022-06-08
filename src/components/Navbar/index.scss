@@ -115,21 +115,21 @@
 /* responsive css style  */
 @media (max-width: 1080px) {
   .navbar-main-nav {
-    height: 8rem;
+    height: 5rem;
     grid-template-columns: 2rem 3fr 3fr 1fr 2rem;
   }
 
   .navbar-logo,
   .menu-link ul,
   .social-media ul {
-    height: 8rem;
+    height: 5rem;
   }
 }
 
 /* responsive css style  */
 @media (max-width: 998px) {
   .navbar-main-nav {
-    height: 7rem;
+    height: 5rem;
     grid-template-columns: 2rem 2fr 3fr 2rem 2rem;
   }
 
@@ -201,17 +201,17 @@
 
 @media (max-width: 798px) {
   .navbar-main-nav {
-    height: 4rem;
+    height: 5rem;
     grid-template-columns: 1rem 2fr 1fr 1fr 1rem;
   }
 
   .navbar-logo,
   .social-media ul {
-    height: 4rem;
+    height: 5rem;
   }
 
   .social-media {
-    height: 4rem;
+    height: 5rem;
     display: flex;
     justify-self: end;
     align-items: center;
@@ -225,13 +225,13 @@
 
 @media (max-width: 520px) {
   .navbar-main-nav {
-    height: 4rem;
+    height: 5rem;
     grid-template-columns: 1rem 4fr 1fr 1fr 1rem;
   }
 
   .navbar-logo,
   .social-media ul {
-    height: 4rem;
+    height: 5rem;
   }
 
   .navbar-logo h2 {
