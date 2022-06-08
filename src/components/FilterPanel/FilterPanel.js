@@ -1,6 +1,7 @@
 import './index.scss'
 import { FILTER_CATEGORIES } from '../../utils/constants'
 import FilterCategory from './FilterCategory';
+import Button from 'react-bootstrap/Button';
 
 const FilterPanel = () => {
   const categories = FILTER_CATEGORIES;
@@ -14,7 +15,7 @@ const FilterPanel = () => {
     <div className='FilterPanel'>
       <div className="top">
         <h1>filter by</h1>
-        <button>Reset</button>
+        <Button variant="outline-primary">reset</Button>
       </div>
       <form onSubmit={handleSubmit}>
         <ul>
@@ -22,7 +23,7 @@ const FilterPanel = () => {
             <FilterCategory key={category.id} category={category} />
           ))}
         </ul>
-        <button type='submit'>submit</button>
+        <Button type='submit'>submit</Button>
       </form>
     </div>
   );

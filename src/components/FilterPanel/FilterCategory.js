@@ -12,7 +12,7 @@ const FilterCategory = ({ category }) => {
                     const uid = name + '_' + index;
                     return (
                         <div key={uid} className="option">
-                            <input type="radio" id={uid} name={name} value={option} />
+                            <input type="checkbox" id={uid} name={name} value={option} />
                             <label htmlFor={uid}>{option}</label>
                         </div>
                     )

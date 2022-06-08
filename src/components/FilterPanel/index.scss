@@ -1,16 +1,47 @@
 .FilterPanel {
-    font-family: 'Kalam', cursive;
-    border: 30px;
-    border-color: black;
+    // font-family: 'Kalam', cursive;
+    font-family: 'Roboto', sans-serif;
     max-width: 20vw;
+
+    border-radius: 10px;
+    background: rgba(93, 146, 109, 0.445);
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+
+    padding: 1rem 1.5rem;
+    margin: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 1fr;
 
     .top {
         display: flex;
         justify-content: space-between;
     }
+
+
 }
 
 .FilterCategory {
+    padding-bottom: 1rem;
     list-style: none;
+    display: flex;
+    flex-flow: column nowrap;
+
+    .category-name {
+        font-size: large;
+    }
+
+    .options-container {
+        display: flex;
+        flex-flow: column nowrap;
+
+        .option {
+            padding: 0.2rem;
+        }
+    }
 
 }
