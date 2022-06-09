@@ -21,13 +21,13 @@ const Navbar = () => {
                 </NavLink>
             </nav>
         </div>
-        <div className='bottom-bar'>
+        {/* <div className='bottom-bar'>
             <nav className='bottom'>
               <NavLink exact="true" activeclassname="active" className="about-link" to="/about">
                   <FontAwesomeIcon icon={faQuestion} color='#808080' size="lg" />
               </NavLink>
             </nav>
-        </div>
+        </div> */}
     </>
   )
 }

@@ -2,7 +2,7 @@ import './index.scss'
 import Slider from '../../components/Slider'
 import FilterPanel from '../../components/FilterPanel/FilterPanel'
 import FilterList from '../../components/FilterList'
-import ShrinkedFilterPanel from '../../components/FilterPanel/ShrinkedFilterPanel'
+import ShrinkedFilterPanel from '../../components/FilterPanelSmall/ShrinkedFilterPanel'
 import ReviewForm from '../../components/ReviewForm'
 import ReviewList from '../../components/ReviewList'
 
@@ -17,7 +17,7 @@ const Home = () => {
                 <ShrinkedFilterPanel />
                 </div>
                 <div className="filter-function-container">
-                    <FilterPanel />
+                    <FilterPanel open={true}/>
                     <FilterList />
                 </div>
             </div>

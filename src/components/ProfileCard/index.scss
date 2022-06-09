@@ -30,7 +30,7 @@
 }
 
 .lower-container {
-    padding-top: 60px;
+    padding-top: 30px;
     margin-left: 10%;
     width: 80%;
     height: 200px;
@@ -126,8 +126,33 @@ p {
     border: none;
     color: white;
 }
-
 @media screen and (max-width: 1130px) {
+    .lower-container h2,
+    h4,
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .lower-container h2 {
+        color: black;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .lower-container h4 {
+        color: purple;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .star-rating {
+        color: purple;
+        font-weight: 600;
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 890px) {
     .ProfileCard {
         // font-family: 'Kaushan Script', cursive;
         display: flex;
@@ -167,7 +192,7 @@ p {
         display: flex;
         justify-content: center;
         flex-direction: column;
-        padding-top: 60px;
+        padding-top: 30px;
         width: 100%;
         height: 300px;
         background: white;
@@ -191,34 +216,21 @@ p {
     .lower-container h4 {
         color: purple;
         font-weight: 600;
-        font-size: auto;
+        font-size: 18px;
     }
 
     .star-rating {
         color: purple;
         font-weight: 600;
-        font-size: 15px;
+        font-size: 18px;
     }
 
-    // .starOn {
-    //     background-color: transparent;
-    //     border: none;
-    //     outline: none;
-    //     cursor: pointer;
-    //     color: #000;
-    // }
-    // .starOff {
-    //     background-color: transparent;
-    //     border: none;
-    //     outline: none;
-    //     cursor: pointer;
-    //     color: #ccc;
-    // }
     .profilecard-buttons {
         display: flex;
         width: 100%;
         flex-direction: column;
         justify-content: center;
+        padding-bottom: 20px;
     }
 
     .profileButton {

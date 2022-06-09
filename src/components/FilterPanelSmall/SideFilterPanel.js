@@ -1,7 +1,7 @@
 import React from "react"
 import './index.scss'
 import { FILTER_CATEGORIES } from '../../utils/constants'
-import FilterCategory from './FilterCategory';
+import SideFilterCategory from './SideFilterCategory';
 import { Stack, Button} from '@mui/material';
 
 
@@ -15,22 +15,22 @@ const FilterPanel = ({open}) => {
   }
 
   return (
-    <div className='FilterPanel'>
-      <div className="top">
+    <div className='SideFilterPanel'>
+      <div className="SideFilterPanel-top">
         <p>filter by</p>
       </div>
       <form onSubmit={handleSubmit}>
         <Stack
-          className='categories-list'
+          className='SideFilterPanel-categories-list'
           direction="column"
           justifyContent="flex-start"
           alignItems="flex-start"
           spacing={0.5}>
           {categories.map((category) => (
-            <FilterCategory key={category.id} category={category} />
+            <SideFilterCategory key={category.id} category={category} />
           ))}
         </Stack>
-        <div className="filter-btns">
+        <div className="SideFilterPanel-filter-btns">
           <Button variant="outline-primary">reset</Button>
           <Button type='submit'>submit</Button>
         </div>
