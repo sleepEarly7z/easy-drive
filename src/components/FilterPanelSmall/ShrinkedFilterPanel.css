@@ -26,10 +26,16 @@
     padding-top: 10px;
 }
 .ShrinkedFilterPanel-filter-button{
+    display:flex;
 }
 .ShrinkedFilterPanel-filterPanel{
     display:flex;
     justify-content: flex-end;
     float:right;
+}
 
+@media screen and (min-width: 1130px) {
+    .ShrinkedFilterPanel-rightPanel{
+        display:none;
+    }
 }
