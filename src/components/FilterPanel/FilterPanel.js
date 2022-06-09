@@ -1,12 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import './index.scss'
 import { FILTER_CATEGORIES } from '../../utils/constants'
 import FilterCategory from './FilterCategory';
-import { Stack, Button} from '@mui/material';
+import { Box, List, ListSubheader, Button, Stack, Grid } from '@mui/material';
 
+const FilterPanel = ({ open }) => {
+  const [expanded, setExpanded] = useState(true);
 
-const FilterPanel = ({open}) => {
-  if(!open) return null;
+  if (!open) return null;
   const categories = FILTER_CATEGORIES;
 
   const handleSubmit = (e) => {
@@ -14,28 +15,32 @@ const FilterPanel = ({open}) => {
     console.log('submitted');
   }
 
+  const handleClick = () => {
+    setExpanded(!expanded);
+  };
+
   return (
-    <div className='FilterPanel'>
-      <div className="top">
-        <p>filter by</p>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <Stack
-          className='categories-list'
-          direction="column"
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          spacing={0.5}>
-          {categories.map((category) => (
-            <FilterCategory key={category.id} category={category} />
-          ))}
-        </Stack>
-        <div className="filter-btns">
-          <Button variant="outline-primary">reset</Button>
-          <Button type='submit'>submit</Button>
-        </div>
-      </form>
-    </div>
+    <Box item className='FilterPanel' sx={{ p: 2, minWidth: 250 }} >
+      <List
+        sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+        subheader={
+          <ListSubheader component="div" id="nested-list-subheader">
+            Filter By
+          </ListSubheader>
+        }
+      >
+        {categories.map((category) => (
+          <FilterCategory key={category.id} category={category} />
+        ))}
+      </List>
+
+      <Stack spacing={1} derection="row">
+        <Button variant="outline-primary">reset</Button>
+        <Button type='submit'>apply</Button>
+      </Stack>
+    </Box>
   );
 }
 
