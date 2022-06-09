@@ -5,7 +5,7 @@ import SideFilterCategory from './SideFilterCategory';
 import { Stack, Button} from '@mui/material';
 
 
-const FilterPanel = ({open}) => {
+const FilterPanel = ({open,onClose}) => {
   if(!open) return null;
   const categories = FILTER_CATEGORIES;
 
@@ -18,6 +18,7 @@ const FilterPanel = ({open}) => {
     <div className='SideFilterPanel'>
       <div className="SideFilterPanel-top">
         <p>filter by</p>
+        <Button onClick={onClose}>Close</Button>
       </div>
       <form onSubmit={handleSubmit}>
         <Stack
