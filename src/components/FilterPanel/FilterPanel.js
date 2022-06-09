@@ -1,7 +1,9 @@
+import React from "react"
 import './index.scss'
 import { FILTER_CATEGORIES } from '../../utils/constants'
 import FilterCategory from './FilterCategory';
-import { Stack, Button } from '@mui/material';
+import { Stack, Button} from '@mui/material';
+
 
 const FilterPanel = () => {
   const categories = FILTER_CATEGORIES;

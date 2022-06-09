@@ -9,7 +9,7 @@ function ProfileCard ({name,location,years,rate,imgSrc}) {
         <div className='ProfileCard'>
             <div className='upper-container'>
                 <div className='image-container'>
-                    <img src={imgSrc} alt='profilePicture' height='100px' width='100px' />
+                    <img className='image-container-img'src={imgSrc} alt='profilePicture' height='100px' width='100px' />
                 </div>
             </div>
             <div className="lower-container">
