@@ -7,12 +7,22 @@ import $ from 'jquery';
 export default function ShrinkedFilterPanel() {
   const [openFilter, setOpenFilter] = useState(false)
 
+  // const handleClose = ()=> {
+  // if($(window).width() > 767) {
+  //   console.log("dsad")
+  //   $(document.body).css("background-color", '');
+  //   $("div.ShrinkedFilterPanel-main").css("background-color", "")
+  //   $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "");
+  //   $(".shrinkedFilterPanel").css("height","");
+  // }}
+
   function handleOpenFilter() {
     setOpenFilter(true)
     // document.documentElement.style.setProperty('background-color', 'red');
     $(document.body).css("background-color", 'rgba(0,0,0,0.4)');
-    $("div.ShrinkedFilterPanel-main").css("background-color", "rgba(0,0,0,0)")
-    $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "white")
+    $("div.ShrinkedFilterPanel-main").css("background-color", "rgba(0,0,0,0)");
+    $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "white");
+    $(".shrinkedFilterPanel").css("height","100%");
     // $('.upper-container').css("background", 'rgba(0,0,0,0.4)');
     // $('.image-container').css("background-color", 'rgba(0,0,0,0.4)');
     // $('.image-container-img').css("background-color", 'rgba(0,0,0,0.4)');
@@ -21,13 +31,21 @@ export default function ShrinkedFilterPanel() {
     // $('.profileButton').css("background-color", 'rgba(0,0,0,0)');
     // $('.favouriteButton').css("background-color", 'rgba(0,0,0,0)');
 
-    
+    window.addEventListener("resize", checkWindowSize);
+  }
+
+  function checkWindowSize() {
+    if(window.innerWidth > 1130) {
+      handleCloseFilter()
+    }
   }
 
   function handleCloseFilter() {
     setOpenFilter(false)
     $(document.body).css("background-color", '');
     $("div.ShrinkedFilterPanel-main").css("background-color", "")
+    $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "");
+    $(".shrinkedFilterPanel").css("height","");
   }
 
   return (
