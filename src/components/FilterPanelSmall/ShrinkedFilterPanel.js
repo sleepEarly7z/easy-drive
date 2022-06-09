@@ -13,6 +13,15 @@ export default function ShrinkedFilterPanel() {
     $(document.body).css("background-color", 'rgba(0,0,0,0.4)');
     $("div.ShrinkedFilterPanel-main").css("background-color", "rgba(0,0,0,0)")
     $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "white")
+    // $('.upper-container').css("background", 'rgba(0,0,0,0.4)');
+    // $('.image-container').css("background-color", 'rgba(0,0,0,0.4)');
+    // $('.image-container-img').css("background-color", 'rgba(0,0,0,0.4)');
+    // $('.lower-container').css("background-color", 'rgba(0,0,0,0.4)');
+    // $('.profilecard-buttons').css("background-color", 'rgba(0,0,0,0.4)');
+    // $('.profileButton').css("background-color", 'rgba(0,0,0,0)');
+    // $('.favouriteButton').css("background-color", 'rgba(0,0,0,0)');
+
+    
   }
 
   function handleCloseFilter() {
