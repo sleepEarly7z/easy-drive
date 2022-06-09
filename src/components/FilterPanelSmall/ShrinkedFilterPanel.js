@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
-import './ShrinkedFilterPanel.css'
+import './ShrinkedFilterPanel.scss'
 import SideFilterPanel from './SideFilterPanel';
 import $ from 'jquery';
 
