@@ -54,7 +54,7 @@ export default function ShrinkedFilterPanel() {
         <div className='ShrinkedFilterPanel-leftPanel'>
           <FormControl className='classes.formControl'>
             <InputLabel>Sort</InputLabel>
-            <Select className='ShrinkedFilterPanel-dropDown'>
+            <Select className='ShrinkedFilterPanel-dropDown'  defaultValue = "Best Match" >
               <MenuItem value={"Best Match"}>Best Match</MenuItem>
               <MenuItem value={"Price Low-High"}>Price Low-High</MenuItem>
               <MenuItem value={"Price High-Low"}>Price High-Low</MenuItem>
