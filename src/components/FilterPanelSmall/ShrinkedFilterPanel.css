@@ -34,7 +34,7 @@
     float:right;
 }
 
-@media screen and (min-width: 1130px) {
+@media screen and (min-width: 700px) {
     .ShrinkedFilterPanel-rightPanel{
         display:none;
     }

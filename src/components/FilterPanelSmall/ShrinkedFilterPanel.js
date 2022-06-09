@@ -35,7 +35,7 @@ export default function ShrinkedFilterPanel() {
   }
 
   function checkWindowSize() {
-    if(window.innerWidth > 1130) {
+    if(window.innerWidth > 700) {
       handleCloseFilter()
     }
   }
