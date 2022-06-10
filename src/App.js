@@ -14,7 +14,7 @@ import Explore from './pages/Explore';
 
 function App() {
   return (
-    <>
+      <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
