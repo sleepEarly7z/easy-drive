@@ -17,12 +17,12 @@ const Slider = () => {
         <h1 style={{ textAlign: "center" }}>Top Rated Instructors</h1>
               <div className="App">
                 <Carousel breakPoints={breakPoints}>
-                  <ProfileCard />
-                  <ProfileCard />
-                  <ProfileCard />
-                  <ProfileCard />
-                  <ProfileCard />
-                  <ProfileCard />
+                  <ProfileCard name={'Donald Trump'} location={'USA'} years={'3'} rate={'2'} imgSrc={"https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg"}/>
+                  <ProfileCard name={'Donald Trump'} location={'USA'} years={'3'} rate={'2'} imgSrc={"https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg"}/>
+                  <ProfileCard name={'Donald Trump'} location={'USA'} years={'3'} rate={'2'} imgSrc={"https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg"}/>
+                  <ProfileCard name={'Donald Trump'} location={'USA'} years={'3'} rate={'2'} imgSrc={"https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg"}/>
+                  <ProfileCard name={'Donald Trump'} location={'USA'} years={'3'} rate={'2'} imgSrc={"https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg"}/>
+                  <ProfileCard name={'Donald Trump'} location={'USA'} years={'3'} rate={'2'} imgSrc={"https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg"}/>
                 </Carousel>
               </div>
       </>
