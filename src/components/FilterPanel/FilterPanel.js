@@ -39,7 +39,7 @@ const FilterPanel = ({mainFilter,open,onClose }) => {
         ))}
       </List>
 
-      <Stack spacing={1} derection="row">
+      <Stack spacing={1} derection="row" className="FilterPanel-Stack">
         <Button variant="outline-primary">reset</Button>
         <Button type='submit'>apply</Button>
       </Stack>
