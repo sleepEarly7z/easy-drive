@@ -4,7 +4,7 @@ import { FILTER_CATEGORIES } from '../../utils/constants'
 import FilterCategory from './FilterCategory';
 import { Box, List, ListSubheader, Button, Stack, Grid } from '@mui/material';
 
-const FilterPanel = ({ open }) => {
+const FilterPanel = ({mainFilter,open,onClose }) => {
   const [expanded, setExpanded] = useState(true);
 
   if (!open) return null;
@@ -20,7 +20,7 @@ const FilterPanel = ({ open }) => {
   };
 
   return (
-    <Box item className='FilterPanel' sx={{ p: 2, minWidth: 250 }} >
+    <Box item className= {mainFilter? 'FilterPanel':'sideFilterPanel'} sx={{ p: 2, minWidth: 250 }} >
       <List
         sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
         component="nav"
@@ -31,6 +31,9 @@ const FilterPanel = ({ open }) => {
           </ListSubheader>
         }
       >
+        <div className="filterPanel-Close-Button-div"> 
+        <Button className="filterPanel-Close-Button" onClick={onClose}>Close</Button>
+        </div>
         {categories.map((category) => (
           <FilterCategory key={category.id} category={category} />
         ))}
