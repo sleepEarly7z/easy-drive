@@ -48,7 +48,7 @@ const ReviewForm = () => {
 
           {message && <div className='message'>{message}</div>}
         </form>
-        <div className='rcard-bottom-space' />
+        <div className='rfcard-bottom-space' />
       </RFCard>
   )
 }

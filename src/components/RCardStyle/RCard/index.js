@@ -6,11 +6,7 @@ const RCard = ({ children }) => {
     return (
         <div>
             <div 
-            className="rcard" 
-            style={{
-                backgroundColor: '#f1fffc',
-                color: '#000',
-            }}>
+            className="rcard" >
                 {children}
             </div>
             <div className='rcard-bottom-space' />
