@@ -13,7 +13,7 @@ function ProfileCard ({name,location,years,rate,imgSrc}) {
                 </div>
             </div>
             <div className="lower-container">
-                <h2> {"Name: " + name} </h2>
+                <h2> {"Name: " + name} </h2><br/>
                 <h4> {"Location: " + location} </h4>
                 <h4> {"Years of Experience: " + years} </h4>
                 <div className="star-rating">
