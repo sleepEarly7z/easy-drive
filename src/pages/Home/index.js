@@ -10,7 +10,6 @@ const Home = () => {
     return (
         <>
             <div className='Home'>
-                <h1>Home</h1>
                 {/* TODO: create a Search bar component */}
                 <Slider />
                 <div className='shrinkedFilterPanel'>

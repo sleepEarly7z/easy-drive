@@ -39,6 +39,7 @@ export default function ShrinkedFilterPanel() {
     $("div.ShrinkedFilterPanel-filterPanel").css("z-index", "99");
     $("div.shrinkedFilterPanel-filterPanel").css("height", "100%");
     $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "white");
+    $("Stack.FilterPanel-Stack").css("background-color", "white");
     
 
     // $(document.body).css("background-color", 'rgba(0,0,0,0.4)');
@@ -67,9 +68,9 @@ export default function ShrinkedFilterPanel() {
     $("div.fadeMe").css("top","")
     $("div.fadeMe").css("left","")
     $("div.fadeMe").css("position","")
-    $("div.ShrinkedFilterPanel").css("z-index", "");
-    $("div.shrinkedFilterPanel").css("height", "");
-    $("div.ShrinkedFilterPanel").css("background-color", "");
+    $("div.ShrinkedFilterPanel-filterPanel").css("z-index", "");
+    $("div.shrinkedFilterPanel-filterPanel").css("height", "");
+    $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "");
     
     // $(document.body).css("background-color", '');
     // $("div.ShrinkedFilterPanel-main").css("background-color", "")
@@ -96,7 +97,7 @@ export default function ShrinkedFilterPanel() {
             onClick={handleOpenFilter}>Filter</Button>
         </div>
       </div>
-      <div class="fadeMe">
+      <div className="fadeMe">
       </div>
       <div className='ShrinkedFilterPanel-filterPanel' ref={closeFilterRef}>
         <FilterPanel mainFilter={false} open={openFilter} onClose={handleCloseFilter} />
