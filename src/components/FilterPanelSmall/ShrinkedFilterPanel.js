@@ -1,20 +1,12 @@
 import React, { useState } from 'react'
 import { Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import './ShrinkedFilterPanel.scss'
-import SideFilterPanel from './SideFilterPanel';
+import FilterPanel from '../../components/FilterPanel/FilterPanel'
+
 import $ from 'jquery';
 
 export default function ShrinkedFilterPanel() {
   const [openFilter, setOpenFilter] = useState(false)
-
-  // const handleClose = ()=> {
-  // if($(window).width() > 767) {
-  //   console.log("dsad")
-  //   $(document.body).css("background-color", '');
-  //   $("div.ShrinkedFilterPanel-main").css("background-color", "")
-  //   $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "");
-  //   $(".shrinkedFilterPanel").css("height","");
-  // }}
 
   function handleOpenFilter() {
     setOpenFilter(true)
@@ -68,7 +60,7 @@ export default function ShrinkedFilterPanel() {
         </div>
       </div>
       <div className='ShrinkedFilterPanel-filterPanel'>
-        <SideFilterPanel open={openFilter} onClose={handleCloseFilter} />
+        <FilterPanel mainFilter={false} open={openFilter} onClose={handleCloseFilter}/>
       </div>
     </div>
   )

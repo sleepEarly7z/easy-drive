@@ -17,7 +17,7 @@ const Home = () => {
                 <ShrinkedFilterPanel />
                 </div>
                 <div className="filter-function-container">
-                    <FilterPanel open={true}/>
+                    <FilterPanel mainFilter={true} open={true}/>
                     <FilterList />
                 </div>
             </div>
