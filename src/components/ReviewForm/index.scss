@@ -1,6 +1,4 @@
-.ReviewForm {
-    font-family: 'Helvetica Neue', sans-serif;
-}
+@import '../../App.scss';
 
 .submit-review-button {
     color: #fff;
@@ -17,7 +15,7 @@
 }
   
 .submit-review-button {
-    background: #73b9a6c0;
+    background: $primary-color;
 }
   
 .submit-review-button:hover {
@@ -26,7 +24,7 @@
 }
   
 .submit-review-button:disabled {
-    background-color: #cccccc;
+    background-color: #d4c6c3;
     color: #333;
     cursor: auto;
 }
@@ -38,13 +36,18 @@
 
 .review-form-question {
     text-align: center;
+    font-size: 2rem;
+    font-family: 'Josefin Sans', sans-serif;
+    padding-top: 10px;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Kalam&family=Kaushan+Script&family=Montserrat+Alternates:wght@500&family=Pacifico&family=Varela+Round&display=swap');
 .input-group {
     background: #ffffff;
     display: flex;
     flex-direction: row;
-    border: 1px solid #73b9a6c0;
+    // border: 1px solid #73b9a6c0;
+    border: 1px solid $primary-color;
     padding: 8px 10px;
     border-radius: 8px;
 }
@@ -52,11 +55,20 @@
 input {
     flex-grow: 2;
     border: none;
-    font-size: 16px;
+    font-size: 12px;
 }
   
 input:focus {
     outline: none;
+}
+
+.submit-review-button-text {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 1px;
+    margin-left: 7px;
+    margin-right: 7px;
 }
 
 @media (max-width: 600px) {
@@ -69,19 +81,12 @@ input:focus {
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      margin: 30px 0 40px;
+      margin-left: -50px;
+      min-width: 350px;
     }
   
     .input-group input {
-      width: 80%;
+      width: 50%;
     }
-}
 
-.submit-review-button-text {
-    font-family: 'Helvetica Neue', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 1px;
-    margin-left: 7px;
-    margin-right: 7px;
 }

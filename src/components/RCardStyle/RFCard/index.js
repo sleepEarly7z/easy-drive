@@ -6,14 +6,10 @@ const RFCard = ({ children }) => {
     return (
         <div>
             <div 
-            className="rfcard" 
-            style={{
-                backgroundColor: '#f1fffc',
-                color: '#000',
-            }}>
+            className="rfcard" >
                 {children}
             </div>
-            <div className='rcard-bottom-space' />
+            <div className='rfcard-bottom-space' />
         </div>
     )
 }

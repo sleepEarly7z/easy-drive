@@ -1,4 +1,7 @@
 import './index.scss'
+import RatingStar from '../RatingStar'
+
+import ProgressBar from "../ProgressBar";
 
 const RateDisplay = ({ item }) => {
 
@@ -6,12 +9,25 @@ const RateDisplay = ({ item }) => {
       item.reduce((acc, { rating }) => acc + rating, 0) / item.length
     )
 
+    
+
     return (
       <div className='RateDisplay'>
-        <h1>Student reviews</h1>
-        <h1>{average}/5</h1>
-        <h3>Rating: </h3>
-        <h3>{item.length} Reviews</h3>
+        <div className='RateDisplay-left'>
+          <div className='ratedisplay-title'>Student reviews</div>
+          <div className='ratedisplay-average'>{average.toFixed(1)}/5.0</div>
+          {/* <h3>{item.length} Reviews</h3> */}
+          <RatingStar average={average} />
+          <div className='rdcard-bottom-space' /> 
+        </div>
+        <div className='RateDisplay-right'>
+            <ProgressBar value={60} />
+            <ProgressBar value={60} />
+            <ProgressBar value={60} />
+            <ProgressBar value={60} />
+            <ProgressBar value={60} />
+            {/* <ProgressBar className='rd-progressbar-item' width={"450px"} value={60} max={100} /> */}
+        </div>
       </div>
     )
 }

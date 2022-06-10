@@ -1,18 +1,21 @@
+@import '../../../App.scss';
+
 .rcard {
-    background-color: #f1fffc;
+    background-color: #faf9f9;
     // box-shadow: 0 0 5px 5px rgb(177, 219, 203);
-    border: 2px solid rgb(177, 219, 203);
-    color: #f1fffc;
+    // border: 2px solid rgb(177, 219, 203);
+    border: 3px solid $primary-color;
+    color: #000;
     border-radius: 15px;
     padding: 20px 50px;
     margin: 20px 0;
     position: relative;
-    max-width: 950px;
+    max-width: 850px;
     min-width: 350px;
-    min-height: 140px;
+    min-height: 80px;
     margin-top: 100px;
     margin-bottom: 100px;
-    width: 100%;
+    width: 80%;
     margin: auto;
 
     transition: all .4s ease;
@@ -20,11 +23,13 @@
 }
 
 .rcard:hover {
-    border: 3px solid rgb(177, 219, 203);
-    box-shadow: 8px 8px rgb(177, 219, 203);
+    border: 3px solid $primary-color;
+    box-shadow: 8px 8px $primary-color;
+    // border: 3px solid rgb(177, 219, 203);
+    // box-shadow: 8px 8px rgb(177, 219, 203);
     border-radius: 3px 3px 3px 3px;
 }
 
 .rcard-bottom-space {
-    min-height: 40px;
+    height: 42px;
 }
