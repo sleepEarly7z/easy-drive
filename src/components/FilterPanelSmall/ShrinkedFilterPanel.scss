@@ -31,7 +31,9 @@
     float:right;
     border: 2px solid black;
 }
-
+#popup.show {
+    display: block;
+  }
 @media screen and (min-width: 700px) {
     .ShrinkedFilterPanel-rightPanel{
         display:none;
