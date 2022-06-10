@@ -1,9 +1,23 @@
 .Home {
+    position:relative;
     margin-top: 80px;
     margin-left: 30px;
 
+    .shrinkedFilterPanel{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        
+    z-index: 10;
+    }
+    
     .filter-function-container {
         display: flex;
         flex-direction: row;
+        justify-content: center;
+        padding-top: 70px;
+        
+    z-index: 11;
     }
 }
