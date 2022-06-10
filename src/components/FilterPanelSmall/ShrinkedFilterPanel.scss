@@ -1,41 +1,55 @@
-.ShrinkedFilterPanel{
-    width:100%;
-    float:left;
+.ShrinkedFilterPanel {
+    width: 100%;
+    float: left;
     /* display: flex;
     justify-content: center;
     flex-direction: row; */
 }
-.ShrinkedFilterPanel-main{
-    background-color:  whitesmoke;
-    width:100%;
-    height:60px;
+
+.ShrinkedFilterPanel-main {
+    background-color: whitesmoke;
+    width: 100%;
+    height: 60px;
     display: flex;
     justify-content: center;
-    float:left;
-    
+    float: left;
+
 }
-.ShrinkedFilterPanel-dropDown{
+
+.ShrinkedFilterPanel-dropDown {
     display: flex;
     width: 200px;
 }
-.ShrinkedFilterPanel-rightPanel{
+
+.ShrinkedFilterPanel-rightPanel {
     padding-left: 10%;
     padding-top: 10px;
 }
-.ShrinkedFilterPanel-filter-button{
-    display:flex;
+
+.ShrinkedFilterPanel-filter-button {
+    display: flex;
 }
-.ShrinkedFilterPanel-filterPanel{
-    display:flex;
+
+.ShrinkedFilterPanel-filterPanel {
+    display: flex;
     justify-content: flex-end;
-    float:right;
+    float: right;
     border: 2px solid black;
 }
-#popup.show {
-    display: block;
-  }
+
+// div.fadeMe {
+//     opacity: 0.5;
+//     background: #000;
+//     width: 100%;
+//     height: 100%;
+//     z-index: 10;
+//     top: 0;
+//     left: 0;
+//     position: fixed;
+// }
+
 @media screen and (min-width: 700px) {
-    .ShrinkedFilterPanel-rightPanel{
-        display:none;
+    .ShrinkedFilterPanel-rightPanel {
+        display: none;
     }
 }
