@@ -29,18 +29,23 @@ export default function ShrinkedFilterPanel() {
 
   function handleOpenFilter() {
     setOpenFilter(true)
-    // document.documentElement.style.setProperty('background-color', 'red');
-    $(document.body).css("background-color", 'rgba(0,0,0,0.4)');
-    $("div.ShrinkedFilterPanel-main").css("background-color", "rgba(0,0,0,0)");
+    $("div.fadeMe").css("opacity",0.5)
+    $("div.fadeMe").css("background","#000")
+    $("div.fadeMe").css("width","100%")
+    $("div.fadeMe").css("height","100%")
+    $("div.fadeMe").css("top","0")
+    $("div.fadeMe").css("left","0")
+    $("div.fadeMe").css("position","fixed")
+    $("div.ShrinkedFilterPanel-filterPanel").css("z-index", "99");
+    $("div.shrinkedFilterPanel-filterPanel").css("height", "100%");
     $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "white");
-    $(".shrinkedFilterPanel").css("height", "100%");
-    // $('.upper-container').css("background", 'rgba(0,0,0,0.4)');
-    // $('.image-container').css("background-color", 'rgba(0,0,0,0.4)');
-    // $('.image-container-img').css("background-color", 'rgba(0,0,0,0.4)');
-    // $('.lower-container').css("background-color", 'rgba(0,0,0,0.4)');
-    // $('.profilecard-buttons').css("background-color", 'rgba(0,0,0,0.4)');
-    // $('.profileButton').css("background-color", 'rgba(0,0,0,0)');
-    // $('.favouriteButton').css("background-color", 'rgba(0,0,0,0)');
+    
+
+    // $(document.body).css("background-color", 'rgba(0,0,0,0.4)');
+    // $("div.ShrinkedFilterPanel-main").css("background-color", "rgba(0,0,0,0)");
+    // $(".shrinkedFilterPanel").css("height", "100%");
+    // $(".shrinkedFilterPanel").css("z-index", "99");
+
 
     window.addEventListener("resize", checkWindowSize);
   }
@@ -53,10 +58,23 @@ export default function ShrinkedFilterPanel() {
 
   function handleCloseFilter() {
     setOpenFilter(false)
-    $(document.body).css("background-color", '');
-    $("div.ShrinkedFilterPanel-main").css("background-color", "")
-    $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "");
-    $(".shrinkedFilterPanel").css("height", "");
+    $("div.fadeMe").css("opacity","")
+    $("div.fadeMe").css("background","")
+    $("div.fadeMe").css("width","")
+    $("div.fadeMe").css("height","")
+    $("div.fadeMe").css("z-index","")
+    $("div.ShrinkedFilterPanel-filterPanel").css("z-index", "");
+    $("div.fadeMe").css("top","")
+    $("div.fadeMe").css("left","")
+    $("div.fadeMe").css("position","")
+    $("div.ShrinkedFilterPanel").css("z-index", "");
+    $("div.shrinkedFilterPanel").css("height", "");
+    $("div.ShrinkedFilterPanel").css("background-color", "");
+    
+    // $(document.body).css("background-color", '');
+    // $("div.ShrinkedFilterPanel-main").css("background-color", "")
+    // $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "");
+    // $(".shrinkedFilterPanel").css("height", "");
   }
 
   return (
@@ -77,6 +95,8 @@ export default function ShrinkedFilterPanel() {
           <Button className='ShrinkedFilterPanel-filter-button'
             onClick={handleOpenFilter}>Filter</Button>
         </div>
+      </div>
+      <div class="fadeMe">
       </div>
       <div className='ShrinkedFilterPanel-filterPanel' ref={closeFilterRef}>
         <FilterPanel mainFilter={false} open={openFilter} onClose={handleCloseFilter} />
