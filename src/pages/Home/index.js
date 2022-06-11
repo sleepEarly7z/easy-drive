@@ -1,17 +1,19 @@
 import './index.scss'
-import Slider from '../../components/Slider'
+// import Slider from '../../components/Slider'
 import FilterPanel from '../../components/FilterPanel/FilterPanel'
 import FilterList from '../../components/FilterList'
 import ShrinkedFilterPanel from '../../components/FilterPanelSmall/ShrinkedFilterPanel'
-import ReviewForm from '../../components/ReviewForm'
-import ReviewList from '../../components/ReviewList'
+
+import MainPageSliderV2 from "../../components/MainPageSliderV2/Slider";
+
+import data from "../../utils/dataForSlider";
 
 const Home = () => {
     return (
         <>
             <div className='Home'>
                 {/* TODO: create a Search bar component */}
-                <Slider />
+                
                 <div className='shrinkedFilterPanel'>
                 <ShrinkedFilterPanel />
                 </div>

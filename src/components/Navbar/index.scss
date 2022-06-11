@@ -115,6 +115,10 @@
   display: none;
 }
 
+.profile-icon-link {
+  margin-top: 13px;
+}
+
 
 /* responsive css style  */
 @media (max-width: 1080px) {
@@ -129,9 +133,6 @@
     height: 5rem;
   }
 
-  .profile-icon-link {
-    display: none;
-  }
 }
 
 /* responsive css style  */
