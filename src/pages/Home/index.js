@@ -21,7 +21,7 @@ const Home = () => {
                 {/* Cathy - Slider v1 */}
                 {/* <ImageSlider slides={SliderData} />; */}
                 {/* Cathy - Slider v2 */}
-                <MainPageSliderV2 data={data} />
+                {/* <MainPageSliderV2 data={data} /> */}
                 
                 <div className='shrinkedFilterPanel'>
                 <ShrinkedFilterPanel />
