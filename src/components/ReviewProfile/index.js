@@ -48,7 +48,7 @@ export default function ReviewProfile() {
         <div class="ReviewProfile">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="row-left">
+                    <div className="row-left">
                         <div class="col-12 p-0 px-3 py-3 mb-3 pt-4">
                             <div class="d-flex flex-column align-items-center">
                                 <img class="photo"

@@ -2,7 +2,7 @@
 @import '../../App.scss';
 
 .ReviewProfile {
-    background-color: #fffcbf45;
+    background-color: #ffffff;
     padding-top: 50px;
     padding-right: 10px;
     min-height: 928px;
@@ -19,7 +19,8 @@
 }
 
 .row-left {
-    padding-left: 20px;
+    margin-left: 20px;
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
 }
 
 .row-right {
