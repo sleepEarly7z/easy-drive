@@ -7,11 +7,17 @@ const FilterCategory = ({ category }) => {
     const options = category.options;
 
     const [open, setOpen] = useState(true);
+    const [openLicenseType, setOpenLicenseType] = useState(true);
+
     const [checked, setChecked] = useState([0]);
 
     const handleClick = () => {
         setOpen(!open);
     };
+
+    const handleClickLicenseType = () => {
+        setOpenLicenseType(!openLicenseType);
+    }
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -27,6 +33,54 @@ const FilterCategory = ({ category }) => {
     };
 
 
+    /**
+     * 
+     * @param {object} option
+     * @param {string} option.type
+     * @param {string[]} option.classes
+     * 
+     * @returns {ReactJSXElement}
+     */
+    const renderLicenceType = (option) => {
+        return (
+            <>
+                <ListItemButton onClick={handleClickLicenseType}>
+                    <ListItemText primary={option.type} />
+                    {openLicenseType ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+
+                <Collapse in={openLicenseType} timeout="auto" unmountOnExit>
+                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                        {option.classes.map((className, index) => {
+                            const uid = className + '_' + index;
+                            return renderCheckboxes(uid, className);
+                        })}
+                    </List>
+                </Collapse>
+            </>
+        );
+    }
+
+    const renderCheckboxes = (uid, option) => {
+        return (
+            <ListItem key={uid} disablePadding>
+                <ListItemButton role={undefined} onClick={handleToggle(option)} dense>
+                    <ListItemIcon>
+                        <Checkbox
+                            edge="start"
+                            checked={checked.indexOf(option) !== -1}
+                            tabIndex={-1}
+                            disableRipple
+                            inputProps={{ 'aria-labelledby': option }}
+                        />
+                    </ListItemIcon>
+                    <ListItemText id={uid} primary={`${option}`} />
+                </ListItemButton>
+            </ListItem>
+        );
+    }
+
+
     return (
         <>
             <ListItemButton onClick={handleClick}>
@@ -38,22 +92,7 @@ const FilterCategory = ({ category }) => {
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                     {options.map((option, index) => {
                         const uid = name + '_' + index;
-                        return (
-                            <ListItem key={uid} disablePadding>
-                                <ListItemButton role={undefined} onClick={handleToggle(option)} dense>
-                                    <ListItemIcon>
-                                        <Checkbox
-                                            edge="start"
-                                            checked={checked.indexOf(option) !== -1}
-                                            tabIndex={-1}
-                                            disableRipple
-                                            inputProps={{ 'aria-labelledby': option }}
-                                        />
-                                    </ListItemIcon>
-                                    <ListItemText id={uid} primary={`${option}`} />
-                                </ListItemButton>
-                            </ListItem>
-                        );
+                        return (name === "licence type") ? renderLicenceType(option) : renderCheckboxes(uid, option)
                     })}
                 </List>
             </Collapse>

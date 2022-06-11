@@ -17,6 +17,11 @@ export const FILTER_CATEGORIES = [
     {
         id: 4,
         name: 'licence type',
-        options: ['class 7', 'class 5', 'class 4']
+        options: [
+            {type: "Driver's licence", classes:['Class 5', 'Class 7']},
+            {type: "Motorcycle licence", classes:['Class 6', 'Class 8']},
+            {type: "Commercial licence", classes:['Class 1', 'Class 2', 'Class 3', 'Class 4 (restricted)', 'Class 4 (unrestricted)']},
+            {type: "Heavy trailer endorsement", classes:['Class 1', 'Class 2', 'Class 3', 'Class 4 (restricted)', 'Class 4 (unrestricted)']}
+        ]
     }
 ]
