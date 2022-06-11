@@ -49,7 +49,7 @@ export default function ReviewProfile() {
             <div class="row">
                 <div class="col-md-5">
                     <div class="row-left">
-                        <div class="col-12 p-0 px-3 py-3 mb-3">
+                        <div class="col-12 p-0 px-3 py-3 mb-3 pt-4">
                             <div class="d-flex flex-column align-items-center">
                                 <img class="photo"
                                     src={'https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'}
@@ -64,7 +64,7 @@ export default function ReviewProfile() {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 p-0 px-2 py-3 pb-3 mb-3">
+                        <div class="col-12 p-0 px-2 py-3 pb-3 mb-3 pt-5">
                             <div class="d-flex justify-content-between border-bottom py-2 px-3">
                                 <p className="review-profile-info">Company</p>
                                 <NavLink to="/">https://bootdey.com</NavLink>
@@ -90,7 +90,7 @@ export default function ReviewProfile() {
                 </div>
                 <div class="col-md-7 ps-md-4">
                     <div class="row-right">
-                        <div class="col-12 px-3 py-3 mb-3 pb-3">
+                        <div class="col-12 px-3 py-3 mb-3 pb-3 pt-4">
                             <div class="d-flex align-items-center justify-content-between border-bottom">
                                 <p class="py-2">Full Name</p>
                                 <p class="py-2 text-muted">Kenneth valdez</p>
@@ -112,7 +112,7 @@ export default function ReviewProfile() {
                                 <p class="py-2 text-muted"> Soma,San Francisco,CA</p>
                             </div>
                         </div>
-                        <div class="col-12 px-3 pb-2">
+                        <div class="col-12 px-3 pb-2 pt-4">
                             <h6 class="d-flex align-items-center mb-3 fw-bold py-3"><i
                                     class="text-info me-2">Rate</i>and
                                 Review</h6>

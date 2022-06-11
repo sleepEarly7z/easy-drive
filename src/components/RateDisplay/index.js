@@ -9,7 +9,7 @@ const RateDisplay = ({ item }) => {
       item.reduce((acc, { rating }) => acc + rating, 0) / item.length
     )
 
-    
+    // TODO: set percentage
 
     return (
       <div className='RateDisplay'>

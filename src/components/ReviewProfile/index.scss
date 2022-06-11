@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import '../../App.scss';
 
 .ReviewProfile {
-    background-color: #fffa9745;
+    background-color: #fffcbf45;
     padding-top: 50px;
     padding-right: 10px;
+    min-height: 928px;
+    // border-bottom: 12px solid $black-background;
 }
 
 .d-flex a {
