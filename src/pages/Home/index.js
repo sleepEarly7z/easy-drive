@@ -1,5 +1,5 @@
 import './index.scss'
-// import Slider from '../../components/Slider'
+import Slider from '../../components/Slider'
 import FilterPanel from '../../components/FilterPanel/FilterPanel'
 import FilterList from '../../components/FilterList'
 import ShrinkedFilterPanel from '../../components/FilterPanelSmall/ShrinkedFilterPanel'
@@ -13,6 +13,7 @@ const Home = () => {
         <>
             <div className='Home'>
                 {/* TODO: create a Search bar component */}
+                <Slider />
                 
                 <div className='shrinkedFilterPanel'>
                 <ShrinkedFilterPanel />
