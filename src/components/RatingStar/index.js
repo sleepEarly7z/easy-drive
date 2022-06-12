@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import './index.scss'
+import { v4 as uuidv4 } from 'uuid';
 
 // TODO
 function RatingStar({ average }) {
@@ -12,12 +13,12 @@ function RatingStar({ average }) {
           .fill()
           .map((_, index) =>
             average >= index + 1 ? (
-              <FaStar style={{ color: "orange", fontSize: '20px' }} />
+              <FaStar key={uuidv4()} style={{ color: "orange", fontSize: '20px' }} />
             ) : (
               average >= index + 0.5 ? (
-                <FaStarHalfAlt style={{ color: "orange", fontSize: '17px' }} />
+                <FaStarHalfAlt key={uuidv4()} style={{ color: "orange", fontSize: '17px' }} />
               ) : (
-                <FaRegStar style={{ color: "orange", fontSize: '20px' }} />
+                <FaRegStar key={uuidv4()} style={{ color: "orange", fontSize: '20px' }} />
               )
             )
           )}

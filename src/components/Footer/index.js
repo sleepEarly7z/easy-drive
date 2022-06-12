@@ -18,21 +18,21 @@ function Footer() {
           {/* Column2 */}
           <div className="col">
             <h4 className="footer-heading-4">Services</h4>
-            <ui className="list-unstyled">
+            <ul className="list-unstyled">
               <li>Rate and Review</li>
               <li>Find a driver instructor</li>
               <li>Find a driving school</li>
-            </ui>
+            </ul>
           </div>
           {/* Column3 */}
           <div className="col">
             <h4 className="footer-heading-4">Help</h4>
-            <ui className="list-unstyled">
+            <ul className="list-unstyled">
               <li>Q&A</li>
               <li>Facebook</li>
               <li>Twitter</li>
               <li>Instagram</li>
-            </ui>
+            </ul>
           </div>
         </div>
         <hr />

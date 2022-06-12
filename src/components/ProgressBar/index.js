@@ -1,7 +1,3 @@
-// 1. It should show the progress
-// 2. Show the percentage of completion in text
-// 3. Color, width
-
 import React from "react";
 import PropTypes from "prop-types";
 import Styled from "styled-components";
@@ -55,3 +51,4 @@ ProgressBar.defaultProps = {
 };
 
 export default ProgressBar;
+

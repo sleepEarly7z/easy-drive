@@ -1,6 +1,7 @@
 import './index.scss'
 import ReviewCard from '../../components/ReviewCard'
 import RateDisplay from '../RateDisplay';
+import { v4 as uuidv4 } from 'uuid';
 
 const ReviewList = () => {
   const reviews = [
@@ -30,7 +31,7 @@ const ReviewList = () => {
               {/* <h1>ReviewList</h1> */}
               <RateDisplay item={reviews} />
               {reviews.map((item, index) => (
-                  <ReviewCard item={item} index={index} />
+                  <ReviewCard item={item} index={index} key={uuidv4()} />
                   // <RSection item={item} index={index} />
               ))}
           </div>
