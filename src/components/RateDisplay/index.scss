@@ -12,7 +12,7 @@
     position: relative;
     padding-bottom: 30px;
     width: 350px;
-}  
+}
 
 .ratedisplay-title {
     font-size: 34px;
@@ -39,14 +39,13 @@
     margin-top: 40px;
 }
 
-
 /* responsive css style  */
 @media (max-width: 998px) {
     .RateDisplay {
         justify-content: center;
         display: grid;
     }
-    
+
     .RateDisplay-left {
         padding: 20px 50px;
         padding-left: 60px;
@@ -58,12 +57,12 @@
         margin-top: 100px;
         width: 80%;
         margin: auto;
-    }  
-    
+    }
+
     .rdcard-bottom-space {
         height: 0px;
     }
-    
+
     .RateDisplay-right {
         margin-top: 0px;
         margin-bottom: 40px;

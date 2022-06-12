@@ -4,41 +4,41 @@
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 .form-control:focus {
     box-shadow: none;
-    border-color: #BA68C8
+    border-color: #ba68c8;
 }
 
 .profile-button {
     background: rgb(99, 39, 120);
     box-shadow: none;
-    border: none
+    border: none;
 }
 
 .profile-button:hover {
-    background: #682773
+    background: #682773;
 }
 
 .profile-button:focus {
     background: #682773;
-    box-shadow: none
+    box-shadow: none;
 }
 
 .profile-button:active {
     background: #682773;
-    box-shadow: none
+    box-shadow: none;
 }
 
 .back:hover {
     color: #682773;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .labels {
-    font-size: 11px
+    font-size: 11px;
 }
 
 .add-experience:hover {
-    background: #BA68C8;
+    background: #ba68c8;
     color: #fff;
     cursor: pointer;
-    border: solid 1px #BA68C8
+    border: solid 1px #ba68c8;
 }

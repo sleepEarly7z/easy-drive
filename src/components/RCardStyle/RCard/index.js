@@ -5,11 +5,8 @@ import './index.scss'
 const RCard = ({ children }) => {
     return (
         <div>
-            <div 
-            className="rcard" >
-                {children}
-            </div>
-            <div className='rcard-bottom-space' />
+            <div className="rcard">{children}</div>
+            <div className="rcard-bottom-space" />
         </div>
     )
 }

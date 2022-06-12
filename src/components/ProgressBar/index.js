@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Styled from "styled-components";
+import React from 'react'
+import PropTypes from 'prop-types'
+import Styled from 'styled-components'
 import './index.scss'
 
 const Container = Styled.div`
@@ -9,7 +9,7 @@ const Container = Styled.div`
   }
 
   progress[value] {
-    width: ${props => props.width};
+    width: ${(props) => props.width};
 
     -webkit-appearance: none;
     appearance: none;
@@ -24,31 +24,30 @@ const Container = Styled.div`
   progress[value]::-webkit-progress-value {
     height: 10px;
     border-radius: 20px;
-    background-color: ${props => props.color};
+    background-color: ${(props) => props.color};
   }
-`;
+`
 
 const ProgressBar = ({ value }) => {
-  return (
-    <Container color={'#ff7979'} width={'450px'}>
-      <progress value={value} max={100} />
-      <span>{(value / 100) * 100}%</span>
-    </Container>
-  );
-};
+    return (
+        <Container color={'#ff7979'} width={'450px'}>
+            <progress value={value} max={100} />
+            <span>{(value / 100) * 100}%</span>
+        </Container>
+    )
+}
 
 ProgressBar.propTypes = {
-  value: PropTypes.number.isRequired,
-  max: PropTypes.number,
-  color: PropTypes.string,
-  width: PropTypes.string
-};
+    value: PropTypes.number.isRequired,
+    max: PropTypes.number,
+    color: PropTypes.string,
+    width: PropTypes.string,
+}
 
 ProgressBar.defaultProps = {
-  max: 100,
-  color: "lightBlue",
-  width: "250px"
-};
+    max: 100,
+    color: 'lightBlue',
+    width: '250px',
+}
 
-export default ProgressBar;
-
+export default ProgressBar

@@ -11,8 +11,7 @@
 .upper-container-Yizhou {
     height: 100%;
     width: 100px;
-    background: linear-gradient(to left, #2d00f7, #ff0291)
-
+    background: linear-gradient(to left, #2d00f7, #ff0291);
 }
 
 .image-container-Yizhou {
@@ -151,120 +150,119 @@ p {
     }
 }
 // @media screen and (max-width: 910px) {
-    .ProfileCard-Yizhou {
-        // font-family: 'Kaushan Script', cursive;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        width: 90%;
-        height: 480px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0px 1px 10px 1px black;
-        transform: scale(0.98, 0.98);
-    }
+.ProfileCard-Yizhou {
+    // font-family: 'Kaushan Script', cursive;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    height: 480px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 1px 10px 1px black;
+    transform: scale(0.98, 0.98);
+}
 
-    .upper-container-Yizhou {
-        width: 100%;
-        height: 100px;
-    }
+.upper-container-Yizhou {
+    width: 100%;
+    height: 100px;
+}
 
-    .image-container-Yizhou {
-        display: flex;
-        justify-content: center;
-    }
+.image-container-Yizhou {
+    display: flex;
+    justify-content: center;
+}
 
-    .image-container-img-Yizhou {
-        background: white;
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        padding: 5px;
-        transform: translate(0%, 50%);
-    }
+.image-container-img-Yizhou {
+    background: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 5px;
+    transform: translate(0%, 50%);
+}
 
+.lower-container-Yizhou {
+    margin-left: 0%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 30px;
+    width: 100%;
+    height: 300px;
+    background: white;
+    text-align: center;
+    font-family: 'Titillium Web', sans-serif;
+}
 
-    .lower-container-Yizhou {
-        margin-left: 0%;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        padding-top: 30px;
-        width: 100%;
-        height: 300px;
-        background: white;
-        text-align: center;
-        font-family: 'Titillium Web', sans-serif;
-    }
+.lower-container-Yizhou h2,
+h4,
+p {
+    margin: 0;
+    padding: 0;
+}
 
-    .lower-container-Yizhou h2,
-    h4,
-    p {
-        margin: 0;
-        padding: 0;
-    }
+.lower-container-Yizhou h2 {
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+}
 
-    .lower-container-Yizhou h2 {
-        color: black;
-        font-weight: 600;
-        font-size: 20px;
-    }
+.lower-container-Yizhou h4 {
+    font-weight: 600;
+    font-size: 18px;
+}
 
-    .lower-container-Yizhou h4 {
-        font-weight: 600;
-        font-size: 18px;
-    }
+.star-rating-Yizhou {
+    font-weight: 600;
+    font-size: 18px;
+}
 
-    .star-rating-Yizhou {
-        font-weight: 600;
-        font-size: 18px;
-    }
+.profilecard-buttons-Yizhou {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 20px;
+}
 
-    .profilecard-buttons-Yizhou {
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        justify-content: center;
-        padding-bottom: 20px;
-    }
+.profileButton-Yizhou {
+    align-items: center;
+    margin-left: 25%;
+    width: 50%;
+    height: 40%;
+    color: black;
+    font: bold;
+    background-color: white;
+    padding: 0.4rem;
+    border-radius: 6px;
+    transition-duration: 0.5s;
+    animation: ease-in-out;
+}
 
-    .profileButton-Yizhou {
-        align-items: center;
-        margin-left: 25%;
-        width: 50%;
-        height: 40%;
-        color: black;
-        font: bold;
-        background-color: white;
-        padding: 0.4rem;
-        border-radius: 6px;
-        transition-duration: 0.5s;
-        animation: ease-in-out;
-    }
+.profileButton-Yizhou:hover {
+    align-items: center;
+    transform: scale(1.2);
+    border: none;
+    color: white;
+}
 
-    .profileButton-Yizhou:hover {
-        align-items: center;
-        transform: scale(1.2);
-        border: none;
-        color: white;
-    }
+.favouriteButton-Yizhou {
+    width: 50%;
+    height: 40%;
+    margin-left: 25%;
+    color: black;
+    font: bold;
+    background-color: white;
+    padding: 0.4rem;
+    border-radius: 6px;
+    transition-duration: 0.5s;
+    animation: ease-in-out;
+}
 
-    .favouriteButton-Yizhou {
-        width: 50%;
-        height: 40%;
-        margin-left: 25%;
-        color: black;
-        font: bold;
-        background-color: white;
-        padding: 0.4rem;
-        border-radius: 6px;
-        transition-duration: 0.5s;
-        animation: ease-in-out;
-    }
-
-    .favouriteButton-Yizhou:hover {
-        transform: scale(1.2);
-        border: none;
-        color: white;
-    }
+.favouriteButton-Yizhou:hover {
+    transform: scale(1.2);
+    border: none;
+    color: white;
+}
 // }
