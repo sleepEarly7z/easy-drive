@@ -1,0 +1,80 @@
+.TopRecommended {
+  width: 80%;
+  margin: 10rem auto;
+  margin-top: 30px;
+  height: 100%;
+}
+
+.slide_topRecommended img {
+  width: 30rem;
+  margin: 0 auto;
+}
+
+.slide_topRecommended {
+  transform: scale(0.8);
+  transition: transform 1000ms;
+  opacity: 0.5;
+}
+
+.activeSlide {
+  transform: scale(0.9);
+  opacity: 1;
+}
+
+.arrow_topRecommended {
+  background-color: #fff;
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.arrow_topRecommended svg {
+  transition: color 1000ms;
+}
+
+.arrow_topRecommended svg:hover {
+  color: #68edff;
+}
+
+.next_topRecommended {
+  right: 0%;
+  top: 50%;
+}
+
+.prev_topRecommended {
+  left: 0%;
+  top: 50%;
+}
+
+.explore_more_div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.explore_more {
+    -webkit-appearance: none;
+            appearance: none;
+    -webkit-filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+            filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+    -webkit-transition: all .5s ease;
+           filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+    -webkit-transition: all .5s ease;
+            transition: all .5s ease;
+    border: none;
+    background: #FFD800;
+    border-radius: 30px;
+    /* text-transform: uppercase; */
+    box-sizing: border-box;
+    padding: 15px 40px;
+    font-weight: 600;
+    font-size: 17px;
+    cursor: cursor;
+    justify-content: center;
+}
+
+.explore_more:hover {
+  color: #FFFFFF;
+  background: #222222;
+  -webkit-filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+          filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+}

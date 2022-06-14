@@ -156,6 +156,9 @@ $black-background: #242327;
 
 @import url('https://fonts.googleapis.com/css2?family=Kalam&family=Kaushan+Script&family=Montserrat+Alternates:wght@500&family=Pacifico&family=Varela+Round&display=swap');
 
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 input,
 textarea {
     font-family: 'Helvetica Neue', sans-serif;

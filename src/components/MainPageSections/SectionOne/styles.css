@@ -49,12 +49,12 @@
 
 .slider-wrapper {
   position: relative;
-  height: 93vh;
+  height: 103vh;
   overflow: hidden;
 }
 
 .slide {
-  height: 93vh;
+  height: 103vh;
   background-size: cover !important;
 }
 
