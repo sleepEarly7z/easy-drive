@@ -1,22 +1,20 @@
-
 /* scroll to top button */
 .top-btn-position {
     position: fixed;
     bottom: 185px;
     right: 20px;
-    z-index:999;
+    z-index: 999;
 }
-  
+
 .top-btn-style {
     height: 40px;
     width: 40px;
     color: #333;
     cursor: pointer;
 }
-  
+
 .top-btn-style:hover {
     animation: none;
     background: transparent;
     color: rgba(51, 51, 51, 0.465);
 }
-  

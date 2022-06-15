@@ -1,50 +1,24 @@
 import React from 'react'
 import './index.scss'
-import STCard from './STCard';
-import cathy from "../../../assets/images/jpg/IMG_1004.JPG";
-import jack  from "../../../assets/images/jpg/IMG_1001.JPG";
-import davis from "../../../assets/images/jpg/IMG_1003.JPG";
-import chloe from "../../../assets/images/jpg/IMG_1005.JPG";
-
-const team = [
-  {
-    name: "Kaiqian(Cathy) Yang",
-    subtitle: "4th-year in CS",
-    description: "I'm passionate about Web Development",
-    image: cathy,
-  },
-  {
-    name: "Yizhou(Jack) Li",
-    subtitle: "4th-year in CS",
-    description: "I'm passionate about Web Development",
-    image: jack,
-  },
-  {
-    name: "Haoliang(Davis)) Qi",
-    subtitle: "4th-year in CS",
-    description: "I'm passionate about Web Development",
-    image: davis,
-  },
-  {
-    name: "Chloe Zhang",
-    subtitle: "4th-year in CS",
-    description: "I'm passionate about Web Development",
-    image: chloe,
-  },
-]
+import STCard from './STCard'
+import dataForTeam from '../../../utils/dataForTeam'
+import { v4 as uuidv4 } from 'uuid'
 
 const OurTeam = () => {
-  return (
-    <div>
-        <h1>Meet Our Team</h1>
-        <h4>We are Team 405 FOUND</h4>
-        <div className='ourteam_content'>
-          {team.map((img, idx) => (
-            <STCard props={team[idx]}/>
-          ))}
+    return (
+        <div>
+            <div className="section_title">Meet Our Team</div>
+            <div className="OurTeam_content">
+                We are team - 405 FOUND. <br />
+                This website is designed for CPSC 455 2022S project at UBC.
+            </div>
+            <div className="ourteam_card">
+                {dataForTeam.map((img, idx) => (
+                    <STCard props={dataForTeam[idx]} key={uuidv4()} />
+                ))}
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
-export default OurTeam;
+export default OurTeam

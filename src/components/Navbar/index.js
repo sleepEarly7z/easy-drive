@@ -33,7 +33,10 @@ const Navbar = () => {
                             </NavLink>
                         </li>
                         <li className="navbar-list-itm">
-                            <NavLink to="/explore" style={{ textDecoration: 'none' }}>
+                            <NavLink
+                                to="/explore"
+                                style={{ textDecoration: 'none' }}
+                            >
                                 Explore
                             </NavLink>
                         </li>

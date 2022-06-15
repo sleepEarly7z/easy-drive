@@ -2,13 +2,11 @@ import React from 'react'
 import './index.scss'
 
 const TopReivews = () => {
-  return (
-    <div>
-        <h1>
-            TopReivews
-        </h1>
-    </div>
-  )
+    return (
+        <div>
+            <div className="section_title">TopReivews</div>
+        </div>
+    )
 }
 
-export default TopReivews;
+export default TopReivews

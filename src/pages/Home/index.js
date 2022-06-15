@@ -9,40 +9,40 @@ import ScrollToTop from '../../components/MainPageSections/SectionTwo/ScrollToTo
 import OurTeam from '../../components/MainPageSections/SectionFive'
 
 const Home = () => {
-    const slider = useRef(null);
-    const instructions = useRef(null);
-    const topinstructors = useRef(null);
-    const topreviews = useRef(null);
-    const ourteam = useRef(null);
-    
+    const slider = useRef(null)
+    const instructions = useRef(null)
+    const topinstructors = useRef(null)
+    const topreviews = useRef(null)
+    const ourteam = useRef(null)
+
     return (
         <>
             <div className="Home">
                 <ScrollToTop />
 
-                <div ref={slider} className='sectionOne'>
+                <div ref={slider} className="sectionOne">
                     <ImageSlider />
                 </div>
 
-                <div className='sectionTabs'>
-                    <STTab title={"What To Do"} section={instructions} />
-                    <STTab title={"Top Instructors"} section={topinstructors} />
-                    <STTab title={"About Us"} section={ourteam} />
+                <div className="sectionTabs">
+                    <STTab title={'What To Do'} section={instructions} />
+                    <STTab title={'Top Instructors'} section={topinstructors} />
+                    <STTab title={'About Us'} section={ourteam} />
                 </div>
 
-                <div ref={instructions} className='sectionTwo'>
+                <div ref={instructions} className="sectionTwo">
                     <FollowInstructions />
                 </div>
-                
-                <div ref={topinstructors} className='sectionThree'>
+
+                <div ref={topinstructors} className="sectionThree">
                     <TopRecommended />
                 </div>
-                
-                <div ref={topreviews} className='sectionFour'>
+
+                <div ref={topreviews} className="sectionFour">
                     <TopReivews />
                 </div>
-                
-                <div ref={ourteam} className='sectionFive'>
+
+                <div ref={ourteam} className="sectionFive">
                     <OurTeam />
                 </div>
 
