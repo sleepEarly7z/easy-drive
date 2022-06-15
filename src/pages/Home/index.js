@@ -46,7 +46,7 @@ const Home = () => {
                     <OurTeam />
                 </div>
 
-                <h1>Start your journey</h1>
+                <div className="section_title">Start your journey</div>
             </div>
         </>
     )
