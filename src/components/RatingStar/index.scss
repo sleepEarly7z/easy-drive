@@ -1,0 +1,15 @@
+.RatingStar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: 45px;
+}
+
+.rating-text {
+    font-size: 18px;
+    font-weight: 600;
+    padding-right: 6px;
+}
+.rating-star {
+    padding-top: 1px;
+}

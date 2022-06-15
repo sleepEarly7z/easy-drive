@@ -1,0 +1,28 @@
+// https://bbbootstrap.com/snippets/bootstrap-comment-section-user-ratings-fa-icons-21867306
+.dot {
+    height: 6px;
+    width: 6px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 2px;
+    background-color: rgb(91, 92, 91);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.name {
+    font-size: 14px;
+}
+
+.date {
+    font-size: 12px;
+}
+
+.rating i {
+    color: green;
+    font-size: 13px;
+}
+
+.comment-text {
+    font-size: 12px;
+}

@@ -1,24 +1,23 @@
 import './index.scss'
-import Contact from '../../components/Contact'
+// import Contact from '../../components/Contact'
 import ReviewForm from '../../components/ReviewForm'
-import RateDisplay from '../../components/RateDisplay'
 import ReviewList from '../../components/ReviewList'
+import ProfileCard from '../../components/ProfileCard'
+import ReviewProfile from '../../components/ReviewProfile'
 
 const ProfileRateReview = () => {
     return (
         <>
-          <div className='ProfileRateReview'>
-              <h1>ProfileRateReview</h1>
-              {/* TODO: ProfileCard or text */}
-              <Contact />
-              {/* TODO: instructor's description */}
-              {/* TODO: can combine review and rate components later */}
-              <ReviewForm />
-              <RateDisplay />
-              <ReviewList />
-          </div>
+            <div className="ProfileRateReview">
+                <ReviewProfile />
+                {/* <ProfileCard name={'Rick Astley'} location={'UK'} years={'10+'} rate={'5'} imgSrc={"https://img.apmcdn.org/768cb350c59023919f564341090e3eea4970388c/square/72dd92-20180309-rick-astley.jpg"} /> */}
+                <br />
+                <br />
+                <ReviewForm />
+                <ReviewList />
+            </div>
         </>
     )
-  }
-  
-  export default ProfileRateReview
+}
+
+export default ProfileRateReview

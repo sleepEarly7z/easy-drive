@@ -1,15 +1,29 @@
 import './index.scss'
+import React from 'react'
+import PropTypes from 'prop-types'
+import RCard from '../RCardStyle/RCard'
 
-const ReviewCard = () => {
-  return (
-      <>
-        <div className='ReviewCard'>
-            <h2 className='fonts one'>ReviewCard</h2>
-            <h2 className='fonts two'>ReviewCard</h2>
-            <h2 className='fonts three'>ReviewCard</h2>
-        </div>
-      </>
-  )
+const ReviewCard = ({ item }) => {
+    return (
+        <RCard className="ReviewCard">
+            <div className="num-display">{item.rating}</div>
+            <div className="text-display">
+                <div className="text-display-review">
+                    {item.comment}
+                    <br />
+                </div>
+                <div className="text-display-name"> -- {item.reviewer}</div>
+                <div className="text-display-date">
+                    Shared publicly - {item.datetime}
+                </div>
+            </div>
+            <div></div>
+        </RCard>
+    )
+}
+
+ReviewCard.propTypes = {
+    item: PropTypes.object.isRequired,
 }
 
 export default ReviewCard

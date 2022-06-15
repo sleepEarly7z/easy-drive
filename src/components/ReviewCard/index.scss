@@ -1,11 +1,92 @@
+@import '../../App.scss';
 
-.one {
-    font-family: 'Montserrat Alternates', sans-serif;
-}
-.two {
+.like-text,
+.dislike-text {
     font-family: 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    margin-top: 2px;
+    margin-left: 7px;
 }
-.three {
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-family: 'Pacifico', cursive;
+
+// .action-button-group {
+//     position: relative;
+//     display: flex;
+//     justify-content: right;
+//     padding-top: 10px;
+// }
+
+// .likeIcon {
+//     margin-top: 0px;
+//     margin-left: 9px;
+// }
+
+// .dislikeIcon {
+//     margin-top: 4px;
+//     margin-bottom: 0px;
+// }
+
+.text-display {
+    margin-top: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+.text-display-name {
+    font-size: 22px;
+    font-weight: 500px;
+    color: rgb(57, 67, 76);
+    text-align: right;
+}
+
+.text-display-date {
+    font-size: 14px;
+    color: gray;
+    // margin-top: 18px;
+    margin-left: 10px;
+    text-align: right;
+}
+
+.text-display-rating {
+    color: rgb(128, 85, 0);
+    font-size: 16px;
+    text-align: right;
+}
+
+.text-display-review {
+    background-color: #ffffff;
+    margin-top: 14px;
+    padding-top: 14px;
+    padding-left: 14px;
+    padding-bottom: 14px;
+    margin-bottom: 4px;
+    border-radius: 5px;
+    // box-shadow: 0 0 1px 2px rgb(207, 239, 227);
+    // box-shadow: 0 0 0px 1px rgb(96, 93, 93);
+    // border-width: 4px 1.25em;
+    border-bottom: 2px solid rgb(203, 193, 193);
+    font-size: 20px;
+    color: rgb(108, 99, 99);
+    min-height: 100px;
+}
+
+.date text-black-50 {
+    font-size: 16px;
+}
+
+.num-display {
+    background: #f4f4f4;
+    width: 60px;
+    height: 60px;
+    padding: 11px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 22px;
+    border: 1px #eee solid;
+    transition: 0.3s;
+    background: #d48166;
+    color: #fff;
+    position: absolute;
+    top: -32px;
+    left: -32px;
 }
