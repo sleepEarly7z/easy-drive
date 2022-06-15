@@ -1,48 +1,168 @@
 import './index.scss'
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 const InformationInstructor = () => {
   return (
       <>
-<div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        {/* <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
-        </div> */}
-        <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value=""/></div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"/></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""/></div>
-                    <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""/></div>
-                    <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value=""/></div>
-                    <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value=""/></div>
-                    <div class="col-md-12"><label class="labels">Province</label><input type="text" class="form-control" placeholder="enter address line 2" value=""/></div>
-                    <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value=""/></div>
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""/></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Car Provided</label><input type="text" class="form-control" placeholder="country" value=""/></div>
-                    <div class="col-md-6"><label class="labels">Pick-up/Drop-off</label><input type="text" class="form-control" value="" placeholder="state"/></div>
-                </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br/>
-                <div class="col-md-12"><label class="labels">Experience in teaching</label><input type="text" class="form-control" placeholder="experience" value=""/></div> <br/>
-                <div class="col-md-12"><label class="labels">Class5/7</label><input type="text" class="form-control" placeholder="additional details" value=""/></div>
-            </div>
-        </div>
-    </div>
-</div>
+ <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '30ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
+        <TextField
+          required
+          id="outlined-required"
+          label="First Name"
+          defaultValue="First"
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Last Name"
+          defaultValue="Last"
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Phone Number"
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Email Address"
+        />
+        <TextField
+          id="outlined-number"
+          label="Number"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField id="outlined-search" label="Search field" type="search" />
+        <TextField
+          id="outlined-helperText"
+          label="Helper text"
+          defaultValue="Default Value"
+          helperText="Some important text"
+        />
+      </div>
+      <div>
+        <TextField
+          required
+          id="filled-required"
+          label="Required"
+          defaultValue="Hello World"
+          variant="filled"
+        />
+        <TextField
+          disabled
+          id="filled-disabled"
+          label="Disabled"
+          defaultValue="Hello World"
+          variant="filled"
+        />
+        <TextField
+          id="filled-password-input"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          variant="filled"
+        />
+        <TextField
+          id="filled-read-only-input"
+          label="Read Only"
+          defaultValue="Hello World"
+          InputProps={{
+            readOnly: true,
+          }}
+          variant="filled"
+        />
+        <TextField
+          id="filled-number"
+          label="Number"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="filled"
+        />
+        <TextField
+          id="filled-search"
+          label="Search field"
+          type="search"
+          variant="filled"
+        />
+        <TextField
+          id="filled-helperText"
+          label="Helper text"
+          defaultValue="Default Value"
+          helperText="Some important text"
+          variant="filled"
+        />
+      </div>
+      <div>
+        <TextField
+          required
+          id="standard-required"
+          label="Required"
+          defaultValue="Hello World"
+          variant="standard"
+        />
+        <TextField
+          disabled
+          id="standard-disabled"
+          label="Disabled"
+          defaultValue="Hello World"
+          variant="standard"
+        />
+        <TextField
+          id="standard-password-input"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          variant="standard"
+        />
+        <TextField
+          id="standard-read-only-input"
+          label="Read Only"
+          defaultValue="Hello World"
+          InputProps={{
+            readOnly: true,
+          }}
+          variant="standard"
+        />
+        <TextField
+          id="standard-number"
+          label="Number"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="standard"
+        />
+        <TextField
+          id="standard-search"
+          label="Search field"
+          type="search"
+          variant="standard"
+        />
+        <TextField
+          id="standard-helperText"
+          label="Helper text"
+          defaultValue="Default Value"
+          helperText="Some important text"
+          variant="standard"
+        />
+      </div>
+    </Box>
       </>
   )
 }
