@@ -8,27 +8,27 @@
     width: 100px;
     height: 40px;
     cursor: pointer;
-  }
-  
+}
+
 .submit-review-button {
     background-color: #202142;
 }
-  
+
 .submit-review-button {
     background: $primary-color;
 }
-  
+
 .submit-review-button:hover {
     transform: scale(0.98);
     opacity: 0.9;
 }
-  
+
 .submit-review-button:disabled {
     background-color: #d4c6c3;
     color: #333;
     cursor: auto;
 }
-  
+
 .submit-review-button:disabled:hover {
     transform: scale(1);
     opacity: 1;
@@ -51,13 +51,13 @@
     padding: 8px 10px;
     border-radius: 8px;
 }
-  
+
 input {
     flex-grow: 2;
     border: none;
     font-size: 12px;
 }
-  
+
 input:focus {
     outline: none;
 }
@@ -73,20 +73,19 @@ input:focus {
 
 @media (max-width: 600px) {
     .rating li {
-      margin: 10px 3px;
-    }
-  
-    .rating {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-left: -50px;
-      min-width: 350px;
-    }
-  
-    .input-group input {
-      width: 50%;
+        margin: 10px 3px;
     }
 
+    .rating {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-left: -50px;
+        min-width: 350px;
+    }
+
+    .input-group input {
+        width: 50%;
+    }
 }
