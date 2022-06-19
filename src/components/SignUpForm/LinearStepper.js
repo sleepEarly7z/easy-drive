@@ -16,7 +16,6 @@ import {
     useFormContext,
 } from 'react-hook-form'
 
-import MultipleSelectChip from './MultiLanguages'
 import CarProvided from './CarProvided'
 
 const useStyles = makeStyles((theme) => ({
@@ -269,17 +268,35 @@ const ProfessionalForm = () => {
                 )}
             />
 
-            <Controller
+            {/* <Controller
                 control={control}
                 name="language"
                 render={({ field }) => <MultipleSelectChip />}
-            />
+            /> */}
+            {/* <MultipleSelectChip control={control} /> */}
 
             <Controller
                 control={control}
-                name="carIsProvided"
-                render={({ field }) => <CarProvided />}
+                name="language"
+                render={({ field }) => (
+                    <TextField
+                        id="language"
+                        label="Language"
+                        variant="outlined"
+                        placeholder="Enter Your Languages, and split using comma"
+                        fullWidth
+                        margin="normal"
+                        {...field}
+                    />
+                )}
             />
+
+            {/* <Controller
+                control={control}
+                name="carIsProvided"
+                render={({ field }) => <CarProvided control={control} />}
+            /> */}
+            <CarProvided control={control} />
         </>
     )
 }
@@ -427,10 +444,7 @@ const LinearStepper = () => {
                         stepProps.completed = false
                     }
                     return (
-                        <Step
-                            {...stepProps}
-                            key={index}
-                        >
+                        <Step {...stepProps} key={index}>
                             <StepLabel
                                 {...labelProps}
                                 classes={{
