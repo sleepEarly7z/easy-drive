@@ -83,7 +83,8 @@ const Navbar = () => {
                         </li>
                         <li className="navbar-list-itm-signin">
                             <NavLink
-                                to="/sign-in"
+                                // to="/sign-in"
+                                to="/sign-up"
                                 style={{ textDecoration: 'none' }}
                             >
                                 Sign In
