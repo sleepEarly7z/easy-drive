@@ -16,14 +16,15 @@ import {
     useFormContext,
 } from 'react-hook-form'
 
+import MultipleSelectChip from './MultiLanguages'
+import CarProvided from './CarProvided'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         paddingTop: theme.spacing(6),
         paddingBottom: theme.spacing(3),
         paddingLeft: theme.spacing(3),
         paddingRight: theme.spacing(3),
-    },
-    cntLabel: {
         iconColor: '#f4ca59',
     },
     leftText: {
@@ -51,14 +52,14 @@ const useStyles = makeStyles((theme) => ({
         '&$active': {
             color: '#f4ca59',
         },
-        '&$disabled': {
-            color: 'red',
-        },
+        // '&$disabled': {
+        //     color: 'red',
+        // },
     },
     alternativeLabel: {},
     active: {}, //needed so that the &$active tag works
     completed: {},
-    disabled: {},
+    // disabled: {},
     labelContainer: {
         '&$alternativeLabel': {
             marginTop: 0,
@@ -264,7 +265,6 @@ const ProfessionalForm = () => {
                         placeholder="Enter Your Company Name"
                         fullWidth
                         margin="normal"
-                        {...field}
                     />
                 )}
             />
@@ -272,33 +272,13 @@ const ProfessionalForm = () => {
             <Controller
                 control={control}
                 name="language"
-                render={({ field }) => (
-                    <TextField
-                        id="language"
-                        label="Language"
-                        variant="outlined"
-                        placeholder="Enter Your Language"
-                        fullWidth
-                        margin="normal"
-                        {...field}
-                    />
-                )}
+                render={({ field }) => <MultipleSelectChip />}
             />
 
             <Controller
                 control={control}
                 name="carIsProvided"
-                render={({ field }) => (
-                    <TextField
-                        id="carIsProvided"
-                        label="Car Is Provided"
-                        variant="outlined"
-                        placeholder="True/False"
-                        fullWidth
-                        margin="normal"
-                        {...field}
-                    />
-                )}
+                render={({ field }) => <CarProvided {...field} />}
             />
         </>
     )
@@ -313,12 +293,14 @@ const ProfileForm = () => {
                 name="description"
                 render={({ field }) => (
                     <TextField
-                        id="description"
+                        id="outlined-multiline-static"
                         label="Description"
-                        variant="outlined"
                         placeholder="Enter Your Description"
-                        fullWidth
+                        multiline
+                        minrows={4}
                         margin="normal"
+                        variant="outlined"
+                        fullWidth
                         {...field}
                     />
                 )}
@@ -420,6 +402,10 @@ const LinearStepper = () => {
         setActiveStep(activeStep + 1)
     }
 
+    const onSubmit = (data) => {
+        console.log(data)
+    }
+
     return (
         <div className={classes.root}>
             <Stepper alternativeLabel activeStep={activeStep}>
@@ -444,7 +430,7 @@ const LinearStepper = () => {
                         <Step
                             {...stepProps}
                             key={index}
-                            className={classes.cntLabel}
+                            // className={classes.cntLabel}
                         >
                             <StepLabel
                                 {...labelProps}
@@ -457,7 +443,6 @@ const LinearStepper = () => {
                                         root: classes.step,
                                         completed: classes.completed,
                                         active: classes.active,
-                                        disabled: classes.disabled,
                                     },
                                 }}
                             >
@@ -477,9 +462,9 @@ const LinearStepper = () => {
                     <FormProvider {...methods}>
                         <form onSubmit={methods.handleSubmit(handleNext)}>
                             {getStepContent(activeStep)}
-                            <Grid container justify="space-between">
+                            <Grid container justifyContent="space-between">
                                 <Typography
-                                    inline
+                                    inline="true"
                                     variant="body1"
                                     className={classes.leftText}
                                 >
@@ -492,7 +477,7 @@ const LinearStepper = () => {
                                     </Button>
                                 </Typography>
                                 <Typography
-                                    inline
+                                    inline="true"
                                     variant="body1"
                                     className={classes.rightText}
                                 >
