@@ -2,7 +2,6 @@ import './index.scss'
 import React from 'react'
 import { NavLink } from 'react-bootstrap'
 import styled from 'styled-components'
-import RatingStar from '../RatingStar'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;

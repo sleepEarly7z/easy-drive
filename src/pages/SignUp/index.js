@@ -1,11 +1,17 @@
 import './index.scss'
+import LinearStepper from "../../components/SignUpForm";
+import { CssBaseline, Container, Paper, Box } from "@material-ui/core";
+
 
 const SignUp = () => {
     return (
         <>
-            <div className="SignUp">
-                <h1>SignUp</h1>
-            </div>
+        <CssBaseline />
+        <Container component={Box} p={4}>
+          <Paper component={Box} p={3}>
+            <LinearStepper />
+          </Paper>
+        </Container>
         </>
     )
 }
