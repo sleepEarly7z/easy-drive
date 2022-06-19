@@ -278,7 +278,7 @@ const ProfessionalForm = () => {
             <Controller
                 control={control}
                 name="carIsProvided"
-                render={({ field }) => <CarProvided {...field} />}
+                render={({ field }) => <CarProvided />}
             />
         </>
     )
@@ -430,7 +430,6 @@ const LinearStepper = () => {
                         <Step
                             {...stepProps}
                             key={index}
-                            // className={classes.cntLabel}
                         >
                             <StepLabel
                                 {...labelProps}
