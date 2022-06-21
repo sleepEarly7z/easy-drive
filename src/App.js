@@ -8,7 +8,8 @@ import ProfileStudent from './pages/ProfileStudent'
 import ProfileInstructor from './pages/ProfileInstructor'
 // import PrivateRoute from './pages/PrivateRouter';
 import SignIn from './pages/SignIn'
-import SignUp from './pages/SignUp'
+import SignUpInstructor from './pages/SignUp/SignUpInstructor'
+import SignUpStudent from './pages/SignUp/SignUpStudent'
 import ForgotPassword from './pages/ForgotPassword'
 import Explore from './pages/Explore'
 
@@ -39,7 +40,8 @@ function App() {
                     />
                     {/* </Route> */}
                     <Route path="sign-in" element={<SignIn />} />
-                    <Route path="sign-up" element={<SignUp />} />
+                    <Route path="sign-up-instructor" element={<SignUpInstructor />} />
+                    <Route path="sign-up-student" element={<SignUpStudent />} />
                     <Route
                         path="forgot-password"
                         element={<ForgotPassword />}

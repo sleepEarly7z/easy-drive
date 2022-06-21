@@ -15,6 +15,7 @@ import {
     FormProvider,
     useFormContext,
 } from 'react-hook-form'
+import { NavLink } from 'react-router-dom'
 
 import CarProvided from './CarProvided'
 
@@ -51,14 +52,10 @@ const useStyles = makeStyles((theme) => ({
         '&$active': {
             color: '#f4ca59',
         },
-        // '&$disabled': {
-        //     color: 'red',
-        // },
     },
     alternativeLabel: {},
     active: {}, //needed so that the &$active tag works
     completed: {},
-    // disabled: {},
     labelContainer: {
         '&$alternativeLabel': {
             marginTop: 0,
@@ -419,109 +416,112 @@ const LinearStepper = () => {
         setActiveStep(activeStep + 1)
     }
 
-    const onSubmit = (data) => {
-        console.log(data)
-    }
+    // const onSubmit = (data) => {
+    //     console.log(data)
+    // }
 
     return (
-        <div className={classes.root}>
-            <Stepper alternativeLabel activeStep={activeStep}>
-                {steps.map((step, index) => {
-                    const labelProps = {}
-                    const stepProps = {}
-                    if (isStepOptional(index)) {
-                        labelProps.optional = (
-                            <Typography
-                                variant="caption"
-                                align="center"
-                                style={{ display: 'block' }}
-                            >
-                                optional
-                            </Typography>
-                        )
-                    }
-                    if (isStepSkipped(index)) {
-                        stepProps.completed = false
-                    }
-                    return (
-                        <Step {...stepProps} key={index}>
-                            <StepLabel
-                                {...labelProps}
-                                classes={{
-                                    alternativeLabel: classes.alternativeLabel,
-                                    labelContainer: classes.labelContainer,
-                                }}
-                                StepIconProps={{
-                                    classes: {
-                                        root: classes.step,
-                                        completed: classes.completed,
-                                        active: classes.active,
-                                    },
-                                }}
-                            >
-                                {step}
-                            </StepLabel>
-                        </Step>
-                    )
-                })}
-            </Stepper>
-
-            {activeStep === steps.length ? (
-                <Typography variant="h3" align="center">
-                    Thank You
-                </Typography>
-            ) : (
-                <>
-                    <FormProvider {...methods}>
-                        <form onSubmit={methods.handleSubmit(handleNext)}>
-                            {getStepContent(activeStep)}
-                            <Grid container justifyContent="space-between">
+        <>
+            <div className={classes.root}>
+                <Stepper alternativeLabel activeStep={activeStep}>
+                    {steps.map((step, index) => {
+                        const labelProps = {}
+                        const stepProps = {}
+                        if (isStepOptional(index)) {
+                            labelProps.optional = (
                                 <Typography
-                                    inline="true"
-                                    variant="body1"
-                                    className={classes.leftText}
+                                    variant="caption"
+                                    align="center"
+                                    style={{ display: 'block' }}
                                 >
-                                    <Button
-                                        className={classes.buttonLeft}
-                                        disabled={activeStep === 0}
-                                        onClick={handleBack}
-                                    >
-                                        back
-                                    </Button>
+                                    optional
                                 </Typography>
-                                <Typography
-                                    inline="true"
-                                    variant="body1"
-                                    className={classes.rightText}
+                            )
+                        }
+                        if (isStepSkipped(index)) {
+                            stepProps.completed = false
+                        }
+                        return (
+                            <Step {...stepProps} key={index}>
+                                <StepLabel
+                                    {...labelProps}
+                                    classes={{
+                                        alternativeLabel:
+                                            classes.alternativeLabel,
+                                        labelContainer: classes.labelContainer,
+                                    }}
+                                    StepIconProps={{
+                                        classes: {
+                                            root: classes.step,
+                                            completed: classes.completed,
+                                            active: classes.active,
+                                        },
+                                    }}
                                 >
-                                    {isStepOptional(activeStep) && (
+                                    {step}
+                                </StepLabel>
+                            </Step>
+                        )
+                    })}
+                </Stepper>
+
+                {activeStep === steps.length ? (
+                    <Typography variant="h3" align="center">
+                        Thank You
+                    </Typography>
+                ) : (
+                    <>
+                        <FormProvider {...methods}>
+                            <form onSubmit={methods.handleSubmit(handleNext)}>
+                                {getStepContent(activeStep)}
+                                <Grid container justifyContent="space-between">
+                                    <Typography
+                                        inline="true"
+                                        variant="body1"
+                                        className={classes.leftText}
+                                    >
+                                        <Button
+                                            className={classes.buttonLeft}
+                                            disabled={activeStep === 0}
+                                            onClick={handleBack}
+                                        >
+                                            back
+                                        </Button>
+                                    </Typography>
+                                    <Typography
+                                        inline="true"
+                                        variant="body1"
+                                        className={classes.rightText}
+                                    >
+                                        {isStepOptional(activeStep) && (
+                                            <Button
+                                                className={classes.buttonRight}
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={handleSkip}
+                                            >
+                                                skip
+                                            </Button>
+                                        )}
                                         <Button
                                             className={classes.buttonRight}
                                             variant="contained"
                                             color="primary"
-                                            onClick={handleSkip}
+                                            // onClick={handleNext}
+                                            type="submit"
                                         >
-                                            skip
+                                            {activeStep === steps.length - 1
+                                                ? 'Finish'
+                                                : 'Next'}
                                         </Button>
-                                    )}
-                                    <Button
-                                        className={classes.buttonRight}
-                                        variant="contained"
-                                        color="primary"
-                                        // onClick={handleNext}
-                                        type="submit"
-                                    >
-                                        {activeStep === steps.length - 1
-                                            ? 'Finish'
-                                            : 'Next'}
-                                    </Button>
-                                </Typography>
-                            </Grid>
-                        </form>
-                    </FormProvider>
-                </>
-            )}
-        </div>
+                                    </Typography>
+                                </Grid>
+                            </form>
+                        </FormProvider>
+                    </>
+                )}
+            </div>
+        </>
     )
 }
 

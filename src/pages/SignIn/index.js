@@ -1,10 +1,11 @@
 import './index.scss'
+import SignInForm from '../../components/SignInForm'
 
 const SignIn = () => {
     return (
         <>
             <div className="SignIn">
-                <h1>SignIn</h1>
+                <SignInForm />
             </div>
         </>
     )
