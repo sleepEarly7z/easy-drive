@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { REQUEST_STATE } from './utils';
+import { REQUEST_STATE } from '../utils';
 import { addUserAsync, getUsersAsync } from './thunks';
 
 const INITIAL_STATE = {
