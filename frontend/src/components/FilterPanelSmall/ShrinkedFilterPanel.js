@@ -7,7 +7,7 @@ import {
     FormControl,
 } from '@mui/material'
 import './ShrinkedFilterPanel.scss'
-import FilterPanel from '../../components/FilterPanel/FilterPanel'
+import FilterPanel from '../FilterPanel/FilterPanel'
 
 import $ from 'jquery'
 
