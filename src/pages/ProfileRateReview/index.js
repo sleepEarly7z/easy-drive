@@ -1,22 +1,37 @@
 import './index.scss'
-// import Contact from '../../components/Contact'
 import ReviewForm from '../../components/ReviewForm'
 import ReviewList from '../../components/ReviewList'
-import ProfileCard from '../../components/ProfileCard'
 import ReviewProfile from '../../components/ReviewProfile'
 
 const ProfileRateReview = () => {
     return (
+        // // Version 1
         <>
             <div className="ProfileRateReview">
                 <ReviewProfile />
-                {/* <ProfileCard name={'Rick Astley'} location={'UK'} years={'10+'} rate={'5'} imgSrc={"https://img.apmcdn.org/768cb350c59023919f564341090e3eea4970388c/square/72dd92-20180309-rick-astley.jpg"} /> */}
                 <br />
                 <br />
                 <ReviewForm />
                 <ReviewList />
             </div>
         </>
+        // // Version 2
+        // <div className="ProfileRateReview">
+        //     <div className="listContainer">
+        //         <div className="listWrapper">
+        //             <div id="review-profile-panel">
+        //                 <ReviewProfile />
+        //             </div>
+        //             <div id="review-comment-panel">
+        //                 <ReviewForm />
+        //                 <ReviewList />
+        //                 {/* <ReviewForm /> */}
+        //                 {/* <ReviewList /> */}
+        //                 <div className='boxTitle'>123</div>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </div>
     )
 }
 

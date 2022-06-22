@@ -47,80 +47,72 @@ export default function ReviewProfile() {
         <div>
             <div className="ReviewProfile">
                 <div className="row">
-                    <div className="col-md-5">
-                        <div className="row-left">
-                            <div className="col-12 p-0 px-3 py-3 mb-3 pt-4">
-                                <div className="d-flex flex-column align-items-center">
-                                    <img
-                                        className="photo"
-                                        src={
-                                            'https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
-                                        }
-                                        alt=""
-                                        style={{
-                                            width: '100px',
-                                            height: '100px',
-                                            borderRadius: '50%',
-                                            objectFit: 'cover',
-                                        }}
-                                    />
-                                    <p className="fw-bold h4 mt-3">John Doe</p>
-                                    <p className="text-muted">
-                                        className 5 instructor
-                                    </p>
-                                    <p className="text-muted mb-3">
-                                        Soma,San Francisco, CA
-                                    </p>
-                                    <div className="d-flex">
-                                        <FollowActionButton>
-                                            Follow
-                                        </FollowActionButton>
-                                        <MessageActionButton>
-                                            Message
-                                        </MessageActionButton>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-12 p-0 px-2 py-3 pb-3 mb-3 pt-5">
-                                <div className="d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Company
-                                    </p>
-                                    <NavLink to="/">
-                                        https://bootdey.com
-                                    </NavLink>
-                                </div>
-                                <div className="d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Languages
-                                    </p>
-                                    <NavLink to="/">French, English</NavLink>
-                                </div>
-                                <div className="d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Year of Experience
-                                    </p>
-                                    <NavLink to="/">5</NavLink>
-                                </div>
-                                <div className="d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Liscense
-                                    </p>
-                                    <NavLink to="/">className 5</NavLink>
-                                </div>
-                                <div className="d-flex justify-content-between py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Description
-                                    </p>
-                                    <NavLink to="/">
-                                        My name is John and I'm currently a
-                                        driver instructor.
-                                    </NavLink>
+                    {/* <div className="col-md-5"> */}
+                    <div className="row-left">
+                        <div className="col-12 p-0 px-3 py-3 mb-3 pt-4">
+                            <div className="d-flex flex-column align-items-center">
+                                <img
+                                    className="photo"
+                                    src={
+                                        'https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
+                                    }
+                                    alt=""
+                                    style={{
+                                        width: '100px',
+                                        height: '100px',
+                                        borderRadius: '50%',
+                                        objectFit: 'cover',
+                                    }}
+                                />
+                                <p className="fw-bold h4 mt-3">John Doe</p>
+                                <p className="text-muted">
+                                    className 5 instructor
+                                </p>
+                                <p className="text-muted mb-3">
+                                    Soma,San Francisco, CA
+                                </p>
+                                <div className="d-flex">
+                                    <FollowActionButton>
+                                        Follow
+                                    </FollowActionButton>
+                                    <MessageActionButton>
+                                        Message
+                                    </MessageActionButton>
                                 </div>
                             </div>
                         </div>
+                        <div className="col-12 p-0 px-2 py-3 pb-3 mb-3 pt-5">
+                            <div className="d-flex justify-content-between border-bottom py-2 px-3">
+                                <p className="review-profile-info">Company</p>
+                                <NavLink to="/">https://bootdey.com</NavLink>
+                            </div>
+                            <div className="d-flex justify-content-between border-bottom py-2 px-3">
+                                <p className="review-profile-info">Languages</p>
+                                <NavLink to="/">French, English</NavLink>
+                            </div>
+                            <div className="d-flex justify-content-between border-bottom py-2 px-3">
+                                <p className="review-profile-info">
+                                    Year of Experience
+                                </p>
+                                <NavLink to="/">5</NavLink>
+                            </div>
+                            <div className="d-flex justify-content-between border-bottom py-2 px-3">
+                                <p className="review-profile-info">Liscense</p>
+                                <NavLink to="/">className 5</NavLink>
+                            </div>
+                            <div className="d-flex justify-content-between py-2 px-3">
+                                <p className="review-profile-info">
+                                    Description
+                                </p>
+                                <NavLink to="/">
+                                    My name is John and I'm currently a driver
+                                    instructor.
+                                </NavLink>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-md-7 ps-md-4">
+                </div>
+                {/* <div className="col-md-7 ps-md-4">
                         <div className="row-right">
                             <div className="col-12 px-3 py-3 mb-3 pb-3 pt-4">
                                 <div className="d-flex align-items-center justify-content-between border-bottom">
@@ -232,8 +224,8 @@ export default function ReviewProfile() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div> */}
+                {/* </div> */}
             </div>
         </div>
     )
