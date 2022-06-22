@@ -1,7 +1,7 @@
 const addUser = async (mydata) => {
   const {name, age} = mydata;
 	const response = await fetch(
-		'http://localhost:3003/users',
+		'http://localhost:3001/users',
 		{
 			method: 'POST',
 			headers: {
@@ -23,7 +23,7 @@ const addUser = async (mydata) => {
 
 const getUsers = async () => {
 	const response = await fetch(
-		'http://localhost:3003/users',
+		'http://localhost:3001/users',
 		{
 			method: 'GET',
 		}
