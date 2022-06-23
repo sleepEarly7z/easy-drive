@@ -10,7 +10,7 @@ const ProfileRateReview = () => {
         <>
             <div className="ProfileRateReview">
                 <div className='ReviewProfile-top'>
-                    <ReviewProfile />
+                    <ReviewProfile instructorId={'62a56dccfc13ae05bf00046d'} />
                 </div>
                 <div>
                     <ReviewList />

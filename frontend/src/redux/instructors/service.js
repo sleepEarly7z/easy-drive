@@ -1,19 +1,57 @@
-const addInstructor = async (name) => {
+const addInstructor = async (data) => {
+    const {
+        first_name,
+        last_name,
+        password,
+        email,
+        phone,
+        street,
+        city,
+        country,
+        company,
+        language,
+        experience,
+        license,
+        description,
+        time,
+        carIsProvided,
+    } = data
+    // console.log('data')
+    // console.log(data)
     const response = await fetch('http://localhost:3001/instructors', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(name),
+        body: JSON.stringify({
+            first_name,
+            last_name,
+            password,
+            email,
+            phone,
+            street,
+            city,
+            country,
+            company,
+            language,
+            experience,
+            license,
+            description,
+            time,
+            carIsProvided,
+        }),
     })
 
-    const data = await response.json()
+    const result = await response.json()
     if (!response.ok) {
-        const errorMsg = data?.message
+        const errorMsg = result?.message
         throw new Error(errorMsg)
     }
 
-    return data
+    // console.log('result');
+    // console.log(result);
+
+    return result
 }
 
 const getInstructors = async () => {

@@ -11,7 +11,7 @@ export const getInstructorsAsync = createAsyncThunk(
 
 export const addInstructorAsync = createAsyncThunk(
   actionTypes.ADD_INSTRUCTOR,
-  async (name) => {
-    return await InstructorService.addInstructor({ name });
+  async (data) => {
+    return await InstructorService.addInstructor(data);
   }
 );
