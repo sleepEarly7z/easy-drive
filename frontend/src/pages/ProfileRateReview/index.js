@@ -20,23 +20,6 @@ const ProfileRateReview = () => {
                 {/* <Comment /> */}
             </div>
         </>
-        // // Version 2
-        // <div className="ProfileRateReview">
-        //     <div className="listContainer">
-        //         <div className="listWrapper">
-        //             <div id="review-profile-panel">
-        //                 <ReviewProfile />
-        //             </div>
-        //             <div id="review-comment-panel">
-        //                 <ReviewForm />
-        //                 <ReviewList />
-        //                 {/* <ReviewForm /> */}
-        //                 {/* <ReviewList /> */}
-        //                 <div className='boxTitle'>123</div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
 
