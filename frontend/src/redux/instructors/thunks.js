@@ -15,3 +15,17 @@ export const addInstructorAsync = createAsyncThunk(
     return await InstructorService.addInstructor({ name });
   }
 );
+
+export const getFiltersAsync = createAsyncThunk(
+  actionTypes.GET_FILTER,
+  async () => {
+    return await InstructorService.getFilter();
+  }
+);
+
+export const updateFilterAsync = createAsyncThunk(
+  actionTypes.UPDATE_FILTER,
+  async ({id}) => {
+    return await InstructorService.updateFilter({ id });
+  }
+);

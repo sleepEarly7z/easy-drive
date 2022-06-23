@@ -4,7 +4,7 @@ import { NavLink } from 'react-bootstrap'
 import styled from 'styled-components'
 import RateDisplay from '../RateDisplay'
 // import Calendar from '../Calendar/Calendar'
-import CalendarSchedular from '../Calendar/CalendarSchedular'
+// import CalendarSchedular from '../Calendar/CalendarSchedular'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -163,7 +163,7 @@ export default function ReviewProfile() {
                             </div>
                             <div className="col-12 px-3 py-3 mb-3 pb-3 pt-4">
                                 {/* <Calendar /> */}
-                                <CalendarSchedular page="reviewpage" />
+                                {/* <CalendarSchedular page="reviewpage" /> */}
                             </div>
                             {/* <div className="col-12 px-3 py-3 mb-3 pb-3 pt-4">
                                 <div className="FollowActionButton d-flex align-items-center justify-content-between border-bottom py-2 px-3">

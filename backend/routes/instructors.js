@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
 });
 
 // READ
-router.get('/:id', function (req, res, next) {
+router.get('instructor/:id', function (req, res, next) {
 	const foundInstructor = instructors.find(
 		(user) => user.id.$oid === req.params.id
 	);
@@ -184,6 +184,23 @@ router.patch('/:id', function (req, res, next) {
 	return res.send(foundInstructor);
 });
 
+router.get('/filter', function (req, res, next) {
+	return res.send(filter);
+});
+
+router.delete('/filter/:id', function (req, res, next) {
+  const id = JSON.stringify(req.body.id).replaceAll("\"", "")
+  console.log (typeof (id) + id)
+  const deleted = filter.find(instructor => instructor.id.$oid === id);
+  if (deleted) {
+    filter = filter.filter(instructor => instructor.id.$oid !== id);
+    return res.send(deleted);
+  }
+  else {
+    return res.status(404).json({ message: 'instructor you are looking for does not exist' });
+  }
+});
+
 let instructors = [
 	{
 		id: {
@@ -196,7 +213,7 @@ let instructors = [
 		phone: '+1 (210) 148-2668',
 		gender: 'Male',
 		photo: 'https://randomuser.me/api/portraits/men/21.jpg',
-		Rating: 4,
+		Rating: 3,
 		street: '9308 Morning Terrace',
 		city: 'Vancouver',
 		country: 'Canada',
@@ -2071,4 +2088,5 @@ let instructors = [
 	},
 ];
 
+let filter = JSON.parse(JSON.stringify(instructors));
 module.exports = router;
