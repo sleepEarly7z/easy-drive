@@ -47,9 +47,32 @@ const updateFilter = async (id) => {
 
     return data;
 }
+
+const sortFilter = async (sortCondition) => {
+    console.log(JSON.stringify(sortCondition))
+    const {condition} = sortCondition
+    const response = await fetch('http://localhost:3001/instructors/filter/sort', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({condition})
+    });
+
+    console.log(response)
+    const data = await response.json();
+    if (!response.ok) {
+        const errorMsg = data?.message;
+        throw new Error(errorMsg)
+    }
+
+    return data;
+}
+
     export default {
         addInstructor,
         getInstructors,
         getFilter,
-        updateFilter
+        updateFilter,
+        sortFilter
     }

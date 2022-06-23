@@ -30,7 +30,8 @@ function FilterList() {
                             rate={instructor.Rating + ''}
                             imgSrc={
                                 'https://img.apmcdn.org/768cb350c59023919f564341090e3eea4970388c/square/72dd92-20180309-rick-astley.jpg'
-                            } />
+                            } 
+                            instructorId = {instructor.id.$oid}/>
 
                         <br />
                     </div>);

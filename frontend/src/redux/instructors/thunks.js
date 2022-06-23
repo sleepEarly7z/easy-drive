@@ -29,3 +29,10 @@ export const updateFilterAsync = createAsyncThunk(
     return await InstructorService.updateFilter({ id });
   }
 );
+
+export const sortFiltersAsync = createAsyncThunk(
+  actionTypes.SORT_FILTER,
+  async (sortCondition) => {
+    return await InstructorService.sortFilter( sortCondition );
+  }
+);

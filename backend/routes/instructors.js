@@ -188,6 +188,20 @@ router.get('/filter', function (req, res, next) {
 	return res.send(filter);
 });
 
+const dropDownType = {
+    BEST_MATCH: 'Best Match',
+    HIGHEST_RATED: 'Highest Rated'
+}
+router.get('/filter/sort', function (req, res, next) {
+	const condition = req.body.condition
+	console.log("pass1")
+	if (condition === dropDownType.HIGHEST_RATED) {
+		console.log("pass2")
+		filter.sort(function(a, b){return b.Rating-a.Rating});
+	}
+	return res.send(filter);
+});
+
 router.delete('/filter/:id', function (req, res, next) {
   const id = JSON.stringify(req.body.id).replaceAll("\"", "")
   console.log (typeof (id) + id)

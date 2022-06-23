@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import { ExpandLess, ExpandMore } from '@mui/icons-material'
 import { useSelector, useDispatch } from 'react-redux';
-import { getFiltersAsync,updateFilterAsync } from '../../redux/instructors/thunks';
+import { getFiltersAsync,getInstructorsAsync,updateFilterAsync } from '../../redux/instructors/thunks';
 
 
 const FilterCategory = ({ category }) => {
@@ -41,21 +41,23 @@ const FilterCategory = ({ category }) => {
         setChecked(newChecked)
     }
 
-    const handleFilterChecked = (option) => () => {
+    const handleFilterChecked = (option) => {
         dispatch(getFiltersAsync());
         console.log("checked")
         for (let instructor in instructors) {
-            console.log(option)
-            if (instructor.city === option) {
+            console.log(instructor.city)
+            if (instructor.city === option || instructor.language === option) {
+               
                 const id = instructor.id;
                 dispatch(updateFilterAsync({ id }));
             }
         }
     }
 
-    useEffect(() => {
-        dispatch(getFiltersAsync());
-      }, []);
+    // useEffect(() => {
+    //     dispatch(getInstructorsAsync());
+    //     dispatch(getFiltersAsync());
+    //   }, []);
 
     return (
         <>
@@ -92,7 +94,6 @@ const FilterCategory = ({ category }) => {
                                             inputProps={{
                                                 'aria-labelledby': option,
                                             }}
-                                            onClick={() => handleFilterChecked(option)}
                                         />
                                     </ListItemIcon>
                                     <ListItemText

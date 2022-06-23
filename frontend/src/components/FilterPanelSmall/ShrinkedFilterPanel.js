@@ -8,6 +8,9 @@ import {
 } from '@mui/material'
 import './ShrinkedFilterPanel.scss'
 import FilterPanel from '../FilterPanel/FilterPanel'
+import { dropDownType } from './dropDownType'
+import { useSelector, useDispatch } from 'react-redux';
+import { sortFiltersAsync } from '../../redux/instructors/thunks';
 
 import $ from 'jquery'
 
@@ -26,7 +29,11 @@ let useClickOutside = (handler) => {
 }
 
 export default function ShrinkedFilterPanel() {
+    const dispatch = useDispatch()
+    const instructors = useSelector(state => state.instructors.list)
+
     const [openFilter, setOpenFilter] = useState(false)
+    const [sort, setSort] = useState(dropDownType.BEST_MATCH)
 
     let closeFilterRef = useClickOutside(() => {
         handleCloseFilter()
@@ -83,6 +90,11 @@ export default function ShrinkedFilterPanel() {
         // $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "");
         // $(".shrinkedFilterPanel").css("height", "");
     }
+    
+    function handleSorting(sortCondition) {
+        console.log("test " + sortCondition)
+        dispatch(sortFiltersAsync({condition : sortCondition}))
+    }
 
     return (
         <div className="ShrinkedFilterPanel">
@@ -93,6 +105,7 @@ export default function ShrinkedFilterPanel() {
                         <Select
                             className="ShrinkedFilterPanel-dropDown"
                             defaultValue="Best Match"
+                            onChange={(e) => handleSorting(e.target.value)}
                         >
                             <MenuItem value={'Best Match'}>Best Match</MenuItem>
                             <MenuItem value={'Price Low-High'}>
