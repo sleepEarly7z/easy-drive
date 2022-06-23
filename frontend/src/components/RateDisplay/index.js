@@ -18,14 +18,14 @@ const RateDisplay = ({ item }) => {
                     {average.toFixed(1)}/5.0
                 </div>
                 <RatingStar average={average} />
-                <div className="rdcard-bottom-space" />
+                {/* <div className="rdcard-bottom-space" /> */}
             </div>
             <div className="RateDisplay-right">
-                <ProgressBar value={60} />
-                <ProgressBar value={20} />
-                <ProgressBar value={10} />
-                <ProgressBar value={10} />
-                <ProgressBar value={0} />
+                Five stars<ProgressBar value={60} />
+                Four stars<ProgressBar value={20} />
+                Three stars<ProgressBar value={10} />
+                Two stars<ProgressBar value={10} />
+                One star<ProgressBar value={0} />
                 {/* <ProgressBar className='rd-progressbar-item' width={"450px"} value={60} max={100} /> */}
             </div>
         </div>
