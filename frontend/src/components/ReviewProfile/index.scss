@@ -3,13 +3,26 @@
 
 .ReviewProfile {
     background-color: #ffffff;
-    padding-top: 50px;
-    padding-right: 10px;
-    min-height: 928px;
-    // border-bottom: 12px solid $black-background;
+    margin: 30px 40px;
+    padding: 25px 15px;
+    padding-top: 35px;
+    // min-height: 928px;
+    // border: 1px solid $black-background;
+    border-radius: 5px;
+    background: linear-gradient(
+        to right bottom,
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.3)
+      );
+    padding: 1.5rem;
+    box-shadow: 0 0 5px rgba(234, 225, 225, 0.5), 0 0 25px rgba(0, 0, 0, 0.08);
 }
 
-.d-flex a {
+.FollowActionButton {
+    gap: 15px;
+}
+
+.FollowActionButton a {
     text-decoration: none;
     color: #686868;
 }
@@ -18,11 +31,19 @@
     padding-top: 10px;
 }
 
-.row-left {
+.review-profile-info-res {
+    padding-top: 10px;
+    padding-right: 14px;
+    text-align: right;
+}
+
+.review-profile-row-left {
     margin-left: 20px;
     box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
 }
 
-.row-right {
+.review-profile-row-right {
+    // margin-top: 40px;
+    padding-left: 50px;
     padding-right: 20px;
 }
