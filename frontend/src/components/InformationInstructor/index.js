@@ -2,8 +2,10 @@ import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux';
+import { updateInstructorAsync } from '../../redux/instructors/thunks';
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 const InformationInstructor = () => {
+    const dispatch = useDispatch();
     const [fname, setFname] = useState('')
     const [lname, setLname] = useState('')
     const [email, setEmail] = useState('')
@@ -45,6 +47,7 @@ const InformationInstructor = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let instData = {
+            id : "62a56dccfc13ae05bf00046a",
             fname: fname,
             lname: lname,
             email: email,
@@ -55,6 +58,7 @@ const InformationInstructor = () => {
             language: language,
             experience: experience
         }
+        dispatch(updateInstructorAsync(instData))
         console.log(fname, lname, email, phone, street, city, province, language, experience)
     }
     return (

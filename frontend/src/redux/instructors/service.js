@@ -23,7 +23,15 @@ const getInstructors = async () => {
     return response.json()
 }
 
+const updateInstructor = async (payload) => {
+    const response = await fetch(`http://localhost:3001/instructors/${payload.id}`, {
+        method: 'PATCH',
+    })
+    return response.json()
+}
+
 export default {
     addInstructor,
     getInstructors,
+    updateInstructor,
 }

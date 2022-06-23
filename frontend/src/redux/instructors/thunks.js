@@ -15,3 +15,10 @@ export const addInstructorAsync = createAsyncThunk(
     return await InstructorService.addInstructor({ name });
   }
 );
+
+export const updateInstructorAsync = createAsyncThunk(
+  actionTypes.UPDATE_INSTRUCTOR,
+  async (id) => {
+    return await InstructorService.updateInstructor({ id});
+  }
+);
