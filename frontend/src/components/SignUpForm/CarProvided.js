@@ -14,12 +14,26 @@ const theme = createTheme({
 const CarProvided = ({ control }) => {
     return (
         <ThemeProvider theme={theme}>
-            <div className="container">
-                <section>
-                    <label>Car Is Provided</label>
+            <div>
+                <section style={{ display: 'flex' }}>
+                    <div
+                        style={{
+                            fontSize: '17px',
+                            paddingTop: '9px',
+                            marginRight: '12px',
+                            paddingLeft: '5px',
+                        }}
+                    >
+                        Car Is Provided:{' '}
+                    </div>
                     <Controller
                         render={({ field }) => (
-                            <RadioGroup aria-label="carIsProvided" {...field}>
+                            <RadioGroup
+                                aria-label="carIsProvided"
+                                {...field}
+                                row
+                                defaultValue="true"
+                            >
                                 <FormControlLabel
                                     value="true"
                                     control={<Radio />}

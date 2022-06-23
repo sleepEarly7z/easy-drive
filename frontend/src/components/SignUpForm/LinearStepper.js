@@ -322,13 +322,13 @@ const ProfileForm = () => {
 
             <Controller
                 control={control}
-                name="timeSlot"
+                name="hoursAvailablePerDay"
                 render={({ field }) => (
                     <TextField
-                        id="timeSlot"
-                        label="Time Slot"
+                        id="hoursAvailablePerDay"
+                        label="Hours Available Per Day"
                         variant="outlined"
-                        placeholder="Enter Your Time Slot"
+                        placeholder="Enter Your Available Hours Each Workday"
                         fullWidth
                         margin="normal"
                         {...field}
@@ -373,7 +373,7 @@ const LinearStepper = () => {
             language: '',
             carIsProvided: '',
             description: '',
-            timeSlot: '',
+            hoursAvailablePerDay: '',
         },
     })
     const [activeStep, setActiveStep] = useState(0)
