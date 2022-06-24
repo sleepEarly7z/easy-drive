@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { REQUEST_STATE } from '../utils'
-import { addInstructorAsync, getInstructorsAsync, updateInstructorAsync } from './thunks'
+import { addInstructorAsync, getInstructorsAsync, updateInstructorAsync,getFiltersAsync,updateFilterAsync,
+    sortFiltersAsync  } from './thunks'
 
 const INITIAL_STATE = {
     list: [],

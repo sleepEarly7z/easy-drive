@@ -18,7 +18,28 @@ export const addInstructorAsync = createAsyncThunk(
 
 export const updateInstructorAsync = createAsyncThunk(
   actionTypes.UPDATE_INSTRUCTOR,
-  async (id) => {
-    return await InstructorService.updateInstructor({ id});
+  async (instData) => {
+    return await InstructorService.updateInstructor(instData);
+  }
+);
+
+export const getFiltersAsync = createAsyncThunk(
+  actionTypes.GET_FILTER,
+  async () => {
+    return await InstructorService.getFilter();
+  }
+);
+
+export const updateFilterAsync = createAsyncThunk(
+  actionTypes.UPDATE_FILTER,
+  async ({id}) => {
+    return await InstructorService.updateFilter({ id });
+  }
+);
+
+export const sortFiltersAsync = createAsyncThunk(
+  actionTypes.SORT_FILTER,
+  async (sortCondition) => {
+    return await InstructorService.sortFilter( sortCondition );
   }
 );
