@@ -122,7 +122,6 @@ router.delete('/:id', function (req, res, next) {
 
 // UPDATE
 router.patch('/:id', function (req, res, next) {
-	console.log(req.body);
 	let foundInstructor = instructors.find(
 		(user) => user.id.$oid === req.params.id
 	);

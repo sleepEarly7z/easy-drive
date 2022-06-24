@@ -16,13 +16,6 @@ export const addInstructorAsync = createAsyncThunk(
   }
 );
 
-export const updateInstructorAsync = createAsyncThunk(
-  actionTypes.UPDATE_INSTRUCTOR,
-  async (instData) => {
-    return await InstructorService.updateInstructor(instData);
-  }
-);
-
 export const getFiltersAsync = createAsyncThunk(
   actionTypes.GET_FILTER,
   async () => {
