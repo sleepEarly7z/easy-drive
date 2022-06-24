@@ -23,6 +23,39 @@ const getInstructors = async () => {
     return response.json()
 }
 
+const updateInstructor = async (payload) => {
+    const {
+        id,
+        fname,
+        lname,
+        email,
+        phone,
+        street,
+        city,
+        province,
+    } = payload;
+    console.log(id);
+    const response = await fetch('http://localhost:3001/instructors/' + id, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            fname,
+            lname,
+            email,
+            phone,
+            street,
+            city,
+            province,
+        }),
+    })
+    return response.json()
+}
+        
+        
+        
+        
 const getFilter = async () => {
     const response = await fetch('http://localhost:3001/instructors/filter', {
         method: 'GET',
@@ -69,6 +102,7 @@ const sortFilter = async (condition) => {
     export default {
         addInstructor,
         getInstructors,
+        updateInstructor,
         getFilter,
         updateFilter,
         sortFilter
