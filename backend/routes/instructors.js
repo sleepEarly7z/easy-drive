@@ -7,17 +7,17 @@ router.get('/', function (req, res, next) {
 	return res.send(instructors);
 });
 
-// READ
-router.get('/:id', function (req, res, next) {
-	const foundInstructor = instructors.find(
-		(user) => user.id.$oid === req.params.id
-	);
+// // READ
+// router.get('/:id', function (req, res, next) {
+// 	const foundInstructor = instructors.find(
+// 		(user) => user.id.$oid === req.params.id
+// 	);
 
-	if (!foundInstructor)
-		return res.status(404).send({ message: 'User not found' });
+// 	if (!foundInstructor)
+// 		return res.status(404).send({ message: 'User not found' });
 
-	return res.send(foundInstructor);
-});
+// 	return res.send(foundInstructor);
+// });
 
 // CREATE
 router.post('/', function (req, res, next) {
@@ -205,6 +205,7 @@ router.get('/sort', function (req, res, next) {
 	}
 	return res.send(filter);
 });
+
 // router.get('/sort', function (req, res, next) {
 // 	console.log("pass1"+ req.body.condition)
 // 	const condition = req.body.condition
@@ -215,23 +216,23 @@ router.get('/sort', function (req, res, next) {
 // 	return res.send(filter);
 // });
 
-router.delete('/filter/:id', function (req, res, next) {
-	const id = JSON.stringify(req.body.id).replaceAll('"', '');
-	console.log(typeof id + id);
-	const deleted = filter.find(
-		(instructor) => instructor.id.$oid === id
-	);
-	if (deleted) {
-		filter = filter.filter(
-			(instructor) => instructor.id.$oid !== id
-		);
-		return res.send(deleted);
-	} else {
-		return res.status(404).json({
-			message: 'instructor you are looking for does not exist',
-		});
-	}
-});
+// router.delete('/filter/:id', function (req, res, next) {
+// 	const id = JSON.stringify(req.body.id).replaceAll('"', '');
+// 	console.log(typeof id + id);
+// 	const deleted = filter.find(
+// 		(instructor) => instructor.id.$oid === id
+// 	);
+// 	if (deleted) {
+// 		filter = filter.filter(
+// 			(instructor) => instructor.id.$oid !== id
+// 		);
+// 		return res.send(deleted);
+// 	} else {
+// 		return res.status(404).json({
+// 			message: 'instructor you are looking for does not exist',
+// 		});
+// 	}
+// });
 
 let instructors = [
 	{

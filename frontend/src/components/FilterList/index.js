@@ -19,7 +19,7 @@ function FilterList({ instructors }) {
 
     return (
         <div className="FilterList">
-            {instructors.slice(0, 10).map((instructor) => {
+            {Array.from(instructors).slice(0, 10).map((instructor) => {
                 return (
                     <div key={instructor.id.$oid} id="addedProfileCard-div">
                         <ProfileCard

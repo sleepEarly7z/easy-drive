@@ -36,7 +36,7 @@ function App() {
                     {/* </Route> */}
                     {/* <Route path='/profileinstructor' element={<PrivateRoute />}> */}
                     <Route
-                        path="showProfileRating/:id"
+                        path="profile-instructor"
                         element={<ProfileInstructor />}
                     />
                     {/* </Route> */}

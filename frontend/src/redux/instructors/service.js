@@ -5,12 +5,12 @@ const getInstructors = async () => {
     return response.json()
 }
 
-const getInstructor = async (id) => {
-    const response = await fetch('http://localhost:3001/instructors/' + id, {
-        method: 'GET',
-    })
-    return response.json()
-}
+// const getInstructor = async (id) => {
+//     const response = await fetch('http://localhost:3001/instructors/' + id, {
+//         method: 'GET',
+//     })
+//     return response.json()
+// }
 
 const addInstructor = async (data) => {
     const {
@@ -141,7 +141,7 @@ const sortFilter = async (condition) => {
 
 export default {
     getInstructors,
-    getInstructor,
+    // getInstructor,
     addInstructor,
     updateInstructor,
     getFilter,

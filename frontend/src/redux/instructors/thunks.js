@@ -9,19 +9,19 @@ export const getInstructorsAsync = createAsyncThunk(
     },
 )
 
-export const getInstructorAsync = createAsyncThunk(
-    actionTypes.GET_INSTRUCTOR,
-    async () => {
-        return await InstructorService.getInstructor()
-    },
-)
+// export const getInstructorAsync = createAsyncThunk(
+//     actionTypes.GET_INSTRUCTOR,
+//     async () => {
+//         return await InstructorService.getInstructor()
+//     },
+// )
 
 export const addInstructorAsync = createAsyncThunk(
-  actionTypes.ADD_INSTRUCTOR,
-  async (data) => {
-    return await InstructorService.addInstructor(data);
-  }
-);
+    actionTypes.ADD_INSTRUCTOR,
+    async (data) => {
+        return await InstructorService.addInstructor(data)
+    },
+)
 
 export const updateInstructorAsync = createAsyncThunk(
     actionTypes.UPDATE_INSTRUCTOR,
