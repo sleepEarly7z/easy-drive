@@ -1,10 +1,10 @@
 import './index.scss'
 import React, { useState, useEffect } from 'react'
 import ProfileCard from '../ProfileCard'
-import { useSelector, useDispatch } from 'react-redux';
-import { getFiltersAsync } from '../../redux/instructors/thunks';
+import { useSelector, useDispatch } from 'react-redux'
+import { getFiltersAsync } from '../../redux/instructors/thunks'
 
-function FilterList({instructors}) {
+function FilterList({ instructors }) {
     // const dispatch = useDispatch()
 
     const [name, setName] = useState('Name: Your name')
@@ -17,25 +17,24 @@ function FilterList({instructors}) {
     //     dispatch(getFiltersAsync());
     // }, []);
 
-
     return (
         <div className="FilterList">
             {instructors.slice(0, 10).map((instructor) => {
                 return (
                     <div key={instructor.id.$oid} id="addedProfileCard-div">
-                        <ProfileCard key={instructor.id.$oid}
+                        <ProfileCard
+                            key={instructor.id.$oid}
                             name={instructor.first_name}
                             location={instructor.city}
                             years={instructor.experience}
                             rate={instructor.Rating + ''}
-                            imgSrc={
-                                'https://img.apmcdn.org/768cb350c59023919f564341090e3eea4970388c/square/72dd92-20180309-rick-astley.jpg'
-                            } 
-                            instructorId = {instructor.id.$oid}/>
+                            imgSrc={instructor.photo}
+                            instructorId={instructor.id.$oid}
+                        />
 
                         <br />
-                    </div>);
-
+                    </div>
+                )
             })}
             {/* <br />
             <ProfileCard

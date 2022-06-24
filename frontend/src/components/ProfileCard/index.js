@@ -1,9 +1,17 @@
 import './index.scss'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-function ProfileCard({ name, location, years, rate, imgSrc,instructorId }) {
+function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
     const [rating, setRating] = useState(rate)
     const [hover, setHover] = useState(rate)
+    const navigate = useNavigate()
+
+    const handleClickSeeProfile = () => {
+        // navigate('/profile-ratereview');
+        // to={`/profileratereview/${instructorId}`}
+        console.log('clicked see profile')
+    }
 
     return (
         <div className="ProfileCard">
@@ -47,7 +55,12 @@ function ProfileCard({ name, location, years, rate, imgSrc,instructorId }) {
                 </div>
             </div>
             <div className="profilecard-buttons">
-                <button className="profileButton">See Profile</button>
+                <button
+                    className="profileButton"
+                    onClick={handleClickSeeProfile}
+                >
+                    See Profile
+                </button>
                 <br />
                 <button className="favouriteButton">Favourite</button>
             </div>
