@@ -3,6 +3,7 @@ import { REQUEST_STATE } from '../utils'
 import {
     addInstructorAsync,
     getInstructorsAsync,
+    updateInstructorAsync,
     getFiltersAsync,
     updateFilterAsync,
     sortFiltersAsync,
@@ -13,6 +14,7 @@ const INITIAL_STATE = {
     filter: [],
     getInstructors: REQUEST_STATE.IDLE,
     addInstructor: REQUEST_STATE.IDLE,
+    updateInstructor: REQUEST_STATE.IDLE,
     getFilter: REQUEST_STATE.IDLE,
     addFilter: REQUEST_STATE.IDLE,
     error: null,
@@ -48,6 +50,14 @@ const instructorsSlice = createSlice({
                 state.addInstructor = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
+            // .addCase(updateInstructorAsync.pending, (state) => {
+            //     state.updateInstructor = REQUEST_STATE.PENDING
+            //     state.error = null
+            // })
+            // .addCase(updateInstructorAsync.fulfilled, (state, action) => {
+            //     state.updateInstructor = REQUEST_STATE.FULFILLED
+            //     state.list = action.payload
+            // })
             .addCase(getFiltersAsync.pending, (state) => {
                 state.getFilter = REQUEST_STATE.PENDING
                 state.error = null

@@ -23,6 +23,27 @@ const getInstructors = async () => {
     return response.json()
 }
 
+const updateInstructor = async (payload) => {
+    const { id, fname, lname, email, phone, street, city, province } = payload
+    console.log(id)
+    const response = await fetch('http://localhost:3001/instructors/' + id, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            fname,
+            lname,
+            email,
+            phone,
+            street,
+            city,
+            province,
+        }),
+    })
+    return response.json()
+}
+
 const getFilter = async () => {
     const response = await fetch('http://localhost:3001/instructors/filter', {
         method: 'GET',
@@ -31,45 +52,53 @@ const getFilter = async () => {
 }
 
 const updateFilter = async (id) => {
-    const response = await fetch('http://localhost:3001/instructors/filter'+JSON.stringify(id).replaceAll("\"", ""), {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
+    const response = await fetch(
+        'http://localhost:3001/instructors/filter' +
+            JSON.stringify(id).replaceAll('"', ''),
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(id),
         },
-        body: JSON.stringify(id)
-    });
+    )
 
-    const data = await response.json();
+    const data = await response.json()
     if (!response.ok) {
-        const errorMsg = data?.message;
+        const errorMsg = data?.message
         throw new Error(errorMsg)
     }
 
-    return data;
+    return data
 }
 
 const sortFilter = async (condition) => {
     console.log(JSON.stringify(condition))
-    const querystring = 'condition='+JSON.stringify(condition.condition);
+    const querystring = 'condition=' + JSON.stringify(condition.condition)
     console.log(querystring)
-    const response = await fetch('http://localhost:3001/instructors/sort?'+querystring, {
-        method: 'GET',
-    });
+    const response = await fetch(
+        'http://localhost:3001/instructors/sort?' + querystring,
+        {
+            method: 'GET',
+        },
+    )
 
     console.log(response)
-    const data = await response.json();
+    const data = await response.json()
     if (!response.ok) {
-        const errorMsg = data?.message;
+        const errorMsg = data?.message
         throw new Error(errorMsg)
     }
 
-    return data;
+    return data
 }
 
-    export default {
-        addInstructor,
-        getInstructors,
-        getFilter,
-        updateFilter,
-        sortFilter
-    }
+export default {
+    addInstructor,
+    getInstructors,
+    updateInstructor,
+    getFilter,
+    updateFilter,
+    sortFilter,
+}

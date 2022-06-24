@@ -122,6 +122,7 @@ router.delete('/:id', function (req, res, next) {
 
 // UPDATE
 router.patch('/:id', function (req, res, next) {
+	console.log(req.body);
 	let foundInstructor = instructors.find(
 		(user) => user.id.$oid === req.params.id
 	);
@@ -189,19 +190,23 @@ router.get('/filter', function (req, res, next) {
 });
 
 const dropDownType = {
-    BEST_MATCH: 'Best Match',
-    HIGHEST_RATED: 'Highest Rated'
-}
+	BEST_MATCH: 'Best Match',
+	HIGHEST_RATED: 'Highest Rated',
+};
 
 router.get('/sort', function (req, res, next) {
-	const condition = req.query.condition.replaceAll('"', '')
+	const condition = req.query.condition.replaceAll('"', '');
 	if (condition === dropDownType.HIGHEST_RATED) {
-		console.log("pass1")
-		filter.sort(function(a, b){return b.Rating-a.Rating});
-	} else if (condition === dropDownType.BEST_MATCH){
-		filter.sort(function(a, b){return b.experience-a.experience})
+		console.log('pass1');
+		filter.sort(function (a, b) {
+			return b.Rating - a.Rating;
+		});
+	} else if (condition === dropDownType.BEST_MATCH) {
+		filter.sort(function (a, b) {
+			return b.experience - a.experience;
+		});
 	} else {
-		console.log("fail")
+		console.log('fail');
 	}
 	return res.send(filter);
 });
@@ -216,16 +221,24 @@ router.get('/sort', function (req, res, next) {
 // });
 
 router.delete('/filter/:id', function (req, res, next) {
-  const id = JSON.stringify(req.body.id).replaceAll("\"", "")
-  console.log (typeof (id) + id)
-  const deleted = filter.find(instructor => instructor.id.$oid === id);
-  if (deleted) {
-    filter = filter.filter(instructor => instructor.id.$oid !== id);
-    return res.send(deleted);
-  }
-  else {
-    return res.status(404).json({ message: 'instructor you are looking for does not exist' });
-  }
+	const id = JSON.stringify(req.body.id).replaceAll('"', '');
+	console.log(typeof id + id);
+	const deleted = filter.find(
+		(instructor) => instructor.id.$oid === id
+	);
+	if (deleted) {
+		filter = filter.filter(
+			(instructor) => instructor.id.$oid !== id
+		);
+		return res.send(deleted);
+	} else {
+		return res
+			.status(404)
+			.json({
+				message:
+					'instructor you are looking for does not exist',
+			});
+	}
 });
 
 let instructors = [
