@@ -1,7 +1,7 @@
 import './index.scss'
 import React, { useState } from 'react'
 
-function ProfileCard({ name, location, years, rate, imgSrc }) {
+function ProfileCard({ name, location, years, rate, imgSrc,instructorId }) {
     const [rating, setRating] = useState(rate)
     const [hover, setHover] = useState(rate)
 

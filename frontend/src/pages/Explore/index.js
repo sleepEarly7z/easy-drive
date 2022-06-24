@@ -3,6 +3,7 @@ import Slider from '../../components/Slider'
 import FilterPanel from '../../components/FilterPanel/FilterPanel'
 import FilterList from '../../components/FilterList'
 import ShrinkedFilterPanel from '../../components/FilterPanelSmall/ShrinkedFilterPanel'
+import FilterSearchBar from '../../components/FilterPanelSmall/FilterSearchBar'
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { getFiltersAsync } from '../../redux/instructors/thunks';
@@ -22,6 +23,7 @@ const Explore = () => {
 
                 <div className="shrinkedFilterPanel">
                     <ShrinkedFilterPanel instructors={instructors}/>
+                    <FilterSearchBar />
                 </div>
                 <div className="filter-function-container">
                     <FilterPanel mainFilter={true} open={true} />

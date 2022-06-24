@@ -303,7 +303,7 @@ let instructors = [
 		phone: '+1 (183) 654-2958',
 		gender: 'Male',
 		photo: 'https://randomuser.me/api/portraits/men/22.jpg',
-		Rating: 4.2,
+		Rating: 5,
 		street: '37057 Ryan Trail',
 		city: 'Vancouver',
 		country: 'Canada',
