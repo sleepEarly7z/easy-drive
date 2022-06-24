@@ -7,6 +7,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const ProfileRateReview = () => {
     const params = useParams();
+    
     return (
         // // Version 1
         <>

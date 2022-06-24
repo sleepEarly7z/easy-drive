@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
 });
 
 // READ
-router.get('instructor/:id', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
 	const foundInstructor = instructors.find(
 		(user) => user.id.$oid === req.params.id
 	);
@@ -227,12 +227,9 @@ router.delete('/filter/:id', function (req, res, next) {
 		);
 		return res.send(deleted);
 	} else {
-		return res
-			.status(404)
-			.json({
-				message:
-					'instructor you are looking for does not exist',
-			});
+		return res.status(404).json({
+			message: 'instructor you are looking for does not exist',
+		});
 	}
 });
 

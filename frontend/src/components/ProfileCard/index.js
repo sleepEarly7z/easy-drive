@@ -8,9 +8,9 @@ function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
     const navigate = useNavigate()
 
     const handleClickSeeProfile = () => {
-        // navigate('/profile-ratereview');
-        // to={`/profileratereview/${instructorId}`}
+        navigate(`/showProfileRating/${instructorId}`)
         console.log('clicked see profile')
+        console.log(instructorId)
     }
 
     return (
