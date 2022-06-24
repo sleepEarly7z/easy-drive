@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { REQUEST_STATE } from '../utils'
-import { addInstructorAsync, getInstructorsAsync,getFiltersAsync,updateFilterAsync,
-         sortFiltersAsync } from './thunks'
+import {
+    addInstructorAsync, getInstructorsAsync, getFiltersAsync, updateFilterAsync,
+    sortFiltersAsync
+} from './thunks'
 
 const INITIAL_STATE = {
     list: [],
@@ -19,6 +21,7 @@ const instructorsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            // get
             .addCase(getInstructorsAsync.pending, (state) => {
                 state.getInstructors = REQUEST_STATE.PENDING
                 state.error = null
@@ -31,6 +34,7 @@ const instructorsSlice = createSlice({
                 state.getInstructors = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
+            // add
             .addCase(addInstructorAsync.pending, (state) => {
                 state.addInstructor = REQUEST_STATE.PENDING
                 state.error = null
@@ -43,6 +47,7 @@ const instructorsSlice = createSlice({
                 state.addInstructor = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
+            // getFilter
             .addCase(getFiltersAsync.pending, (state) => {
                 state.getFilters = REQUEST_STATE.PENDING
                 state.error = null
@@ -55,6 +60,7 @@ const instructorsSlice = createSlice({
                 state.getFilters = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
+            // updateFilter
             .addCase(updateFilterAsync.pending, (state) => {
                 state.addFilter = REQUEST_STATE.PENDING
                 state.error = null
@@ -67,6 +73,7 @@ const instructorsSlice = createSlice({
                 state.addFilter = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
+            // sort
             .addCase(sortFiltersAsync.pending, (state) => {
                 state.getFilters = REQUEST_STATE.PENDING
                 state.error = null

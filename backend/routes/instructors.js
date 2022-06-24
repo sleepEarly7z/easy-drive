@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
 });
 
 // READ
-router.get('instructor/:id', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
 	const foundInstructor = instructors.find(
 		(user) => user.id.$oid === req.params.id
 	);

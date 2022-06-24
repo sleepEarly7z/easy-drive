@@ -23,7 +23,7 @@ const getInstructors = async () => {
     return response.json()
 }
 
-const getFilter = async () => {
+const getFilteredInstructors = async () => {
     const response = await fetch('http://localhost:3001/instructors/filter', {
         method: 'GET',
     })
@@ -31,7 +31,7 @@ const getFilter = async () => {
 }
 
 const updateFilter = async (id) => {
-    const response = await fetch('http://localhost:3001/instructors/filter'+JSON.stringify(id).replaceAll("\"", ""), {
+    const response = await fetch('http://localhost:3001/instructors/filter' + JSON.stringify(id).replaceAll("\"", ""), {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -50,9 +50,9 @@ const updateFilter = async (id) => {
 
 const sortFilter = async (condition) => {
     console.log(JSON.stringify(condition))
-    const querystring = 'condition='+JSON.stringify(condition.condition);
+    const querystring = 'condition=' + JSON.stringify(condition.condition);
     console.log(querystring)
-    const response = await fetch('http://localhost:3001/instructors/sort?'+querystring, {
+    const response = await fetch('http://localhost:3001/instructors/sort?' + querystring, {
         method: 'GET',
     });
 
@@ -66,10 +66,10 @@ const sortFilter = async (condition) => {
     return data;
 }
 
-    export default {
-        addInstructor,
-        getInstructors,
-        getFilter,
-        updateFilter,
-        sortFilter
-    }
+export default {
+    addInstructor,
+    getInstructors,
+    getFilter,
+    updateFilter,
+    sortFilter
+}
