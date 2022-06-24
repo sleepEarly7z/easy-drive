@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
 });
 
 // READ
-router.get('/:id', function (req, res, next) {
+router.get('instructor/:id', function (req, res, next) {
 	const foundInstructor = instructors.find(
 		(user) => user.id.$oid === req.params.id
 	);
@@ -117,6 +117,7 @@ router.delete('/:id', function (req, res, next) {
 
 // UPDATE
 router.patch('/:id', function (req, res, next) {
+	console.log(req.body);
 	let foundInstructor = instructors.find(
 		(user) => user.id.$oid === req.params.id
 	);
@@ -179,6 +180,62 @@ router.patch('/:id', function (req, res, next) {
 	return res.send(foundInstructor);
 });
 
+router.get('/filter', function (req, res, next) {
+	return res.send(filter);
+});
+
+const dropDownType = {
+	BEST_MATCH: 'Best Match',
+	HIGHEST_RATED: 'Highest Rated',
+};
+
+router.get('/sort', function (req, res, next) {
+	const condition = req.query.condition.replaceAll('"', '');
+	if (condition === dropDownType.HIGHEST_RATED) {
+		console.log('pass1');
+		filter.sort(function (a, b) {
+			return b.Rating - a.Rating;
+		});
+	} else if (condition === dropDownType.BEST_MATCH) {
+		filter.sort(function (a, b) {
+			return b.experience - a.experience;
+		});
+	} else {
+		console.log('fail');
+	}
+	return res.send(filter);
+});
+// router.get('/sort', function (req, res, next) {
+// 	console.log("pass1"+ req.body.condition)
+// 	const condition = req.body.condition
+// 	if (condition === 'Highest Rated') {
+// 		console.log("pass2")
+// 		filter.sort(function(a, b){return b.Rating-a.Rating});
+// 	}
+// 	return res.send(filter);
+// });
+
+router.delete('/filter/:id', function (req, res, next) {
+	const id = JSON.stringify(req.body.id).replaceAll('"', '');
+	console.log(typeof id + id);
+	const deleted = filter.find(
+		(instructor) => instructor.id.$oid === id
+	);
+	if (deleted) {
+		filter = filter.filter(
+			(instructor) => instructor.id.$oid !== id
+		);
+		return res.send(deleted);
+	} else {
+		return res
+			.status(404)
+			.json({
+				message:
+					'instructor you are looking for does not exist',
+			});
+	}
+});
+
 let instructors = [
 	{
 		id: {
@@ -191,7 +248,7 @@ let instructors = [
 		phone: '+1 (210) 148-2668',
 		gender: 'Male',
 		photo: 'https://randomuser.me/api/portraits/men/21.jpg',
-		Rating: 4,
+		Rating: 3,
 		street: '9308 Morning Terrace',
 		city: 'Vancouver',
 		country: 'Canada',
@@ -254,7 +311,7 @@ let instructors = [
 		phone: '+1 (183) 654-2958',
 		gender: 'Male',
 		photo: 'https://randomuser.me/api/portraits/men/22.jpg',
-		Rating: 4.2,
+		Rating: 5,
 		street: '37057 Ryan Trail',
 		city: 'Vancouver',
 		country: 'Canada',
@@ -2066,4 +2123,5 @@ let instructors = [
 	},
 ];
 
+let filter = JSON.parse(JSON.stringify(instructors));
 module.exports = router;

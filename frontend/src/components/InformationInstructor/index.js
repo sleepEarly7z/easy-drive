@@ -1,7 +1,66 @@
 import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import React, {useState} from 'react'
+import { useDispatch } from 'react-redux';
+import { updateInstructorAsync } from '../../redux/instructors/thunks';
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 const InformationInstructor = () => {
+    const dispatch = useDispatch();
+    const [fname, setFname] = useState('')
+    const [lname, setLname] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
+    const [street, setStreet] = useState('')
+    const [city, setCity] = useState('')
+    const [province, setProvince] = useState('')
+    const [language, setLanguage] = useState('')
+    const [experience, setExperience] = useState('')
+
+    const handleFname = (e) => {
+        setFname(e.target.value)
+    }
+    const handleLname = (e) => {
+        setLname(e.target.value)
+    }
+    const handleEmail = (e) => {
+        setEmail(e.target.value)
+    }
+    const handlePhone = (e) => {
+        setPhone(e.target.value)
+    }
+    const handleStreet = (e) => {
+        setStreet(e.target.value)
+    }
+    const handleCity = (e) => {
+        setCity(e.target.value)
+    }
+    const handleProvince = (e) => {
+        setProvince(e.target.value)
+    }
+    const handleLanguage = (e) => {
+        setLanguage(e.target.value)
+    }
+    const handleExperience = (e) => {
+        setExperience(e.target.value)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        let instData = {
+            id : "62a56dccfc13ae05bf00046a",
+            fname: fname,
+            lname: lname,
+            email: email,
+            phone: phone,
+            street: street,
+            city: city,
+            province: province,
+            language: language,
+            experience: experience
+        }
+        dispatch(updateInstructorAsync(instData))
+        console.log(fname, lname, email, phone, street, city, province, language, experience)
+    }
     return (
         <>
             <div className="container rounded bg-white mt-5 mb-5">
@@ -21,16 +80,16 @@ const InformationInstructor = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="first name"
-                                        value=""
+                                        onChange={handleFname}
                                     />
                                 </div>
                                 <div className="col-md-6">
-                                    <label className="labels">Surname</label>
+                                    <label className="labels">Last Name</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        value=""
-                                        placeholder="surname"
+                                        placeholder="last name"
+                                        onChange={handleLname}
                                     />
                                 </div>
                             </div>
@@ -43,29 +102,29 @@ const InformationInstructor = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="enter phone number"
-                                        value=""
+                                        onChange={handlePhone}
                                     />
                                 </div>
                                 <div className="col-md-12">
                                     <label className="labels">
-                                        Address Line 1
+                                        Street
                                     </label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="enter address line 1"
-                                        value=""
+                                        placeholder="street"
+                                        onChange={handleStreet}
                                     />
                                 </div>
                                 <div className="col-md-12">
                                     <label className="labels">
-                                        Address Line 2
+                                        City
                                     </label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="enter address line 2"
-                                        value=""
+                                        placeholder="city"
+                                        onChange={handleCity}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -73,8 +132,7 @@ const InformationInstructor = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="enter address line 2"
-                                        value=""
+                                        placeholder="Postcode"
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -82,17 +140,17 @@ const InformationInstructor = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="enter address line 2"
-                                        value=""
+                                        placeholder="Province"
+                                        onChange={handleProvince}
                                     />
                                 </div>
                                 <div className="col-md-12">
-                                    <label className="labels">Area</label>
+                                    <label className="labels">Language</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="enter address line 2"
-                                        value=""
+                                        placeholder="Language"
+                                        onChange={handleLanguage}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -101,7 +159,7 @@ const InformationInstructor = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="enter email id"
-                                        value=""
+                                        onChange={handleEmail}
                                     />
                                 </div>
                             </div>
@@ -114,7 +172,6 @@ const InformationInstructor = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="country"
-                                        value=""
                                     />
                                 </div>
                                 <div className="col-md-6">
@@ -124,7 +181,6 @@ const InformationInstructor = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        value=""
                                         placeholder="state"
                                     />
                                 </div>
@@ -133,6 +189,7 @@ const InformationInstructor = () => {
                                 <button
                                     className="btn btn-primary profile-button"
                                     type="button"
+                                    onClick={handleSubmit}
                                 >
                                     Save Profile
                                 </button>
@@ -157,7 +214,7 @@ const InformationInstructor = () => {
                                     type="text"
                                     className="form-control"
                                     placeholder="experience"
-                                    value=""
+                                    onChange={handleExperience}
                                 />
                             </div>{' '}
                             <br />
@@ -167,7 +224,6 @@ const InformationInstructor = () => {
                                     type="text"
                                     className="form-control"
                                     placeholder="additional details"
-                                    value=""
                                 />
                             </div>
                         </div>
