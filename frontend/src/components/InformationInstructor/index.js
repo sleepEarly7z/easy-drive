@@ -1,11 +1,11 @@
 import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import React, {useState} from 'react'
-import { useDispatch } from 'react-redux';
-import { updateInstructorAsync } from '../../redux/instructors/thunks';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateInstructorAsync } from '../../redux/instructors/thunks'
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 const InformationInstructor = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const [fname, setFname] = useState('')
     const [lname, setLname] = useState('')
     const [email, setEmail] = useState('')
@@ -47,7 +47,7 @@ const InformationInstructor = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let instData = {
-            id : "62a56dccfc13ae05bf00046a",
+            id: '62a56dccfc13ae05bf00046a',
             fname: fname,
             lname: lname,
             email: email,
@@ -56,10 +56,20 @@ const InformationInstructor = () => {
             city: city,
             province: province,
             language: language,
-            experience: experience
+            experience: experience,
         }
         dispatch(updateInstructorAsync(instData))
-        console.log(fname, lname, email, phone, street, city, province, language, experience)
+        console.log(
+            fname,
+            lname,
+            email,
+            phone,
+            street,
+            city,
+            province,
+            language,
+            experience,
+        )
     }
     return (
         <>
@@ -106,9 +116,7 @@ const InformationInstructor = () => {
                                     />
                                 </div>
                                 <div className="col-md-12">
-                                    <label className="labels">
-                                        Street
-                                    </label>
+                                    <label className="labels">Street</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -117,9 +125,7 @@ const InformationInstructor = () => {
                                     />
                                 </div>
                                 <div className="col-md-12">
-                                    <label className="labels">
-                                        City
-                                    </label>
+                                    <label className="labels">City</label>
                                     <input
                                         type="text"
                                         className="form-control"

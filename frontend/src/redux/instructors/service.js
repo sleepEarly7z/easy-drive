@@ -1,3 +1,17 @@
+const getInstructors = async () => {
+    const response = await fetch('http://localhost:3001/instructors', {
+        method: 'GET',
+    })
+    return response.json()
+}
+
+const getInstructor = async (id) => {
+    const response = await fetch('http://localhost:3001/instructors/' + id, {
+        method: 'GET',
+    })
+    return response.json()
+}
+
 const addInstructor = async (data) => {
     const {
         first_name,
@@ -52,13 +66,6 @@ const addInstructor = async (data) => {
     // console.log(result);
 
     return result
-}
-
-const getInstructors = async () => {
-    const response = await fetch('http://localhost:3001/instructors', {
-        method: 'GET',
-    })
-    return response.json()
 }
 
 const updateInstructor = async (payload) => {
@@ -133,8 +140,9 @@ const sortFilter = async (condition) => {
 }
 
 export default {
-    addInstructor,
     getInstructors,
+    getInstructor,
+    addInstructor,
     updateInstructor,
     getFilter,
     updateFilter,

@@ -50,7 +50,7 @@ const Navbar = () => {
                         </li>
                         <li className="navbar-list-itm">
                             <NavLink
-                                to="/showProfileRating"
+                                to="/profile-instructor"
                                 style={{ textDecoration: 'none' }}
                             >
                                 ProfileIns

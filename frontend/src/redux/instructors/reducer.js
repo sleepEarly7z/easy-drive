@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { REQUEST_STATE } from '../utils'
 import {
-    addInstructorAsync,
     getInstructorsAsync,
+    getInstructorAsync,
+    addInstructorAsync,
     updateInstructorAsync,
     getFiltersAsync,
     updateFilterAsync,
@@ -12,7 +13,9 @@ import {
 const INITIAL_STATE = {
     list: [],
     filter: [],
+    currentInstructor: {},
     getInstructors: REQUEST_STATE.IDLE,
+    getInstructor: REQUEST_STATE.IDLE,
     addInstructor: REQUEST_STATE.IDLE,
     updateInstructor: REQUEST_STATE.IDLE,
     getFilter: REQUEST_STATE.IDLE,
@@ -36,6 +39,18 @@ const instructorsSlice = createSlice({
             })
             .addCase(getInstructorsAsync.rejected, (state, action) => {
                 state.getInstructors = REQUEST_STATE.REJECTED
+                state.error = action.error
+            })
+            .addCase(getInstructorAsync.pending, (state) => {
+                state.getInstructor = REQUEST_STATE.PENDING
+                state.error = null
+            })
+            .addCase(getInstructorAsync.fulfilled, (state, action) => {
+                state.getInstructor = REQUEST_STATE.FULFILLED
+                state.currentInstructor = action.payload
+            })
+            .addCase(getInstructorAsync.rejected, (state, action) => {
+                state.getInstructor = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
             .addCase(addInstructorAsync.pending, (state) => {
