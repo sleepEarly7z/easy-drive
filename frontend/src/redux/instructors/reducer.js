@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { REQUEST_STATE } from '../utils'
-
-import { addInstructorAsync, getInstructorsAsync, updateInstructorAsync ,getFiltersAsync,updateFilterAsync,
-         sortFiltersAsyn} from './thunks'
+import { addInstructorAsync, getInstructorsAsync,getFiltersAsync,updateFilterAsync,
+         sortFiltersAsync } from './thunks'
 
 const INITIAL_STATE = {
     list: [],
@@ -44,16 +43,6 @@ const instructorsSlice = createSlice({
                 state.addInstructor = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
-            .addCase(updateInstructorAsync.pending, (state) => {
-                state.updateInstructor = REQUEST_STATE.PENDING
-                state.error = null
-            }
-            )
-            .addCase(updateInstructorAsync.fulfilled, (state, action) => {
-                state.updateInstructor = REQUEST_STATE.FULFILLED
-                state.list = action.payload
-            }
-            )
             .addCase(getFiltersAsync.pending, (state) => {
                 state.getFilters = REQUEST_STATE.PENDING
                 state.error = null
