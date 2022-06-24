@@ -10,7 +10,7 @@ import './ShrinkedFilterPanel.scss'
 import FilterPanel from '../FilterPanel/FilterPanel'
 import { dropDownType } from './dropDownType'
 import { useSelector, useDispatch } from 'react-redux';
-import { sortFiltersAsync } from '../../redux/instructors/thunks';
+import { sortFiltersAsync,getInstructorsAsync, getFiltersAsync} from '../../redux/instructors/thunks';
 
 import $ from 'jquery'
 
@@ -28,9 +28,9 @@ let useClickOutside = (handler) => {
     return closeFilterRef
 }
 
-export default function ShrinkedFilterPanel() {
+export default function ShrinkedFilterPanel({instructors}) {
     const dispatch = useDispatch()
-    const instructors = useSelector(state => state.instructors.list)
+    // const instructors = useSelector(state => state.instructors.filter)
 
     const [openFilter, setOpenFilter] = useState(false)
     const [sort, setSort] = useState(dropDownType.BEST_MATCH)
@@ -90,10 +90,14 @@ export default function ShrinkedFilterPanel() {
         // $("div.ShrinkedFilterPanel-filterPanel").css("background-color", "");
         // $(".shrinkedFilterPanel").css("height", "");
     }
-    
-    function handleSorting(sortCondition) {
-        console.log("test " + sortCondition)
-        dispatch(sortFiltersAsync({condition : sortCondition}))
+    useEffect(() => {
+        dispatch(getInstructorsAsync());
+        dispatch(getFiltersAsync())
+      }, []);
+
+    function handleSorting(condition) {
+        console.log(JSON.stringify({condition}))
+        dispatch(sortFiltersAsync({condition}))
     }
 
     return (

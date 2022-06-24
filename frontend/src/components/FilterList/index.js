@@ -4,18 +4,18 @@ import ProfileCard from '../ProfileCard'
 import { useSelector, useDispatch } from 'react-redux';
 import { getFiltersAsync } from '../../redux/instructors/thunks';
 
-function FilterList() {
-    const dispatch = useDispatch()
+function FilterList({instructors}) {
+    // const dispatch = useDispatch()
 
     const [name, setName] = useState('Name: Your name')
     const [location, setLocation] = useState('Location: Your location')
     const [years, setYears] = useState('Years of Experience: x years')
 
-    const instructors = useSelector(state => state.instructors.filter);
+    // const instructors = useSelector(state => state.instructors.filter);
 
-    useEffect(() => {
-        dispatch(getFiltersAsync());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(getFiltersAsync());
+    // }, []);
 
 
     return (

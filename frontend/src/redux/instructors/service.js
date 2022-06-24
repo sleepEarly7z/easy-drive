@@ -48,15 +48,12 @@ const updateFilter = async (id) => {
     return data;
 }
 
-const sortFilter = async (sortCondition) => {
-    console.log(JSON.stringify(sortCondition))
-    const {condition} = sortCondition
-    const response = await fetch('http://localhost:3001/instructors/filter/sort', {
+const sortFilter = async (condition) => {
+    console.log(JSON.stringify(condition))
+    const querystring = 'condition='+JSON.stringify(condition.condition);
+    console.log(querystring)
+    const response = await fetch('http://localhost:3001/instructors/sort?'+querystring, {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({condition})
     });
 
     console.log(response)
