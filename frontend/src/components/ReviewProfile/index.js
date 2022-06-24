@@ -6,10 +6,10 @@ import RateDisplay from '../RateDisplay'
 // import Calendar from '../Calendar/Calendar'
 import CalendarSchedular from '../Calendar/CalendarSchedular'
 
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import {getInstructorsAsync} from '../../redux/instructors/thunks'
+import { getInstructorsAsync } from '../../redux/instructors/thunks'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -30,7 +30,6 @@ const MessageActionButton = styled.button`
         color: #fff;
     }
 `
-
 const FollowActionButton = styled.button`
   margin: 0 5px;
   padding: 8px 14px;
@@ -51,12 +50,13 @@ const FollowActionButton = styled.button`
 }`
 
 export default function ReviewProfile({ instructorId }) {
-	const dispatch = useDispatch();
-	const list = useSelector((state) => state.instructors.list);
+    const dispatch = useDispatch()
+    const instructors = useSelector((state) => state.instructors.filter)
+    // const instructor = instructors.find((user) => user.id.$oid === instructorId)
 
-	useEffect(() => {
-		dispatch(getInstructorsAsync());
-	}, [dispatch]);
+    useEffect(() => {
+        dispatch(getInstructorsAsync())
+    }, [dispatch])
 
     const reviews = [
         {
@@ -100,7 +100,9 @@ export default function ReviewProfile({ instructorId }) {
                                             objectFit: 'cover',
                                         }}
                                     />
-                                    <p className="fw-bold h4 mt-5">Kenneth valdez</p>
+                                    <p className="fw-bold h4 mt-5">
+                                        Kenneth valdez
+                                    </p>
                                     <p className="text-muted">
                                         class 5&7 instructor
                                     </p>
@@ -119,16 +121,21 @@ export default function ReviewProfile({ instructorId }) {
                             </div>
                             <div className="col-12 p-0 px-2 py-3 pb-3 mb-3 pt-3">
                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Email
-                                    </p>
-                                    <a className="review-profile-info-res" href='/'>fip@jukmuh.al</a>
+                                    <p className="review-profile-info">Email</p>
+                                    <a
+                                        className="review-profile-info-res"
+                                        href="/"
+                                    >
+                                        fip@jukmuh.al
+                                    </a>
                                 </div>
                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                     <p className="review-profile-info">
                                         Mobile
                                     </p>
-                                    <p className="review-profile-info-res">(239) 816-9029</p>
+                                    <p className="review-profile-info-res">
+                                        (239) 816-9029
+                                    </p>
                                 </div>
                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                     <p className="review-profile-info">
@@ -142,7 +149,9 @@ export default function ReviewProfile({ instructorId }) {
                                     <p className="review-profile-info">
                                         Languages
                                     </p>
-                                    <p className="review-profile-info-res">French, English</p>
+                                    <p className="review-profile-info-res">
+                                        French, English
+                                    </p>
                                 </div>
                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                     <p className="review-profile-info">
@@ -154,7 +163,9 @@ export default function ReviewProfile({ instructorId }) {
                                     <p className="review-profile-info">
                                         Liscense
                                     </p>
-                                    <p className="review-profile-info-res">class 5&7</p>
+                                    <p className="review-profile-info-res">
+                                        class 5&7
+                                    </p>
                                 </div>
                                 <div className="FollowActionButton d-flex justify-content-between py-2 px-3">
                                     <p className="review-profile-info">

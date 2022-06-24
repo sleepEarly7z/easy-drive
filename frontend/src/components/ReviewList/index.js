@@ -3,7 +3,7 @@ import ReviewCard from '../ReviewCard'
 import RateDisplay from '../RateDisplay'
 import { v4 as uuidv4 } from 'uuid'
 
-const ReviewList = () => {
+const ReviewList = ({ instructorId }) => {
     const reviews = [
         {
             reviewer: 'Phil James',
