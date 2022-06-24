@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Checkbox,
     List,
@@ -9,8 +9,15 @@ import {
     Collapse,
 } from '@mui/material'
 import { ExpandLess, ExpandMore } from '@mui/icons-material'
+import { useSelector, useDispatch } from 'react-redux';
+import { getFiltersAsync,getInstructorsAsync,updateFilterAsync } from '../../redux/instructors/thunks';
+
 
 const FilterCategory = ({ category }) => {
+    const dispatch = useDispatch()
+    const instructors = useSelector(state => state.instructors.list);
+    // const filters = useSelector(state => state.instructors.filter);
+
     const name = category.name
     const options = category.options
 
@@ -33,6 +40,24 @@ const FilterCategory = ({ category }) => {
 
         setChecked(newChecked)
     }
+
+    const handleFilterChecked = (option) => {
+        dispatch(getFiltersAsync());
+        console.log("checked")
+        for (let instructor in instructors) {
+            console.log(instructor.city)
+            if (instructor.city === option || instructor.language === option) {
+               
+                const id = instructor.id;
+                dispatch(updateFilterAsync({ id }));
+            }
+        }
+    }
+
+    // useEffect(() => {
+    //     dispatch(getInstructorsAsync());
+    //     dispatch(getFiltersAsync());
+    //   }, []);
 
     return (
         <>

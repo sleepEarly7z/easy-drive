@@ -2,7 +2,7 @@ export const FILTER_CATEGORIES = [
     {
         id: 1,
         name: 'location',
-        options: ['vancouver', 'richmond', 'burnaby'],
+        options: ['Vancouver', 'Richmond', 'Burnaby'],
     },
     {
         id: 2,

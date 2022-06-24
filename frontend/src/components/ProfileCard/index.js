@@ -36,9 +36,9 @@ function ProfileCard({ name, location, years, rate, imgSrc }) {
                                         ? 'starOn'
                                         : 'starOff'
                                 }
-                                onClick={() => setRating(index)}
-                                onMouseEnter={() => setHover(index)}
-                                onMouseLeave={() => setHover(rating)}
+                                // onClick={() => setRating(index)}
+                                // onMouseEnter={() => setHover(index)}
+                                // onMouseLeave={() => setHover(rating)}
                             >
                                 <span className="star">&#9733;</span>
                             </button>
