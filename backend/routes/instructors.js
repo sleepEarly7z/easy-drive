@@ -51,11 +51,6 @@ router.post('/', function (req, res, next) {
 			.status(404)
 			.send({ message: 'Company can not be empty' });
 	}
-	if (!req.body.language) {
-		return res
-			.status(404)
-			.send({ message: 'Language can not be empty' });
-	}
 	if (!req.body.experience) {
 		return res
 			.status(404)
@@ -88,7 +83,7 @@ router.post('/', function (req, res, next) {
 		city: req.body.city,
 		country: req.body.country,
 		company: req.body.company,
-		language: req.body.language,
+		language: req.body.language ? req.body.language : 'English',
 		experience: req.body.experience,
 		license: req.body.license,
 		description: req.body.description

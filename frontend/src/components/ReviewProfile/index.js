@@ -6,6 +6,11 @@ import RateDisplay from '../RateDisplay'
 // import Calendar from '../Calendar/Calendar'
 // import CalendarSchedular from '../Calendar/CalendarSchedular'
 
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {getInstructorsAsync} from '../../redux/instructors/thunks'
+
 const MessageActionButton = styled.button`
     margin: 0 5px;
     padding: 8px 14px;
@@ -45,7 +50,14 @@ const FollowActionButton = styled.button`
     color: #fff;
 }`
 
-export default function ReviewProfile() {
+export default function ReviewProfile({ instructorId }) {
+	const dispatch = useDispatch();
+	const list = useSelector((state) => state.instructors.list);
+
+	useEffect(() => {
+		dispatch(getInstructorsAsync());
+	}, [dispatch]);
+
     const reviews = [
         {
             reviewer: 'Phil James',

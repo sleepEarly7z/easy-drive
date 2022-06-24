@@ -12,6 +12,7 @@ import SignUpInstructor from './pages/SignUp/SignUpInstructor'
 import SignUpStudent from './pages/SignUp/SignUpStudent'
 import ForgotPassword from './pages/ForgotPassword'
 import Explore from './pages/Explore'
+import { Toaster } from 'react-hot-toast';
 
 function App() {
     return (
@@ -48,6 +49,14 @@ function App() {
                     />
                 </Route>
             </Routes>
+			<Toaster
+				position='bottom-right'
+				toastOptions={{
+					style: {
+						fontSize: '1rem',
+					},
+				}}
+			/>
         </>
     )
 }
