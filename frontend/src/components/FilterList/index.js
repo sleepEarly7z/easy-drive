@@ -1,14 +1,42 @@
 import './index.scss'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ProfileCard from '../ProfileCard'
+import { useSelector, useDispatch } from 'react-redux'
+import { getFiltersAsync } from '../../redux/instructors/thunks'
 
-function FilterList() {
+function FilterList({ instructors }) {
+    // const dispatch = useDispatch()
+
     const [name, setName] = useState('Name: Your name')
     const [location, setLocation] = useState('Location: Your location')
     const [years, setYears] = useState('Years of Experience: x years')
+
+    // const instructors = useSelector(state => state.instructors.filter);
+
+    // useEffect(() => {
+    //     dispatch(getFiltersAsync());
+    // }, []);
+
     return (
         <div className="FilterList">
-            <br />
+            {instructors.slice(0, 10).map((instructor) => {
+                return (
+                    <div key={instructor.id.$oid} id="addedProfileCard-div">
+                        <ProfileCard
+                            key={instructor.id.$oid}
+                            name={instructor.first_name}
+                            location={instructor.city}
+                            years={instructor.experience}
+                            rate={instructor.Rating + ''}
+                            imgSrc={instructor.photo}
+                            instructorId={instructor.id.$oid}
+                        />
+
+                        <br />
+                    </div>
+                )
+            })}
+            {/* <br />
             <ProfileCard
                 name={'Rick Astley'}
                 location={'UK'}
@@ -38,7 +66,7 @@ function FilterList() {
                     'https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg'
                 }
             />
-            <br />
+            <br /> */}
         </div>
     )
 }
