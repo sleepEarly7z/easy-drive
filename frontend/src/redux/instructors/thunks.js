@@ -22,24 +22,3 @@ export const updateInstructorAsync = createAsyncThunk(
     return await InstructorService.updateInstructor(instData);
   }
 );
-
-export const getFiltersAsync = createAsyncThunk(
-  actionTypes.GET_FILTER,
-  async () => {
-    return await InstructorService.getFilter();
-  }
-);
-
-export const updateFilterAsync = createAsyncThunk(
-  actionTypes.UPDATE_FILTER,
-  async ({id}) => {
-    return await InstructorService.updateFilter({ id });
-  }
-);
-
-export const sortFiltersAsync = createAsyncThunk(
-  actionTypes.SORT_FILTER,
-  async (sortCondition) => {
-    return await InstructorService.sortFilter( sortCondition );
-  }
-);
