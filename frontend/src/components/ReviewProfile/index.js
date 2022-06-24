@@ -51,10 +51,17 @@ const FollowActionButton = styled.button`
 export default function ReviewProfile({ instructorId }) {
     const dispatch = useDispatch()
     const instructors = useSelector((state) => state.instructors.filter)
-    // const instructor = instructors.find((user) => user.id.$oid === instructorId)
+    const instructor = instructors.find((user) => user.id.$oid === instructorId)
 
     useEffect(() => {
-        dispatch(getInstructorsAsync())
+        // dispatch(getInstructorsAsync())
+        console.log('instructor')
+        console.log(instructor.id.$oid)
+        console.log(instructor.first_name)
+        console.log(instructor.last_name)
+        console.log(instructor.password)
+        console.log(instructor.email)
+        console.log(instructor.phone)
     }, [dispatch])
 
     const reviews = [
@@ -89,7 +96,7 @@ export default function ReviewProfile({ instructorId }) {
                                     <img
                                         className="photo"
                                         src={
-                                            'https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
+                                            instructor.photo
                                         }
                                         alt=""
                                         style={{
@@ -100,13 +107,15 @@ export default function ReviewProfile({ instructorId }) {
                                         }}
                                     />
                                     <p className="fw-bold h4 mt-5">
-                                        Kenneth valdez
+                                        {instructor.first_name}
+                                        {instructor.last_name}
                                     </p>
                                     <p className="text-muted">
-                                        class 5&7 instructor
+                                        {instructor.license}
                                     </p>
                                     <p className="text-muted mb-3">
-                                        Soma,San Francisco, CA
+                                        {instructor.street}, {instructor.city},{' '}
+                                        {instructor.country}
                                     </p>
                                     <div className="FollowActionButton d-flex">
                                         <FollowActionButton>
@@ -125,7 +134,7 @@ export default function ReviewProfile({ instructorId }) {
                                         className="review-profile-info-res"
                                         href="/"
                                     >
-                                        fip@jukmuh.al
+                                        {instructor.email}
                                     </a>
                                 </div>
                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
@@ -133,7 +142,7 @@ export default function ReviewProfile({ instructorId }) {
                                         Mobile
                                     </p>
                                     <p className="review-profile-info-res">
-                                        (239) 816-9029
+                                        {instructor.phone}
                                     </p>
                                 </div>
                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
@@ -141,7 +150,7 @@ export default function ReviewProfile({ instructorId }) {
                                         Company
                                     </p>
                                     <NavLink to="/">
-                                        https://bootdey.com
+                                        {instructor.company}
                                     </NavLink>
                                 </div>
                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
@@ -149,21 +158,23 @@ export default function ReviewProfile({ instructorId }) {
                                         Languages
                                     </p>
                                     <p className="review-profile-info-res">
-                                        French, English
+                                        {instructor.language}
                                     </p>
                                 </div>
                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                     <p className="review-profile-info">
                                         Year of Experience
                                     </p>
-                                    <p className="review-profile-info-res">5</p>
+                                    <p className="review-profile-info-res">
+                                        {instructor.experience}
+                                    </p>
                                 </div>
                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                     <p className="review-profile-info">
                                         Liscense
                                     </p>
                                     <p className="review-profile-info-res">
-                                        class 5&7
+                                        {instructor.license}
                                     </p>
                                 </div>
                                 <div className="FollowActionButton d-flex justify-content-between py-2 px-3">
@@ -171,8 +182,7 @@ export default function ReviewProfile({ instructorId }) {
                                         Description
                                     </p>
                                     <p className="review-profile-info-res">
-                                        My name is Kenneth and I'm currently a
-                                        driver instructor.
+                                        {instructor.description}
                                     </p>
                                 </div>
                             </div>
@@ -184,42 +194,8 @@ export default function ReviewProfile({ instructorId }) {
                                 <RateDisplay item={reviews} />
                             </div>
                             <div className="col-12 px-3 py-3 mb-3 pb-3 pt-4">
-                                {/* <Calendar /> */}
                                 <CalendarSchedular page="reviewpage" />
                             </div>
-                            {/* <div className="col-12 px-3 py-3 mb-3 pb-3 pt-4">
-                                <div className="FollowActionButton d-flex align-items-center justify-content-between border-bottom py-2 px-3">
-                                    <p className="py-2">Full Name</p>
-                                    <p className="py-2 text-muted">
-                                        Kenneth valdez
-                                    </p>
-                                </div>
-                                <div className="FollowActionButton d-flex align-items-center justify-content-between border-bottom py-2 px-3">
-                                    <p className="py-2">Email</p>
-                                    <p className="py-2 text-muted">
-                                        fip@jukmuh.al
-                                    </p>
-                                </div>
-                                <div className="FollowActionButton d-flex align-items-center justify-content-between border-bottom py-2 px-3">
-                                    <p className="py-2">Phone</p>
-                                    <p className="py-2 text-muted">
-                                        (239) 816-9029
-                                    </p>
-                                </div>
-                                <div className="FollowActionButton d-flex align-items-center justify-content-between border-bottom py-2 px-3">
-                                    <p className="py-2">Mobile</p>
-                                    <p className="py-2 text-muted">
-                                        (320) 380-4539
-                                    </p>
-                                </div>
-                                <div className="FollowActionButton d-flex align-items-center justify-content-between py-2 px-3">
-                                    <p className="py-2">Address</p>
-                                    <p className="py-2 text-muted">
-                                        {' '}
-                                        Soma, San Francisco,CA
-                                    </p>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
                 </div>
