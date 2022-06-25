@@ -3,7 +3,7 @@ import ReviewCard from '../ReviewCard'
 import RateDisplay from '../RateDisplay'
 import { v4 as uuidv4 } from 'uuid'
 
-const ReviewList = ({ instructorId }) => {
+const ReviewList = ({ instructor }) => {
     const reviews = [
         {
             reviewer: 'Phil James',
@@ -29,8 +29,8 @@ const ReviewList = ({ instructorId }) => {
         <>
             <div className="ReviewList">
                 {/* <h1>ReviewList</h1> */}
-                <RateDisplay item={reviews} />
-                {reviews.map((item, index) => (
+                {/* <RateDisplay item={reviews} /> */}
+                {instructor.reviews.map((item, index) => (
                     <ReviewCard item={item} index={index} key={uuidv4()} />
                     // <RSection item={item} index={index} />
                 ))}

@@ -15,7 +15,7 @@ const breakPoints = [
 const Slider = () => {
     return (
         <>
-            <h1 style={{ textAlign: 'center' }}>Top Rated Instructors</h1>
+            {/* <h1 style={{ textAlign: 'center' }}>Top Rated Instructors</h1> */}
             <div className="SliderMain">
                 <Carousel breakPoints={breakPoints}>
                     <TopRatingSliderCards

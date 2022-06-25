@@ -6,7 +6,6 @@ import RateDisplay from '../RateDisplay'
 import CalendarSchedular from '../Calendar/CalendarSchedular'
 
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { getInstructorsAsync } from '../../redux/instructors/thunks'
 
@@ -48,21 +47,16 @@ const FollowActionButton = styled.button`
     color: #fff;
 }`
 
-export default function ReviewProfile({ instructorId }) {
-    const dispatch = useDispatch()
-    const instructors = useSelector((state) => state.instructors.filter)
-    const instructor = instructors.find((user) => user.id.$oid === instructorId)
-
-    useEffect(() => {
-        // dispatch(getInstructorsAsync())
-        console.log('instructor')
-        console.log(instructor.id.$oid)
-        console.log(instructor.first_name)
-        console.log(instructor.last_name)
-        console.log(instructor.password)
-        console.log(instructor.email)
-        console.log(instructor.phone)
-    }, [dispatch])
+export default function ReviewProfile({ instructor }) {
+    // useEffect(() => {
+    //     console.log('instructor')
+    //     console.log(instructor.id.$oid)
+    //     console.log(instructor.first_name)
+    //     console.log(instructor.last_name)
+    //     console.log(instructor.password)
+    //     console.log(instructor.email)
+    //     console.log(instructor.phone)
+    // }, [dispatch])
 
     const reviews = [
         {
@@ -191,7 +185,7 @@ export default function ReviewProfile({ instructorId }) {
                     <div className="col-md-9 ps-md-4">
                         <div className="review-profile-row-right">
                             <div className="col-12 px-3 pb-2">
-                                <RateDisplay item={reviews} />
+                                <RateDisplay item={instructor.reviews} />
                             </div>
                             <div className="col-12 px-3 py-3 mb-3 pb-3 pt-4">
                                 <CalendarSchedular page="reviewpage" />
