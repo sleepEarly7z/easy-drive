@@ -31,7 +31,7 @@ router.post('/', function (req, res) {
 		city: req.body.city,
 		country: req.body.country,
 		company: req.body.company,
-		language: req.body.language,
+		language: req.body.language ? req.body.language : 'English',
 		experience: req.body.experience,
 		license: req.body.license,
 		time: req.body.time,
@@ -100,7 +100,7 @@ router.get('/sort', function (req, res, next) {
 	} else if (condition === dropDownType.BEST_MATCH) {
 		instructors.sort(function (a, b) { return b.experience - a.experience })
 	} else {
-		console.log("fail")
+		console.log('fail');
 	}
 	return res.send(instructors);
 });

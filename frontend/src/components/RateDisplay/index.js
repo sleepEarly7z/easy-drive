@@ -3,11 +3,13 @@ import RatingStar from '../RatingStar'
 
 import ProgressBar from '../ProgressBar'
 
-const RateDisplay = ({ item }) => {
-    const average = Math.round(
-        item.reduce((acc, { rating }) => acc + rating, 0) / item.length,
-    )
+const RateDisplay = ({ reviews }) => {
 
+    // const average = Math.round(
+    //     reviews.reduce((acc, { rating }) => acc + rating, 0) / reviews.length,
+    // )
+    const average = 4;
+    console.log(average);
     // TODO: set percentage
 
     return (
@@ -26,7 +28,7 @@ const RateDisplay = ({ item }) => {
                 Three stars<ProgressBar value={10} />
                 Two stars<ProgressBar value={10} />
                 One star<ProgressBar value={0} />
-                {/* <ProgressBar className='rd-progressbar-item' width={"450px"} value={60} max={100} /> */}
+                {/* <ProgressBar className='rd-progressbar-reviews' width={"450px"} value={60} max={100} /> */}
             </div>
         </div>
     )

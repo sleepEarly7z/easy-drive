@@ -12,6 +12,7 @@ import SignUpInstructor from './pages/SignUp/SignUpInstructor'
 import SignUpStudent from './pages/SignUp/SignUpStudent'
 import ForgotPassword from './pages/ForgotPassword'
 import Explore from './pages/Explore'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
     return (
@@ -20,7 +21,7 @@ function App() {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route
-                        path="profile-ratereview"
+                        path="showProfileRating/:instructorId"
                         element={<ProfileRateReview />}
                     />
                     <Route path="explore" element={<Explore />} />
@@ -40,7 +41,10 @@ function App() {
                     />
                     {/* </Route> */}
                     <Route path="sign-in" element={<SignIn />} />
-                    <Route path="sign-up-instructor" element={<SignUpInstructor />} />
+                    <Route
+                        path="sign-up-instructor"
+                        element={<SignUpInstructor />}
+                    />
                     <Route path="sign-up-student" element={<SignUpStudent />} />
                     <Route
                         path="forgot-password"
@@ -48,6 +52,14 @@ function App() {
                     />
                 </Route>
             </Routes>
+            <Toaster
+                position="bottom-right"
+                toastOptions={{
+                    style: {
+                        fontSize: '1rem',
+                    },
+                }}
+            />
         </>
     )
 }
