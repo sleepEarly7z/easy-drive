@@ -5,9 +5,6 @@ import ProgressBar from '../ProgressBar'
 
 const RateDisplay = ({ reviews }) => {
 
-    // const average = Math.round(
-    //     reviews.reduce((acc, { rating }) => acc + rating, 0) / reviews.length,
-    // )
     const average = 4;
     console.log(average);
     // TODO: set percentage

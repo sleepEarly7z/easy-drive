@@ -2,7 +2,7 @@ const getInstructors = async () => {
     const response = await fetch('http://localhost:3001/instructors', {
         method: 'GET',
     })
-    console.log("getInstructors()");
+    // console.log("getInstructors()");
     return response.json()
 }
 
