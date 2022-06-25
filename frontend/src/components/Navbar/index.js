@@ -42,7 +42,7 @@ const Navbar = () => {
                         </li>
                         <li className="navbar-list-itm">
                             <NavLink
-                                to="/profile-ratereview"
+                                to="/showProfileRating/62a56dccfc13ae05bf00046a"
                                 style={{ textDecoration: 'none' }}
                             >
                                 Review

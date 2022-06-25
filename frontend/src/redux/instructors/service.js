@@ -1,24 +1,91 @@
-const addInstructor = async (name) => {
+const getInstructors = async () => {
+    const response = await fetch('http://localhost:3001/instructors', {
+        method: 'GET',
+    })
+    console.log("getInstructors()");
+    return response.json()
+}
+
+// const getInstructor = async (id) => {
+//     const response = await fetch('http://localhost:3001/instructors/' + id, {
+//         method: 'GET',
+//     })
+//     return response.json()
+// }
+
+const addInstructor = async (data) => {
+    const {
+        first_name,
+        last_name,
+        password,
+        email,
+        phone,
+        street,
+        city,
+        country,
+        company,
+        language,
+        experience,
+        license,
+        description,
+        time,
+        carIsProvided,
+    } = data
+    // console.log('data')
+    // console.log(data)
     const response = await fetch('http://localhost:3001/instructors', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(name),
+        body: JSON.stringify({
+            first_name,
+            last_name,
+            password,
+            email,
+            phone,
+            street,
+            city,
+            country,
+            company,
+            language,
+            experience,
+            license,
+            description,
+            time,
+            carIsProvided,
+        }),
     })
 
-    const data = await response.json()
+    const result = await response.json()
     if (!response.ok) {
-        const errorMsg = data?.message
+        const errorMsg = result?.message
         throw new Error(errorMsg)
     }
 
-    return data
+    // console.log('result');
+    // console.log(result);
+
+    return result
 }
 
-const getInstructors = async () => {
-    const response = await fetch('http://localhost:3001/instructors', {
-        method: 'GET',
+const updateInstructor = async (payload) => {
+    const { id, fname, lname, email, phone, street, city, province } = payload
+    console.log(id)
+    const response = await fetch('http://localhost:3001/instructors/' + id, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            fname,
+            lname,
+            email,
+            phone,
+            street,
+            city,
+            province,
+        }),
     })
     return response.json()
 }
@@ -36,16 +103,15 @@ const updateFilter = async (id) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(id)
-    });
+    )
 
-    const data = await response.json();
+    const data = await response.json()
     if (!response.ok) {
-        const errorMsg = data?.message;
+        const errorMsg = data?.message
         throw new Error(errorMsg)
     }
 
-    return data;
+    return data
 }
 
 const sortFilter = async (condition) => {
@@ -57,13 +123,13 @@ const sortFilter = async (condition) => {
     });
 
     console.log(response)
-    const data = await response.json();
+    const data = await response.json()
     if (!response.ok) {
-        const errorMsg = data?.message;
+        const errorMsg = data?.message
         throw new Error(errorMsg)
     }
 
-    return data;
+    return data
 }
 
 export default {

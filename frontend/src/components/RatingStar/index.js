@@ -32,8 +32,8 @@ function RatingStar({ average }) {
             </div>
 
             {/* <FaStar style={{ color: "orange", fontSize: '43px' }} />
-      <FaStarHalfAlt style={{ color: "orange", fontSize: '40px' }} />
-      <FaRegStar style={{ color: "orange", fontSize: '43px' }} /> */}
+                <FaStarHalfAlt style={{ color: "orange", fontSize: '40px' }} />
+                <FaRegStar style={{ color: "orange", fontSize: '43px' }} /> */}
         </div>
     )
 }
