@@ -1,38 +1,68 @@
+// import './index.scss'
+// import ReviewCard from '../ReviewCard'
+// import { v4 as uuidv4 } from 'uuid'
+
+// const ReviewList = ({ instructor }) => {
+//     return (
+//         <>
+//             <div className="ReviewList">
+//                 {instructor.reviews.map((item, index) => (
+//                     <ReviewCard item={item} index={index} key={uuidv4()} />
+//                 ))}
+//             </div>
+//         </>
+//     )
+// }
+
+// export default ReviewList
 import './index.scss'
 import ReviewCard from '../ReviewCard'
-import RateDisplay from '../RateDisplay'
 import { v4 as uuidv4 } from 'uuid'
 
 const ReviewList = () => {
     const reviews = [
         {
-            reviewer: 'Phil James',
-            datetime: '22-Oct, 2022',
-            rating: 4,
-            comment: 'An awesome instructor!',
-        },
-        {
-            reviewer: 'Dave Norman',
-            datetime: '12-Jun, 2021',
-            rating: 5,
-            comment: 'I really love this instructor! He is patient and funny',
-        },
-        {
-            reviewer: 'Brian Lee',
-            datetime: '07-May, 2022',
+            reviewer_name: 'Ronni Keld',
+            user_name: 'rkeld0',
             rating: 3,
+            time: '1/2/2022',
             comment:
-                'Helpful, but he is a busy man and sometimes it`s hard to contact with him',
+                'integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat',
+        },
+        {
+            reviewer_name: 'Laverna Tummasutti',
+            user_name: 'ltummasutti1',
+            rating: 5,
+            time: '6/18/2021',
+            comment: 'blandit',
+        },
+        {
+            reviewer_name: 'Towney Godbehere',
+            user_name: 'tgodbehere2',
+            rating: 5,
+            time: '1/17/2022',
+            comment: 'et magnis dis parturient montes nascetur ridiculus',
+        },
+        {
+            reviewer_name: 'Rubetta Giraudo',
+            user_name: 'rgiraudo3',
+            rating: 4,
+            time: '4/28/2022',
+            comment: 'id nulla ultrices aliquet maecenas',
+        },
+        {
+            reviewer_name: 'Sela Boorman',
+            user_name: 'sboorman4',
+            rating: 3,
+            time: '2/1/2022',
+            comment: 'mi asd ed oodk',
         },
     ]
     return (
         <>
             <div className="ReviewList">
-                {/* <h1>ReviewList</h1> */}
-                <RateDisplay item={reviews} />
                 {reviews.map((item, index) => (
                     <ReviewCard item={item} index={index} key={uuidv4()} />
-                    // <RSection item={item} index={index} />
                 ))}
             </div>
         </>

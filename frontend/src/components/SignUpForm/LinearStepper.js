@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import './index.scss'
 import {
     Typography,
     TextField,
@@ -7,6 +8,7 @@ import {
     Step,
     StepLabel,
 } from '@material-ui/core'
+import { CssBaseline, Container, Paper, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import {
@@ -15,9 +17,18 @@ import {
     FormProvider,
     useFormContext,
 } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import toast from 'react-hot-toast'
 import { NavLink } from 'react-router-dom'
 
+import {
+    getInstructorsAsync,
+    addInstructorAsync,
+} from '../../redux/instructors/thunks'
+
 import CarProvided from './CarProvided'
+import Loading from '../Animation/Loading'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -78,11 +89,11 @@ const BasicForm = () => {
         <>
             <Controller
                 control={control}
-                name="firstName"
+                name="first_name"
                 render={({ field }) => (
                     <TextField
                         id="first-name"
-                        label="First Name"
+                        label="First Name*"
                         variant="outlined"
                         placeholder="Enter Your First Name"
                         fullWidth
@@ -94,11 +105,11 @@ const BasicForm = () => {
 
             <Controller
                 control={control}
-                name="lastName"
+                name="last_name"
                 render={({ field }) => (
                     <TextField
                         id="last-name"
-                        label="Last Name"
+                        label="Last Name*"
                         variant="outlined"
                         placeholder="Enter Your Last Name"
                         fullWidth
@@ -110,11 +121,11 @@ const BasicForm = () => {
 
             <Controller
                 control={control}
-                name="passWord"
+                name="password"
                 render={({ field }) => (
                     <TextField
                         id="pass-word"
-                        label="Password"
+                        label="Password*"
                         variant="outlined"
                         placeholder="Enter Your Password"
                         fullWidth
@@ -130,7 +141,7 @@ const BasicForm = () => {
                 render={({ field }) => (
                     <TextField
                         id="re-password"
-                        label="Re-Password"
+                        label="Re-Password*"
                         variant="outlined"
                         placeholder="Re-enter Your Password"
                         fullWidth
@@ -149,11 +160,11 @@ const ContactForm = () => {
         <>
             <Controller
                 control={control}
-                name="emailAddress"
+                name="email"
                 render={({ field }) => (
                     <TextField
                         id="email"
-                        label="E-mail"
+                        label="E-mail*"
                         variant="outlined"
                         placeholder="Enter Your E-mail Address"
                         fullWidth
@@ -165,11 +176,11 @@ const ContactForm = () => {
 
             <Controller
                 control={control}
-                name="phoneNumber"
+                name="phone"
                 render={({ field }) => (
                     <TextField
-                        id="phone-number"
-                        label="Phone Number"
+                        id="phone"
+                        label="Phone Number*"
                         variant="outlined"
                         placeholder="Enter Your Phone Number"
                         fullWidth
@@ -185,7 +196,7 @@ const ContactForm = () => {
                 render={({ field }) => (
                     <TextField
                         id="street"
-                        label="Street"
+                        label="Street*"
                         variant="outlined"
                         placeholder="Enter Your Street"
                         fullWidth
@@ -201,9 +212,25 @@ const ContactForm = () => {
                 render={({ field }) => (
                     <TextField
                         id="city"
-                        label="City"
+                        label="City*"
                         variant="outlined"
                         placeholder="Enter Your City"
+                        fullWidth
+                        margin="normal"
+                        {...field}
+                    />
+                )}
+            />
+
+            <Controller
+                control={control}
+                name="country"
+                render={({ field }) => (
+                    <TextField
+                        id="country"
+                        label="Country*"
+                        variant="outlined"
+                        placeholder="Enter Your Country"
                         fullWidth
                         margin="normal"
                         {...field}
@@ -224,7 +251,7 @@ const ProfessionalForm = () => {
                 render={({ field }) => (
                     <TextField
                         id="license"
-                        label="License"
+                        label="License*"
                         variant="outlined"
                         placeholder="Enter Your License"
                         fullWidth
@@ -236,11 +263,11 @@ const ProfessionalForm = () => {
 
             <Controller
                 control={control}
-                name="yearOfExperience"
+                name="experience"
                 render={({ field }) => (
                     <TextField
-                        id="yearOfExperience"
-                        label="Year Of Experience"
+                        id="experience"
+                        label="Year Of Experience*"
                         variant="outlined"
                         placeholder="Enter Your Year Of Experience"
                         fullWidth
@@ -256,11 +283,12 @@ const ProfessionalForm = () => {
                 render={({ field }) => (
                     <TextField
                         id="company"
-                        label="Company"
+                        label="Company*"
                         variant="outlined"
                         placeholder="Enter Your Company Name"
                         fullWidth
                         margin="normal"
+                        {...field}
                     />
                 )}
             />
@@ -322,11 +350,11 @@ const ProfileForm = () => {
 
             <Controller
                 control={control}
-                name="hoursAvailablePerDay"
+                name="time"
                 render={({ field }) => (
                     <TextField
-                        id="hoursAvailablePerDay"
-                        label="Hours Available Per Day"
+                        id="time"
+                        label="Hours Available Per Day*"
                         variant="outlined"
                         placeholder="Enter Your Available Hours Each Workday"
                         fullWidth
@@ -355,29 +383,37 @@ function getStepContent(step) {
 }
 
 const LinearStepper = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        dispatch(getInstructorsAsync())
+    }, [dispatch])
+
     const classes = useStyles()
     const methods = useForm({
         defaultValues: {
-            firstName: '',
-            lastName: '',
-            passWord: '',
+            first_name: '',
+            last_name: '',
+            password: '',
             rePassWord: '',
-            emailAddress: '',
-            phoneNumber: '',
+            email: '',
+            phone: '',
             street: '',
             city: '',
-            province: '',
+            country: '',
             license: '',
-            yearOfExperience: '',
+            experience: '',
             company: '',
             language: '',
             carIsProvided: '',
             description: '',
-            hoursAvailablePerDay: '',
+            time: '',
         },
     })
     const [activeStep, setActiveStep] = useState(0)
     const [skippedSteps, setSkippedSteps] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
     const steps = getSteps()
 
     const isStepOptional = (step) => {
@@ -391,13 +427,62 @@ const LinearStepper = () => {
     const handleNext = (data) => {
         console.log(data)
         if (activeStep === steps.length - 1) {
+            if (!data.time) {
+                toast.error('Please fill the required space.')
+                return
+            }
             fetch('https://jsonplaceholder.typicode.com/comments')
                 .then((data) => data.json())
                 .then((res) => {
                     console.log(res)
                     setActiveStep(activeStep + 1)
                 })
+            // create an account
+            dispatch(addInstructorAsync(data))
+            setIsLoading(true)
+            // redirect after 3 seconds
+            setTimeout(function () {
+                navigate('/explore')
+                // navigate('/')
+            }, 3000) //run this after 3 seconds
         } else {
+            if (activeStep === 0) {
+                if (
+                    !data.first_name ||
+                    !data.last_name ||
+                    !data.password ||
+                    !data.rePassWord
+                ) {
+                    toast.error('Please fill the required space.')
+                    return
+                }
+                if (data.password.length < 8) {
+                    toast.error('Passwords must be at least 8 characters long.')
+                    return
+                }
+                if (data.password !== data.rePassWord) {
+                    toast.error('Re-entered password does not match.')
+                    return
+                }
+            }
+            if (activeStep === 1) {
+                if (
+                    !data.email ||
+                    !data.phone ||
+                    !data.street ||
+                    !data.city ||
+                    !data.country
+                ) {
+                    toast.error('Please fill the required space.')
+                    return
+                }
+            }
+            if (activeStep === 2) {
+                if (!data.license || !data.experience || !data.company) {
+                    toast.error('Please fill the required space.')
+                    return
+                }
+            }
             setActiveStep(activeStep + 1)
             setSkippedSteps(
                 skippedSteps.filter((skipItem) => skipItem !== activeStep),
@@ -416,110 +501,145 @@ const LinearStepper = () => {
         setActiveStep(activeStep + 1)
     }
 
-    // const onSubmit = (data) => {
-    //     console.log(data)
-    // }
+    const onSubmit = (data) => {
+        console.log(data)
+    }
 
-    return (
+    return isLoading ? (
+        <Loading />
+    ) : (
         <>
-            <div className={classes.root}>
-                <Stepper alternativeLabel activeStep={activeStep}>
-                    {steps.map((step, index) => {
-                        const labelProps = {}
-                        const stepProps = {}
-                        if (isStepOptional(index)) {
-                            labelProps.optional = (
-                                <Typography
-                                    variant="caption"
-                                    align="center"
-                                    style={{ display: 'block' }}
-                                >
-                                    optional
-                                </Typography>
-                            )
-                        }
-                        if (isStepSkipped(index)) {
-                            stepProps.completed = false
-                        }
-                        return (
-                            <Step {...stepProps} key={index}>
-                                <StepLabel
-                                    {...labelProps}
-                                    classes={{
-                                        alternativeLabel:
-                                            classes.alternativeLabel,
-                                        labelContainer: classes.labelContainer,
-                                    }}
-                                    StepIconProps={{
-                                        classes: {
-                                            root: classes.step,
-                                            completed: classes.completed,
-                                            active: classes.active,
-                                        },
-                                    }}
-                                >
-                                    {step}
-                                </StepLabel>
-                            </Step>
-                        )
-                    })}
-                </Stepper>
+            <div className="SignUpTitle">Register As An Instructor</div>
+            <CssBaseline />
+            <Container component={Box} p={4}>
+                <Paper component={Box} p={3}>
+                    <div className={classes.root}>
+                        <Stepper alternativeLabel activeStep={activeStep}>
+                            {steps.map((step, index) => {
+                                const labelProps = {}
+                                const stepProps = {}
+                                if (isStepOptional(index)) {
+                                    labelProps.optional = (
+                                        <Typography
+                                            variant="caption"
+                                            align="center"
+                                            style={{ display: 'block' }}
+                                        >
+                                            optional
+                                        </Typography>
+                                    )
+                                }
+                                if (isStepSkipped(index)) {
+                                    stepProps.completed = false
+                                }
+                                return (
+                                    <Step {...stepProps} key={index}>
+                                        <StepLabel
+                                            {...labelProps}
+                                            classes={{
+                                                alternativeLabel:
+                                                    classes.alternativeLabel,
+                                                labelContainer:
+                                                    classes.labelContainer,
+                                            }}
+                                            StepIconProps={{
+                                                classes: {
+                                                    root: classes.step,
+                                                    completed:
+                                                        classes.completed,
+                                                    active: classes.active,
+                                                },
+                                            }}
+                                        >
+                                            {step}
+                                        </StepLabel>
+                                    </Step>
+                                )
+                            })}
+                        </Stepper>
 
-                {activeStep === steps.length ? (
-                    <Typography variant="h3" align="center">
-                        Thank You
-                    </Typography>
-                ) : (
-                    <>
-                        <FormProvider {...methods}>
-                            <form onSubmit={methods.handleSubmit(handleNext)}>
-                                {getStepContent(activeStep)}
-                                <Grid container justifyContent="space-between">
-                                    <Typography
-                                        inline="true"
-                                        variant="body1"
-                                        className={classes.leftText}
-                                    >
-                                        <Button
-                                            className={classes.buttonLeft}
-                                            disabled={activeStep === 0}
-                                            onClick={handleBack}
-                                        >
-                                            back
-                                        </Button>
-                                    </Typography>
-                                    <Typography
-                                        inline="true"
-                                        variant="body1"
-                                        className={classes.rightText}
-                                    >
-                                        {isStepOptional(activeStep) && (
-                                            <Button
-                                                className={classes.buttonRight}
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={handleSkip}
-                                            >
-                                                skip
-                                            </Button>
+                        {activeStep === steps.length ? (
+                            <Typography variant="h6" align="center">
+                                You have successfully sign up an account,
+                                redirecting...
+                            </Typography>
+                        ) : (
+                            <>
+                                <FormProvider {...methods}>
+                                    <form
+                                        onSubmit={methods.handleSubmit(
+                                            handleNext,
                                         )}
-                                        <Button
-                                            className={classes.buttonRight}
-                                            variant="contained"
-                                            color="primary"
-                                            // onClick={handleNext}
-                                            type="submit"
+                                    >
+                                        {getStepContent(activeStep)}
+                                        <Grid
+                                            container
+                                            justifyContent="space-between"
                                         >
-                                            {activeStep === steps.length - 1
-                                                ? 'Finish'
-                                                : 'Next'}
-                                        </Button>
-                                    </Typography>
-                                </Grid>
-                            </form>
-                        </FormProvider>
-                    </>
-                )}
+                                            <Typography
+                                                inline="true"
+                                                variant="body1"
+                                                className={classes.leftText}
+                                            >
+                                                <Button
+                                                    className={
+                                                        classes.buttonLeft
+                                                    }
+                                                    disabled={activeStep === 0}
+                                                    onClick={handleBack}
+                                                >
+                                                    back
+                                                </Button>
+                                            </Typography>
+                                            <Typography
+                                                inline="true"
+                                                variant="body1"
+                                                className={classes.rightText}
+                                            >
+                                                {isStepOptional(activeStep) && (
+                                                    <Button
+                                                        className={
+                                                            classes.buttonRight
+                                                        }
+                                                        variant="contained"
+                                                        color="primary"
+                                                        onClick={handleSkip}
+                                                    >
+                                                        skip
+                                                    </Button>
+                                                )}
+                                                <Button
+                                                    className={
+                                                        classes.buttonRight
+                                                    }
+                                                    variant="contained"
+                                                    color="primary"
+                                                    // onClick={handleNext}
+                                                    type="submit"
+                                                >
+                                                    {activeStep ===
+                                                    steps.length - 1
+                                                        ? 'Finish'
+                                                        : 'Next'}
+                                                </Button>
+                                            </Typography>
+                                        </Grid>
+                                    </form>
+                                </FormProvider>
+                            </>
+                        )}
+                    </div>
+                </Paper>
+            </Container>
+            <div className="SignUpRedirect">
+                <div className="SignInRedirectLink">
+                    <NavLink to="/sign-in">Sign in instead</NavLink>
+                </div>
+                <div className="SignUpRedirectLink">
+                    <NavLink to="/sign-up-student">
+                        Sign up as an student
+                    </NavLink>
+                </div>
             </div>
         </>
     )

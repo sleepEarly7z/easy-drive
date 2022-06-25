@@ -1,3 +1,127 @@
+// const express = require('express');
+// const router = express.Router();
+
+// const instructorsData = require('../data-access/instructorsData');
+// const { validateInstructor, defaultInstructor } = require('../services/instructors');
+
+// router.get('/', function (req, res) {
+// 	let instructorsAll = instructorsData.getInstructors();
+
+// 	res.status(200).send(instructorsAll);
+// });
+
+// // router.get('/:id', function (req, res) {
+
+// // 	const id = req.params.id;
+// // 	const instructor = instructorsData.getInstructorById(id);
+
+// // 	(instructor)
+// // 		? res.status(200).send(instructor)
+// // 		: res.status(404).send({ message: `User ${id} not found` })
+// // });
+
+// router.post('/', function (req, res) {
+// 	const inputInstructor = {
+// 		first_name: req.body.first_name,
+// 		last_name: req.body.last_name,
+// 		password: req.body.password,
+// 		email: req.body.email,
+// 		phone: req.body.phone,
+// 		street: req.body.street,
+// 		city: req.body.city,
+// 		country: req.body.country,
+// 		company: req.body.company,
+// 		language: req.body.language ? req.body.language : 'English',
+// 		experience: req.body.experience,
+// 		license: req.body.license,
+// 		time: req.body.time,
+// 	}
+
+// 	try {
+// 		validateInstructor(inputInstructor);
+// 	} catch (invalidProperty) {
+// 		res.status(400).send({ message: `${invalidProperty} cannot be empty` });
+// 	}
+
+// 	const instructor = defaultInstructor(req.body);
+
+// 	const instructorAdded = instructorsData.addInstructor(instructor);
+// 	(instructorAdded)
+// 		? res.status(200).send(instructorAdded)
+// 		: res.status(424).send({ message: `failed to add instructor ${instructor.first_name}  ${instructor.lastname} to database` })
+// });
+
+// // DELETE
+// router.delete('/:id', function (req, res) {
+// 	const id = req.params.id;
+// 	const instructor = instructorsData.getInstructorById(id);
+
+// 	if (!instructor) {
+// 		return res.status(404).send(`instructor ${id} not found`);
+// 	}
+
+// 	const instructorDeleted = instructorsData.deleteInstructorById(id);
+// 	(instructorDeleted)
+// 		? res.status(200).send(instructorDeleted)
+// 		: res.status(424).send({ message: `failed to delete instructor ${id} from database` })
+// });
+
+// // UPDATE
+// router.patch('/:id', function (req, res, next) {
+// 	const id = req.params.id;
+// 	const instructor = instructorsData.getInstructorById(id);
+
+// 	if (!instructor) {
+// 		return res.status(404).send(`instructor ${id} not found`);
+// 	}
+
+// 	const instructorUpdated = instructorsData.updateInstructorById(id, req.body);
+
+// 	(instructorUpdated)
+// 		? res.status(200).send(instructorUpdated)
+// 		: res.status(424).send({ message: `failed to update instructor ${id} from database` })
+// });
+
+// router.get('/filter', function (req, res) {
+// 	res.send(instructorsData.getInstructors());
+// });
+
+// const dropDownType = {
+// 	BEST_MATCH: 'Best Match',
+// 	HIGHEST_RATED: 'Highest Rated'
+// }
+
+// router.get('/sort', function (req, res, next) {
+// 	const instructors = instructorsData.getInstructors();
+// 	const condition = req.query.condition.replaceAll('"', '')
+// 	if (condition === dropDownType.HIGHEST_RATED) {
+// 		console.log("pass1")
+// 		instructors.sort(function (a, b) { return b.Rating - a.Rating });
+// 	} else if (condition === dropDownType.BEST_MATCH) {
+// 		instructors.sort(function (a, b) { return b.experience - a.experience })
+// 	} else {
+// 		console.log('fail');
+// 	}
+// 	return res.send(instructors);
+// });
+
+// router.delete('/filter/:id', function (req, res, next) {
+// 	const instructors = instructorsData.getInstructors();
+// 	const id = JSON.stringify(req.body.id).replaceAll("\"", "")
+// 	console.log(typeof (id) + id)
+// 	const deleted = instructors.find(instructor => instructor.id.$oid === id);
+// 	if (deleted) {
+// 		instructors = instructors.filter(instructor => instructor.id.$oid !== id);
+// 		return res.send(deleted);
+// 	}
+// 	else {
+// 		return res.status(404).json({ message: 'instructor you are looking for does not exist' });
+// 	}
+// });
+
+// module.exports = router;
+
+
 const express = require('express');
 const router = express.Router();
 const { v4: uuid } = require('uuid');
@@ -7,17 +131,17 @@ router.get('/', function (req, res, next) {
 	return res.send(instructors);
 });
 
-// READ
-router.get('instructor/:id', function (req, res, next) {
-	const foundInstructor = instructors.find(
-		(user) => user.id.$oid === req.params.id
-	);
+// // READ
+// router.get('/:id', function (req, res, next) {
+// 	const foundInstructor = instructors.find(
+// 		(user) => user.id.$oid === req.params.id
+// 	);
 
-	if (!foundInstructor)
-		return res.status(404).send({ message: 'User not found' });
+// 	if (!foundInstructor)
+// 		return res.status(404).send({ message: 'User not found' });
 
-	return res.send(foundInstructor);
-});
+// 	return res.send(foundInstructor);
+// });
 
 // CREATE
 router.post('/', function (req, res, next) {
@@ -51,11 +175,6 @@ router.post('/', function (req, res, next) {
 			.status(404)
 			.send({ message: 'Company can not be empty' });
 	}
-	if (!req.body.language) {
-		return res
-			.status(404)
-			.send({ message: 'Language can not be empty' });
-	}
 	if (!req.body.experience) {
 		return res
 			.status(404)
@@ -88,7 +207,7 @@ router.post('/', function (req, res, next) {
 		city: req.body.city,
 		country: req.body.country,
 		company: req.body.company,
-		language: req.body.language,
+		language: req.body.language ? req.body.language : 'English',
 		experience: req.body.experience,
 		license: req.body.license,
 		description: req.body.description
@@ -122,6 +241,7 @@ router.delete('/:id', function (req, res, next) {
 
 // UPDATE
 router.patch('/:id', function (req, res, next) {
+	console.log(req.body);
 	let foundInstructor = instructors.find(
 		(user) => user.id.$oid === req.params.id
 	);
@@ -189,22 +309,27 @@ router.get('/filter', function (req, res, next) {
 });
 
 const dropDownType = {
-    BEST_MATCH: 'Best Match',
-    HIGHEST_RATED: 'Highest Rated'
-}
+	BEST_MATCH: 'Best Match',
+	HIGHEST_RATED: 'Highest Rated',
+};
 
 router.get('/sort', function (req, res, next) {
-	const condition = req.query.condition.replaceAll('"', '')
+	const condition = req.query.condition.replaceAll('"', '');
 	if (condition === dropDownType.HIGHEST_RATED) {
-		console.log("pass1")
-		filter.sort(function(a, b){return b.Rating-a.Rating});
-	} else if (condition === dropDownType.BEST_MATCH){
-		filter.sort(function(a, b){return b.experience-a.experience})
+		console.log('pass1');
+		filter.sort(function (a, b) {
+			return b.Rating - a.Rating;
+		});
+	} else if (condition === dropDownType.BEST_MATCH) {
+		filter.sort(function (a, b) {
+			return b.experience - a.experience;
+		});
 	} else {
-		console.log("fail")
+		console.log('fail');
 	}
 	return res.send(filter);
 });
+
 // router.get('/sort', function (req, res, next) {
 // 	console.log("pass1"+ req.body.condition)
 // 	const condition = req.body.condition
@@ -215,18 +340,23 @@ router.get('/sort', function (req, res, next) {
 // 	return res.send(filter);
 // });
 
-router.delete('/filter/:id', function (req, res, next) {
-  const id = JSON.stringify(req.body.id).replaceAll("\"", "")
-  console.log (typeof (id) + id)
-  const deleted = filter.find(instructor => instructor.id.$oid === id);
-  if (deleted) {
-    filter = filter.filter(instructor => instructor.id.$oid !== id);
-    return res.send(deleted);
-  }
-  else {
-    return res.status(404).json({ message: 'instructor you are looking for does not exist' });
-  }
-});
+// router.delete('/filter/:id', function (req, res, next) {
+// 	const id = JSON.stringify(req.body.id).replaceAll('"', '');
+// 	console.log(typeof id + id);
+// 	const deleted = filter.find(
+// 		(instructor) => instructor.id.$oid === id
+// 	);
+// 	if (deleted) {
+// 		filter = filter.filter(
+// 			(instructor) => instructor.id.$oid !== id
+// 		);
+// 		return res.send(deleted);
+// 	} else {
+// 		return res.status(404).json({
+// 			message: 'instructor you are looking for does not exist',
+// 		});
+// 	}
+// });
 
 let instructors = [
 	{
@@ -303,7 +433,7 @@ let instructors = [
 		phone: '+1 (183) 654-2958',
 		gender: 'Male',
 		photo: 'https://randomuser.me/api/portraits/men/22.jpg',
-		Rating: 4.2,
+		Rating: 5,
 		street: '37057 Ryan Trail',
 		city: 'Vancouver',
 		country: 'Canada',

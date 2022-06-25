@@ -28,7 +28,10 @@ const Navbar = () => {
                 >
                     <ul>
                         <li className="navbar-list-itm">
-                            <NavLink to="/" style={{ textDecoration: 'none' }}>
+                            <NavLink
+                                to="/explore"
+                                style={{ textDecoration: 'none' }}
+                            >
                                 Home
                             </NavLink>
                         </li>
@@ -40,9 +43,18 @@ const Navbar = () => {
                                 Explore
                             </NavLink>
                         </li>
+                        {/* <li className="navbar-list-itm">
+                            <NavLink
+                                to="/showProfileRating/62a56dccfc13ae05bf00046a"
+                                style={{ textDecoration: 'none' }}
+                            >
+                                Review
+                            </NavLink>
+                        </li> */}
+
                         <li className="navbar-list-itm">
                             <NavLink
-                                to="/profile-ratereview"
+                                to="/showProfileRating"
                                 style={{ textDecoration: 'none' }}
                             >
                                 Review
