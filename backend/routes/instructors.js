@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const instructorsData = require('../data-access/instructorsData');
-const { validateInstructor, defaultInstructor } = require('../models/instructors');
+const { validateInstructor, defaultInstructor } = require('../services/instructors');
 
 router.get('/', function (req, res) {
 	let instructorsAll = instructorsData.getInstructors();
