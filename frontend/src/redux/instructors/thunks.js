@@ -30,6 +30,13 @@ export const updateInstructorAsync = createAsyncThunk(
     },
 )
 
+export const deleteInstructorAsync = createAsyncThunk(
+	actionTypes.DELETE_INSTRUCTOR,
+	async (id) => {
+		return await InstructorService.deleteInstructor(id);
+	}
+);
+
 export const getFiltersAsync = createAsyncThunk(
     actionTypes.GET_FILTER,
     async () => {
