@@ -90,6 +90,29 @@ const updateInstructor = async (payload) => {
     return response.json()
 }
 
+
+// DELETE
+const deleteInstructor = async (id) => {
+	const response = await fetch(
+		'http://localhost:3001/instructors/' + id,
+		{
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+
+	const data = await response.json();
+	if (!response.ok) {
+		const errorMsg = data?.message;
+		throw new Error(errorMsg);
+	}
+
+	return data;
+};
+
+
 const getFilter = async () => {
     const response = await fetch('http://localhost:3001/instructors/filter', {
         method: 'GET',
@@ -145,6 +168,7 @@ export default {
     // getInstructor,
     addInstructor,
     updateInstructor,
+    deleteInstructor,
     getFilter,
     updateFilter,
     sortFilter,

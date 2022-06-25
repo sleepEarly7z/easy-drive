@@ -2,10 +2,19 @@ import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateInstructorAsync } from '../../redux/instructors/thunks'
+import { useNavigate } from 'react-router-dom'
+import {
+    updateInstructorAsync,
+    deleteInstructorAsync,
+} from '../../redux/instructors/thunks'
+import toast from 'react-hot-toast'
+
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
+
 const InformationInstructor = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const [fname, setFname] = useState('')
     const [lname, setLname] = useState('')
     const [email, setEmail] = useState('')
@@ -44,8 +53,9 @@ const InformationInstructor = () => {
         setExperience(e.target.value)
     }
 
-    const handleSubmit = (e) => {
+    const handleSave = (e) => {
         e.preventDefault()
+
         let instData = {
             id: '62a56dccfc13ae05bf00046a',
             fname: fname,
@@ -58,7 +68,9 @@ const InformationInstructor = () => {
             language: language,
             experience: experience,
         }
+
         dispatch(updateInstructorAsync(instData))
+        
         console.log(
             fname,
             lname,
@@ -70,7 +82,35 @@ const InformationInstructor = () => {
             language,
             experience,
         )
+
+        toast.success('Save the changes successfully.')
     }
+
+    const handleDelete = (e) => {
+        e.preventDefault()
+
+        let instData = {
+            id: '62a56dccfc13ae05bf00046a',
+            fname: fname,
+            lname: lname,
+            email: email,
+            phone: phone,
+            street: street,
+            city: city,
+            province: province,
+            language: language,
+            experience: experience,
+        }
+        dispatch(deleteInstructorAsync(instData.id))
+
+        console.log('delete successfully')
+
+        setTimeout(function () {
+            navigate('/explore')
+            toast.success('Delete the account successfully.')
+        }, 1000)
+    }
+
     return (
         <>
             <div className="container rounded bg-white mt-5 mb-5">
@@ -89,7 +129,7 @@ const InformationInstructor = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="first name"
+                                        placeholder={'first name'}
                                         onChange={handleFname}
                                     />
                                 </div>
@@ -193,11 +233,18 @@ const InformationInstructor = () => {
                             </div>
                             <div className="mt-5 text-center">
                                 <button
-                                    className="btn btn-primary profile-button"
+                                    className="btn btn-primary profile-button me-5"
                                     type="button"
-                                    onClick={handleSubmit}
+                                    onClick={handleSave}
                                 >
                                     Save Profile
+                                </button>
+                                <button
+                                    className="btn btn-primary profile-button"
+                                    type="button"
+                                    onClick={handleDelete}
+                                >
+                                    Delete Profile
                                 </button>
                             </div>
                         </div>

@@ -5,6 +5,7 @@ import {
     // getInstructorAsync,
     addInstructorAsync,
     updateInstructorAsync,
+    deleteInstructorAsync,
     getFiltersAsync,
     updateFilterAsync,
     sortFiltersAsync,
@@ -13,10 +14,11 @@ import {
 const INITIAL_STATE = {
     list: [],
     filter: [],
-    currentInstructor: {},
+    // currentInstructor: {},
     getInstructors: REQUEST_STATE.IDLE,
     // getInstructor: REQUEST_STATE.IDLE,
     addInstructor: REQUEST_STATE.IDLE,
+    deleteInstructor: REQUEST_STATE.IDLE,
     updateInstructor: REQUEST_STATE.IDLE,
     getFilter: REQUEST_STATE.IDLE,
     addFilter: REQUEST_STATE.IDLE,
@@ -65,14 +67,31 @@ const instructorsSlice = createSlice({
                 state.addInstructor = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
-            // .addCase(updateInstructorAsync.pending, (state) => {
-            //     state.updateInstructor = REQUEST_STATE.PENDING
-            //     state.error = null
-            // })
-            // .addCase(updateInstructorAsync.fulfilled, (state, action) => {
-            //     state.updateInstructor = REQUEST_STATE.FULFILLED
-            //     state.list = action.payload
-            // })
+            .addCase(updateInstructorAsync.pending, (state) => {
+                state.updateInstructor = REQUEST_STATE.PENDING
+                state.error = null
+            })
+            .addCase(updateInstructorAsync.fulfilled, (state, action) => {
+                state.updateInstructor = REQUEST_STATE.FULFILLED
+                state.list = action.payload
+            })
+            .addCase(updateInstructorAsync.rejected, (state, action) => {
+                state.updateInstructor = REQUEST_STATE.REJECTED
+                state.error = action.error
+            })
+            .addCase(deleteInstructorAsync.pending, (state) => {
+                state.deleteInstructor = REQUEST_STATE.PENDING
+                state.error = null
+            })
+            .addCase(deleteInstructorAsync.fulfilled, (state, action) => {
+                state.deleteInstructor = REQUEST_STATE.FULFILLED
+                state.list = action.payload
+            })
+            .addCase(deleteInstructorAsync.rejected, (state, action) => {
+                state.deleteInstructor = REQUEST_STATE.REJECTED
+                state.error = action.error
+            })
+
             .addCase(getFiltersAsync.pending, (state) => {
                 state.getFilter = REQUEST_STATE.PENDING
                 state.error = null
