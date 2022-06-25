@@ -2,6 +2,9 @@ import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 const InformationStudent = () => {
+    const handleOnchange = (e) => {
+        console.log(e.target.value)
+    }
     return (
         <>
             <div className="container rounded bg-white mt-5 mb-5">
@@ -21,7 +24,8 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="first name"
-                                        value=""
+                                        value= ""
+                                        onChange={handleOnchange}
                                     />
                                 </div>
                                 <div className="col-md-6">
@@ -31,6 +35,8 @@ const InformationStudent = () => {
                                         className="form-control"
                                         value=""
                                         placeholder="surname"
+                                        onChange={handleOnchange}
+                                    
                                     />
                                 </div>
                             </div>
@@ -44,6 +50,7 @@ const InformationStudent = () => {
                                         className="form-control"
                                         placeholder="enter phone number"
                                         value=""
+                                        onChange={handleOnchange}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -55,6 +62,7 @@ const InformationStudent = () => {
                                         className="form-control"
                                         placeholder="enter address line 1"
                                         value=""
+                                        onChange={handleOnchange}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -66,6 +74,7 @@ const InformationStudent = () => {
                                         className="form-control"
                                         placeholder="enter address line 2"
                                         value=""
+                                        onChange={handleOnchange}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -75,6 +84,7 @@ const InformationStudent = () => {
                                         className="form-control"
                                         placeholder="enter address line 2"
                                         value=""
+                                        onChange={handleOnchange}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -84,6 +94,7 @@ const InformationStudent = () => {
                                         className="form-control"
                                         placeholder="enter address line 2"
                                         value=""
+                                        onChange={handleOnchange}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -93,6 +104,7 @@ const InformationStudent = () => {
                                         className="form-control"
                                         placeholder="enter address line 2"
                                         value=""
+                                        onChange={handleOnchange}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -102,6 +114,7 @@ const InformationStudent = () => {
                                         className="form-control"
                                         placeholder="enter email id"
                                         value=""
+                                        onChange={handleOnchange}
                                     />
                                 </div>
                             </div>
@@ -115,6 +128,7 @@ const InformationStudent = () => {
                                         className="form-control"
                                         placeholder="country"
                                         value=""
+                                        onChange={handleOnchange}
                                     />
                                 </div>
                                 <div className="col-md-6">
@@ -126,6 +140,7 @@ const InformationStudent = () => {
                                         className="form-control"
                                         value=""
                                         placeholder="state"
+                                        onChange={handleOnchange}
                                     />
                                 </div>
                             </div>
@@ -158,6 +173,7 @@ const InformationStudent = () => {
                                     className="form-control"
                                     placeholder="experience"
                                     value=""
+                                    onChange={handleOnchange}
                                 />
                             </div>{' '}
                             <br />
@@ -168,6 +184,7 @@ const InformationStudent = () => {
                                     className="form-control"
                                     placeholder="additional details"
                                     value=""
+                                    onChange={handleOnchange}
                                 />
                             </div>
                         </div>
