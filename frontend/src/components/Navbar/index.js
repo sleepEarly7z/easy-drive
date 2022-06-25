@@ -28,7 +28,10 @@ const Navbar = () => {
                 >
                     <ul>
                         <li className="navbar-list-itm">
-                            <NavLink to="/" style={{ textDecoration: 'none' }}>
+                            <NavLink
+                                to="/explore"
+                                style={{ textDecoration: 'none' }}
+                            >
                                 Home
                             </NavLink>
                         </li>
