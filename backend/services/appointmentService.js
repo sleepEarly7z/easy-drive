@@ -16,7 +16,7 @@ const timeSlotSchema = new mongoose.Schema({
 
 const TimeSlot = mongoose.model('TimeSlot', timeSlotSchema);
 
-const appoitmentSchema = new mongoose.Schema({
+const appointmentSchema = new mongoose.Schema({
     instructorId: {
         type: String,
         required: true
@@ -24,7 +24,7 @@ const appoitmentSchema = new mongoose.Schema({
     time_slots: [timeSlotSchema]
 })
 
-const Appointment = mongoose.model('Appointement', appoitmentSchema);
+const Appointment = mongoose.model('Appointement', appointmentSchema);
 
 /**
  * Get all appointments with given instructor id
