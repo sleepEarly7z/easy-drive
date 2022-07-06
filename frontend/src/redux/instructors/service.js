@@ -2,7 +2,7 @@ const getInstructors = async () => {
     const response = await fetch('http://localhost:3001/instructors', {
         method: 'GET',
     })
-    // console.log("getInstructors()");
+    console.log("3 processed http://localhost:3001/instructors");
     return response.json()
 }
 
@@ -90,28 +90,23 @@ const updateInstructor = async (payload) => {
     return response.json()
 }
 
-
 // DELETE
 const deleteInstructor = async (id) => {
-	const response = await fetch(
-		'http://localhost:3001/instructors/' + id,
-		{
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		}
-	);
+    const response = await fetch('http://localhost:3001/instructors/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
 
-	const data = await response.json();
-	if (!response.ok) {
-		const errorMsg = data?.message;
-		throw new Error(errorMsg);
-	}
+    const data = await response.json()
+    if (!response.ok) {
+        const errorMsg = data?.message
+        throw new Error(errorMsg)
+    }
 
-	return data;
-};
-
+    return data
+}
 
 const getFilter = async () => {
     const response = await fetch('http://localhost:3001/instructors/filter', {

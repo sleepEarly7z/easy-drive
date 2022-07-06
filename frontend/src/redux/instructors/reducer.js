@@ -73,7 +73,7 @@ const instructorsSlice = createSlice({
             })
             .addCase(updateInstructorAsync.fulfilled, (state, action) => {
                 state.updateInstructor = REQUEST_STATE.FULFILLED
-                state.list = action.payload
+                // state.list = action.payload
             })
             .addCase(updateInstructorAsync.rejected, (state, action) => {
                 state.updateInstructor = REQUEST_STATE.REJECTED
@@ -85,7 +85,7 @@ const instructorsSlice = createSlice({
             })
             .addCase(deleteInstructorAsync.fulfilled, (state, action) => {
                 state.deleteInstructor = REQUEST_STATE.FULFILLED
-                state.list = action.payload
+                // state.list = action.payload
             })
             .addCase(deleteInstructorAsync.rejected, (state, action) => {
                 state.deleteInstructor = REQUEST_STATE.REJECTED

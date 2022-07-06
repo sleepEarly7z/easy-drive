@@ -15,6 +15,7 @@ const Explore = () => {
     useEffect(() => {
         dispatch(getFiltersAsync())
     }, [])
+    
     return (
         <>
             <div className="Explore">

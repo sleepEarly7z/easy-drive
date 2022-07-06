@@ -24,7 +24,7 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="first name"
-                                        value= ""
+                                        value=""
                                         onChange={handleOnchange}
                                     />
                                 </div>
@@ -36,7 +36,6 @@ const InformationStudent = () => {
                                         value=""
                                         placeholder="surname"
                                         onChange={handleOnchange}
-                                    
                                     />
                                 </div>
                             </div>

@@ -15,9 +15,7 @@ const FilterPanel = ({ mainFilter, open, onClose }) => {
         console.log('submitted')
     }
 
-    function resetFilter(recipe) {
-
-      }
+    function resetFilter(recipe) {}
 
     return (
         <Box
@@ -53,8 +51,9 @@ const FilterPanel = ({ mainFilter, open, onClose }) => {
             </List>
 
             <Stack spacing={1} derection="row" className="FilterPanel-Stack">
-                <Button variant="outline-primary" 
-                onClick={() => resetFilter()}>reset</Button>
+                <Button variant="outline-primary" onClick={() => resetFilter()}>
+                    reset
+                </Button>
                 <Button type="submit">apply</Button>
             </Stack>
         </Box>

@@ -70,7 +70,7 @@ const InformationInstructor = () => {
         }
 
         dispatch(updateInstructorAsync(instData))
-        
+
         console.log(
             fname,
             lname,

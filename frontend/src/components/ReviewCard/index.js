@@ -12,7 +12,10 @@ const ReviewCard = ({ item }) => {
                     {item.comment}
                     <br />
                 </div>
-                <div className="text-display-name"> -- {item.reviewer_name}</div>
+                <div className="text-display-name">
+                    {' '}
+                    -- {item.reviewer_name}
+                </div>
                 <div className="text-display-date">
                     Shared publicly - {item.time}
                 </div>
