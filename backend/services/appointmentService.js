@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
 
 const timeSlotSchema = new mongoose.Schema({
     range: {
@@ -25,3 +27,16 @@ const appoitmentSchema = new mongoose.Schema({
 })
 
 const Appointment = mongoose.model('Appointement', appoitmentSchema);
+
+/**
+ * Get all appointments with given instructor id
+ * 
+ * @returns {Array}
+ */
+const getAppointmentsByInstructorId = (id) => {
+    // TODO
+}
+
+module.exports = {
+    getAppointmentsByInstructorId
+}
