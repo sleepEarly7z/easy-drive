@@ -1,7 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 
 const mongoose = require('mongoose');
-const Review = require('./reviewService');
 
 const instructorSchema = new mongoose.Schema({
     id: {
@@ -61,12 +60,10 @@ const instructorSchema = new mongoose.Schema({
     },
     isCarProvided: {
         type: Boolean, default: false
-    },
-    reviews: [Review],
-
+    }
 })
 
-const Instructor = mongoose.model('Instructor', reviewSchema);
+const Instructor = mongoose.model('Instructor', instructorSchema);
 
 /**
  * Checking if input has missing required property

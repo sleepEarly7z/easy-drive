@@ -12,3 +12,5 @@ router.get('/', function (req, res) {
 		? res.status(200).send(results)
 		: res.status(404).send({ message: ` No appointments found` });
 });
+
+module.exports = router;

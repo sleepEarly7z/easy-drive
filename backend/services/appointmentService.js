@@ -21,9 +21,7 @@ const appoitmentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    time_slots: {
-        type: [TimeSlot]
-    }
+    time_slots: [timeSlotSchema]
 })
 
 const Appointment = mongoose.model('Appointement', appoitmentSchema);
