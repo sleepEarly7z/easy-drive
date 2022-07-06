@@ -1,5 +1,73 @@
 const { v4: uuidv4 } = require('uuid');
 
+const mongoose = require('mongoose');
+const Review = require('./reviewService');
+
+const instructorSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        required: true
+    },
+    first_name: {
+        type: String
+    },
+    last_name: {
+        type: String
+    },
+    password: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    phone: {
+        type: String
+    },
+    gender: {
+        type: String, default: 'none'
+    },
+    photo: {
+        type: String, default: 'https://picsum.photos/200'
+    },
+    rating: {
+        type: Number, default: 0
+    },
+    street: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    country: {
+        type: String
+    },
+    company: {
+        type: String
+    },
+    language: {
+        type: String
+    },
+    experience: {
+        type: Number
+    },
+    license: {
+        type: String
+    },
+    description: {
+        type: String, default: 'No descirption for this instructor'
+    },
+    time: {
+        type: String
+    },
+    isCarProvided: {
+        type: Boolean, default: false
+    },
+    reviews: [Review],
+
+})
+
+const Instructor = mongoose.model('Instructor', reviewSchema);
+
 /**
  * Checking if input has missing required property
  * 

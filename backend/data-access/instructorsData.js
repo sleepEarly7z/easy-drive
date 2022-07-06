@@ -1,3 +1,5 @@
+// WILL BE REMOVED AFTER MONGODB INTEGRATION
+
 const fs = require('fs');
 const PATH = './data/instructors.json';
 
