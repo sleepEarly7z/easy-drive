@@ -120,7 +120,66 @@ const defaultInstructor = (instructor) => ({
     reviews: [],
 });
 
+/**
+ * Get all instructors from database
+ * 
+ * @returns {Array} a list of all instructors stored in BD
+ */
+const getInstructors = () => {
+    // TODO
+}
+
+/**
+ * Get an instructor with given id from database
+ * 
+ * @param {string} id 
+ * 
+ * @returns {object | null} instructor with given id, null if not found
+ */
+const getInstructorById = (id) => {
+    // TODO
+}
+
+/**
+ * Add an instructor to the database
+ * 
+ * @param {string} id 
+ * 
+ * @returns {object} instructor has been added to the db
+ */
+const addInstructor = (instructor) => {
+    // TODO
+}
+
+/**
+ * delete instructor with given id from db
+ * 
+ * @param {string} id 
+ * 
+ * @returns {object} instructor deleted
+ */
+const deleteInstructorById = (id) => {
+    // TODO
+}
+
+/**
+ * Update an instructor form database
+ * 
+ * @param {string} id 
+ * @param {object} patch with properties need to update 
+ * 
+ * @returns {object} instructor updated 
+ */
+const updateInstructorById = (id, patch) => {
+    // TODO
+}
+
 module.exports = {
+    getInstructors,
+    getInstructorById,
+    addInstructor,
+    deleteInstructorById,
+    updateInstructorById,
     validateInstructor,
     defaultInstructor
 }
