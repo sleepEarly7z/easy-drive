@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const instructorsRouter = require('./routes/instructors');
+const appointmentsRouter = require('./routes/appointments');
+const reviewsRouter = require('./routes/reviews');
 
 const app = express();
 
@@ -30,5 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/instructors', instructorsRouter);
+app.use('/appoitments', appointmentsRouter);
+app.use('/reviews', reviewsRouter);
 
 module.exports = app;
