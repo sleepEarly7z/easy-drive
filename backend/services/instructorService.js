@@ -3,10 +3,6 @@ const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 
 const instructorSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true
-    },
     first_name: {
         type: String
     },
@@ -37,6 +33,9 @@ const instructorSchema = new mongoose.Schema({
     city: {
         type: String
     },
+    province: {
+        type: String
+    },
     country: {
         type: String
     },
@@ -54,9 +53,6 @@ const instructorSchema = new mongoose.Schema({
     },
     description: {
         type: String, default: 'No descirption for this instructor'
-    },
-    time: {
-        type: String
     },
     isCarProvided: {
         type: Boolean, default: false
@@ -172,6 +168,7 @@ const updateInstructorById = (id, patch) => {
 }
 
 module.exports = {
+    Instructor,
     getInstructors,
     getInstructorById,
     addInstructor,
