@@ -88,10 +88,15 @@ const getInstructors = () => {
  * 
  * @param {string} id 
  * 
- * @returns {object | null} instructor with given id, null if not found
+ * @returns {object} instructor with given id
+ * @throws {object} error - type and messages
  */
-const getInstructorById = (id) => {
-    // TODO
+const getInstructorById = async (id) => {
+    try {
+        return Instructor.findById(id);
+    } catch (error) {
+        throw { type: 'DB', message: error }
+    }
 }
 
 /**
@@ -103,7 +108,6 @@ const getInstructorById = (id) => {
  * @throws {object}} error - type and messages
  */
 const addInstructor = async (instructor) => {
-    console.log('addInstructor service called')
     const newInstructor = new Instructor(instructor);
 
     // validation https://mongoosejs.com/docs/api.html#document_Document-validateSync

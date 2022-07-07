@@ -16,16 +16,33 @@ router.get('/', function (req, res) {
 /**
  *  Get an instructor
  * 
- *  @description 
+ *  @description get an instructor
+ * 
+ *  @verb GET
+ *  @endpoint /instructors/:id
+ * 
+ *  Request:
+ *  @parameters 
+ * 		id - instructor id
+ * 
+ *  Response:
+ *  Success: 
+ *  @status 200 OK
+ *  @data instructor
+ * 
+ * 	@status 404 NOT FOUND
+ *  @error message
  */
 router.get('/:id', function (req, res) {
-
 	const id = req.params.id;
-	const instructor = service.getInstructorById(id);
 
-	(instructor)
-		? res.status(200).send(instructor)
-		: res.status(404).send({ message: `User ${id} not found` })
+	service.getInstructorById(id)
+		.then((instructorFound) => {
+			res.status(200).send({ data: instructorFound });
+		})
+		.catch((error) => {
+			res.status(404).send({ error: { message: `cannot find instructor with id ${id}` } });
+		})
 });
 
 /**
@@ -37,7 +54,6 @@ router.get('/:id', function (req, res) {
  *  @endpoint /instructors
  * 
  *  Request:
- *  @parameters
  *  @payload { Instructor }
  * 
  *  Response:
