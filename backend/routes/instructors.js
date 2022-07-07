@@ -3,6 +3,9 @@ const router = express.Router();
 
 const service = require('../services/instructorService');
 
+/**
+ * 
+ */
 router.get('/', function (req, res) {
 	let instructorsAll = service.getInstructors();
 
@@ -19,35 +22,40 @@ router.get('/:id', function (req, res) {
 		: res.status(404).send({ message: `User ${id} not found` })
 });
 
+/**
+ *  Register an instructor
+ *  
+ *  @description Add instructor data to database
+ * 
+ *  @verb POST
+ *  @endpoint /instructors
+ * 
+ *  Request:
+ *  @parameters
+ *  @payload { Instructor }
+ * 
+ *  Response:
+ *  Success:
+ *  @status 200 OK
+ *  @payload { Instructor } instructor added
+ * 
+ *  Error:
+ *  @status 400 BAD REQUEST
+ * 	@payload error messages
+ */
 router.post('/', function (req, res) {
-	const inputInstructor = {
-		first_name: req.body.first_name,
-		last_name: req.body.last_name,
-		password: req.body.password,
-		email: req.body.email,
-		phone: req.body.phone,
-		street: req.body.street,
-		city: req.body.city,
-		country: req.body.country,
-		company: req.body.company,
-		language: req.body.language ? req.body.language : 'English',
-		experience: req.body.experience,
-		license: req.body.license,
-		time: req.body.time,
-	}
+	console.log('adding new instructor')
+	const inputInstructor = req.body;
 
-	try {
-		validateInstructor(inputInstructor);
-	} catch (invalidProperty) {
-		res.status(400).send({ message: `${invalidProperty} cannot be empty` });
-	}
-
-	const instructor = defaultInstructor(req.body);
-
-	const instructorAdded = service.addInstructor(instructor);
-	(instructorAdded)
-		? res.status(200).send(instructorAdded)
-		: res.status(424).send({ message: `failed to add instructor ${instructor.first_name}  ${instructor.lastname} to database` })
+	service.addInstructor(inputInstructor)
+		.then((instructorAdded) => {
+			console.log('instructor added')
+			res.status(200).send(instructorAdded);
+		})
+		.catch((error) => {
+			console.log('adding instructor failed')
+			res.status(400).send(error);
+		})
 });
 
 // DELETE

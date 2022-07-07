@@ -75,58 +75,6 @@ const instructorSchema = new mongoose.Schema({
 const Instructor = mongoose.model('Instructor', instructorSchema);
 
 /**
- * Checking if input has missing required property
- * 
- * @param {object} inputInstructor 
- * 
- * @returns {object} the validated instructor
- * @throws {string} the first invalid input key
- */
-const validateInstructor = (inputInstructor) => {
-    console.log('validating');
-    for (const [key, value] of Object.entries(inputInstructor)) {
-        if (!value) throw key;
-    }
-    return inputInstructor;
-}
-
-/**
- * adding default properties to an instructor
- * 
- * @param {object} instructor that has been validated
- * 
- * @returns {object} instructor with added default properties
- */
-const defaultInstructor = (instructor) => ({
-    id: { $oid: uuidv4() },
-    first_name: instructor.first_name,
-    last_name: instructor.last_name,
-    password: instructor.password,
-    email: instructor.email,
-    phone: instructor.phone,
-    gender: instructor.gender ? instructor.gender : 'None',
-    photo: instructor.photo
-        ? instructor.photo
-        : 'https://picsum.photos/200',
-    Rating: 0,
-    street: instructor.street,
-    city: instructor.city,
-    country: instructor.country,
-    company: instructor.company,
-    language: instructor.language,
-    experience: instructor.experience,
-    license: instructor.license,
-    description: instructor.description
-        ? instructor.description
-        : 'No description for this instructor',
-    time: instructor.time,
-    carIsProvided: instructor.carIsProvided
-        ? instructor.carIsProvided
-        : 'false',
-    reviews: [],
-});
-
-/**
  * Get all instructors from database
  * 
  * @returns {Array} a list of all instructors stored in BD
@@ -149,12 +97,21 @@ const getInstructorById = (id) => {
 /**
  * Add an instructor to the database
  * 
- * @param {string} id 
+ * @param {object} instructor 
  * 
  * @returns {object} instructor has been added to the db
+ * @throws {error} error message when input is not valid
  */
-const addInstructor = (instructor) => {
-    // TODO
+const addInstructor = async (instructor) => {
+    console.log('addInstructor service called')
+    const newInstructor = new Instructor(instructor);
+
+    // validation https://mongoosejs.com/docs/api.html#document_Document-validateSync
+    const validationError = newInstructor.validateSync();
+    if (validationError) throw validationError;
+
+    await newInstructor.save();
+    return newInstructor;
 }
 
 /**
