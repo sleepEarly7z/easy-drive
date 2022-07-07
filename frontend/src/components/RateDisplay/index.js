@@ -8,13 +8,20 @@ const RateDisplay = ({ reviews }) => {
     // TODO: set percentage
 
     return (
-        <div className="RateDisplay">
+        <div className="review-info-section">
             <div className="RateDisplay-left">
                 <div className="ratedisplay-title">Student reviews</div>
                 <div className="ratedisplay-average">
                     {average.toFixed(1)}/5.0
                 </div>
-                <RatingStar average={average} />
+                <div className="d-flex">
+                    <div style={{ fontSize: '20px', marginRight: '6px', marginLeft: '25px' }}>
+                        Rating:{' '}
+                    </div>
+                    <div style={{ marginTop: '1px' }}>
+                        <RatingStar average={average} />
+                    </div>
+                </div>
                 {/* <div className="rdcard-bottom-space" /> */}
             </div>
             <div className="RateDisplay-right">

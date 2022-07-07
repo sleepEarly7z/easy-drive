@@ -145,7 +145,7 @@ export default function ShrinkedFilterPanel({ instructors }) {
                 <FilterPanel
                     mainFilter={false}
                     open={openFilter}
-                    onClose={handleCloseFilter}
+                    TransitionProps={handleCloseFilter}
                 />
             </div>
         </div>

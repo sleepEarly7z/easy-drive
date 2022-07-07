@@ -4,22 +4,31 @@ import { NavLink } from 'react-bootstrap'
 import styled from 'styled-components'
 import RateDisplay from '../RateDisplay'
 import CalendarSchedular from '../Calendar/CalendarSchedular'
+import {
+    AiFillMail,
+    AiFillPhone,
+    AiTwotoneBank,
+    AiOutlineHighlight,
+    AiFillIdcard,
+    AiTwotoneSchedule,
+} from 'react-icons/ai'
 
 import { useEffect, useState } from 'react'
 
 import { getInstructorsAsync } from '../../redux/instructors/thunks'
 import { useDispatch, useSelector } from 'react-redux'
+import Reviews from '../Reviews/Reviews'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
-    padding: 8px 14px;
+    padding: 10px 17px;
     background: #f4ca59;
     color: #242327;
     cursor: pointer;
-    // border: 2px solid #242327;
     outline: 0;
     font-weight: 700;
     width: 100px;
+    height: 40px;
     display: flex;
     border-radius: 5px;
     text-align: center;
@@ -38,7 +47,8 @@ const FollowActionButton = styled.button`
   // border: 2px solid #242327;
   outline: 0;
   font-weight: 700;
-  width: 90px;
+  width: 100px;
+  height: 40px;
   padding-left: 10px
   display: flex;
   border-radius: 5px;
@@ -46,7 +56,8 @@ const FollowActionButton = styled.button`
     opacity: 0.8;
     font-weight: 800;
     color: #fff;
-}`
+}
+`
 
 export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch()
@@ -59,329 +70,262 @@ export default function ReviewProfile({ instructor }) {
         <div>
             <div className="ReviewProfile">
                 <div className="row">
-                    <div className="col-md-3">
-                        <div className="review-profile-row-left">
-                            <div className="col-12 p-0 px-3 py-3 mb-1 pt-4">
-                                <div className="FollowActionButton d-flex flex-column align-items-center mt-4">
-                                    <img
-                                        className="photo"
-                                        src={instructor.photo}
-                                        alt=""
-                                        style={{
-                                            width: '200px',
-                                            height: '200px',
-                                            borderRadius: '50%',
-                                            objectFit: 'cover',
-                                        }}
-                                    />
-                                    <p className="fw-bold h4 mt-5">
-                                        {instructor.first_name}
-                                        {instructor.last_name}
-                                    </p>
-                                    <p className="text-muted">
-                                        {instructor.license}
-                                    </p>
-                                    <p className="text-muted mb-3">
-                                        {instructor.street}, {instructor.city},{' '}
-                                        {instructor.country}
-                                    </p>
-                                    <div className="FollowActionButton d-flex">
-                                        <FollowActionButton>
-                                            Follow
-                                        </FollowActionButton>
-                                        <MessageActionButton>
-                                            Message
-                                        </MessageActionButton>
-                                    </div>
-                                </div>
+                    <div className="d-flex col-12 p-0 px-3 py-3 pt-4">
+                        <div className="d-flex flex-column align-items-center mt-4">
+                            <img
+                                className="photo"
+                                src={instructor.photo}
+                                alt=""
+                                style={{
+                                    width: '150px',
+                                    height: '150px',
+                                    borderRadius: '50%',
+                                    objectFit: 'cover',
+                                }}
+                            />
+                        </div>
+                        <div className="d-flex mx-5 pt-2 pb-2 w-75">
+                            <div>
+                                <p className="fw-bold h4 mt-5 mb-3">
+                                    {instructor.first_name}{' '}
+                                    {instructor.last_name}
+                                </p>
+                                <p className="text-muted mb-1">
+                                    {instructor.license}
+                                </p>
+                                <p className="text-muted mb-1">
+                                    {instructor.city}, {instructor.country}
+                                </p>
+                                <p className="text-muted mb-3">
+                                    Rating: {instructor.Rating} / 5
+                                </p>
                             </div>
-                            <div className="col-12 p-0 px-2 py-3 pb-3 mb-3 pt-3">
-                                <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">Email</p>
-                                    <a
-                                        className="review-profile-info-res"
-                                        href="/"
-                                    >
-                                        {instructor.email}
-                                    </a>
-                                </div>
-                                <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Mobile
-                                    </p>
-                                    <p className="review-profile-info-res">
-                                        {instructor.phone}
-                                    </p>
-                                </div>
-                                <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Company
-                                    </p>
-                                    <NavLink to="/">
-                                        {instructor.company}
-                                    </NavLink>
-                                </div>
-                                <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Languages
-                                    </p>
-                                    <p className="review-profile-info-res">
-                                        {instructor.language}
-                                    </p>
-                                </div>
-                                <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Year of Experience
-                                    </p>
-                                    <p className="review-profile-info-res">
-                                        {instructor.experience}
-                                    </p>
-                                </div>
-                                <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Liscense
-                                    </p>
-                                    <p className="review-profile-info-res">
-                                        {instructor.license}
-                                    </p>
-                                </div>
-                                <div className="FollowActionButton d-flex justify-content-between py-2 px-3">
-                                    <p className="review-profile-info">
-                                        Description
-                                    </p>
-                                    <p className="review-profile-info-res">
-                                        {instructor.description}
-                                    </p>
-                                </div>
-                            </div>
+                        </div>
+                        <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
+                            <FollowActionButton className="">
+                                Follow
+                            </FollowActionButton>
+                            <MessageActionButton className="">
+                                Message
+                            </MessageActionButton>
                         </div>
                     </div>
-                    <div className="col-md-9 ps-md-4">
-                        <div className="review-profile-row-right">
-                            <div className="col-12 px-3 pb-2">
-                                <RateDisplay item={instructor.reviews} />
-                            </div>
-                            <div className="col-12 px-3 py-3 mb-3 pb-3 pt-4">
-                                <CalendarSchedular page="reviewpage" />
-                            </div>
+
+                    {/* line breaker */}
+                    <div
+                        style={{
+                            paddingTop: 20,
+                        }}
+                    ></div>
+
+                    <div className="review-info-section-title d-flex mt-3 mb-4">
+                        <div
+                            className="review-info-section-title-0 mr-5"
+                            style={{
+                                backgroundColor: '#ffe599',
+                                height: '80%',
+                                width: '10px',
+                                marginTop: '3px',
+                                marginRight: '6px',
+                            }}
+                        ></div>
+                        <div className="review-info-section-title-1">A</div>
+                        <div className="review-info-section-title-2">
+                            bout Me
                         </div>
+                    </div>
+
+                    <div className="pl-0 w-75" style={{ color: '#7a7a7a' }}>
+                        {instructor.description}
+                    </div>
+
+                    {/* line breaker */}
+                    <div
+                        style={{
+                            borderTop: '2px solid #EEEEEE ',
+                            marginTop: 50,
+                            paddingTop: 20,
+                        }}
+                    ></div>
+
+                    <div className="review-info-section-title d-flex mt-4 mb-4">
+                        <div
+                            className="review-info-section-title-0 mr-5"
+                            style={{
+                                backgroundColor: '#ffe599',
+                                height: '80%',
+                                width: '10px',
+                                marginTop: '3px',
+                                marginRight: '6px',
+                            }}
+                        ></div>
+                        <div className="review-info-section-title-1">B</div>
+                        <div className="review-info-section-title-2">
+                            asic Information
+                        </div>
+                    </div>
+
+                    <div className="review-info-section">
+                        <div className="col-12">
+                            <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
+                                <p className="review-profile-info">
+                                    <AiFillMail style={{ marginRight: '10' }} />
+                                    Email
+                                </p>
+                                <a className="review-profile-info-res" href="/">
+                                    {instructor.email}
+                                </a>
+                            </div>
+                            <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
+                                <p className="review-profile-info">
+                                    <AiFillPhone
+                                        style={{ marginRight: '10' }}
+                                    />
+                                    Mobile
+                                </p>
+                                <p className="review-profile-info-res">
+                                    {instructor.phone}
+                                </p>
+                            </div>
+                            <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
+                                <p className="review-profile-info">
+                                    <AiTwotoneBank
+                                        style={{ marginRight: '10' }}
+                                    />
+                                    Company
+                                </p>
+                                <NavLink to="/">{instructor.company}</NavLink>
+                            </div>
+                            <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
+                                <p className="review-profile-info">
+                                    <AiOutlineHighlight
+                                        style={{ marginRight: '10' }}
+                                    />
+                                    Languages
+                                </p>
+                                <p className="review-profile-info-res">
+                                    {instructor.language}
+                                </p>
+                            </div>
+                            <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
+                                <p className="review-profile-info">
+                                    <AiTwotoneSchedule
+                                        style={{ marginRight: '10' }}
+                                    />
+                                    Year of Experience
+                                </p>
+                                <p className="review-profile-info-res">
+                                    {instructor.experience}
+                                </p>
+                            </div>
+                            <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
+                                <p className="review-profile-info">
+                                    <AiFillIdcard
+                                        style={{ marginRight: '10' }}
+                                    />
+                                    Liscense
+                                </p>
+                                <p className="review-profile-info-res">
+                                    {instructor.license}
+                                </p>
+                            </div>
+                            {/* <div className="FollowActionButton d-flex justify-content-between py-2 px-3">
+                                <p className="review-profile-info">
+                                    <AiFillProject style={{ marginRight: "10" }} />
+                                    Description
+                                </p>
+                                <p className="review-profile-info-res">
+                                    {instructor.description}
+                                </p>
+                            </div> */}
+                        </div>
+                    </div>
+
+                    {/* line breaker */}
+                    <div
+                        style={{
+                            borderTop: '2px solid #EEEEEE ',
+                            marginTop: 50,
+                            paddingTop: 20,
+                        }}
+                    ></div>
+
+                    <div className="review-info-section-title d-flex mt-4 mb-4">
+                        <div
+                            className="review-info-section-title-0 mr-5"
+                            style={{
+                                backgroundColor: '#ffe599',
+                                height: '80%',
+                                width: '10px',
+                                marginTop: '3px',
+                                marginRight: '6px',
+                            }}
+                        ></div>
+                        <div className="review-info-section-title-1">S</div>
+                        <div className="review-info-section-title-2 mb-2">
+                            chedule Preview
+                        </div>
+                    </div>
+                    <CalendarSchedular page="reviewpage" />
+
+                    {/* line breaker */}
+                    <div
+                        style={{
+                            borderTop: '2px solid #EEEEEE ',
+                            marginTop: 50,
+                            paddingTop: 20,
+                        }}
+                    ></div>
+
+                    <div className="review-info-section-title d-flex mt-4 mb-4">
+                        <div
+                            className="review-info-section-title-0 mr-5"
+                            style={{
+                                backgroundColor: '#ffe599',
+                                height: '80%',
+                                width: '10px',
+                                marginTop: '3px',
+                                marginRight: '6px',
+                            }}
+                        ></div>
+                        <div className="review-info-section-title-1">R</div>
+                        <div className="review-info-section-title-2">
+                            atings & Reviews
+                        </div>
+                    </div>
+                    <RateDisplay item={instructor.reviews} />
+
+                    {/* line breaker */}
+                    <div
+                        style={{
+                            borderTop: '2px solid #EEEEEE ',
+                            marginTop: 50,
+                            paddingTop: 20,
+                        }}
+                    ></div>
+
+                    <div className="review-info-section-title d-flex mt-4 mb-4">
+                        <div
+                            className="review-info-section-title-0 mr-5"
+                            style={{
+                                backgroundColor: '#ffe599',
+                                height: '80%',
+                                width: '10px',
+                                marginTop: '3px',
+                                marginRight: '6px',
+                            }}
+                        ></div>
+                        <div className="review-info-section-title-1">R</div>
+                        <div className="review-info-section-title-2">
+                            eviews
+                        </div>
+                    </div>
+
+                    <div className="d-flex mb-4">
+                        <Reviews />
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-
-// import './index.scss'
-// import React from 'react'
-// import { NavLink } from 'react-bootstrap'
-// import styled from 'styled-components'
-// import RateDisplay from '../RateDisplay'
-// import CalendarSchedular from '../Calendar/CalendarSchedular'
-
-// import { useEffect } from 'react'
-
-// import { getInstructorsAsync } from '../../redux/instructors/thunks'
-// import { useDispatch } from 'react-redux'
-
-// const MessageActionButton = styled.button`
-//     margin: 0 5px;
-//     padding: 8px 14px;
-//     background: #f4ca59;
-//     color: #242327;
-//     cursor: pointer;
-//     // border: 2px solid #242327;
-//     outline: 0;
-//     font-weight: 700;
-//     width: 100px;
-//     display: flex;
-//     border-radius: 5px;
-//     text-align: center;
-//     :hover {
-//         opacity: 0.8;
-//         font-weight: 800;
-//         color: #fff;
-//     }
-// `
-// const FollowActionButton = styled.button`
-//   margin: 0 5px;
-//   padding: 8px 14px;
-//   background: #f4ca59;
-//   color: #242327;
-//   cursor: pointer;
-//   // border: 2px solid #242327;
-//   outline: 0;
-//   font-weight: 700;
-//   width: 90px;
-//   padding-left: 10px
-//   display: flex;
-//   border-radius: 5px;
-//   :hover {
-//     opacity: 0.8;
-//     font-weight: 800;
-//     color: #fff;
-// }`
-
-// export default function ReviewProfile() {
-
-//     return (
-//         <div>
-//             <div className="ReviewProfile">
-//                 <div className="row">
-//                     <div className="col-md-3">
-//                         <div className="review-profile-row-left">
-//                             <div className="col-12 p-0 px-3 py-3 mb-1 pt-4">
-//                                 <div className="FollowActionButton d-flex flex-column align-items-center mt-4">
-//                                     <img
-//                                         className="photo"
-//                                         src={
-//                                             'https://randomuser.me/api/portraits/men/21.jpg'
-//                                         }
-//                                         alt=""
-//                                         style={{
-//                                             width: '200px',
-//                                             height: '200px',
-//                                             borderRadius: '50%',
-//                                             objectFit: 'cover',
-//                                         }}
-//                                     />
-//                                     <p className="fw-bold h4 mt-5">
-//                                         {'Faulkner'}
-//                                         {'Schoffel'}
-//                                     </p>
-//                                     <p className="text-muted">
-//                                         {'Commercial license'}
-//                                     </p>
-//                                     <p className="text-muted mb-3">
-//                                         {'9308 Morning Terrace'}, {'Vancouver'},{' '}
-//                                         {'Canada'}
-//                                     </p>
-//                                     <div className="FollowActionButton d-flex">
-//                                         <FollowActionButton>
-//                                             Follow
-//                                         </FollowActionButton>
-//                                         <MessageActionButton>
-//                                             Message
-//                                         </MessageActionButton>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                             <div className="col-12 p-0 px-2 py-3 pb-3 mb-3 pt-3">
-//                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-//                                     <p className="review-profile-info">Email</p>
-//                                     <a
-//                                         className="review-profile-info-res"
-//                                         href="/"
-//                                     >
-//                                         {'fschoffel0@devhub.com'}
-//                                     </a>
-//                                 </div>
-//                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-//                                     <p className="review-profile-info">
-//                                         Mobile
-//                                     </p>
-//                                     <p className="review-profile-info-res">
-//                                         {'+1 (210) 148-2668'}
-//                                     </p>
-//                                 </div>
-//                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-//                                     <p className="review-profile-info">
-//                                         Company
-//                                     </p>
-//                                     <NavLink to="/">
-//                                         {'Wunsch, Kunde and Beer'}
-//                                     </NavLink>
-//                                 </div>
-//                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-//                                     <p className="review-profile-info">
-//                                         Languages
-//                                     </p>
-//                                     <p className="review-profile-info-res">
-//                                         {'English, French, Mandarin'}
-//                                     </p>
-//                                 </div>
-//                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-//                                     <p className="review-profile-info">
-//                                         Year of Experience
-//                                     </p>
-//                                     <p className="review-profile-info-res">
-//                                         {24}
-//                                     </p>
-//                                 </div>
-//                                 <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-//                                     <p className="review-profile-info">
-//                                         Liscense
-//                                     </p>
-//                                     <p className="review-profile-info-res">
-//                                         {'Commercial license'}
-//                                     </p>
-//                                 </div>
-//                                 <div className="FollowActionButton d-flex justify-content-between py-2 px-3">
-//                                     <p className="review-profile-info">
-//                                         Description
-//                                     </p>
-//                                     <p className="review-profile-info-res">
-//                                         {
-//                                             'elementum nullam varius nulla facilisi cras non velit nec'
-//                                         }
-//                                     </p>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                     <div className="col-md-9 ps-md-4">
-//                         <div className="review-profile-row-right">
-//                             <div className="col-12 px-3 pb-2">
-//                                 <RateDisplay
-//                                     item={[
-//                                         {
-//                                             reviewer_name: 'Ronni Keld',
-//                                             user_name: 'rkeld0',
-//                                             rating: 3,
-//                                             time: '1/2/2022',
-//                                             comment:
-//                                                 'integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat',
-//                                         },
-//                                         {
-//                                             reviewer_name: 'Laverna Tummasutti',
-//                                             user_name: 'ltummasutti1',
-//                                             rating: 5,
-//                                             time: '6/18/2021',
-//                                             comment: 'blandit',
-//                                         },
-//                                         {
-//                                             reviewer_name: 'Towney Godbehere',
-//                                             user_name: 'tgodbehere2',
-//                                             rating: 5,
-//                                             time: '1/17/2022',
-//                                             comment:
-//                                                 'et magnis dis parturient montes nascetur ridiculus',
-//                                         },
-//                                         {
-//                                             reviewer_name: 'Rubetta Giraudo',
-//                                             user_name: 'rgiraudo3',
-//                                             rating: 4,
-//                                             time: '4/28/2022',
-//                                             comment:
-//                                                 'id nulla ultrices aliquet maecenas',
-//                                         },
-//                                         {
-//                                             reviewer_name: 'Sela Boorman',
-//                                             user_name: 'sboorman4',
-//                                             rating: 3,
-//                                             time: '2/1/2022',
-//                                             comment: 'mi asd ed oodk',
-//                                         },
-//                                     ]}
-//                                 />
-//                             </div>
-//                             <div className="col-12 px-3 py-3 mb-3 pb-3 pt-4">
-//                                 <CalendarSchedular page="reviewpage" />
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }

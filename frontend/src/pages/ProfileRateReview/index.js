@@ -1,12 +1,9 @@
-import './index.scss'
-import ReviewForm from '../../components/ReviewForm'
-import ReviewList from '../../components/ReviewList'
-import ReviewProfile from '../../components/ReviewProfile'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { useState, useEffect } from 'react'
+import ReviewProfile from '../../components/ReviewProfile'
+
 import { getInstructorsAsync } from '../../redux/instructors/thunks'
-import Reviews from '../../components/Reviews/Reviews'
 
 const ProfileRateReview = () => {
     const params = useParams()
@@ -24,45 +21,10 @@ const ProfileRateReview = () => {
     return (
         <>
             <div className="ProfileRateReview">
-                <div className="ReviewProfile-top">
-                    <ReviewProfile instructor={instructor} />
-                </div>
-                <div>
-                    {/* <ReviewForm />
-                    <ReviewList instructor={instructor} /> */}
-                    <Reviews />
-                </div>
+                <ReviewProfile instructor={instructor} />
             </div>
         </>
     )
 }
 
 export default ProfileRateReview
-
-// import './index.scss'
-// import ReviewForm from '../../components/ReviewForm'
-// import ReviewList from '../../components/ReviewList'
-// import ReviewProfile from '../../components/ReviewProfile'
-// import { useParams } from 'react-router-dom'
-// import { useSelector, useDispatch } from 'react-redux'
-// import { useState, useEffect } from 'react'
-// import { getInstructorsAsync } from '../../redux/instructors/thunks'
-
-// const ProfileRateReview = () => {
-
-//     return (
-//         <>
-//             <div className="ProfileRateReview">
-//                 <div className="ReviewProfile-top">
-//                     <ReviewProfile/>
-//                 </div>
-//                 <div>
-//                     <ReviewForm />
-//                     <ReviewList/>
-//                 </div>
-//             </div>
-//         </>
-//     )
-// }
-
-// export default ProfileRateReview
