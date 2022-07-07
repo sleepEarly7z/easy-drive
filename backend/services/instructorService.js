@@ -100,7 +100,7 @@ const getInstructorById = (id) => {
  * @param {object} instructor 
  * 
  * @returns {object} instructor has been added to the db
- * @throws {error} error message when input is not valid
+ * @throws {object}} error - type and messages
  */
 const addInstructor = async (instructor) => {
     console.log('addInstructor service called')
@@ -108,10 +108,14 @@ const addInstructor = async (instructor) => {
 
     // validation https://mongoosejs.com/docs/api.html#document_Document-validateSync
     const validationError = newInstructor.validateSync();
-    if (validationError) throw validationError;
+    if (validationError) throw { type: 'validation', message: validationError };
 
-    await newInstructor.save();
-    return newInstructor;
+    try {
+        await newInstructor.save();
+        return newInstructor;
+    } catch (error) {
+        throw ({ type: 'DB', message: error })
+    }
 }
 
 /**
@@ -143,7 +147,5 @@ module.exports = {
     getInstructorById,
     addInstructor,
     deleteInstructorById,
-    updateInstructorById,
-    validateInstructor,
-    defaultInstructor
+    updateInstructorById
 }

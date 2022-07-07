@@ -1,3 +1,4 @@
+const e = require('express');
 const express = require('express');
 const router = express.Router();
 
@@ -42,19 +43,23 @@ router.get('/:id', function (req, res) {
  *  Error:
  *  @status 400 BAD REQUEST
  * 	@payload error messages
+ * 
+ *  @status 500 SERVER ERROR
+ *  @payload error messages
  */
 router.post('/', function (req, res) {
-	console.log('adding new instructor')
 	const inputInstructor = req.body;
 
 	service.addInstructor(inputInstructor)
 		.then((instructorAdded) => {
-			console.log('instructor added')
 			res.status(200).send(instructorAdded);
 		})
 		.catch((error) => {
-			console.log('adding instructor failed')
-			res.status(400).send(error);
+			if (error.type === 'validation') {
+				res.status(400).send(error.message);
+			} else {
+				res.status(500).send(error.message);
+			}
 		})
 });
 
