@@ -13,6 +13,11 @@ router.get('/', function (req, res) {
 	res.status(200).send(instructorsAll);
 });
 
+/**
+ *  Get an instructor
+ * 
+ *  @description 
+ */
 router.get('/:id', function (req, res) {
 
 	const id = req.params.id;
@@ -38,27 +43,27 @@ router.get('/:id', function (req, res) {
  *  Response:
  *  Success:
  *  @status 200 OK
- *  @payload { Instructor } instructor added
+ *  @data { Instructor } instructor added
  * 
  *  Error:
  *  @status 400 BAD REQUEST
- * 	@payload error messages
+ * 	@error error messages
  * 
  *  @status 500 SERVER ERROR
- *  @payload error messages
+ *  @error error messages
  */
 router.post('/', function (req, res) {
 	const inputInstructor = req.body;
 
 	service.addInstructor(inputInstructor)
 		.then((instructorAdded) => {
-			res.status(200).send(instructorAdded);
+			res.status(200).send({ data: instructorAdded });
 		})
 		.catch((error) => {
 			if (error.type === 'validation') {
-				res.status(400).send(error.message);
+				res.status(400).send({ error: error.message });
 			} else {
-				res.status(500).send(error.message);
+				res.status(500).send({ error: error.message });
 			}
 		})
 });
