@@ -4,19 +4,23 @@ const mongoose = require('mongoose');
 
 const instructorSchema = new mongoose.Schema({
     first_name: {
-        type: String
+        type: String,
+        required: true
     },
     last_name: {
-        type: String
+        type: String,
+        required: true
     },
     password: {
         type: String
     },
     email: {
-        type: String
+        type: String,
+        required: true
     },
     phone: {
-        type: String
+        type: String,
+        required: true
     },
     gender: {
         type: String, default: 'none'
@@ -28,28 +32,37 @@ const instructorSchema = new mongoose.Schema({
         type: Number, default: 0
     },
     street: {
-        type: String
+        type: String,
+        required: true
     },
     city: {
-        type: String
+        type: String,
+        required: true
     },
     province: {
-        type: String
+        type: String,
+        required: true
     },
     country: {
-        type: String
+        type: String,
+        required: true
     },
     company: {
-        type: String
+        type: String,
     },
     language: {
-        type: String
+        type: String,
+        required: true
     },
     experience: {
-        type: Number
+        type: Number,
+        required: true,
+        min: 0
     },
     license: {
-        type: String
+        type: String,
+        required: true,
+        enum: ['Class 5', 'Class 7', 'Class 4']
     },
     description: {
         type: String, default: 'No descirption for this instructor'
