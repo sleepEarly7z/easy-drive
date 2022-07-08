@@ -13,21 +13,21 @@ CPSC 455 2022S **Team 405 Found**
 
 **Minimal Requirements**
 
--   [ ] Have instructor/student profile pages
--   [ ] Display instructors' reviews
--   [ ] Implement React sliding window effect on the main page
--   [ ] Display instructor profile cards on the main page
--   [ ] Have a sign-in/sign-up page
+-   [x] Have instructor/student profile pages
+-   [x] Display instructors' reviews
+-   [x] Implement React sliding window effect on the main page
+-   [x] Display instructor profile cards on the main page
+-   [x] Have a sign-in/sign-up page
 
 **Standard Requirements**
 
 -   [ ] Manage user registration/login/authentication
--   [ ] Edit instructor/student profile page
--   [ ] Add/Delete/Update user reviews
+-   [x] Edit instructor/student profile page
+-   [ ] Add/Delete/Update user reviews(**ongoing**)
 -   [ ] Like and save instructors to "My Favourite Instructors List"
--   [ ] Filter instructors according to a search criteria
--   [ ] Sort reviews according to rating
--   [ ] List instructor availability in a calendar view
+-   [x] Filter instructors according to a search criteria
+-   [x] Sort reviews according to rating
+-   [x] List instructor availability in a calendar view (**ongoing**)
 
 **Stretch Requirements**
 
@@ -39,13 +39,13 @@ CPSC 455 2022S **Team 405 Found**
 
 ## Requirements breakdown
 
--   [ ] Display instructor profile cards in the main page
+-   [x] Display instructor profile cards in the main page
     -   Have a search bar
     -   Display Top 3 recommended instructor profile cards on the top of the main page using React sliding window effect
     -   Add a filter panel on the left of the webpage to help users search for ideal instructors
     -   Display query results based on filters
     -   Click on cards and redirect to instructors' review pages
--   [ ] Have instructor/student profile pages
+-   [x] Have instructor/student profile pages
     -   Display the user's name, language, location, availability, contact email, etc in the profile page
     -   Be able to edit user's personal information
     -   Upload/Update user's profile image
