@@ -80,7 +80,11 @@ const Instructor = mongoose.model('Instructor', instructorSchema);
  * @returns {Array} a list of all instructors stored in BD
  */
 const getInstructors = () => {
-    // TODO
+    try {
+        return Instructor.find({});
+    } catch (error) {
+        throw { type: 'DB', message: error }
+    }
 }
 
 /**

@@ -37,7 +37,7 @@ const instructorsSlice = createSlice({
             })
             .addCase(getInstructorsAsync.fulfilled, (state, action) => {
                 state.getInstructors = REQUEST_STATE.FULFILLED
-                state.list = action.payload
+                state.list = action.payload.data
             })
             .addCase(getInstructorsAsync.rejected, (state, action) => {
                 state.getInstructors = REQUEST_STATE.REJECTED

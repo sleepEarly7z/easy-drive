@@ -5,12 +5,28 @@ const router = express.Router();
 const service = require('../services/instructorService');
 
 /**
+ * Get all instructors
  * 
+ * @verb GET
+ * @endpoint /instructors
+ * 
+ * Responses:
+ * Success:
+ * @status 200 OK
+ * @data instructors[]
+ * 
+ * Error:
+ * @status 500 SERVER ERROR
+ * @error message
  */
 router.get('/', function (req, res) {
-	let instructorsAll = service.getInstructors();
-
-	res.status(200).send(instructorsAll);
+	service.getInstructors()
+		.then((instructors) => {
+			res.status(200).send({ data: instructors });
+		})
+		.catch((error) => {
+			res.status(500).send({ error: error.message });
+		})
 });
 
 /**
