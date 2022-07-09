@@ -24,3 +24,14 @@ export const FILTER_CATEGORIES = [
         options: ['class 7', 'class 5', 'class 4'],
     },
 ]
+
+export const SORT_OPTIONS = [
+    {
+        label: "rating (high to low)",
+        value: "ratingDesc"
+    },
+    {
+        label: "rating (low to high)",
+        value: "ratingAsc"
+    }
+]
