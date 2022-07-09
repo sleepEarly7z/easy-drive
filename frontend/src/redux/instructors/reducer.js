@@ -104,6 +104,7 @@ const instructorsSlice = createSlice({
                 state.getFilter = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
+            
             .addCase(updateFilterAsync.pending, (state) => {
                 state.addFilter = REQUEST_STATE.PENDING
                 state.error = null

@@ -2,7 +2,6 @@ const getInstructors = async () => {
     const response = await fetch('http://localhost:3001/instructors', {
         method: 'GET',
     })
-    console.log("3 processed http://localhost:3001/instructors");
     return response.json()
 }
 
@@ -31,8 +30,7 @@ const addInstructor = async (data) => {
         time,
         carIsProvided,
     } = data
-    // console.log('data')
-    // console.log(data)
+
     const response = await fetch('http://localhost:3001/instructors', {
         method: 'POST',
         headers: {
@@ -62,9 +60,6 @@ const addInstructor = async (data) => {
         const errorMsg = result?.message
         throw new Error(errorMsg)
     }
-
-    // console.log('result');
-    // console.log(result);
 
     return result
 }
