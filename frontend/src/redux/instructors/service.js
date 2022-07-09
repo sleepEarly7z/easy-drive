@@ -70,21 +70,47 @@ const addInstructor = async (data) => {
 }
 
 const updateInstructor = async (payload) => {
-    const { id, fname, lname, email, phone, street, city, province } = payload
-    console.log(id)
+    const {
+        id,
+        first_name,
+        last_name,
+        password,
+        email,
+        phone,
+        street,
+        city,
+        country,
+        company,
+        language,
+        experience,
+        license,
+        description,
+        time,
+        carIsProvided,
+    } = payload
+    // console.log(id)
     const response = await fetch('http://localhost:3001/instructors/' + id, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            fname,
-            lname,
+            id,
+            first_name,
+            last_name,
+            password,
             email,
             phone,
             street,
             city,
-            province,
+            country,
+            company,
+            language,
+            experience,
+            license,
+            description,
+            time,
+            carIsProvided,
         }),
     })
     return response.json()
