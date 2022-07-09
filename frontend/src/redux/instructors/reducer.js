@@ -37,7 +37,7 @@ const instructorsSlice = createSlice({
             })
             .addCase(getInstructorsAsync.fulfilled, (state, action) => {
                 state.getInstructors = REQUEST_STATE.FULFILLED
-                state.list = action.payload
+                state.list = action.payload.data
             })
             .addCase(getInstructorsAsync.rejected, (state, action) => {
                 state.getInstructors = REQUEST_STATE.REJECTED
@@ -73,7 +73,7 @@ const instructorsSlice = createSlice({
             })
             .addCase(updateInstructorAsync.fulfilled, (state, action) => {
                 state.updateInstructor = REQUEST_STATE.FULFILLED
-                // state.list = action.payload
+                state.list = action.payload
             })
             .addCase(updateInstructorAsync.rejected, (state, action) => {
                 state.updateInstructor = REQUEST_STATE.REJECTED
@@ -85,7 +85,7 @@ const instructorsSlice = createSlice({
             })
             .addCase(deleteInstructorAsync.fulfilled, (state, action) => {
                 state.deleteInstructor = REQUEST_STATE.FULFILLED
-                // state.list = action.payload
+                state.list = action.payload
             })
             .addCase(deleteInstructorAsync.rejected, (state, action) => {
                 state.deleteInstructor = REQUEST_STATE.REJECTED
@@ -104,7 +104,6 @@ const instructorsSlice = createSlice({
                 state.getFilter = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
-            
             .addCase(updateFilterAsync.pending, (state) => {
                 state.addFilter = REQUEST_STATE.PENDING
                 state.error = null

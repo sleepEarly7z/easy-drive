@@ -5,73 +5,96 @@ const router = express.Router();
 const service = require('../services/instructorService');
 
 /**
- * 
+ * Get all instructors
+ *
+ * @verb GET
+ * @endpoint /instructors
+ *
+ * Responses:
+ * Success:
+ * @status 200 OK
+ * @data instructors[]
+ *
+ * Error:
+ * @status 500 SERVER ERROR
+ * @error message
  */
 router.get('/', function (req, res) {
-	let instructorsAll = service.getInstructors();
-
-	res.status(200).send(instructorsAll);
+	service
+		.getInstructors()
+		.then((instructors) => {
+			res.status(200).send({ data: instructors });
+		})
+		.catch((error) => {
+			res.status(500).send({ error: error.message });
+		});
 });
 
 /**
  *  Get an instructor
- * 
+ *
  *  @description get an instructor
- * 
+ *
  *  @verb GET
  *  @endpoint /instructors/:id
- * 
+ *
  *  Request:
- *  @parameters 
+ *  @parameters
  * 		id - instructor id
- * 
+ *
  *  Response:
- *  Success: 
+ *  Success:
  *  @status 200 OK
  *  @data instructor
- * 
+ *
  * 	@status 404 NOT FOUND
  *  @error message
  */
 router.get('/:id', function (req, res) {
 	const id = req.params.id;
 
-	service.getInstructorById(id)
+	service
+		.getInstructorById(id)
 		.then((instructorFound) => {
 			res.status(200).send({ data: instructorFound });
 		})
 		.catch((error) => {
-			res.status(404).send({ error: { message: `cannot find instructor with id ${id}` } });
-		})
+			res.status(404).send({
+				error: {
+					message: `cannot find instructor with id ${id}`,
+				},
+			});
+		});
 });
 
 /**
  *  Register an instructor
- *  
+ *
  *  @description Add instructor data to database
- * 
+ *
  *  @verb POST
  *  @endpoint /instructors
- * 
+ *
  *  Request:
  *  @payload { Instructor }
- * 
+ *
  *  Response:
  *  Success:
  *  @status 200 OK
  *  @data { Instructor } instructor added
- * 
+ *
  *  Error:
  *  @status 400 BAD REQUEST
  * 	@error error messages
- * 
+ *
  *  @status 500 SERVER ERROR
  *  @error error messages
  */
 router.post('/', function (req, res) {
 	const inputInstructor = req.body;
 
-	service.addInstructor(inputInstructor)
+	service
+		.addInstructor(inputInstructor)
 		.then((instructorAdded) => {
 			res.status(200).send({ data: instructorAdded });
 		})
@@ -81,7 +104,7 @@ router.post('/', function (req, res) {
 			} else {
 				res.status(500).send({ error: error.message });
 			}
-		})
+		});
 });
 
 // DELETE
@@ -94,9 +117,13 @@ router.delete('/:id', function (req, res) {
 	}
 
 	const instructorDeleted = service.deleteInstructorById(id);
-	(instructorDeleted)
+	instructorDeleted
 		? res.status(200).send(instructorDeleted)
-		: res.status(424).send({ message: `failed to delete instructor ${id} from database` })
+		: res
+				.status(424)
+				.send({
+					message: `failed to delete instructor ${id} from database`,
+				});
 });
 
 // UPDATE
@@ -108,11 +135,18 @@ router.patch('/:id', function (req, res, next) {
 		return res.status(404).send(`instructor ${id} not found`);
 	}
 
-	const instructorUpdated = service.updateInstructorById(id, req.body);
+	const instructorUpdated = service.updateInstructorById(
+		id,
+		req.body
+	);
 
-	(instructorUpdated)
+	instructorUpdated
 		? res.status(200).send(instructorUpdated)
-		: res.status(424).send({ message: `failed to update instructor ${id} from database` })
+		: res
+				.status(424)
+				.send({
+					message: `failed to update instructor ${id} from database`,
+				});
 });
 
 router.get('/filter', function (req, res) {
@@ -121,17 +155,21 @@ router.get('/filter', function (req, res) {
 
 const dropDownType = {
 	BEST_MATCH: 'Best Match',
-	HIGHEST_RATED: 'Highest Rated'
-}
+	HIGHEST_RATED: 'Highest Rated',
+};
 
 router.get('/sort', function (req, res, next) {
 	const instructors = service.getInstructors();
-	const condition = req.query.condition.replaceAll('"', '')
+	const condition = req.query.condition.replaceAll('"', '');
 	if (condition === dropDownType.HIGHEST_RATED) {
-		console.log("pass1")
-		instructors.sort(function (a, b) { return b.Rating - a.Rating });
+		console.log('pass1');
+		instructors.sort(function (a, b) {
+			return b.Rating - a.Rating;
+		});
 	} else if (condition === dropDownType.BEST_MATCH) {
-		instructors.sort(function (a, b) { return b.experience - a.experience })
+		instructors.sort(function (a, b) {
+			return b.experience - a.experience;
+		});
 	} else {
 		console.log('fail');
 	}
@@ -140,15 +178,23 @@ router.get('/sort', function (req, res, next) {
 
 router.delete('/filter/:id', function (req, res, next) {
 	const instructors = service.getInstructors();
-	const id = JSON.stringify(req.body.id).replaceAll("\"", "")
-	console.log(typeof (id) + id)
-	const deleted = instructors.find(instructor => instructor.id.$oid === id);
+	const id = JSON.stringify(req.body.id).replaceAll('"', '');
+	console.log(typeof id + id);
+	const deleted = instructors.find(
+		(instructor) => instructor.id.$oid === id
+	);
 	if (deleted) {
-		instructors = instructors.filter(instructor => instructor.id.$oid !== id);
+		instructors = instructors.filter(
+			(instructor) => instructor.id.$oid !== id
+		);
 		return res.send(deleted);
-	}
-	else {
-		return res.status(404).json({ message: 'instructor you are looking for does not exist' });
+	} else {
+		return res
+			.status(404)
+			.json({
+				message:
+					'instructor you are looking for does not exist',
+			});
 	}
 });
 
