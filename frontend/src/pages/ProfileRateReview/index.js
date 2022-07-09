@@ -11,7 +11,7 @@ const ProfileRateReview = () => {
 
     const instructors = useSelector((state) => state.instructors.list)
     const instructor = instructors.find(
-        (user) => user.id.$oid === params.instructorId,
+        (user) => user._id === params.instructorId,
     )
 
     useEffect(() => {

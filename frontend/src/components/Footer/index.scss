@@ -1,6 +1,6 @@
 @import '../../App.scss';
 
-.main-footer {
+.Footer-main-footer {
     color: white;
     background-color: $black-background;
     padding-top: 2em;
@@ -11,7 +11,7 @@
     width: 100%;
 }
 
-.row-footer {
+.Footer-row-footer {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
     display: flex;
@@ -21,12 +21,12 @@
     margin-left: calc(-0.5 * var(--bs-gutter-x));
 }
 
-.col-footer {
+.Footer-col-footer {
     flex: 1 0;
     padding-left: 1em;
 }
 
-.container-footer {
+.Footer-container-footer {
     width: 100%;
     padding-right: var(--bs-gutter-x, 0.75rem);
     padding-left: var(--bs-gutter-x, 0.75rem);
@@ -34,19 +34,19 @@
     margin-left: auto;
 }
 
-.footer-heading-4 {
+.Footer-footer-heading-4 {
     font-size: 20px;
     padding-bottom: 10px;
 }
 
-.list-unstyled-footer {
+.Footer-list-unstyled-footer {
     padding-left: 0;
     list-style: none;
     font-size: 14px;
     font-weight: 300;
 }
 
-.col-sm-footer {
+.Footer-col-sm-footer {
     flex: 1 0;
     padding-left: 1em;
 }

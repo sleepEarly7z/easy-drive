@@ -11,7 +11,7 @@ import {
 import { ExpandLess, ExpandMore } from '@mui/icons-material'
 
 const FilterCategory = (props) => {
-    const { category, filterBy, setFilterBy } = props;
+    const { category, filterBy, setFilterBy } = props
 
     const name = category.name
     const options = category.options
@@ -36,26 +36,26 @@ const FilterCategory = (props) => {
         setChecked(newChecked)
 
         // update filterBy
-        updateFilterBy(name, newChecked);
+        updateFilterBy(name, newChecked)
     }
 
     const updateFilterBy = (categoryName, checkedOptions) => {
-        console.log(filterBy);
+        console.log(filterBy)
         // find the categrory in the list in state and then update it
         for (const category of filterBy) {
             if (category.categoryName === categoryName) {
-                category['options'] = checkedOptions;
-                return setFilterBy(filterBy);
+                category['options'] = checkedOptions
+                return setFilterBy(filterBy)
             }
         }
         // category is not in filterBy, add new category
-        filterBy.push({ categoryName, options: checkedOptions });
-        setFilterBy(filterBy);
+        filterBy.push({ categoryName, options: checkedOptions })
+        setFilterBy(filterBy)
     }
 
     return (
         <>
-            <ListItemButton onClick={handleClick} minWidth='sm'>
+            <ListItemButton onClick={handleClick} minwidth="sm">
                 <ListItemText primary={name} />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
@@ -64,7 +64,7 @@ const FilterCategory = (props) => {
                 <List
                     sx={{
                         width: '100%',
-                        minWidth: 'sm',
+                        minwidth: 'sm',
                         bgcolor: 'background.paper',
                     }}
                 >
