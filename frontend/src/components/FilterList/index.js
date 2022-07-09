@@ -19,23 +19,25 @@ function FilterList({ instructors }) {
 
     return (
         <div className="FilterList">
-            {Array.from(instructors).slice(0, 10).map((instructor) => {
-                return (
-                    <div key={instructor.id.$oid} id="addedProfileCard-div">
-                        <ProfileCard
-                            key={instructor.id.$oid}
-                            name={instructor.first_name}
-                            location={instructor.city}
-                            years={instructor.experience}
-                            rate={instructor.Rating + ''}
-                            imgSrc={instructor.photo}
-                            instructorId={instructor.id.$oid}
-                        />
+            {Array.from(instructors)
+                .slice(0, 10)
+                .map((instructor) => {
+                    return (
+                        <div key={instructor.id.$oid} id="addedProfileCard-div">
+                            <ProfileCard
+                                key={instructor.id.$oid}
+                                name={instructor.first_name}
+                                location={instructor.city}
+                                years={instructor.experience}
+                                rate={instructor.Rating + ''}
+                                imgSrc={instructor.photo}
+                                instructorId={instructor.id.$oid}
+                            />
 
-                        <br />
-                    </div>
-                )
-            })}
+                            <br />
+                        </div>
+                    )
+                })}
             {/* <br />
             <ProfileCard
                 name={'Rick Astley'}

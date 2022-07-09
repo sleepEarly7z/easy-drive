@@ -32,7 +32,6 @@ const ControlPanel = (props) => {
                 <Button variant="outline-primary">reset</Button>
                 <Button onClick={() => { console.log(sortBy); console.log(filterBy) }}>apply</Button>
             </Box>
-
         </Box>
     )
 }

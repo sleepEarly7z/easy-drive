@@ -21,7 +21,6 @@ const Explore = () => {
 
     const instructors = useSelector((state) => state.instructors.list);
 
-
     return (
         <div className="Explore">
             <Slider />
@@ -41,7 +40,6 @@ const Explore = () => {
                         instructors={instructors}
                     />
                 </Grid>
-
             </Grid>
         </div>
     )

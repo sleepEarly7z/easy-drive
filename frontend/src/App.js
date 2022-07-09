@@ -20,14 +20,14 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
-                    {/* <Route
+                    <Route
                         path="showProfileRating/:instructorId"
                         element={<ProfileRateReview />}
-                    /> */}
-                    <Route
+                    />
+                    {/* <Route
                         path="showProfileRating"
                         element={<ProfileRateReview />}
-                    />
+                    /> */}
                     <Route path="explore" element={<Explore />} />
 
                     <Route path="about" element={<About />} />

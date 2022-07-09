@@ -9,8 +9,12 @@ import {
 import './ShrinkedFilterPanel.scss'
 import FilterPanel from '../FilterPanel/FilterPanel'
 import { dropDownType } from './dropDownType'
-import { useSelector, useDispatch } from 'react-redux';
-import { sortFiltersAsync,getInstructorsAsync, getFiltersAsync} from '../../redux/instructors/thunks';
+import { useSelector, useDispatch } from 'react-redux'
+import {
+    sortFiltersAsync,
+    getInstructorsAsync,
+    getFiltersAsync,
+} from '../../redux/instructors/thunks'
 
 import $ from 'jquery'
 
@@ -28,7 +32,7 @@ let useClickOutside = (handler) => {
     return closeFilterRef
 }
 
-export default function ShrinkedFilterPanel({instructors}) {
+export default function ShrinkedFilterPanel({ instructors }) {
     const dispatch = useDispatch()
     // const instructors = useSelector(state => state.instructors.filter)
 
@@ -91,13 +95,13 @@ export default function ShrinkedFilterPanel({instructors}) {
         // $(".shrinkedFilterPanel").css("height", "");
     }
     useEffect(() => {
-        dispatch(getInstructorsAsync());
+        dispatch(getInstructorsAsync())
         dispatch(getFiltersAsync())
-      }, []);
+    }, [])
 
     function handleSorting(condition) {
-        console.log(JSON.stringify({condition}))
-        dispatch(sortFiltersAsync({condition}))
+        console.log(JSON.stringify({ condition }))
+        dispatch(sortFiltersAsync({ condition }))
     }
 
     return (
@@ -141,7 +145,7 @@ export default function ShrinkedFilterPanel({instructors}) {
                 <FilterPanel
                     mainFilter={false}
                     open={openFilter}
-                    onClose={handleCloseFilter}
+                    TransitionProps={handleCloseFilter}
                 />
             </div>
         </div>

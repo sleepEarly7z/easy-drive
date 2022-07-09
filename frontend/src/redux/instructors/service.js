@@ -2,7 +2,6 @@ const getInstructors = async () => {
     const response = await fetch('http://localhost:3001/instructors', {
         method: 'GET',
     })
-    // console.log("getInstructors()");
     return response.json()
 }
 
@@ -31,8 +30,7 @@ const addInstructor = async (data) => {
         time,
         carIsProvided,
     } = data
-    // console.log('data')
-    // console.log(data)
+
     const response = await fetch('http://localhost:3001/instructors', {
         method: 'POST',
         headers: {
@@ -63,9 +61,6 @@ const addInstructor = async (data) => {
         throw new Error(errorMsg)
     }
 
-    // console.log('result');
-    // console.log(result);
-
     return result
 }
 
@@ -90,28 +85,23 @@ const updateInstructor = async (payload) => {
     return response.json()
 }
 
-
 // DELETE
 const deleteInstructor = async (id) => {
-	const response = await fetch(
-		'http://localhost:3001/instructors/' + id,
-		{
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		}
-	);
+    const response = await fetch('http://localhost:3001/instructors/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
 
-	const data = await response.json();
-	if (!response.ok) {
-		const errorMsg = data?.message;
-		throw new Error(errorMsg);
-	}
+    const data = await response.json()
+    if (!response.ok) {
+        const errorMsg = data?.message
+        throw new Error(errorMsg)
+    }
 
-	return data;
-};
-
+    return data
+}
 
 const getFilter = async () => {
     const response = await fetch('http://localhost:3001/instructors/filter', {
