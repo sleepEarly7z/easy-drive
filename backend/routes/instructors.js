@@ -1,53 +1,103 @@
+const e = require('express');
 const express = require('express');
 const router = express.Router();
 
 const service = require('../services/instructorService');
 
+/**
+ * Get all instructors
+ * 
+ * @verb GET
+ * @endpoint /instructors
+ * 
+ * Responses:
+ * Success:
+ * @status 200 OK
+ * @data instructors[]
+ * 
+ * Error:
+ * @status 500 SERVER ERROR
+ * @error message
+ */
 router.get('/', function (req, res) {
-	let instructorsAll = service.getInstructors();
-
-	res.status(200).send(instructorsAll);
+	service.getInstructors()
+		.then((instructors) => {
+			res.status(200).send({ data: instructors });
+		})
+		.catch((error) => {
+			res.status(500).send({ error: error.message });
+		})
 });
 
+/**
+ *  Get an instructor
+ * 
+ *  @description get an instructor
+ * 
+ *  @verb GET
+ *  @endpoint /instructors/:id
+ * 
+ *  Request:
+ *  @parameters 
+ * 		id - instructor id
+ * 
+ *  Response:
+ *  Success: 
+ *  @status 200 OK
+ *  @data instructor
+ * 
+ * 	@status 404 NOT FOUND
+ *  @error message
+ */
 router.get('/:id', function (req, res) {
-
 	const id = req.params.id;
-	const instructor = service.getInstructorById(id);
 
-	(instructor)
-		? res.status(200).send(instructor)
-		: res.status(404).send({ message: `User ${id} not found` })
+	service.getInstructorById(id)
+		.then((instructorFound) => {
+			res.status(200).send({ data: instructorFound });
+		})
+		.catch((error) => {
+			res.status(404).send({ error: { message: `cannot find instructor with id ${id}` } });
+		})
 });
 
+/**
+ *  Register an instructor
+ *  
+ *  @description Add instructor data to database
+ * 
+ *  @verb POST
+ *  @endpoint /instructors
+ * 
+ *  Request:
+ *  @payload { Instructor }
+ * 
+ *  Response:
+ *  Success:
+ *  @status 200 OK
+ *  @data { Instructor } instructor added
+ * 
+ *  Error:
+ *  @status 400 BAD REQUEST
+ * 	@error error messages
+ * 
+ *  @status 500 SERVER ERROR
+ *  @error error messages
+ */
 router.post('/', function (req, res) {
-	const inputInstructor = {
-		first_name: req.body.first_name,
-		last_name: req.body.last_name,
-		password: req.body.password,
-		email: req.body.email,
-		phone: req.body.phone,
-		street: req.body.street,
-		city: req.body.city,
-		country: req.body.country,
-		company: req.body.company,
-		language: req.body.language ? req.body.language : 'English',
-		experience: req.body.experience,
-		license: req.body.license,
-		time: req.body.time,
-	}
+	const inputInstructor = req.body;
 
-	try {
-		validateInstructor(inputInstructor);
-	} catch (invalidProperty) {
-		res.status(400).send({ message: `${invalidProperty} cannot be empty` });
-	}
-
-	const instructor = defaultInstructor(req.body);
-
-	const instructorAdded = service.addInstructor(instructor);
-	(instructorAdded)
-		? res.status(200).send(instructorAdded)
-		: res.status(424).send({ message: `failed to add instructor ${instructor.first_name}  ${instructor.lastname} to database` })
+	service.addInstructor(inputInstructor)
+		.then((instructorAdded) => {
+			res.status(200).send({ data: instructorAdded });
+		})
+		.catch((error) => {
+			if (error.type === 'validation') {
+				res.status(400).send({ error: error.message });
+			} else {
+				res.status(500).send({ error: error.message });
+			}
+		})
 });
 
 // DELETE

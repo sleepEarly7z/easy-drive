@@ -218,13 +218,14 @@ const CalendarSchedular = ({ page }) => {
                     onOptionsChange={handleEditingOptionsChange}
                 />
             )}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5px', marginBottom: '10px' }}>
                 <div
                     style={{
-                        fontSize: '30px',
-                        fontWeight: '550',
+                        fontSize: '18px',
+                        fontWeight: '850',
                         paddingBottom: '10px',
                         marginRight: 'auto',
+                        color: '#adb2af',
                     }}
                 >
                     {months[currentDate.getMonth() + 1]},{' '}

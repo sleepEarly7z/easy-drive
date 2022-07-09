@@ -4,7 +4,7 @@ import { FILTER_CATEGORIES } from '../../utils/constants'
 import FilterCategory from './FilterCategory'
 import { Box, List, ListSubheader, Button, Stack, Grid } from '@mui/material'
 
-const FilterPanel = ({ mainFilter, open, onClose }) => {
+const FilterPanel = ({ mainFilter, open, TransitionProps }) => {
     const [expanded, setExpanded] = useState(true)
 
     if (!open) return null
@@ -15,9 +15,7 @@ const FilterPanel = ({ mainFilter, open, onClose }) => {
         console.log('submitted')
     }
 
-    function resetFilter(recipe) {
-
-      }
+    function resetFilter(recipe) {}
 
     return (
         <Box
@@ -42,7 +40,7 @@ const FilterPanel = ({ mainFilter, open, onClose }) => {
                 <div className="filterPanel-Close-Button-div">
                     <Button
                         className="filterPanel-Close-Button"
-                        onClick={onClose}
+                        onClick={TransitionProps}
                     >
                         Close
                     </Button>
@@ -53,8 +51,9 @@ const FilterPanel = ({ mainFilter, open, onClose }) => {
             </List>
 
             <Stack spacing={1} derection="row" className="FilterPanel-Stack">
-                <Button variant="outline-primary" 
-                onClick={() => resetFilter()}>reset</Button>
+                <Button variant="outline-primary" onClick={() => resetFilter()}>
+                    reset
+                </Button>
                 <Button type="submit">apply</Button>
             </Stack>
         </Box>

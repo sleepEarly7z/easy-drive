@@ -13,19 +13,19 @@
 .SignUpRedirect {
     font-size: 17px;
     text-align: center;
-    width:auto;
-    margin:0 auto
+    width: auto;
+    margin: 0 auto;
 }
 
 .SignInRedirectLink {
     margin-top: 15px;
-    display:inline-block;
+    display: inline-block;
     margin-right: 460px;
 }
 
 .SignUpRedirectLink {
     margin-top: 15px;
-    display:inline-block;
+    display: inline-block;
     margin-left: 460px;
 }
 
@@ -42,7 +42,7 @@
     .SignInRedirectLink {
         margin-right: 360px;
     }
-    
+
     .SignUpRedirectLink {
         margin-left: 360px;
     }
@@ -53,7 +53,7 @@
     .SignInRedirectLink {
         margin-right: 260px;
     }
-    
+
     .SignUpRedirectLink {
         margin-left: 260px;
     }
@@ -61,19 +61,17 @@
 
 /* responsive css style  */
 @media (max-width: 894px) {
-
     .SignInRedirect {
-        display:flex;
+        display: flex;
         align-items: center;
     }
     .SignInRedirectLink {
         margin-right: auto;
         width: 100%;
     }
-    
+
     .SignUpRedirectLink {
         margin-left: auto;
         width: 100%;
     }
-    
 }

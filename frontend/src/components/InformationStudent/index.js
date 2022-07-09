@@ -73,7 +73,6 @@ const InformationStudent = () => {
                                         value=""
                                         placeholder="surname"
                                         onChange={handlelast_name}
-                                    
                                     />
                                 </div>
                             </div>

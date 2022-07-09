@@ -100,7 +100,7 @@ const InformationInstructor = () => {
         }
 
         dispatch(updateInstructorAsync(instData))
-        
+
         console.log(
             first_name,
             last_name,

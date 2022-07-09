@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import '../../App.scss';
 
-.RateDisplay {
+.review-info-section {
     display: flex;
     justify-content: center;
     border-radius: 5px;
@@ -9,15 +9,14 @@
         to right bottom,
         rgba(255, 255, 255, 0.5),
         rgba(255, 255, 255, 0.3)
-      );
-    padding: 1.5rem;
-    box-shadow: 0 0 5px rgba(234, 225, 225, 0.5), 0 0 25px rgba(0, 0, 0, 0.08);
+    );
+    // padding: 1.5rem;
+    // box-shadow: 0 0 5px rgba(234, 225, 225, 0.5), 0 0 25px rgba(0, 0, 0, 0.08);
     min-width: 573px;
 }
 
 .RateDisplay-left {
     color: #000000;
-    // align-items: left;
     justify-content: center;
 
     padding-top: 20px;
@@ -26,13 +25,17 @@
     width: 350px;
 }
 
+.RateDisplay-right {
+    padding-top: 20px;
+}
+
 .ratedisplay-title {
-    font-size: 34px;
+    font-size: 30px;
     font-weight: 500;
 }
 
 .ratedisplay-average {
-    font-size: 34px;
+    font-size: 30px;
     height: 50px;
     padding-left: 70px;
     padding-top: 10px;
@@ -45,10 +48,6 @@
 
 .rdcard-bottom-space {
     height: 30px;
-}
-
-.RateDisplay-right {
-    // margin-top: 40px;
 }
 
 /* responsive css style  */
