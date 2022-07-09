@@ -45,7 +45,7 @@ const headCells = [
 
 export default function Reviews() {
     const classes = useStyles()
-    const [rating, setRating] = useState(1)
+    // const [rating, setRating] = useState(1)
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState(reviewService.getAllReviews())
     const [filterFn, setFilterFn] = useState({
