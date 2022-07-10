@@ -1,17 +1,16 @@
 import './index.scss'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
     const [rating, setRating] = useState(rate)
     const [hover, setHover] = useState(rate)
+
+    // Version 1
     const navigate = useNavigate()
 
     const handleClickSeeProfile = () => {
         navigate(`/showProfileRating/${instructorId}`)
-        // navigate(`/showProfileRating`)
-        // console.log('clicked see profile')
-        // console.log(instructorId)
     }
 
     return (
@@ -56,12 +55,14 @@ function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
                 </div>
             </div>
             <div className="profilecard-buttons">
-                <button
-                    className="profileButton"
-                    onClick={handleClickSeeProfile}
-                >
-                    See Profile
-                </button>
+                <Link to={`/showProfileRating/${instructorId}`}>
+                    <button
+                        className="profileButton"
+                        // onClick={handleClickSeeProfile}
+                    >
+                        See Profile
+                    </button>
+                </Link>
                 <br />
                 <button className="favouriteButton">Favourite</button>
             </div>
