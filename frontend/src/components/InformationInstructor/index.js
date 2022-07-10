@@ -81,7 +81,7 @@ const InformationInstructor = () => {
         e.preventDefault()
 
         let instData = {
-            id: '62a56dccfc13ae05bf00046a',
+            _id: '62a56dccfc13ae05bf00046a',
             first_name: first_name,
             last_name: last_name,
             email: email,
@@ -124,7 +124,7 @@ const InformationInstructor = () => {
         e.preventDefault()
 
         let instData = {
-            id: '62a56dccfc13ae05bf00046a',
+            _id: '62a56dccfc13ae05bf00046a',
             first_name: first_name,
             last_name: last_name,
             email: email,
@@ -141,7 +141,7 @@ const InformationInstructor = () => {
             country: country,
             company: company,
         }
-        dispatch(deleteInstructorAsync(instData.id))
+        dispatch(deleteInstructorAsync(instData._id))
 
         console.log('delete successfully')
 

@@ -147,6 +147,11 @@ const deleteInstructorById = (id) => {
  */
 const updateInstructorById = (id, patch) => {
     // TODO
+    return Instructor.findByIdAndUpdate(id, patch, { new: true }, (err, instructor) => {
+        if (err) return console.log(err);
+        console.log(instructor);
+    }
+    );
 }
 
 module.exports = {
