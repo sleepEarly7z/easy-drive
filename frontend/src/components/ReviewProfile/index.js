@@ -60,11 +60,6 @@ const FollowActionButton = styled.button`
 `
 
 export default function ReviewProfile({ instructor }) {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(getInstructorsAsync())
-    }, [])
 
     return (
         <div>
