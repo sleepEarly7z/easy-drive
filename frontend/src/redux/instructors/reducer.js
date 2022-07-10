@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { REQUEST_STATE } from '../utils'
 import {
     getInstructorsAsync,
-    // getInstructorAsync,
+    getInstructorByIdAsync,
     addInstructorAsync,
     updateInstructorAsync,
     deleteInstructorAsync,
@@ -12,11 +12,11 @@ import {
 } from './thunks'
 
 const INITIAL_STATE = {
-    list: [],
     filter: [],
-    // currentInstructor: {},
+    list: [],
+    viewCurrentInstructor: {},
     getInstructors: REQUEST_STATE.IDLE,
-    // getInstructor: REQUEST_STATE.IDLE,
+    getInstructorById: REQUEST_STATE.IDLE,
     addInstructor: REQUEST_STATE.IDLE,
     deleteInstructor: REQUEST_STATE.IDLE,
     updateInstructor: REQUEST_STATE.IDLE,
@@ -43,18 +43,18 @@ const instructorsSlice = createSlice({
                 state.getInstructors = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
-            // .addCase(getInstructorAsync.pending, (state) => {
-            //     state.getInstructor = REQUEST_STATE.PENDING
-            //     state.error = null
-            // })
-            // .addCase(getInstructorAsync.fulfilled, (state, action) => {
-            //     state.getInstructor = REQUEST_STATE.FULFILLED
-            //     state.currentInstructor = action.payload
-            // })
-            // .addCase(getInstructorAsync.rejected, (state, action) => {
-            //     state.getInstructor = REQUEST_STATE.REJECTED
-            //     state.error = action.error
-            // })
+            .addCase(getInstructorByIdAsync.pending, (state) => {
+                state.getInstructorById = REQUEST_STATE.PENDING
+                state.error = null
+            })
+            .addCase(getInstructorByIdAsync.fulfilled, (state, action) => {
+                state.getInstructorById = REQUEST_STATE.FULFILLED
+                state.viewCurrentInstructor = action.payload.data
+            })
+            .addCase(getInstructorByIdAsync.rejected, (state, action) => {
+                state.getInstructorById = REQUEST_STATE.REJECTED
+                state.error = action.error
+            })
             .addCase(addInstructorAsync.pending, (state) => {
                 state.addInstructor = REQUEST_STATE.PENDING
                 state.error = null

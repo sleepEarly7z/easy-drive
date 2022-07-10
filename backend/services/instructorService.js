@@ -79,13 +79,13 @@ const Instructor = mongoose.model('Instructor', instructorSchema);
  * 
  * @returns {Array} a list of all instructors stored in BD
  */
-const getInstructors = () => {
-    try {
-        return Instructor.find({});
-    } catch (error) {
-        throw { type: 'DB', message: error }
-    }
-}
+const getInstructors = async () => {
+	try {
+		return Instructor.find({});
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
 /**
  * Get an instructor with given id from database
