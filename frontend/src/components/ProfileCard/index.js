@@ -1,8 +1,12 @@
 import './index.scss'
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { getInstructorByIdAsync } from '../../redux/instructors/thunks'
 
 function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
+    const dispatch = useDispatch()
+
     const [rating, setRating] = useState(rate)
     const [hover, setHover] = useState(rate)
 
@@ -10,6 +14,7 @@ function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
     const navigate = useNavigate()
 
     const handleClickSeeProfile = () => {
+        dispatch(getInstructorByIdAsync(instructorId))
         navigate(`/showProfileRating/${instructorId}`)
     }
 
@@ -55,14 +60,14 @@ function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
                 </div>
             </div>
             <div className="profilecard-buttons">
-                <Link to={`/showProfileRating/${instructorId}`}>
-                    <button
-                        className="profileButton"
-                        // onClick={handleClickSeeProfile}
-                    >
-                        See Profile
-                    </button>
-                </Link>
+                {/* <Link to={`/showProfileRating/${instructorId}`}> */}
+                <button
+                    className="profileButton"
+                    onClick={handleClickSeeProfile}
+                >
+                    See Profile
+                </button>
+                {/* </Link> */}
                 <br />
                 <button className="favouriteButton">Favourite</button>
             </div>

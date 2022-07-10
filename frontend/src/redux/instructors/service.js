@@ -9,7 +9,7 @@ const getInstructorById = async (id) => {
     const response = await fetch('http://localhost:3001/instructors/' + id, {
         method: 'GET',
     })
-    console.log('getInstructorById(): ' + response.json())
+    console.log('response: ' + response)
     return response.json()
 }
 
