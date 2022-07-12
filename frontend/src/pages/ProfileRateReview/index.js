@@ -7,7 +7,6 @@ import { getInstructorByIdAsync } from '../../redux/instructors/thunks'
 
 const ProfileRateReview = () => {
     const dispatch = useDispatch()
-
     const params = useParams()
 
     useEffect(() => {
@@ -17,13 +16,6 @@ const ProfileRateReview = () => {
     const currentInstructor = useSelector(
         (state) => state.instructors.viewCurrentInstructor,
     )
-
-    // if (currentInstructor._id === undefined) {
-    //     console.log('id not exist')
-    //     dispatch(getInstructorByIdAsync(params.instructorId))
-    // }
-
-    console.log(currentInstructor)
 
     return (
         <>

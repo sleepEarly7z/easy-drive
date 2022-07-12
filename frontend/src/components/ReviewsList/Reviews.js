@@ -43,9 +43,8 @@ const headCells = [
     // { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
-export default function Reviews() {
+export default function Reviews({ instructorId }) {
     const classes = useStyles()
-    // const [rating, setRating] = useState(1)
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState(reviewService.getAllReviews())
     const [filterFn, setFilterFn] = useState({
@@ -133,7 +132,9 @@ export default function Reviews() {
                     <TableBody>
                         {recordsAfterPagingAndSorting().map((item) => (
                             <TableRow key={item.id}>
-                                <TableCell width={200}>{item.fullName}</TableCell>
+                                <TableCell width={200}>
+                                    {item.fullName}
+                                </TableCell>
                                 {/* <TableCell>
 										{item.email}
 									</TableCell> */}

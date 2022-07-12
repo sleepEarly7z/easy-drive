@@ -103,7 +103,7 @@ const EditingOptionsSelector = ({ options, onOptionsChange }) => (
     </StyledDiv>
 )
 
-const CalendarSchedular = ({ page }) => {
+const CalendarSchedular = ({ page, instructorId }) => {
     const [data, setData] = React.useState(appointments)
     const [editingOptions, setEditingOptions] = React.useState({
         allowAdding: true,
@@ -218,7 +218,14 @@ const CalendarSchedular = ({ page }) => {
                     onOptionsChange={handleEditingOptionsChange}
                 />
             )}
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5px', marginBottom: '10px' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '5px',
+                    marginBottom: '10px',
+                }}
+            >
                 <div
                     style={{
                         fontSize: '18px',

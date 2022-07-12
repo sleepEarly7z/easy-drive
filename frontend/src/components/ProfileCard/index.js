@@ -2,7 +2,6 @@ import './index.scss'
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { getInstructorByIdAsync } from '../../redux/instructors/thunks'
 
 function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
     const dispatch = useDispatch()
@@ -10,7 +9,6 @@ function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
     const [rating, setRating] = useState(rate)
     const [hover, setHover] = useState(rate)
 
-    // Version 1
     const navigate = useNavigate()
 
     const handleClickSeeProfile = () => {
@@ -48,9 +46,9 @@ function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
                                         ? 'starOn'
                                         : 'starOff'
                                 }
-                            // onClick={() => setRating(index)}
-                            // onMouseEnter={() => setHover(index)}
-                            // onMouseLeave={() => setHover(rating)}
+                                // onClick={() => setRating(index)}
+                                // onMouseEnter={() => setHover(index)}
+                                // onMouseLeave={() => setHover(rating)}
                             >
                                 <span className="star">&#9733;</span>
                             </button>
@@ -59,14 +57,12 @@ function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
                 </div>
             </div>
             <div className="profilecard-buttons">
-                {/* <Link to={`/showProfileRating/${instructorId}`}> */}
                 <button
                     className="profileButton"
                     onClick={handleClickSeeProfile}
                 >
                     See Profile
                 </button>
-                {/* </Link> */}
                 <br />
                 <button className="favouriteButton">Favourite</button>
             </div>

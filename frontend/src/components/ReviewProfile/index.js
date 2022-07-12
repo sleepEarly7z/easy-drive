@@ -2,7 +2,7 @@ import './index.scss'
 import React from 'react'
 import { NavLink } from 'react-bootstrap'
 import styled from 'styled-components'
-import RateDisplay from '../RateDisplay'
+import RateDisplay from '../ReviewRating/ReviewRating'
 import CalendarSchedular from '../Calendar/CalendarSchedular'
 import {
     AiFillMail,
@@ -13,11 +13,7 @@ import {
     AiTwotoneSchedule,
 } from 'react-icons/ai'
 
-import { useEffect, useState } from 'react'
-
-import { getInstructorsAsync } from '../../redux/instructors/thunks'
-import { useDispatch, useSelector } from 'react-redux'
-import Reviews from '../Reviews/Reviews'
+import Reviews from '../ReviewsList/Reviews'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -60,7 +56,6 @@ const FollowActionButton = styled.button`
 `
 
 export default function ReviewProfile({ instructor }) {
-
     return (
         <div>
             <div className="ReviewProfile">
@@ -261,7 +256,7 @@ export default function ReviewProfile({ instructor }) {
                             chedule Preview
                         </div>
                     </div>
-                    <CalendarSchedular page="reviewpage" />
+                    <CalendarSchedular page="reviewpage" instructorId={instructor._id} />
 
                     {/* line breaker */}
                     <div
@@ -317,7 +312,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews />
+                        <Reviews instructorId={instructor._id} />
                     </div>
                 </div>
             </div>

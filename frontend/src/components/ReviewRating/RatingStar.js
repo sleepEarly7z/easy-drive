@@ -2,8 +2,7 @@ import React from 'react'
 import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid'
 
-// TODO
-function RatingStar({ average }) {
+const RatingStar = ({ average }) => {
     return (
         <div className="RatingStar">
             <div className="rating-star">

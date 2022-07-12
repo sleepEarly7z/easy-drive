@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Styled from 'styled-components'
-import './index.scss'
 
 const Container = Styled.div`
   progress {
