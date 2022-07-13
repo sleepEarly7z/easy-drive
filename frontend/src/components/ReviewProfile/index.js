@@ -256,7 +256,10 @@ export default function ReviewProfile({ instructor }) {
                             chedule Preview
                         </div>
                     </div>
-                    <CalendarSchedular page="reviewpage" instructorId={instructor._id} />
+                    <CalendarSchedular
+                        page="reviewpage"
+                        instructorId={instructor._id}
+                    />
 
                     {/* line breaker */}
                     <div

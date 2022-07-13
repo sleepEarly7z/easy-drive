@@ -57,12 +57,14 @@ function ProfileCard({ name, location, years, rate, imgSrc, instructorId }) {
                 </div>
             </div>
             <div className="profilecard-buttons">
+                {/* <Link to={`/showProfileRating/${instructorId}`}> */}
                 <button
                     className="profileButton"
                     onClick={handleClickSeeProfile}
                 >
                     See Profile
                 </button>
+                {/* </Link> */}
                 <br />
                 <button className="favouriteButton">Favourite</button>
             </div>
