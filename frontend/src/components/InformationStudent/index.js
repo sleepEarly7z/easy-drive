@@ -1,7 +1,44 @@
 import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 const InformationStudent = () => {
+    const dispatch = useDispatch()
+
+    const [first_name, setfirst_name] = useState('')
+    const [last_name, setlast_name] = useState('')
+    const [email, setemail] = useState('')
+    const [phone, setphone] = useState('')
+    const [street, setstreet] = useState('')
+    const [city, setcity] = useState('')
+    const [province, setprovince] = useState('')
+    const [country, setcountry] = useState('')
+
+    const handlefirst_name = (e) => {
+        setfirst_name(e.target.value)
+    }
+    const handlelast_name = (e) => {
+        setlast_name(e.target.value)
+    }
+    const handleemail = (e) => {
+        setemail(e.target.value)
+    }
+    const handlephone = (e) => {
+        setphone(e.target.value)
+    }
+    const handlestreet = (e) => {
+        setstreet(e.target.value)
+    }
+    const handlecity = (e) => {
+        setcity(e.target.value)
+    }
+    const handleprovince = (e) => {
+        setprovince(e.target.value)
+    }
+    const handlecountry = (e) => {
+        setcountry(e.target.value)
+    }
     const handleOnchange = (e) => {
         console.log(e.target.value)
     }
@@ -19,23 +56,23 @@ const InformationStudent = () => {
                             </div>
                             <div className="row mt-2">
                                 <div className="col-md-6">
-                                    <label className="labels">Name</label>
+                                    <label className="labels">First Name</label>
                                     <input
                                         type="text"
                                         className="form-control"
                                         placeholder="first name"
-                                        value=""
-                                        onChange={handleOnchange}
+                                        value= ""
+                                        onChange={handlefirst_name}
                                     />
                                 </div>
                                 <div className="col-md-6">
-                                    <label className="labels">Surname</label>
+                                    <label className="labels">Last Name</label>
                                     <input
                                         type="text"
                                         className="form-control"
                                         value=""
                                         placeholder="surname"
-                                        onChange={handleOnchange}
+                                        onChange={handlelast_name}
                                     />
                                 </div>
                             </div>
@@ -49,41 +86,31 @@ const InformationStudent = () => {
                                         className="form-control"
                                         placeholder="enter phone number"
                                         value=""
-                                        onChange={handleOnchange}
+                                        onChange={handlephone}
                                     />
                                 </div>
                                 <div className="col-md-12">
                                     <label className="labels">
-                                        Address Line 1
+                                        Street
                                     </label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="enter address line 1"
+                                        placeholder="enter street"
                                         value=""
-                                        onChange={handleOnchange}
+                                        onChange={handlestreet}
                                     />
                                 </div>
                                 <div className="col-md-12">
                                     <label className="labels">
-                                        Address Line 2
+                                        City
                                     </label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="enter address line 2"
+                                        placeholder="enter city"
                                         value=""
-                                        onChange={handleOnchange}
-                                    />
-                                </div>
-                                <div className="col-md-12">
-                                    <label className="labels">Postcode</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="enter address line 2"
-                                        value=""
-                                        onChange={handleOnchange}
+                                        onChange={handlecity}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -91,9 +118,19 @@ const InformationStudent = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="enter address line 2"
+                                        placeholder="enter Province"
                                         value=""
-                                        onChange={handleOnchange}
+                                        onChange={handleprovince}
+                                    />
+                                </div>
+                                <div className="col-md-12">
+                                    <label className="labels">Country</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="enter country"
+                                        value=""
+                                        onChange={handlecountry}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -113,7 +150,7 @@ const InformationStudent = () => {
                                         className="form-control"
                                         placeholder="enter email id"
                                         value=""
-                                        onChange={handleOnchange}
+                                        onChange={handleemail}
                                     />
                                 </div>
                             </div>
