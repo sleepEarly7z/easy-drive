@@ -208,8 +208,8 @@ const deleteInstructorById = (id) => {
  * @returns {object} instructor updated
  */
 const updateInstructorById = (id, patch) => {
-	// TODO
-};
+    return null;
+}
 
 // Generate Token
 // https://jwt.io/

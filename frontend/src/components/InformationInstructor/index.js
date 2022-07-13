@@ -15,21 +15,27 @@ const InformationInstructor = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const [fname, setFname] = useState('')
-    const [lname, setLname] = useState('')
+    const [first_name, setfirst_name] = useState('')
+    const [last_name, setlast_name] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
+    const [gender, setgender] = useState('')
     const [street, setStreet] = useState('')
     const [city, setCity] = useState('')
     const [province, setProvince] = useState('')
+    const [country, setcountry] = useState('')
+    const [company, setCompany] = useState('')
     const [language, setLanguage] = useState('')
     const [experience, setExperience] = useState('')
+    const [license, setLicense] = useState('')
+    const [description, setDescription] = useState('')
+    const [isCarProvided, setIsCarProvided] = useState(false)
 
-    const handleFname = (e) => {
-        setFname(e.target.value)
+    const handlefirst_name = (e) => {
+        setfirst_name(e.target.value)
     }
-    const handleLname = (e) => {
-        setLname(e.target.value)
+    const handlelast_name = (e) => {
+        setlast_name(e.target.value)
     }
     const handleEmail = (e) => {
         setEmail(e.target.value)
@@ -52,35 +58,63 @@ const InformationInstructor = () => {
     const handleExperience = (e) => {
         setExperience(e.target.value)
     }
+    const handleLicense = (e) => {
+        setLicense(e.target.value)
+    }
+    const handleDescription = (e) => {
+        setDescription(e.target.value)
+    }
+    const handleIsCarProvided = (e) => {
+        setIsCarProvided(e.target.checked)
+    }
+    const handleCompany = (e) => {
+        setCompany(e.target.value)
+    }
+    const handleCountry = (e) => {
+        setcountry(e.target.value)
+    }
+    const handleGender = (e) => {
+        setgender(e.target.value)
+    }
 
     const handleSave = (e) => {
         e.preventDefault()
 
         let instData = {
-            id: '62a56dccfc13ae05bf00046a',
-            fname: fname,
-            lname: lname,
+            _id: '62a56dccfc13ae05bf00046a',
+            first_name: first_name,
+            last_name: last_name,
             email: email,
+            gender: gender,
             phone: phone,
             street: street,
             city: city,
+            country: country,
+            company: company,
             province: province,
             language: language,
             experience: experience,
+            license: license,
+            description: description,
+            isCarProvided: isCarProvided,
         }
 
         dispatch(updateInstructorAsync(instData))
 
         console.log(
-            fname,
-            lname,
+            first_name,
+            last_name,
             email,
+            gender,
             phone,
             street,
             city,
             province,
             language,
             experience,
+            license,
+            description,
+            isCarProvided,
         )
 
         toast.success('Save the changes successfully.')
@@ -90,18 +124,24 @@ const InformationInstructor = () => {
         e.preventDefault()
 
         let instData = {
-            id: '62a56dccfc13ae05bf00046a',
-            fname: fname,
-            lname: lname,
+            _id: '62a56dccfc13ae05bf00046a',
+            first_name: first_name,
+            last_name: last_name,
             email: email,
             phone: phone,
+            gender: gender,
             street: street,
             city: city,
             province: province,
             language: language,
             experience: experience,
+            license: license,
+            description: description,
+            isCarProvided: isCarProvided,
+            country: country,
+            company: company,
         }
-        dispatch(deleteInstructorAsync(instData.id))
+        dispatch(deleteInstructorAsync(instData._id))
 
         console.log('delete successfully')
 
@@ -125,12 +165,12 @@ const InformationInstructor = () => {
                             </div>
                             <div className="row mt-2">
                                 <div className="col-md-6">
-                                    <label className="labels">Name</label>
+                                    <label className="labels">First Name</label>
                                     <input
                                         type="text"
                                         className="form-control"
                                         placeholder={'first name'}
-                                        onChange={handleFname}
+                                        onChange={handlefirst_name}
                                     />
                                 </div>
                                 <div className="col-md-6">
@@ -139,7 +179,7 @@ const InformationInstructor = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="last name"
-                                        onChange={handleLname}
+                                        onChange={handlelast_name}
                                     />
                                 </div>
                             </div>
@@ -153,6 +193,26 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="enter phone number"
                                         onChange={handlePhone}
+                                    />
+                                </div>
+                                <div className="col-md-12">
+                                    <label className="labels">
+                                        Gender
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="enter gender"
+                                        onChange={handleGender}
+                                    />
+                                </div>
+                                <div className="col-md-12">
+                                    <label className="labels">Email ID</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="enter email id"
+                                        onChange={handleEmail}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -174,20 +234,21 @@ const InformationInstructor = () => {
                                     />
                                 </div>
                                 <div className="col-md-12">
-                                    <label className="labels">Postcode</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Postcode"
-                                    />
-                                </div>
-                                <div className="col-md-12">
                                     <label className="labels">Province</label>
                                     <input
                                         type="text"
                                         className="form-control"
                                         placeholder="Province"
                                         onChange={handleProvince}
+                                    />
+                                </div>
+                                <div className="col-md-12">
+                                    <label className="labels">Country</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Country"
+                                        onChange={handleCountry}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -200,16 +261,16 @@ const InformationInstructor = () => {
                                     />
                                 </div>
                                 <div className="col-md-12">
-                                    <label className="labels">Email ID</label>
+                                    <label className="labels">Company</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="enter email id"
-                                        onChange={handleEmail}
+                                        placeholder="Company"
+                                        onChange={handleCompany}
                                     />
                                 </div>
                             </div>
-                            <div className="row mt-3">
+                            {/* <div className="row mt-3">
                                 <div className="col-md-6">
                                     <label className="labels">
                                         Car Provided
@@ -230,7 +291,7 @@ const InformationInstructor = () => {
                                         placeholder="state"
                                     />
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="mt-5 text-center">
                                 <button
                                     className="btn btn-primary profile-button me-5"
@@ -272,11 +333,31 @@ const InformationInstructor = () => {
                             </div>{' '}
                             <br />
                             <div className="col-md-12">
-                                <label className="labels">className5/7</label>
+                                <label className="labels">License</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    placeholder="additional details"
+                                    placeholder="License"
+                                    onChange={handleLicense}
+                                />
+                            </div>
+                            <br />
+                            <div className="col-md-12">
+                                <label className="labels">Description</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Description"
+                                    onChange={handleDescription}
+                                />
+                            </div>
+                            <br />
+                            <div className="col-md-12">
+                                <label className="labels">Car Provided</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Car Provided"
                                 />
                             </div>
                         </div>
