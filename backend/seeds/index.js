@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
-const { Instructor } = require('../services/instructorService');
+const Instructor = require('../models/instructorModel');
+const Student = require('../models/studentModel');
+
 const { TimeSlot, Appointment } = require('../services/appointmentService');
 
-const { instructors } = require('./seedHelpers');
+const { instructors, students } = require('./seedHelpers');
 const { TIME_SLOTS } = require('../utils/constants');
 
 mongoose.connect('mongodb+srv://m001-student:m001-mongodb-basics@ezdrive.nuvqxbk.mongodb.net/?retryWrites=true&w=majority', {
@@ -29,6 +31,12 @@ const seedInstructor = async () => {
     }
 }
 
+const seedStudents = async () => {
+    for (const student of students) {
+        await new Student(student).save();
+    }
+}
+
 const seedAppointments = async () => {
     // get 10 random instructor ids
     const instructorIds = await Instructor.aggregate([
@@ -45,6 +53,7 @@ const seedAppointments = async () => {
     console.log(instructorIds);
 
     for (const id of instructorIds) {
+        console.log(id);
 
         const sampleTimeSlots = [];
         for (const slot of TIME_SLOTS) {
@@ -68,7 +77,6 @@ const seedAppointments = async () => {
         await newAppointment.save();
     }
 };
-
 
 seedAppointments().then(() => {
     mongoose.connection.close();
