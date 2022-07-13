@@ -220,7 +220,6 @@ const generateToken = (id) => {
 };
 
 module.exports = {
-	Instructor,
 	getInstructors,
 	getInstructorById,
 	addInstructor,
