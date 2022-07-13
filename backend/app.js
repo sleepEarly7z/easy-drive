@@ -8,11 +8,10 @@ const logger = require('morgan');
 const cors = require('cors');
 const connectDB = require('./config/db');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const instructorsRouter = require('./routes/instructors');
 const appointmentsRouter = require('./routes/appointments');
 const reviewsRouter = require('./routes/reviews');
+const studentsRouter = require('./routes/students');
 
 // Connect to database
 connectDB();
@@ -26,10 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/instructors', instructorsRouter);
 app.use('/appointments', appointmentsRouter);
 app.use('/reviews', reviewsRouter);
+app.use('/students', studentsRouter);
 
 module.exports = app;
