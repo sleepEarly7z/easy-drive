@@ -32,7 +32,6 @@ import {
     addInstructorAsync,
 } from '../../redux/instructors/thunks'
 
-// import CarProvided from './CarProvided'
 import Loading from '../Animation/Loading'
 
 const useStyles = makeStyles((theme) => ({
@@ -498,7 +497,6 @@ const SignUpInstructor = () => {
             // redirect after 3 seconds
             setTimeout(function () {
                 navigate('/explore')
-                // navigate('/')
             }, 3000) //run this after 3 seconds
         } else {
             if (activeStep === 0) {

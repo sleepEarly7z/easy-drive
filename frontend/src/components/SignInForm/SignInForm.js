@@ -13,12 +13,15 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { getInstructorsAsync } from '../../redux/instructors/thunks'
+import { login, reset } from '../../redux/authentication/reducer'
+
+import Loading from '../Animation/Loading'
 
 function Copyright(props) {
     return (
@@ -42,34 +45,68 @@ const theme = createTheme()
 
 const SignInForm = () => {
     const dispatch = useDispatch()
-    const list = useSelector((state) => state.instructors.list)
+    const navigate = useNavigate()
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    // const list = useSelector((state) => state.instructors.list)
 
     useEffect(() => {
         dispatch(getInstructorsAsync())
     }, [dispatch])
 
+    const { user, isError, isSuccess, message } = useSelector(
+        (state) => state.auth,
+    )
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
+
+        // Redirect when logged in
+        if (isSuccess || user) {
+            setIsLoading(true)
+            setTimeout(function () {
+                navigate('/explore')
+            }, 3000) //run this after 3 seconds
+        }
+
+        dispatch(reset())
+    }, [isError, isSuccess, user, message, navigate, dispatch])
+
     const handleSubmit = (event) => {
         event.preventDefault()
-        const data = new FormData(event.currentTarget)
-        let foundInstructor = list.find(
-            (user) => user.email === data.get('email'),
-        )
-        console.log(foundInstructor)
-        if (!foundInstructor) {
-            toast.error('Username does not exist')
-            return
+        const formInputs = new FormData(event.currentTarget)
+        console.log('formInputs: ')
+        console.log(formInputs.get('email'))
+        console.log(formInputs.get('password'))
+
+        const userData = {
+            email: formInputs.get('email'),
+            password: formInputs.get('password'),
         }
-        if (foundInstructor.password !== data.get('password')) {
-            toast.error('Invalid combination of username and password')
-            return
-        }
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        })
+
+        // let foundInstructor = list.find(
+        //     (user) => user.email === formInputs.get('email'),
+        // )
+
+        // console.log(foundInstructor)
+        // if (!foundInstructor) {
+        //     toast.error('Username does not exist')
+        //     return
+        // }
+        // if (foundInstructor.password !== formInputs.get('password')) {
+        //     toast.error('Invalid combination of username and password')
+        //     return
+        // }
+        console.log(userData)
+        dispatch(login(userData))
     }
 
-    return (
+    return isLoading ? (
+        <Loading />
+    ) : (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />

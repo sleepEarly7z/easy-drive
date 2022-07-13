@@ -1,12 +1,33 @@
-import React, { useState } from 'react'
 import './index.scss'
-import { GiHamburgerMenu } from 'react-icons/gi'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { GiHamburgerMenu } from 'react-icons/gi'
+
+import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
+
+import { logout, reset } from '../../redux/authentication/reducer'
 
 const Navbar = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { user } = useSelector((state) => state.auth)
+
     const [showMediaIcons, setShowMediaIcons] = useState(false)
+
+    const onLogout = () => {
+        dispatch(logout())
+        dispatch(reset())
+        navigate('/explore')
+    }
+
+    const onLogin = () => {
+        navigate('/sign-in')
+    }
+
     return (
         <>
             <nav className="navbar-main-nav">
@@ -75,23 +96,57 @@ const Navbar = () => {
                                 About
                             </NavLink>
                         </li>
-                        <li className="profile-icon-link">
-                            <NavLink to="/sign-in">
-                                <FontAwesomeIcon
-                                    icon={faUser}
-                                    color="#f4ca59"
-                                    fontSize="38px"
-                                />
-                            </NavLink>
-                        </li>
-                        <li className="navbar-list-itm-signin">
-                            <NavLink
-                                to="/sign-in"
-                                style={{ textDecoration: 'none' }}
-                            >
-                                Sign In
-                            </NavLink>
-                        </li>
+
+                        {user ? (
+                            <li className="navbar-list-itm">
+                                <button
+                                    className="d-flex btn"
+                                    onClick={onLogout}
+                                >
+                                    <FaSignOutAlt
+                                        color="#f4ca59"
+                                        fontSize="28px"
+                                    />
+                                    <div className="navbar-list-itm-text">
+                                        Logout
+                                    </div>
+                                </button>
+                            </li>
+                        ) : (
+                            <>
+                                <li className="profile-icon-link">
+                                    <NavLink to="/sign-in">
+                                        <FontAwesomeIcon
+                                            icon={faUser}
+                                            color="#f4ca59"
+                                            fontSize="38px"
+                                        />
+                                    </NavLink>
+                                </li>
+                                <li className="navbar-list-itm">
+                                    <button
+                                        className="d-flex btn"
+                                        onClick={onLogin}
+                                    >
+                                        <FaSignInAlt
+                                            color="#f4ca59"
+                                            fontSize="28px"
+                                        />
+                                        <div className="navbar-list-itm-text">
+                                            Login
+                                        </div>
+                                    </button>
+                                </li>
+                                <li className="navbar-list-itm-signin">
+                                    <NavLink
+                                        to="/sign-in"
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        Sign In
+                                    </NavLink>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </div>
 
