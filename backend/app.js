@@ -1,9 +1,13 @@
 const express = require('express');
+const colors = require('colors');
+const dotenv = require('dotenv').config();
+const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+const connectDB = require('./config/db');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -11,16 +15,10 @@ const instructorsRouter = require('./routes/instructors');
 const appointmentsRouter = require('./routes/appointments');
 const reviewsRouter = require('./routes/reviews');
 
-const app = express();
+// Connect to database
+connectDB();
 
-mongoose.connect('mongodb+srv://m001-student:m001-mongodb-basics@ezdrive.nuvqxbk.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log("MongoDB connection open")
-    })
-    .catch(err => {
-        console.log("OH NO MONGO CONNECTION ERROR!!!!")
-        console.log(err)
-    })
+const app = express();
 
 app.use(cors());
 app.use(logger('dev'));
