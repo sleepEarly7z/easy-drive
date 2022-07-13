@@ -118,12 +118,13 @@ router.delete('/:id', function (req, res) {
 // UPDATE
 router.patch('/:id', function (req, res, next) {
 	const id = req.params.id;
+	console.log("instrucot route 121")
 	const instructor = service.getInstructorById(id);
 
 	if (!instructor) {
 		return res.status(404).send(`instructor ${id} not found`);
 	}
-
+	console.log("instrucot route 127")
 	const instructorUpdated = service.updateInstructorById(id, req.body);
 
 	(instructorUpdated)
