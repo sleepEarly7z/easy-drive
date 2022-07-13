@@ -100,6 +100,230 @@ const instructors = [{ "first_name": "Minerva", "last_name": "Brimfield", "passw
 { "first_name": "Bianca", "last_name": "Bulcock", "password": "6LtcIhCc0LV", "email": "bbulcock2q@businesswire.com", "phone": "318-854-4468", "gender": "Genderfluid", "photo": "http://dummyimage.com/101x100.png/ff4444/ffffff", "rating": 2.4, "street": "53 Eggendart Junction", "city": "Osoyoos", "country": "Canada", "province": "British Columbia", "company": "Watsica-O'Reilly", "language": "Tetum", "experience": 22, "license": "Class 4", "description": "proin risus praesent lectus vestibulum quam sapien varius ut blandit non interdum", "isCarProvided": true },
 { "first_name": "Germayne", "last_name": "Teaze", "password": "FoaWDYC9ni", "email": "gteaze2r@addtoany.com", "phone": "679-254-5288", "gender": "Male", "photo": "http://dummyimage.com/160x100.png/dddddd/000000", "rating": 1.0, "street": "27530 Northridge Center", "city": "Nakusp", "country": "Canada", "province": "British Columbia", "company": "Ziemann-Bahringer", "language": "Kazakh", "experience": 5, "license": "Class 7", "description": "potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit", "isCarProvided": false }];
 
+
+const students = [{
+    "first_name": "Eleanora",
+    "last_name": "Bassford",
+    "email": "ebassford0@zimbio.com",
+    "phone": "981-384-0389",
+    "photo": "http://dummyimage.com/127x100.png/cc0000/ffffff",
+    "street": "Debs",
+    "city": "Gibsons",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "yVEvUBfHVCJr"
+}, {
+    "first_name": "Coralie",
+    "last_name": "Nears",
+    "email": "cnears1@barnesandnoble.com",
+    "phone": "834-126-6507",
+    "photo": "http://dummyimage.com/142x100.png/ff4444/ffffff",
+    "street": "Spenser",
+    "city": "Smithers",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "M8agJW"
+}, {
+    "first_name": "Evania",
+    "last_name": "Vedntyev",
+    "email": "evedntyev2@umn.edu",
+    "phone": "639-142-0856",
+    "photo": "http://dummyimage.com/101x100.png/5fa2dd/ffffff",
+    "street": "Melrose",
+    "city": "Lillooet",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "O7tah8C6yy"
+}, {
+    "first_name": "Seana",
+    "last_name": "Pauwel",
+    "email": "spauwel3@furl.net",
+    "phone": "751-817-7724",
+    "photo": "http://dummyimage.com/219x100.png/5fa2dd/ffffff",
+    "street": "Mosinee",
+    "city": "North Cowichan",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "0Z3pUTj0Zq"
+}, {
+    "first_name": "Luigi",
+    "last_name": "Crewes",
+    "email": "lcrewes4@ucsd.edu",
+    "phone": "281-167-7610",
+    "photo": "http://dummyimage.com/106x100.png/ff4444/ffffff",
+    "street": "Haas",
+    "city": "Ladner",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "3pYRqJ8B9"
+}, {
+    "first_name": "Sim",
+    "last_name": "Giacomini",
+    "email": "sgiacomini5@java.com",
+    "phone": "773-882-3857",
+    "photo": "http://dummyimage.com/112x100.png/dddddd/000000",
+    "street": "Chive",
+    "city": "Oak Bay",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "dwEERH9AAGg"
+}, {
+    "first_name": "Otto",
+    "last_name": "Silverlock",
+    "email": "osilverlock6@about.me",
+    "phone": "694-474-6055",
+    "photo": "http://dummyimage.com/198x100.png/cc0000/ffffff",
+    "street": "Brickson Park",
+    "city": "Oliver",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "cTw5X7h"
+}, {
+    "first_name": "Adina",
+    "last_name": "Bracey",
+    "email": "abracey7@facebook.com",
+    "phone": "312-767-5256",
+    "photo": "http://dummyimage.com/149x100.png/ff4444/ffffff",
+    "street": "Valley Edge",
+    "city": "Kimberley",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "UKsuZfjoY"
+}, {
+    "first_name": "Merrily",
+    "last_name": "Ellis",
+    "email": "mellis8@wikipedia.org",
+    "phone": "174-213-8255",
+    "photo": "http://dummyimage.com/167x100.png/ff4444/ffffff",
+    "street": "Mayfield",
+    "city": "Houston",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "0tXh0EdLeh"
+}, {
+    "first_name": "Lynette",
+    "last_name": "McKeighen",
+    "email": "lmckeighen9@ocn.ne.jp",
+    "phone": "465-560-9486",
+    "photo": "http://dummyimage.com/101x100.png/ff4444/ffffff",
+    "street": "Lillian",
+    "city": "Maple Ridge",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "Ix1s9J1Ob7"
+}, {
+    "first_name": "Celie",
+    "last_name": "Bestar",
+    "email": "cbestara@apple.com",
+    "phone": "608-626-5663",
+    "photo": "http://dummyimage.com/174x100.png/dddddd/000000",
+    "street": "Hoard",
+    "city": "Langford",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "aVPidCfL"
+}, {
+    "first_name": "Timothee",
+    "last_name": "Barson",
+    "email": "tbarsonb@twitter.com",
+    "phone": "522-567-0723",
+    "photo": "http://dummyimage.com/175x100.png/ff4444/ffffff",
+    "street": "Green Ridge",
+    "city": "Port Moody",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "UkmbHvg6"
+}, {
+    "first_name": "Dulciana",
+    "last_name": "Powton",
+    "email": "dpowtonc@cnn.com",
+    "phone": "172-897-3728",
+    "photo": "http://dummyimage.com/156x100.png/5fa2dd/ffffff",
+    "street": "Dexter",
+    "city": "North Vancouver",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "MgDUbh1fk"
+}, {
+    "first_name": "Maryanna",
+    "last_name": "Marquese",
+    "email": "mmarquesed@nasa.gov",
+    "phone": "876-752-7845",
+    "photo": "http://dummyimage.com/244x100.png/ff4444/ffffff",
+    "street": "Dayton",
+    "city": "Cache Creek",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "Rv5At9sNh1X"
+}, {
+    "first_name": "Yuri",
+    "last_name": "Bamfield",
+    "email": "ybamfielde@indiegogo.com",
+    "phone": "879-158-6453",
+    "photo": "http://dummyimage.com/198x100.png/ff4444/ffffff",
+    "street": "Blue Bill Park",
+    "city": "Peachland",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "bgjdHF"
+}, {
+    "first_name": "Ellwood",
+    "last_name": "Ashenhurst",
+    "email": "eashenhurstf@boston.com",
+    "phone": "377-639-7524",
+    "photo": "http://dummyimage.com/215x100.png/cc0000/ffffff",
+    "street": "Pepper Wood",
+    "city": "Nanaimo",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "hqPPqyV8"
+}, {
+    "first_name": "Ruprecht",
+    "last_name": "McOrkil",
+    "email": "rmcorkilg@wufoo.com",
+    "phone": "836-149-4474",
+    "photo": "http://dummyimage.com/238x100.png/dddddd/000000",
+    "street": "Sachtjen",
+    "city": "Ladysmith",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "gkT9q2kcLG"
+}, {
+    "first_name": "Farlie",
+    "last_name": "Krimmer",
+    "email": "fkrimmerh@360.cn",
+    "phone": "877-861-3487",
+    "photo": "http://dummyimage.com/141x100.png/5fa2dd/ffffff",
+    "street": "Miller",
+    "city": "Kelowna",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "WdPj3b"
+}, {
+    "first_name": "Fayth",
+    "last_name": "Tinsley",
+    "email": "ftinsleyi@businessweek.com",
+    "phone": "242-643-6360",
+    "photo": "http://dummyimage.com/201x100.png/dddddd/000000",
+    "street": "Milwaukee",
+    "city": "Agassiz",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "yeFRpS9eElE"
+}, {
+    "first_name": "Ron",
+    "last_name": "Faustian",
+    "email": "rfaustianj@geocities.jp",
+    "phone": "119-325-9919",
+    "photo": "http://dummyimage.com/219x100.png/ff4444/ffffff",
+    "street": "Express",
+    "city": "Whistler",
+    "province": "British Columbia",
+    "country": "Canada",
+    "password": "gpwLxKfNszSN"
+}]
+
 module.exports = {
-    instructors
+    instructors,
+    students
 }

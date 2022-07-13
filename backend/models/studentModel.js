@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 const StudentSchema = new mongoose.Schema({
     first_name: {
@@ -10,7 +11,8 @@ const StudentSchema = new mongoose.Schema({
         required: true
     },
     password: {
-        type: String
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -24,23 +26,19 @@ const StudentSchema = new mongoose.Schema({
         type: String, default: 'https://picsum.photos/200'
     },
     street: {
-        type: String,
-        required: true
+        type: String
     },
     city: {
-        type: String,
-        required: true
+        type: String
     },
     province: {
-        type: String,
-        required: true
+        type: String
     },
     country: {
-        type: String,
-        required: true
+        type: String
     },
     followedInstructors: {
-        type: [{type: Schema.Types.ObjectId, ref: 'Instructor'}]
+        type: [String]
     }
 })
 
