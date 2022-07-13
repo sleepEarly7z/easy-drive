@@ -40,7 +40,7 @@ function Copyright(props) {
 
 const theme = createTheme()
 
-export default function SignIn() {
+const SignInForm = () => {
     const dispatch = useDispatch()
     const list = useSelector((state) => state.instructors.list)
 
@@ -149,3 +149,5 @@ export default function SignIn() {
         </ThemeProvider>
     )
 }
+
+export default SignInForm

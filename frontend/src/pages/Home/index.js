@@ -1,12 +1,12 @@
 import './index.scss'
 import { useRef } from 'react'
-import ImageSlider from '../../components/MainPageSections/SectionOne/ImageSlider'
-import STTab from '../../components/MainPageSections/SectionTwo/STTab'
-import FollowInstructions from '../../components/MainPageSections/SectionTwo'
-import TopRecommended from '../../components/MainPageSections/SectionThree'
-import TopReivews from '../../components/MainPageSections/SectionFour'
-import ScrollToTop from '../../components/MainPageSections/SectionTwo/ScrollToTop'
-import OurTeam from '../../components/MainPageSections/SectionFive'
+import ImageSlider from '../../components/HomePageSections/SectionOne/ImageSlider'
+import STTab from '../../components/HomePageSections/SectionTwo/STTab'
+import FollowInstructions from '../../components/HomePageSections/SectionTwo'
+import TopRecommended from '../../components/HomePageSections/SectionThree'
+import TopReivews from '../../components/HomePageSections/SectionFour'
+import ScrollToTop from '../../components/HomePageSections/SectionTwo/ScrollToTop'
+import OurTeam from '../../components/HomePageSections/SectionFive'
 
 const Home = () => {
     const slider = useRef(null)

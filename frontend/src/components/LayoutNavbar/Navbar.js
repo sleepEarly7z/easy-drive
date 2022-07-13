@@ -45,22 +45,12 @@ const Navbar = () => {
                         </li>
                         <li className="navbar-list-itm">
                             <NavLink
-                                to="/showProfileRating/62a56dccfc13ae05bf00046a"
+                                to="/showProfileRating/62c627693211f7421b269ff5"
                                 style={{ textDecoration: 'none' }}
                             >
                                 Review
                             </NavLink>
                         </li>
-
-                        {/* <li className="navbar-list-itm">
-                            <NavLink
-                                to="/showProfileRating"
-                                style={{ textDecoration: 'none' }}
-                            >
-                                Review
-                            </NavLink>
-                        </li> */}
-
                         <li className="navbar-list-itm">
                             <NavLink
                                 to="/profile-instructor"

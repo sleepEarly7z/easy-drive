@@ -7,9 +7,14 @@ import {
     Stepper,
     Step,
     StepLabel,
+    createTheme,
+    ThemeProvider,
 } from '@material-ui/core'
 import { CssBaseline, Container, Paper, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 import {
     useForm,
@@ -27,7 +32,7 @@ import {
     addInstructorAsync,
 } from '../../redux/instructors/thunks'
 
-import CarProvided from './CarProvided'
+// import CarProvided from './CarProvided'
 import Loading from '../Animation/Loading'
 
 const useStyles = makeStyles((theme) => ({
@@ -73,6 +78,56 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 }))
+
+const theme = createTheme({
+    palette: {
+        type: 'dark',
+    },
+})
+
+const CarProvided = ({ control }) => {
+    return (
+        <ThemeProvider theme={theme}>
+            <div>
+                <section style={{ display: 'flex' }}>
+                    <div
+                        style={{
+                            fontSize: '17px',
+                            paddingTop: '9px',
+                            marginRight: '12px',
+                            paddingLeft: '5px',
+                        }}
+                    >
+                        Car Is Provided:{' '}
+                    </div>
+                    <Controller
+                        render={({ field }) => (
+                            <RadioGroup
+                                aria-label="carIsProvided"
+                                {...field}
+                                row
+                                defaultValue="true"
+                            >
+                                <FormControlLabel
+                                    value="true"
+                                    control={<Radio />}
+                                    label="True"
+                                />
+                                <FormControlLabel
+                                    value="false"
+                                    control={<Radio />}
+                                    label="False"
+                                />
+                            </RadioGroup>
+                        )}
+                        name="carIsProvided"
+                        control={control}
+                    />
+                </section>
+            </div>
+        </ThemeProvider>
+    )
+}
 
 function getSteps() {
     return [
@@ -382,7 +437,7 @@ function getStepContent(step) {
     }
 }
 
-const LinearStepper = () => {
+const SignUpInstructor = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -645,4 +700,4 @@ const LinearStepper = () => {
     )
 }
 
-export default LinearStepper
+export default SignUpInstructor

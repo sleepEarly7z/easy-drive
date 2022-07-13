@@ -1,11 +1,8 @@
-import './index.scss'
-
 const RatingSelect = ({ select, selected }) => {
     const handleChange = (e) => {
         select(+e.currentTarget.value)
     }
 
-    // NOTE: simplified with iteration
     return (
         <ul className="rating">
             {Array.from({ length: 5 }, (_, i) => (
