@@ -9,7 +9,8 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
 
-import { logout, reset } from '../../redux/authentication/reducer'
+import { reset } from '../../redux/authentication/reducer'
+import { logoutAsync } from '../../redux/authentication/thunks'
 
 const Navbar = () => {
     const navigate = useNavigate()
@@ -19,7 +20,7 @@ const Navbar = () => {
     const [showMediaIcons, setShowMediaIcons] = useState(false)
 
     const onLogout = () => {
-        dispatch(logout())
+        dispatch(logoutAsync())
         dispatch(reset())
         navigate('/explore')
     }

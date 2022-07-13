@@ -19,7 +19,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { getInstructorsAsync } from '../../redux/instructors/thunks'
-import { login, reset } from '../../redux/authentication/reducer'
+import { reset } from '../../redux/authentication/reducer'
+import { loginAsync } from '../../redux/authentication/thunks'
 
 import Loading from '../Animation/Loading'
 
@@ -101,7 +102,7 @@ const SignInForm = () => {
         //     return
         // }
         console.log(userData)
-        dispatch(login(userData))
+        dispatch(loginAsync(userData))
     }
 
     return isLoading ? (
