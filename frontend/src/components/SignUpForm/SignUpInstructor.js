@@ -518,7 +518,6 @@ const SignUpInstructor = () => {
                 })
 
             // create an account
-            // dispatch(addInstructorAsync(data))
             console.log(data)
             dispatch(registerAsync(data))
             setIsLoading(true)
