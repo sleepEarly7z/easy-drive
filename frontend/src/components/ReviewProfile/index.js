@@ -14,6 +14,7 @@ import {
 } from 'react-icons/ai'
 
 import Reviews from '../ReviewsList/Reviews'
+import RatingStar from '../ReviewRating/RatingStar'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -86,8 +87,11 @@ export default function ReviewProfile({ instructor }) {
                                 <p className="text-muted mb-1">
                                     {instructor.city}, {instructor.country}
                                 </p>
-                                <p className="text-muted mb-3">
-                                    Rating: {instructor.rating} / 5
+                                <p className="d-flex text-muted d-flex mb-3">
+                                    <RatingStar average={instructor.rating} />{' '}
+                                    <div className="rating-number">
+                                        {instructor.rating} / 5
+                                    </div>
                                 </p>
                             </div>
                         </div>
