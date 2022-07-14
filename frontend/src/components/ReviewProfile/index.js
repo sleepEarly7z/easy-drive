@@ -87,7 +87,7 @@ export default function ReviewProfile({ instructor }) {
                                     {instructor.city}, {instructor.country}
                                 </p>
                                 <p className="text-muted mb-3">
-                                    Rating: {instructor.Rating} / 5
+                                    Rating: {instructor.rating} / 5
                                 </p>
                             </div>
                         </div>

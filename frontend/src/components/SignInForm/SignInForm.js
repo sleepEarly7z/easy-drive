@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 import { useEffect, useState } from 'react'
@@ -44,11 +45,23 @@ function Copyright(props) {
 
 const theme = createTheme()
 
+const useStyles = makeStyles((theme) => ({
+    buttonRight: {
+        backgroundColor: '#f4ca59',
+        marginTop: theme.spacing(2),
+        marginRight: theme.spacing(1),
+        '&:hover': {
+            backgroundColor: '#f4ca59',
+        },
+    },
+}))
+
 const SignInForm = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const [isLoading, setIsLoading] = useState(false)
+    const classes = useStyles()
 
     // const list = useSelector((state) => state.instructors.list)
 
@@ -140,6 +153,7 @@ const SignInForm = () => {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            value="billieeasd@gmail.com"
                         />
                         <TextField
                             margin="normal"
@@ -150,6 +164,7 @@ const SignInForm = () => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            value="1asdj12"
                         />
                         <FormControlLabel
                             control={
@@ -158,6 +173,7 @@ const SignInForm = () => {
                             label="Remember me"
                         />
                         <Button
+                            className={classes.buttonRight}
                             type="submit"
                             fullWidth
                             variant="contained"
