@@ -23,7 +23,7 @@ import {
     useFormContext,
 } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import toast from 'react-hot-toast'
 import { NavLink } from 'react-router-dom'
 
@@ -31,6 +31,9 @@ import {
     getInstructorsAsync,
     addInstructorAsync,
 } from '../../redux/instructors/thunks'
+
+import { reset } from '../../redux/authentication/reducer'
+import { registerAsync } from '../../redux/authentication/thunks'
 
 import Loading from '../Animation/Loading'
 
@@ -102,7 +105,7 @@ const CarProvided = ({ control }) => {
                     <Controller
                         render={({ field }) => (
                             <RadioGroup
-                                aria-label="carIsProvided"
+                                aria-label="isCarProvided"
                                 {...field}
                                 row
                                 defaultValue="true"
@@ -119,7 +122,7 @@ const CarProvided = ({ control }) => {
                                 />
                             </RadioGroup>
                         )}
-                        name="carIsProvided"
+                        name="isCarProvided"
                         control={control}
                     />
                 </section>
@@ -191,11 +194,11 @@ const BasicForm = () => {
 
             <Controller
                 control={control}
-                name="rePassWord"
+                name="province"
                 render={({ field }) => (
                     <TextField
-                        id="re-password"
-                        label="Re-Password*"
+                        id="province"
+                        label="Province*"
                         variant="outlined"
                         placeholder="Re-enter Your Password"
                         fullWidth
@@ -372,7 +375,7 @@ const ProfessionalForm = () => {
 
             {/* <Controller
                 control={control}
-                name="carIsProvided"
+                name="isCarProvided"
                 render={({ field }) => <CarProvided control={control} />}
             /> */}
             <CarProvided control={control} />
@@ -444,23 +447,45 @@ const SignUpInstructor = () => {
         dispatch(getInstructorsAsync())
     }, [dispatch])
 
+    const { user, isError, isSuccess, message } = useSelector(
+        (state) => state.auth,
+    )
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
+
+        // Redirect when logged in
+        if (isSuccess || user) {
+            setIsLoading(true)
+            setTimeout(function () {
+                navigate('/explore')
+            }, 3000) //run this after 3 seconds
+        }
+
+        dispatch(reset())
+    }, [isError, isSuccess, user, message, navigate, dispatch])
+
     const classes = useStyles()
     const methods = useForm({
         defaultValues: {
             first_name: '',
             last_name: '',
             password: '',
-            rePassWord: '',
+            // province: '',
             email: '',
             phone: '',
+            // gender: '',
             street: '',
             city: '',
+            province: '',
             country: '',
             license: '',
             experience: '',
             company: '',
             language: '',
-            carIsProvided: '',
+            isCarProvided: '',
             description: '',
             time: '',
         },
@@ -491,8 +516,11 @@ const SignUpInstructor = () => {
                     console.log(res)
                     setActiveStep(activeStep + 1)
                 })
+
             // create an account
-            dispatch(addInstructorAsync(data))
+            // dispatch(addInstructorAsync(data))
+            console.log(data)
+            dispatch(registerAsync(data))
             setIsLoading(true)
             // redirect after 3 seconds
             setTimeout(function () {
@@ -504,7 +532,7 @@ const SignUpInstructor = () => {
                     !data.first_name ||
                     !data.last_name ||
                     !data.password ||
-                    !data.rePassWord
+                    !data.province
                 ) {
                     toast.error('Please fill the required space.')
                     return
@@ -513,10 +541,10 @@ const SignUpInstructor = () => {
                     toast.error('Passwords must be at least 8 characters long.')
                     return
                 }
-                if (data.password !== data.rePassWord) {
-                    toast.error('Re-entered password does not match.')
-                    return
-                }
+                // if (data.password !== data.province) {
+                //     toast.error('Re-entered password does not match.')
+                //     return
+                // }
             }
             if (activeStep === 1) {
                 if (
