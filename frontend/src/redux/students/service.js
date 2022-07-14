@@ -96,9 +96,6 @@ const deleteStudent = async (id) => {
 
 const followInstructor = async (instructorId) => {
     const {id} = instructorId
-    console.log(instructorId)
-    console.log(id)
-    console.log(instructorId._id)
     // const id = JSON.stringify(instructorId);
     const response = await fetch('http://localhost:3001/students/followInstructor/' + instructorId._id, {
         method: 'PATCH',

@@ -89,16 +89,18 @@ const updateStudentById = (id, patch) => {
  * 
  * @returns {object} Student's instructor follow list updated 
  */
- const followInstructorById = async (id, patch) => {
-    // TODO
-    const exampleStudentId = '62ce6616d2816a5b9eb398f2'
+ const followInstructorById = async (id) => {
+    const exampleStudentId = '62ce6616d2816a5b9eb398f2';
     try {
         await Student.findById(exampleStudentId)
         .then(student => {
-            student.followedInstructors.push(id)
-          console.log("service passed")
+            if(!student.followedInstructors.includes(id)) {
+                student.followedInstructors.push(id);
+                console.log("new instructor is followed");
+            } else {
+                console.log("this instructor already followed");
+            }
           student.save()
-          .then(()=>console.log("success"))
           .catch(err=>console.log("error"))
           
         })

@@ -60,9 +60,6 @@ const FollowActionButton = styled.button`
 export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch()
     function followInstructor(instructorID) {
-        console.log("success followed")
-        console.log(instructorID)
-        console.log(JSON.stringify(instructorID))
         let id = {
             _id: instructorID
         }
