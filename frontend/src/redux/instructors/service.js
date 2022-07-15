@@ -66,8 +66,10 @@ const addInstructor = async (data) => {
 }
 
 const updateInstructor = async (payload) => {
+    const temp = payload;
+    // console.log(temp)
     const {
-        id,
+        _id,
         first_name,
         last_name,
         password,
@@ -75,6 +77,7 @@ const updateInstructor = async (payload) => {
         phone,
         street,
         city,
+        province,
         country,
         company,
         language,
@@ -85,13 +88,14 @@ const updateInstructor = async (payload) => {
         carIsProvided,
     } = payload
     // console.log(id)
-    const response = await fetch('http://localhost:3001/instructors/' + id, {
+    // console.log(payload)
+    const response = await fetch('http://localhost:3001/instructors/' + payload._id, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            id,
+            _id,
             first_name,
             last_name,
             password,
@@ -99,6 +103,7 @@ const updateInstructor = async (payload) => {
             phone,
             street,
             city,
+            province,
             country,
             company,
             language,
@@ -109,6 +114,7 @@ const updateInstructor = async (payload) => {
             carIsProvided,
         }),
     })
+    console.log("97 service")
     return response.json()
 }
 
