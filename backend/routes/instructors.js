@@ -54,6 +54,7 @@ router.get('/:id', function (req, res) {
 
 	service.getInstructorById(id)
 		.then((instructorFound) => {
+			console.log(instructorFound);
 			res.status(200).send({ data: instructorFound });
 		})
 		.catch((error) => {
