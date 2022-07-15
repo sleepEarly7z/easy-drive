@@ -1,6 +1,6 @@
 import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -8,8 +8,11 @@ import {
     deleteInstructorAsync,
 } from '../../redux/instructors/thunks'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
+
+
 
 const InformationInstructor = () => {
     const dispatch = useDispatch()
@@ -33,6 +36,7 @@ const InformationInstructor = () => {
 
     const handlefirst_name = (e) => {
         setfirst_name(e.target.value)
+        return first_name;
     }
     const handlelast_name = (e) => {
         setlast_name(e.target.value)
@@ -77,11 +81,48 @@ const InformationInstructor = () => {
         setgender(e.target.value)
     }
 
+    useEffect(() => {
+        const sendGet = async () => {
+            const res = await axios.get('http://localhost:3001/instructors/62c627683211f7421b269ff2')
+            .then((res) =>{
+              console.log(res.data)
+              console.log(res.data.data)
+                setfirst_name(res.data.data.first_name)
+                setlast_name(res.data.data.last_name)
+            }).catch((err) => {
+              alert(err);
+            }
+            );
+            // console.log(this.state.allRecipes);
+          }
+            sendGet();
+      },[]);
+
+    const getInstructorById = async (id) => {
+        const response = await fetch(`http://localhost:5000/api/instructors/${id}`)
+        const data = await response.json()
+        setfirst_name(data.first_name)
+        setlast_name(data.last_name)
+        setEmail(data.email)
+        setPhone(data.phone)
+        setStreet(data.street)
+        setCity(data.city)
+        setProvince(data.province)
+        setcountry(data.country)
+        setCompany(data.company)
+        setLanguage(data.language)
+        setExperience(data.experience)
+        setLicense(data.license)
+        setDescription(data.description)
+        setIsCarProvided(data.isCarProvided)
+    }
+
+
     const handleSave = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
 
         let instData = {
-            _id: '62a56dccfc13ae05bf00046a',
+            _id: '62c627683211f7421b269ff2',
             first_name: first_name,
             last_name: last_name,
             email: email,
@@ -171,6 +212,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder={'first name'}
                                         onChange={handlefirst_name}
+                                        value = {first_name || setfirst_name}
                                     />
                                 </div>
                                 <div className="col-md-6">
@@ -180,6 +222,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="last name"
                                         onChange={handlelast_name}
+                                        value = {last_name || handlelast_name}
                                     />
                                 </div>
                             </div>

@@ -1,5 +1,49 @@
 const { v4: uuidv4 } = require('uuid');
-const Student = require('../models/studentModel');
+
+const mongoose = require('mongoose');
+
+const StudentSchema = new mongoose.Schema({
+    first_name: {
+        type: String,
+        required: true
+    },
+    last_name: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    photo: {
+        type: String, default: 'https://picsum.photos/200'
+    },
+    street: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    province: {
+        type: String,
+        required: true
+    },
+    country: {
+        type: String,
+        required: true
+    },
+})
+
+const Student = mongoose.model('Student', StudentSchema);
 
 /**
  * Get all Students from database
@@ -82,6 +126,7 @@ const updateStudentById = (id, patch) => {
 }
 
 module.exports = {
+    Student,
     getStudents,
     getStudentById,
     addStudent,
