@@ -81,7 +81,7 @@ const InformationInstructor = () => {
         e.preventDefault()
 
         let instData = {
-            _id: '62a56dccfc13ae05bf00046a',
+            _id: '62c627683211f7421b269ff2',
             first_name: first_name,
             last_name: last_name,
             email: email,

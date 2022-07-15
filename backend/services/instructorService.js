@@ -147,11 +147,18 @@ const deleteInstructorById = (id) => {
  */
 const updateInstructorById = (id, patch) => {
     // TODO
-    return Instructor.findByIdAndUpdate(id, patch, { new: true }, (err, instructor) => {
-        if (err) return console.log(err);
-        console.log(instructor);
-    }
-    );
+    console.log("instrucotService 150")
+    Instructor.updateOne({ _id: id }, patch, (err, instructor) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(instructor)
+        }
+    })
+    // ).then(() => {
+    //     return Instructor.findById(id);
+    // }
+    // );
 }
 
 module.exports = {
