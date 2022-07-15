@@ -14,10 +14,11 @@ import {
 } from 'react-icons/ai'
 
 import Reviews from '../ReviewsList/Reviews'
+import RatingStar from '../ReviewRating/RatingStar'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
-    padding: 10px 17px;
+    padding: 8px 19px;
     background: #f4ca59;
     color: #242327;
     cursor: pointer;
@@ -86,8 +87,11 @@ export default function ReviewProfile({ instructor }) {
                                 <p className="text-muted mb-1">
                                     {instructor.city}, {instructor.country}
                                 </p>
-                                <p className="text-muted mb-3">
-                                    Rating: {instructor.Rating} / 5
+                                <p className="d-flex text-muted d-flex mb-3">
+                                    <RatingStar average={instructor.rating} />{' '}
+                                    <div className="rating-number">
+                                        {instructor.rating} / 5
+                                    </div>
                                 </p>
                             </div>
                         </div>
@@ -102,23 +106,10 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     {/* line breaker */}
-                    <div
-                        style={{
-                            paddingTop: 20,
-                        }}
-                    ></div>
+                    <div className="line-breaker-0"></div>
 
                     <div className="review-info-section-title d-flex mt-3 mb-4">
-                        <div
-                            className="review-info-section-title-0 mr-5"
-                            style={{
-                                backgroundColor: '#ffe599',
-                                height: '80%',
-                                width: '10px',
-                                marginTop: '3px',
-                                marginRight: '6px',
-                            }}
-                        ></div>
+                        <div className="review-info-section-title-0 mr-5"></div>
                         <div className="review-info-section-title-1">A</div>
                         <div className="review-info-section-title-2">
                             bout Me
@@ -130,25 +121,10 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     {/* line breaker */}
-                    <div
-                        style={{
-                            borderTop: '2px solid #EEEEEE ',
-                            marginTop: 50,
-                            paddingTop: 20,
-                        }}
-                    ></div>
+                    <div className="line-breaker-1"></div>
 
                     <div className="review-info-section-title d-flex mt-4 mb-4">
-                        <div
-                            className="review-info-section-title-0 mr-5"
-                            style={{
-                                backgroundColor: '#ffe599',
-                                height: '80%',
-                                width: '10px',
-                                marginTop: '3px',
-                                marginRight: '6px',
-                            }}
-                        ></div>
+                        <div className="review-info-section-title-0 mr-5"></div>
                         <div className="review-info-section-title-1">B</div>
                         <div className="review-info-section-title-2">
                             asic Information
@@ -159,7 +135,7 @@ export default function ReviewProfile({ instructor }) {
                         <div className="col-12">
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <p className="review-profile-info">
-                                    <AiFillMail style={{ marginRight: '10' }} />
+                                    <AiFillMail className="review-profile-ai-icon" />
                                     Email
                                 </p>
                                 <a className="review-profile-info-res" href="/">
@@ -168,9 +144,7 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <p className="review-profile-info">
-                                    <AiFillPhone
-                                        style={{ marginRight: '10' }}
-                                    />
+                                    <AiFillPhone className="review-profile-ai-icon" />
                                     Mobile
                                 </p>
                                 <p className="review-profile-info-res">
@@ -179,18 +153,14 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <p className="review-profile-info">
-                                    <AiTwotoneBank
-                                        style={{ marginRight: '10' }}
-                                    />
+                                    <AiTwotoneBank className="review-profile-ai-icon" />
                                     Company
                                 </p>
                                 <NavLink to="/">{instructor.company}</NavLink>
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <p className="review-profile-info">
-                                    <AiOutlineHighlight
-                                        style={{ marginRight: '10' }}
-                                    />
+                                    <AiOutlineHighlight className="review-profile-ai-icon" />
                                     Languages
                                 </p>
                                 <p className="review-profile-info-res">
@@ -199,9 +169,7 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <p className="review-profile-info">
-                                    <AiTwotoneSchedule
-                                        style={{ marginRight: '10' }}
-                                    />
+                                    <AiTwotoneSchedule className="review-profile-ai-icon" />
                                     Year of Experience
                                 </p>
                                 <p className="review-profile-info-res">
@@ -210,47 +178,21 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <p className="review-profile-info">
-                                    <AiFillIdcard
-                                        style={{ marginRight: '10' }}
-                                    />
+                                    <AiFillIdcard className="review-profile-ai-icon" />
                                     Liscense
                                 </p>
                                 <p className="review-profile-info-res">
                                     {instructor.license}
                                 </p>
                             </div>
-                            {/* <div className="FollowActionButton d-flex justify-content-between py-2 px-3">
-                                <p className="review-profile-info">
-                                    <AiFillProject style={{ marginRight: "10" }} />
-                                    Description
-                                </p>
-                                <p className="review-profile-info-res">
-                                    {instructor.description}
-                                </p>
-                            </div> */}
                         </div>
                     </div>
 
                     {/* line breaker */}
-                    <div
-                        style={{
-                            borderTop: '2px solid #EEEEEE ',
-                            marginTop: 50,
-                            paddingTop: 20,
-                        }}
-                    ></div>
+                    <div className="line-breaker-1"></div>
 
                     <div className="review-info-section-title d-flex mt-4 mb-4">
-                        <div
-                            className="review-info-section-title-0 mr-5"
-                            style={{
-                                backgroundColor: '#ffe599',
-                                height: '80%',
-                                width: '10px',
-                                marginTop: '3px',
-                                marginRight: '6px',
-                            }}
-                        ></div>
+                        <div className="review-info-section-title-0 mr-5"></div>
                         <div className="review-info-section-title-1">S</div>
                         <div className="review-info-section-title-2 mb-2">
                             chedule Preview
@@ -262,25 +204,10 @@ export default function ReviewProfile({ instructor }) {
                     />
 
                     {/* line breaker */}
-                    <div
-                        style={{
-                            borderTop: '2px solid #EEEEEE ',
-                            marginTop: 50,
-                            paddingTop: 20,
-                        }}
-                    ></div>
+                    <div className="line-breaker-1"></div>
 
                     <div className="review-info-section-title d-flex mt-4 mb-4">
-                        <div
-                            className="review-info-section-title-0 mr-5"
-                            style={{
-                                backgroundColor: '#ffe599',
-                                height: '80%',
-                                width: '10px',
-                                marginTop: '3px',
-                                marginRight: '6px',
-                            }}
-                        ></div>
+                        <div className="review-info-section-title-0 mr-5"></div>
                         <div className="review-info-section-title-1">R</div>
                         <div className="review-info-section-title-2">
                             atings & Reviews
@@ -289,25 +216,10 @@ export default function ReviewProfile({ instructor }) {
                     <RateDisplay item={instructor.reviews} />
 
                     {/* line breaker */}
-                    <div
-                        style={{
-                            borderTop: '2px solid #EEEEEE ',
-                            marginTop: 50,
-                            paddingTop: 20,
-                        }}
-                    ></div>
+                    <div className="line-breaker-1"></div>
 
                     <div className="review-info-section-title d-flex mt-4 mb-4">
-                        <div
-                            className="review-info-section-title-0 mr-5"
-                            style={{
-                                backgroundColor: '#ffe599',
-                                height: '80%',
-                                width: '10px',
-                                marginTop: '3px',
-                                marginRight: '6px',
-                            }}
-                        ></div>
+                        <div className="review-info-section-title-0 mr-5"></div>
                         <div className="review-info-section-title-1">R</div>
                         <div className="review-info-section-title-2">
                             eviews

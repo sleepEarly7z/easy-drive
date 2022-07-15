@@ -1,0 +1,347 @@
+body {
+  margin: 0;
+  font-family: roboto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+  --bg:  #242526;
+  --bg-accent: #484a4d;
+  --text-color: #dadce1;
+  --text-color-1:  #d7d5d5;
+  --nav-size: 60px;
+  --icon-size: 80px;
+  --border: 1px solid #474a4d;
+  --border-radius: 8px;
+  --speed: 500ms; 
+}
+
+.navbar-nav-left,
+.navbar-nav-right,
+.icon-button-logo {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.icon-text-logo {
+    font-size: 40px;
+    font-weight: 760;
+    margin-top: 14px;
+    font-family: 'Helvetica Neue', sans-serif;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(rgb(255, 255, 221), rgb(255, 185, 111));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Top Navigation Bar */
+
+/* <nav> */
+.navbar {
+  height: 5rem;
+  background-color: var(--bg);
+  padding: 0 1rem;
+  border-bottom: var(--border);
+  display: flex;
+  justify-content:space-between;
+}
+
+/* <ul> */
+.navbar-nav-left {
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.navbar-nav-right {
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* <li> */
+.nav-item {
+  width: calc(var(--nav-size) * 2.3);
+  /* margin-top: calc(var(--nav-size) * 0.1); */
+  margin-bottom: calc(var(--nav-size) * 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-text {
+  color: var(--text-color);
+  width: var(--button-size);
+  height: var(--button-size);
+  font-size: 13px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+}
+
+/* Icon Button */
+.icon-button,
+.icon-button-home,
+.icon-button-explore,
+.icon-button-notification,
+.icon-button-message,
+.icon-button-profile,
+.icon-button-signout,
+.icon-button-signin {
+  --button-size: calc(var(--nav-size) * 0.7);
+  width: calc(var(--nav-size) * 0.7);
+  height: calc(var(--nav-size) * 0.7);
+  /* background-color: var(--bg-accent);
+  border-radius: 50%; */
+  padding: 5px;
+  margin: 2px;
+  padding-top: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+  margin-top: 20px;
+}
+
+.icon-button-home {
+  margin-left: 7px;
+}
+
+.icon-button-explore {
+  margin-left: 6px;
+}
+
+.icon-button-notification {
+  margin-left: 11px;
+}
+
+.icon-button-message {
+  margin-left: 11px;
+}
+
+.icon-button-profile {
+  margin-left: 8px;
+}
+
+.icon-button-signout {
+  margin-left: 9px;
+}
+
+.icon-button-signin {
+  margin-left: 25px;
+}
+
+.iconos {
+  --button-size: calc(var(--nav-size) * 0.7);
+  position: absolute;
+  right: 50px;
+  width: calc(var(--button-size)*0.75);
+  height: calc(var(--button-size)*0.75);
+  background-color: var(--bg-accent);
+  margin-top: 26px;
+  margin-left: 7px;
+  margin-bottom: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+}
+
+.icon-button:hover,
+.icon-button-home:hover,
+.icon-button-explore:hover,
+.icon-button-notification:hover,
+.icon-button-message:hover,
+.icon-button-profile:hover,
+.icon-button-signout:hover,
+.icon-button-signin:hover,
+.iconos:hover,
+.nav-item-btn:hover {
+  filter: brightness(1.2);
+}
+
+.icon-button svg { 
+  fill: var(--text-color-1);
+  width: 40px;
+  height: 40px;
+}
+
+.icon-button-home svg { 
+  fill: var(--text-color-1);
+  width: 40px;
+  height: 40px;
+}
+
+.icon-button-explore svg { 
+  fill: var(--text-color-1);
+  width: 40px;
+  height: 40px;
+}
+
+.icon-button-notification svg {
+  fill: var(--text-color-1);
+  width: 40px;
+  height: 40px;
+}
+
+.icon-button-message svg {
+  fill: var(--text-color-1);
+  width: 40px;
+  height: 40px;
+}
+
+.icon-button-profile svg {
+  fill: var(--text-color-1);
+  margin-top: 6px;
+  margin-bottom: 3px;
+  width: 30px;
+  height: 30px;
+}
+
+.icon-button-signout svg {
+  fill: var(--text-color-1);
+  width: 40px;
+  height: 40px;
+}
+
+
+.icon-button-signin svg {
+  fill: var(--text-color-1);
+  width: 40px;
+  height: 40px;
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: absolute;
+  top: calc(var(--nav-size)*1.15);
+  /* right: 150px; */
+  /* top: 160px; */
+  transform: translateX(-45%);
+  background-color: var(--bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow: hidden;
+  transition: height var(--speed) ease;
+  /* width: 1600px; */
+  z-index: 999;
+}
+
+.profffffile {
+  display: flex;
+  align-items: flex-end;
+  /* justify-content: center; */
+  flex-direction: row;
+  position: absolute;
+  top: 11px;
+  right: -250px;
+}
+
+.menu {
+  width: 100%;
+}
+
+.menu-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius);
+  transition: background var(--speed);
+  padding: 0.5rem;
+  color: var(--text-color);
+  text-decoration: none;;
+  width: 500px;
+}
+
+.menu-item,
+.icon-button,
+.icon-button-home,
+.icon-button-explore,
+.icon-button-notification,
+.icon-button-message,
+.icon-button-profile,
+.icon-button-signout,
+.icon-button-signin,
+.iconos,
+.nav-item-btn {
+  margin-right: 0.5rem;
+  color: var(--text-color);
+  text-decoration: none;;
+}
+
+.menu-item
+.icon-button
+.icon-button-home
+.icon-button-explore
+.icon-button-notification
+.icon-button-message
+.icon-button-profile
+.icon-button-signout
+.icon-button-signin
+.iconos
+.nav-item-btn:hover {
+  filter: none;
+}
+.menu-item:hover {
+  filter: none;
+}
+
+.menu-item:hover {
+  background-color: #525357;
+}
+
+.icon-right {
+  margin-left: auto;
+}
+
+/* CSSTransition classes  */
+.menu-primary-enter {
+  position: absolute;
+  transform: translateX(-110%);
+}
+.menu-primary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+.menu-primary-exit {
+  position: absolute;
+}
+.menu-primary-exit-active {
+  transform: translateX(-110%);
+  transition: all var(--speed) ease;
+}
+.menu-secondary-enter {
+  transform: translateX(110%);
+}
+.menu-secondary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+.menu-secondary-exit {
+
+}
+.menu-secondary-exit-active {
+  transform: translateX(110%);
+  transition: all var(--speed) ease;
+}
+
+.icon-button-img {
+  right: 100px;
+  width: 1200px;
+}

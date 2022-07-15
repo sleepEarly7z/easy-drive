@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router-dom'
-import Navbar from '../../components/LayoutNavbar/Navbar'
+
+import LayoutNavbar from '../../components/LayoutNavbar/LayoutNavbar'
 import Footer from '../../components/LayoutFooter/Footer'
-import './index.scss'
 
 const Layout = () => {
     return (
         <>
             <div className="App">
-                <Navbar />
+                <LayoutNavbar />
                 <div className="page">
                     <Outlet />
                 </div>
