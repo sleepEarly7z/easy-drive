@@ -142,6 +142,22 @@ const InformationInstructor = () => {
 
         dispatch(updateInstructorAsync(instData))
 
+        console.log(
+            first_name,
+            last_name,
+            email,
+            gender,
+            phone,
+            street,
+            city,
+            province,
+            language,
+            experience,
+            license,
+            description,
+            isCarProvided,
+        )
+
         toast.success('Save the changes successfully.')
     }
 

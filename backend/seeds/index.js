@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
 
-const { Instructor } = require('../services/instructorService');
+const Instructor = require('../models/instructorModel');
+const Student = require('../models/studentModel');
+const { Review } = require('../models/reviewModel');
+
 const { TimeSlot, Appointment } = require('../services/appointmentService');
 
-const { instructors } = require('./seedHelpers');
+const { instructors, students } = require('./seedHelpers');
 const { TIME_SLOTS } = require('../utils/constants');
 
 mongoose.connect('mongodb+srv://m001-student:m001-mongodb-basics@ezdrive.nuvqxbk.mongodb.net/?retryWrites=true&w=majority', {
@@ -19,13 +22,59 @@ db.once("open", () => {
 });
 
 const clearAll = async () => {
-    await Instructor.deleteMany({});
-    await Appointment.deleteMany({});
+    // await Instructor.deleteMany({});
+    // await Appointment.deleteMany({});
+    await Review.deleteMany({});
 }
 
 const seedInstructor = async () => {
     for (const instructor of instructors) {
         await new Instructor(instructor).save();
+    }
+}
+
+const seedStudents = async () => {
+    for (const student of students) {
+        await new Student(student).save();
+    }
+}
+
+const getNRamdonIdsFromModel = async (model, n) => {
+    const ids = await model.aggregate([
+        {
+            '$sample': {
+                'size': n
+            }
+        }, {
+            '$project': {
+                '_id': 1
+            }
+        }
+    ])
+    return ids;
+}
+
+// random 5 student add 1 review to random 5 instructors
+const seedReviews = async () => {
+    const randomStudentIds = await getNRamdonIdsFromModel(Student, 5);
+    const randomInstructorIds = await getNRamdonIdsFromModel(Instructor, 5);
+
+    const randomReviewContent = [
+        'Good instructor!',
+        'This insctrutor helped me got my N!',
+        'Super patient!'
+    ]
+
+    for (const student of randomStudentIds) {
+        for (const instructor of randomInstructorIds) {
+            const newReview = new Review({
+                instructor_id: instructor._id,
+                student_id: student._id,
+                comment_content: randomReviewContent[Math.floor(Math.random() * 2)],
+                rating: Math.floor(Math.random() * 6)
+            })
+            await newReview.save();
+        }
     }
 }
 
@@ -45,6 +94,7 @@ const seedAppointments = async () => {
     console.log(instructorIds);
 
     for (const id of instructorIds) {
+        console.log(id);
 
         const sampleTimeSlots = [];
         for (const slot of TIME_SLOTS) {
@@ -69,8 +119,7 @@ const seedAppointments = async () => {
     }
 };
 
-
-seedAppointments().then(() => {
+seedReviews().then(() => {
     mongoose.connection.close();
     console.log('MongoDB connection closed');
 })

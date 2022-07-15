@@ -55,7 +55,7 @@ const FilterCategory = (props) => {
 
     return (
         <>
-            <ListItemButton onClick={handleClick} minWidth='sm'>
+            <ListItemButton onClick={handleClick} minwidth="sm">
                 <ListItemText primary={name} />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
@@ -64,7 +64,7 @@ const FilterCategory = (props) => {
                 <List
                     sx={{
                         width: '100%',
-                        minWidth: 'sm',
+                        minwidth: 'sm',
                         bgcolor: 'background.paper',
                     }}
                 >

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import RatingSelect from '../RatingSelect'
+// import RatingSelect from '../RatingSelect'
 import RFCard from '../RCardStyle/RFCard'
 import './index.scss'
 
@@ -36,7 +36,7 @@ const ReviewForm = () => {
                 <h1 className="review-form-question">
                     How would you rate this driver instructor?
                 </h1>
-                <RatingSelect select={setRating} selected={rating} />
+                {/* <RatingSelect select={setRating} selected={rating} /> */}
                 <div className="input-group">
                     <input
                         onChange={handleTextChange}

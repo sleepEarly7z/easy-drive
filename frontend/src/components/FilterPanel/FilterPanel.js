@@ -21,7 +21,7 @@ const FilterPanel = ({ mainFilter, open, TransitionProps }) => {
         <Box
             item
             className={mainFilter ? 'FilterPanel' : 'sideFilterPanel'}
-            sx={{ p: 2, minWidth: 250 }}
+            sx={{ p: 2, minwidth: 250 }}
         >
             <List
                 sx={{

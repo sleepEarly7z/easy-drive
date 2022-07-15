@@ -6,10 +6,8 @@ import ProfileRateReview from './pages/ProfileRateReview'
 import About from './pages/About'
 import ProfileStudent from './pages/ProfileStudent'
 import ProfileInstructor from './pages/ProfileInstructor'
-// import PrivateRoute from './pages/PrivateRouter';
-import SignIn from './pages/SignIn'
-import SignUpInstructor from './pages/SignUp/SignUpInstructor'
-import SignUpStudent from './pages/SignUp/SignUpStudent'
+import SignIn from './pages/SignInUp/SignIn'
+import SignUp from './pages/SignInUp/SignUp'
 import ForgotPassword from './pages/ForgotPassword'
 import Explore from './pages/Explore'
 import { Toaster } from 'react-hot-toast'
@@ -24,32 +22,27 @@ function App() {
                         path="showProfileRating/:instructorId"
                         element={<ProfileRateReview />}
                     />
-                    {/* <Route
-                        path="showProfileRating"
-                        element={<ProfileRateReview />}
-                    /> */}
                     <Route path="explore" element={<Explore />} />
 
                     <Route path="about" element={<About />} />
 
-                    {/* <Route path='/profilestudent' element={<PrivateRoute />}> */}
                     <Route
                         path="profile-student"
                         element={<ProfileStudent />}
                     />
-                    {/* </Route> */}
-                    {/* <Route path='/profileinstructor' element={<PrivateRoute />}> */}
                     <Route
                         path="profile-instructor"
                         element={<ProfileInstructor />}
                     />
-                    {/* </Route> */}
                     <Route path="sign-in" element={<SignIn />} />
                     <Route
                         path="sign-up-instructor"
-                        element={<SignUpInstructor />}
+                        element={<SignUp role="instructor" />}
                     />
-                    <Route path="sign-up-student" element={<SignUpStudent />} />
+                    <Route
+                        path="sign-up-student"
+                        element={<SignUp role="student" />}
+                    />
                     <Route
                         path="forgot-password"
                         element={<ForgotPassword />}
