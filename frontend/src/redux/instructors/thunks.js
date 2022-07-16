@@ -13,7 +13,7 @@ export const getInstructorByIdAsync = createAsyncThunk(
     actionTypes.GET_INSTRUCTORBYID,
     async (id) => {
         const result = await InstructorService.getInstructorById(id)
-        console.log("result:" + result)
+        console.log('result:' + result)
         return await InstructorService.getInstructorById(id)
     },
 )

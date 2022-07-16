@@ -57,6 +57,7 @@ router.get('/:id', function (req, res) {
 	service
 		.getInstructorById(id)
 		.then((instructorFound) => {
+			console.log(instructorFound);
 			res.status(200).send({ data: instructorFound });
 		})
 		.catch((error) => {
@@ -158,22 +159,19 @@ router.delete('/:id', function (req, res) {
 // UPDATE
 router.patch('/:id', function (req, res, next) {
 	const id = req.params.id;
+	console.log("instrucot route 121")
 	const instructor = service.getInstructorById(id);
 
 	if (!instructor) {
 		return res.status(404).send(`instructor ${id} not found`);
 	}
-
-	const instructorUpdated = service.updateInstructorById(
-		id,
-		req.body
-	);
-
-	instructorUpdated
-		? res.status(200).send(instructorUpdated)
-		: res.status(424).send({
-				message: `failed to update instructor ${id} from database`,
-		  });
+	console.log("instrucot route 127")
+	const instructorUpdated = service.updateInstructorById(id, req.body);
+	res.status(200);
+	// console.log(instructorUpdated);
+	// (instructorUpdated)
+	// 	? res.status(200).send(instructorUpdated)
+	// 	: res.status(424).send({ message: `failed to update instructor ${id} from database`})
 });
 
 router.get('/filter', function (req, res) {

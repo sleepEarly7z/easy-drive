@@ -208,7 +208,19 @@ const deleteInstructorById = (id) => {
  * @returns {object} instructor updated
  */
 const updateInstructorById = (id, patch) => {
-    return null;
+    // TODO
+    console.log("instrucotService 150")
+    Instructor.updateOne({ _id: id }, patch, (err, instructor) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(instructor)
+        }
+    })
+    // ).then(() => {
+    //     return Instructor.findById(id);
+    // }
+    // );
 }
 
 // Generate Token

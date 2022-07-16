@@ -64,13 +64,43 @@
     margin-bottom: 5px;
 }
 
+.review-info-section-title-0 {
+    background-color: #ffe599;
+    height: 80%;
+    width: 10px;
+    margin-top: 3px;
+    margin-right: 6px;
+}
+
 .review-info-section-title-1 {
     font-size: 32px;
     font-weight: 1000;
     color: #f4ca59;
 }
+
 .review-info-section-title-2 {
     font-size: 22px;
     font-weight: 900;
     padding-top: 10px;
+}
+
+.line-breaker-1 {
+    padding-top: 20px;
+}
+
+.line-breaker-1 {
+    border-bottom: 2px solid #EEEEEE;
+    margin-top: 20px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.review-profile-ai-icon {
+    margin-right: 10px;
+}
+
+.rating-number {
+    margin-left: 5px;
+    margin-top: 2px;
 }

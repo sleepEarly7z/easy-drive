@@ -3,7 +3,6 @@ const KEYS = {
     reviewsId: 'reviewsId',
 }
 
-
 const months = [
     'January',
     'February',
@@ -19,19 +18,10 @@ const months = [
     'December',
 ]
 
-// export const getRatingCollection = () => [
-//     { id: '1', title: '5 stars' },
-//     { id: '2', title: '4 stars' },
-//     { id: '3', title: '3 stars' },
-//     { id: '4', title: '2 stars' },
-//     { id: '5', title: '1 stars' },
-// ]
-
 export const getClasstypeCollection = () => [
-    { id: '1', title: `Driver's license` },
-    { id: '2', title: 'Motorcycle license' },
-    { id: '3', title: 'Commercial license' },
-    { id: '4', title: 'Riding mopeds and scooters' },
+    { id: '1', title: `Class 5` },
+    { id: '2', title: 'Class 7' },
+    { id: '3', title: 'Class 4' },
 ]
 
 export function insertReview(data) {
@@ -40,27 +30,32 @@ export function insertReview(data) {
 
     switch (data.ratingStar) {
         case 'onestar':
-            data.rating = 1;
-            break;
+            data.rating = 1
+            break
         case 'twostars':
-            data.rating = 2;
-            break;
+            data.rating = 2
+            break
         case 'threestars':
-            data.rating = 3;
-            break;
+            data.rating = 3
+            break
         case 'fourstars':
-            data.rating = 4;
-            break;
+            data.rating = 4
+            break
         case 'fivestars':
-            data.rating = 5;
-            break;
+            data.rating = 5
+            break
         default:
-            data.rating = 1;
-            break;
+            data.rating = 1
+            break
     }
 
-    const currentDate = new Date();
-    data.reviewDate = months[currentDate.getMonth() + 1] + ' ' + currentDate.getDay() + ', ' + currentDate.getFullYear()
+    const currentDate = new Date()
+    data.reviewDate =
+        months[currentDate.getMonth() + 1] +
+        ' ' +
+        currentDate.getDay() +
+        ', ' +
+        currentDate.getFullYear()
     console.log(currentDate)
     console.log(data.reviewDate)
 
