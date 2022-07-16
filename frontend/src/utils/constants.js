@@ -32,5 +32,21 @@ export const SORT_OPTIONS = [
             sortBy: 'rating',
             sortDir: 'asc'
         }
+    },
+    {
+        label: "experience (less to more)",
+        value: "experienceAsc",
+        payload: {
+            sortBy: 'year',
+            sortDir: 'asc'
+        }
+    },
+    {
+        label: "experience (more to less)",
+        value: "experienceDesc",
+        payload: {
+            sortBy: 'year',
+            sortDir: 'desc'
+        }
     }
 ]
