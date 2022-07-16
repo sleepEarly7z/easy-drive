@@ -5,9 +5,9 @@ import { updateQueryAsync } from './thunks'
 const INITIAL_STATE = {
     resultList: [],
     query: {
-        filterBy: null,
+        filterBy: [],
         sortBy: null,
-        searchBy: null
+        searchBy: ''
     },
     updateQuery: REQUEST_STATE.IDLE,
     error: null

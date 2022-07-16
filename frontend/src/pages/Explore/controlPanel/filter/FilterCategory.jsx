@@ -9,9 +9,13 @@ import {
     Collapse,
 } from '@mui/material'
 import { ExpandLess, ExpandMore } from '@mui/icons-material'
+import { useDispatch } from 'react-redux';
+import { updateQueryAsync } from '../../../../redux/query/thunks';
 
 const FilterCategory = (props) => {
     const { category, filterBy, setFilterBy } = props;
+
+    const dispatch = useDispatch();
 
     const name = category.name
     const options = category.options
@@ -37,13 +41,16 @@ const FilterCategory = (props) => {
 
         // update filterBy
         updateFilterBy(name, newChecked);
+        const filterByCopy = JSON.parse(JSON.stringify(filterBy));
+        // TODO: setup the redux store in format of {'location': ['rmd', 'van'], 'license type':['class 4']}
+        dispatch(updateQueryAsync({ filterBy: filterByCopy }));
         console.log(filterBy);
     }
 
     const updateFilterBy = (categoryName, checkedOptions) => {
         console.log(filterBy);
         // find the categrory in the list in state and then update it
-        for (const category of filterBy) {
+        for (let category of filterBy) {
             if (category.categoryName === categoryName) {
                 category['options'] = checkedOptions;
                 return setFilterBy(filterBy);
