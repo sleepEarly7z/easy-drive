@@ -6,32 +6,29 @@ export const FILTER_CATEGORIES = [
     },
     {
         id: 2,
-        name: 'availability',
-        options: [
-            '7 a.m. to 12 p.m. ',
-            '12 p.m. to 17 p.m. ',
-            '17 p.m. to 22 p.m.',
-        ],
-    },
-    {
-        id: 3,
         name: 'language',
         options: ['English', 'French', 'Mandarin', 'Cantonese', 'Korean'],
     },
     {
-        id: 4,
+        id: 3,
         name: 'licence type',
-        options: ['class 7', 'class 5', 'class 4'],
+        options: ['Class 7', 'Class 5', 'Class 4'],
     },
 ]
 
 export const SORT_OPTIONS = [
     {
         label: "rating (high to low)",
-        value: "ratingDesc"
+        value: {
+            sortBy: 'rating',
+            sortDir: 'desc'
+        }
     },
     {
         label: "rating (low to high)",
-        value: "ratingAsc"
+        value: {
+            sortBy: 'rating',
+            sortDir: ''
+        }
     }
 ]
