@@ -1,8 +1,42 @@
-const getInstructors = async () => {
-    const response = await fetch('http://localhost:3001/instructors', {
-        method: 'GET',
-    })
-    return response.json()
+const getQueryString = (query) => {
+    if (!query) return null;
+
+    const { filterBy, sortBy } = query;
+    let params = new URLSearchParams();
+
+    if (filterBy) {
+        for (const category of filterBy) {
+            const { categoryName, options } = category;
+            for (const option of options) {
+                params.append(categoryName, option);
+            }
+        }
+    }
+
+    if (sortBy) {
+        params.append('sortBy', sortBy.sortBy);
+        params.append('sortDir', sortBy.sortDir);
+    }
+
+    return params.toString();
+};
+
+const getInstructors = async (query) => {
+    const queryString = getQueryString(query);
+    const url = (queryString)
+        ? `http://localhost:3001/instructors?${queryString}`
+        : `http://localhost:3001/instructors`;
+
+    console.log(url);
+
+    try {
+        const response = await fetch(url, {
+            method: 'GET'
+        })
+        return response.json();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const getInstructorById = async (id) => {
@@ -146,7 +180,7 @@ const getFilter = async () => {
 const updateFilter = async (id) => {
     const response = await fetch(
         'http://localhost:3001/instructors/filter' +
-            JSON.stringify(id).replaceAll('"', ''),
+        JSON.stringify(id).replaceAll('"', ''),
         {
             method: 'DELETE',
             headers: {
@@ -186,7 +220,7 @@ const sortFilter = async (condition) => {
     return data
 }
 
-export default {
+const InstructorService = {
     getInstructors,
     getInstructorById,
     addInstructor,
@@ -196,3 +230,5 @@ export default {
     updateFilter,
     sortFilter,
 }
+
+export default InstructorService;
