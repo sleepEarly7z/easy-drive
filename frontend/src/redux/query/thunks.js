@@ -3,7 +3,8 @@ import { actionTypes } from './actionTypes'
 
 export const updateQueryAsync = createAsyncThunk(
     actionTypes.UPDATE_QUERY,
-    async (query) => {
-        return query;
+    // sortBy, filterBy or searchBy
+    async (queryOption) => {
+        return queryOption;
     }
 )

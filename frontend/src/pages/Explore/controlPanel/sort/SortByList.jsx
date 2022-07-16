@@ -1,7 +1,6 @@
 import { SORT_OPTIONS } from "../../../../utils/constants";
-
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from 'react'
-
 import {
     ListSubheader,
     RadioGroup,
@@ -9,19 +8,22 @@ import {
     FormControlLabel,
     FormControl,
 } from '@mui/material'
+import { updateQueryAsync } from "../../../../redux/query/thunks";
 
 const SortByList = (props) => {
-    const { sortBy, setSortBy } = props;
+    const dispatch = useDispatch();
     const sortOptions = SORT_OPTIONS;
-
-    const [value, setValue] = useState(sortBy);
+    const [value, setValue] = useState('');
 
     const handleChange = (event) => {
-        //ui
-        setValue(event.target.value);
+        const value = event.target.value;
+        // ui radio button
+        setValue(value);
 
-        // sortBy state
-        setSortBy(event.target.value);
+        const option = sortOptions.find(option => option.value === value);
+        const sortBy = option.payload;
+        dispatch(updateQueryAsync({ sortBy }));
+
     };
 
     return (
@@ -38,7 +40,6 @@ const SortByList = (props) => {
                 {sortOptions.map(option => (
                     <FormControlLabel value={option.value} control={<Radio />} label={option.label} />
                 ))}
-
             </RadioGroup>
         </FormControl>
     );

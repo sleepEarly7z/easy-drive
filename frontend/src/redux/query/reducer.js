@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { updateQueryAsync } from './thunks'
 import { REQUEST_STATE } from '../utils'
+import { updateQueryAsync } from './thunks'
 
 const INITIAL_STATE = {
     resultList: [],
@@ -22,11 +22,11 @@ const querySlice = createSlice({
             .addCase(updateQueryAsync.pending, (state) => {
                 state.updateQuery = REQUEST_STATE.PENDING;
             })
-            .addCase(updateQueryAsync.pending, (state, action) => {
+            .addCase(updateQueryAsync.fulfilled, (state, action) => {
                 state.updateQuery = REQUEST_STATE.FULFILLED;
-                state.query = action.payload
+                state.query = { ...state.query, ...action.payload };
             })
     }
 })
 
-export default querySlice.reducer
+export default querySlice.reducer;

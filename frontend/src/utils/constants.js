@@ -19,16 +19,18 @@ export const FILTER_CATEGORIES = [
 export const SORT_OPTIONS = [
     {
         label: "rating (high to low)",
-        value: {
+        value: "ratingDesc",
+        payload: {
             sortBy: 'rating',
             sortDir: 'desc'
         }
     },
     {
         label: "rating (low to high)",
-        value: {
+        value: "ratingAsc",
+        payload: {
             sortBy: 'rating',
-            sortDir: ''
+            sortDir: 'asc'
         }
     }
 ]
