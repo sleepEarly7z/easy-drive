@@ -37,6 +37,7 @@ const FilterCategory = (props) => {
 
         // update filterBy
         updateFilterBy(name, newChecked);
+        console.log(filterBy);
     }
 
     const updateFilterBy = (categoryName, checkedOptions) => {

@@ -5,6 +5,7 @@ import { List, ListSubheader } from '@mui/material'
 
 const FilterByList = (props) => {
     const { filterBy, setFilterBy } = props;
+    // const dispatch = useDispatch();
 
     const categories = FILTER_CATEGORIES;
 
