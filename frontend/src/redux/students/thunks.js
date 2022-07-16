@@ -29,3 +29,10 @@ export const deleteStudentAsync = createAsyncThunk(
         return await StudentService.deleteStudent(id)
     }
 )
+
+export const followInstructorAsync = createAsyncThunk(
+    actionTypes.FOLLOW_INSTRUCTOR,
+    async (id) => {
+        return await StudentService.followInstructor(id);
+    }
+)
