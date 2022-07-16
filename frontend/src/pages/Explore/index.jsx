@@ -1,6 +1,6 @@
 import './index.scss'
 import Slider from '../../components/Slider'
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';

@@ -1,4 +1,4 @@
-import { Grid, Box } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getInstructorsAsync } from '../../redux/instructors/thunks';
@@ -8,15 +8,9 @@ const ResultList = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getInstructorsAsync());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
     const instructors = useSelector((state) => state.instructors.list);
-
-    // TODO modify this after implementing pagination
-    const tempInstructors = instructors.slice(0, 20);
-
-    // const recipes = useSelector(state => state.recipes.list);
-    // TODO get instructors from global redux store quried results
 
     return (
         <Grid container

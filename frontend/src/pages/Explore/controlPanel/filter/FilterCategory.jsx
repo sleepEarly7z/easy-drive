@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import { ExpandLess, ExpandMore } from '@mui/icons-material'
 import { useDispatch } from 'react-redux';
-import { updateQueryAsync } from '../../../../redux/query/thunks';
+import queryActions from '../../../../redux/query/actions';
 
 const FilterCategory = (props) => {
     const { category, filterBy, setFilterBy } = props;
@@ -43,7 +43,7 @@ const FilterCategory = (props) => {
         updateFilterBy(name, newChecked);
         const filterByCopy = JSON.parse(JSON.stringify(filterBy));
         // TODO: setup the redux store in format of {'location': ['rmd', 'van'], 'license type':['class 4']}
-        dispatch(updateQueryAsync({ filterBy: filterByCopy }));
+        dispatch(queryActions.updateQuery({ filterBy: filterByCopy }));
     }
 
     const updateFilterBy = (categoryName, checkedOptions) => {

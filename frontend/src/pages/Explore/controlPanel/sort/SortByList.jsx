@@ -8,7 +8,7 @@ import {
     FormControlLabel,
     FormControl,
 } from '@mui/material'
-import { updateQueryAsync } from "../../../../redux/query/thunks";
+import queryActions from '../../../../redux/query/actions';
 
 const SortByList = (props) => {
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const SortByList = (props) => {
         // update redux store
         const option = sortOptions.find(option => option.value === value);
         const sortBy = option.payload;
-        dispatch(updateQueryAsync({ sortBy }));
+        dispatch(queryActions.updateQuery({ sortBy }));
     };
 
     return (
