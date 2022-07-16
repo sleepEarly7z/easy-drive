@@ -7,11 +7,6 @@ import SortByList from './sort/SortByList';
 const ControlPanel = (props) => {
     const query = useSelector((state) => (state.query));
 
-    const {
-        filterBy, setFilterBy,
-        sortBy, setSortBy
-    } = props;
-
     return (
         <Box
             sx={{
@@ -23,17 +18,13 @@ const ControlPanel = (props) => {
             }}
         >
 
-            <FilterByList
-                filterBy={filterBy}
-                setFilterBy={setFilterBy} />
+            <FilterByList />
 
-            <SortByList
-                sortBy={sortBy}
-                setSortBy={setSortBy} />
+            <SortByList />
 
             <Box sx={{ p: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: 1 }}>
                 <Button variant="outline-primary">reset</Button>
-                <Button onClick={() => { console.log(query); console.log(sortBy); console.log(filterBy) }}>apply</Button>
+                <Button onClick={() => { }}>apply</Button>
             </Box>
         </Box>
     )

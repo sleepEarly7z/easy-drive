@@ -44,11 +44,9 @@ const FilterCategory = (props) => {
         const filterByCopy = JSON.parse(JSON.stringify(filterBy));
         // TODO: setup the redux store in format of {'location': ['rmd', 'van'], 'license type':['class 4']}
         dispatch(updateQueryAsync({ filterBy: filterByCopy }));
-        console.log(filterBy);
     }
 
     const updateFilterBy = (categoryName, checkedOptions) => {
-        console.log(filterBy);
         // find the categrory in the list in state and then update it
         for (let category of filterBy) {
             if (category.categoryName === categoryName) {

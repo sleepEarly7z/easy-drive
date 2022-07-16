@@ -1,8 +1,16 @@
 import { Grid, Box } from "@mui/material";
-import ProfileCard from "../../components/ProfileCard";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { getInstructorsAsync } from '../../redux/instructors/thunks';
 import NewProfileCard from './ProfileCard';
+
 const ResultList = (props) => {
-    const { instructors } = props;
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getInstructorsAsync());
+    }, []);
+
+    const instructors = useSelector((state) => state.instructors.list);
 
     // TODO modify this after implementing pagination
     const tempInstructors = instructors.slice(0, 20);

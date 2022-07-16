@@ -2,10 +2,10 @@ import React from 'react'
 import { FILTER_CATEGORIES } from '../../../../utils/constants';
 import FilterCategory from './FilterCategory'
 import { List, ListSubheader } from '@mui/material'
+import { useState } from 'react';
 
 const FilterByList = (props) => {
-    const { filterBy, setFilterBy } = props;
-    // const dispatch = useDispatch();
+    const [filterBy, setFilterBy] = useState([]);
 
     const categories = FILTER_CATEGORIES;
 

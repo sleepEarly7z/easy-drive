@@ -37,7 +37,7 @@ const SortByList = (props) => {
                 onChange={handleChange}
             >
                 {sortOptions.map(option => (
-                    <FormControlLabel value={option.value} control={<Radio />} label={option.label} />
+                    <FormControlLabel key={option.value} value={option.value} control={<Radio />} label={option.label} />
                 ))}
             </RadioGroup>
         </FormControl>
