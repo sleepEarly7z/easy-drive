@@ -15,6 +15,7 @@ import {
 
 import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
+import { useSelector } from 'react-redux'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -57,6 +58,8 @@ const FollowActionButton = styled.button`
 `
 
 export default function ReviewProfile({ instructor }) {
+    // const { user } = useSelector((state) => state.auth)
+    // console.log(user)
     return (
         <div>
             <div className="ReviewProfile">
