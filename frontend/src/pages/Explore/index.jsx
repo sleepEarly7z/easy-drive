@@ -3,6 +3,7 @@ import Slider from '../../components/Slider'
 import React, { useState, useEffect } from 'react';
 
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import ResultList from './ResultList';
 import ControlPanel from './controlPanel/ControlPanel'
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,9 +24,11 @@ const Explore = () => {
 
     return (
         <div className="Explore">
-            <Slider />
+            <Box xs={{ mb: 2 }}>
+                <Slider />
+            </Box>
 
-            <Grid container spacing={2}>
+            <Grid container>
                 <Grid item xs={4}>
                     <ControlPanel
                         filterBy={filterBy}

@@ -40,7 +40,7 @@ const ProfileCard = (props) => {
     }
 
     return (
-        <Card variant="outlined" sx={{ maxWidth: 1 / 3 }}>
+        <Card variant="outlined">
             <CardContent sx={{ pb: 1 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
                     <Box sx={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
