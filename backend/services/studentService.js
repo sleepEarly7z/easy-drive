@@ -125,11 +125,41 @@ const updateStudentById = (id, patch) => {
     // );
 }
 
+/**
+ * Update an Student's instructor follow list form database
+ * 
+ * @param {string} id 
+ * @param {object} patch with properties need to update 
+ * 
+ * @returns {object} Student's instructor follow list updated 
+ */
+ const followInstructorById = async (id) => {
+    const exampleStudentId = '62ce6616d2816a5b9eb398f2';
+    try {
+        await Student.findById(exampleStudentId)
+        .then(student => {
+            if(!student.followedInstructors.includes(id)) {
+                student.followedInstructors.push(id);
+                console.log("new instructor is followed");
+            } else {
+                console.log("this instructor already followed");
+            }
+          student.save()
+          .catch(err=>console.log("error"))
+          
+        })
+        return id;
+      } catch (error) {
+        throw ({ type: 'DB', message: error })
+      }
+}
+
 module.exports = {
     Student,
     getStudents,
     getStudentById,
     addStudent,
     deleteStudentById,
-    updateStudentById
+    updateStudentById,
+    followInstructorById
 }
