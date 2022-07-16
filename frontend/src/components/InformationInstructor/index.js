@@ -11,7 +11,6 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631 
 
-
 const InformationInstructor = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()

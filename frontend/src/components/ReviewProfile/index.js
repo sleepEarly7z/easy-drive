@@ -16,6 +16,8 @@ import {
 import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { followInstructorAsync } from '../../redux/students/thunks';
 
 const MessageActionButton = styled.button`
     margin: 0 5px;

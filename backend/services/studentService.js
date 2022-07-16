@@ -133,6 +133,31 @@ const updateStudentById = (id, patch) => {
  * 
  * @returns {object} Student's instructor follow list updated 
  */
+// const followInstructorById = async (id) => {
+//     const exampleStudentId = '62ce6616d2816a5b9eb398f2';
+//     const studentFound = await Student.findById(exampleStudentId);
+//     const {_id,first_name,last_name,password,email,phone,photo,street,city,province,
+//         country,followedInstructors} =studentFound;
+//     // .then(student => {
+//         console.log(_id)
+//         console.log(followedInstructors)
+//         console.log(studentFound)
+//         console.log(studentFound._id)
+//         console.log(JSON.stringify(studentFound.followedInstructors))
+//         console.log(Array.isArray(studentFound.followedInstructors))
+
+//     if (!studentFound.followedInstructors.includes(id)) {
+//         studentFound.followedInstructors.push(id);
+//         console.log("new instructor is followed");
+//     } else {
+//         console.log("this instructor already followed");
+//     }
+//     await studentFound.save();
+//     //.then(() => {return id})
+//     //.catch(err=>console.log("error"))
+//     return studentFound;
+
+// }
  const followInstructorById = async (id) => {
     const exampleStudentId = '62ce6616d2816a5b9eb398f2';
     try {
@@ -146,7 +171,7 @@ const updateStudentById = (id, patch) => {
             }
           student.save()
           .catch(err=>console.log("error"))
-          
+
         })
         return id;
       } catch (error) {
