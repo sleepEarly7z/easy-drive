@@ -1,7 +1,7 @@
 export const FILTER_CATEGORIES = [
     {
         id: 1,
-        name: 'location',
+        name: 'city',
         options: ['Vancouver', 'Richmond', 'Burnaby'],
     },
     {
@@ -11,7 +11,7 @@ export const FILTER_CATEGORIES = [
     },
     {
         id: 3,
-        name: 'licence type',
+        name: 'license',
         options: ['Class 7', 'Class 5', 'Class 4'],
     },
 ]
