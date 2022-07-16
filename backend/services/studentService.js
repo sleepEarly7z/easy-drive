@@ -1,115 +1,200 @@
-const { v4: uuidv4 } = require('uuid');
+const e = require('express');
+const express = require('express');
+const router = express.Router();
 
-const Student = require('../models/studentModel');
+const service = require('../services/studentService');
 
 /**
- * Get all Students from database
+ * Get all instructors
  *
- * @returns {Array} a list of all Students stored in BD
+ * @verb GET
+ * @endpoint /instructors
+ *
+ * Responses:
+ * Success:
+ * @status 200 OK
+ * @data instructors[]
+ *
+ * Error:
+ * @status 500 SERVER ERROR
+ * @error message
  */
-const getStudents = () => {
-	try {
-		return Student.find({});
-	} catch (error) {
-		throw { type: 'DB', message: error };
+router.get('/', function (req, res) {
+	service
+		.getStudents()
+		.then((students) => {
+			res.status(200).send({ data: students });
+		})
+		.catch((error) => {
+			res.status(500).send({ error: error.message });
+		});
+});
+
+/**
+ *  Get an instructor
+ *
+ *  @description get an instructor
+ *
+ *  @verb GET
+ *  @endpoint /instructors/:id
+ *
+ *  Request:
+ *  @parameters
+ * 		id - instructor id
+ *
+ *  Response:
+ *  Success:
+ *  @status 200 OK
+ *  @data instructor
+ *
+ * 	@status 404 NOT FOUND
+ *  @error message
+ */
+router.get('/:id', function (req, res) {
+	const id = req.params.id;
+
+	service
+		.getStudentById(id)
+		.then((studentFound) => {
+			res.status(200).send({ data: studentFound });
+		})
+		.catch((error) => {
+			res.status(404).send({
+				error: {
+					message: `cannot find STUDENT with id ${id}`,
+				},
+			});
+		});
+});
+
+/**
+ *  Register an instructor
+ *
+ *  @description Add instructor data to database
+ *
+ *  @verb POST
+ *  @endpoint /instructors
+ *
+ *  Request:
+ *  @payload { Instructor }
+ *
+ *  Response:
+ *  Success:
+ *  @status 200 OK
+ *  @data { Instructor } instructor added
+ *
+ *  Error:
+ *  @status 400 BAD REQUEST
+ * 	@error error messages
+ *
+ *  @status 500 SERVER ERROR
+ *  @error error messages
+ */
+router.post('/', function (req, res) {
+	const inputInstructor = req.body;
+
+	service
+		.addStudent(inputInstructor)
+		.then((instructorAdded) => {
+			res.status(200).send({ data: instructorAdded });
+		})
+		.catch((error) => {
+			if (error.type === 'validation') {
+				res.status(400).send({ error: error.message });
+			} else {
+				res.status(500).send({ error: error.message });
+			}
+		});
+});
+
+// DELETE
+router.delete('/:id', function (req, res) {
+	const id = req.params.id;
+	const instructor = service.getStudentById(id);
+
+	if (!instructor) {
+		return res.status(404).send(`instructor ${id} not found`);
 	}
-};
 
-/**
- * Get an Student with given id from database
- *
- * @param {string} id
- *
- * @returns {object} Student with given id
- * @throws {object} error - type and messages
- */
-const getStudentById = async (id) => {
-	try {
-		return Student.findById(id);
-	} catch (error) {
-		throw { type: 'DB', message: error };
+	const instructorDeleted = service.deleteStudentById(id);
+	instructorDeleted
+		? res.status(200).send(instructorDeleted)
+		: res
+				.status(424)
+				.send({
+					message: `failed to delete instructor ${id} from database`,
+				});
+});
+
+// UPDATE
+router.patch('/:id', function (req, res, next) {
+	const id = req.params.id;
+	const instructor = service.getStudentById(id);
+
+	if (!instructor) {
+		return res.status(404).send(`student ${id} not found`);
 	}
-};
 
-/**
- * Add an Student to the database
- *
- * @param {object} Student
- *
- * @returns {object} Student has been added to the db
- * @throws {object}} error - type and messages
- */
-const addStudent = async (Student) => {
-	const newStudent = new Student(Student);
+	const instructorUpdated = service.updateStudentById(id, req.body);
 
-	// validation https://mongoosejs.com/docs/api.html#document_Document-validateSync
-	const validationError = newStudent.validateSync();
-	if (validationError)
-		throw { type: 'validation', message: validationError };
+	instructorUpdated
+		? res.status(200).send(instructorUpdated)
+		: res
+				.status(424)
+				.send({
+					message: `failed to update instructor ${id} from database`,
+				});
+});
 
-	try {
-		await newStudent.save();
-		return newStudent;
-	} catch (error) {
-		throw { type: 'DB', message: error };
-	}
-};
+// UPDATE followed instructor
+router.patch('/followInstructor/:id', function (req, res, next) {
+	const id = req.params.id;
+	const followInstructor = service.followInstructorById(id);
 
-/**
- * delete Student with given id from db
- *
- * @param {string} id
- *
- * @returns {object} Student deleted
- */
-const deleteStudentById = (id) => {
-	// TODO
-};
+	followInstructor
+		? res.status(200).send(followInstructor)
+		: res
+				.status(424)
+				.send({
+					message: `failed to follow instructor ${id} from database`,
+				});
+});
 
-/**
- * Update an Student form database
- *
- * @param {string} id
- * @param {object} patch with properties need to update
- *
- * @returns {object} Student updated
- */
-const updateStudentById = (id, patch) => {
-	// TODO
-	// return Student.findByIdAndUpdate(id, patch, { new: true }, (err, Student) => {
-	//     if (err) return console.log(err);
-	//     console.log(Student);
-	// }
-	// );
-};
+// router.get('/filter', function (req, res) {
+// 	res.send(service.getInstructors());
+// });
 
-/**
- * Update an Student's instructor follow list form database
- *
- * @param {string} id
- * @param {object} patch with properties need to update
- *
- * @returns {object} Student's instructor follow list updated
- */
-const followInstructorById = async (id) => {
-	const exampleStudentId = '62ce6616d2816a5b9eb398f2';
-	const studentFound = await Student.findById(exampleStudentId);
-	if (!studentFound.followedInstructors.includes(id)) {
-		studentFound.followedInstructors.push(id);
-		console.log('new instructor is followed');
-	} else {
-		console.log('this instructor already followed');
-	}
-	await studentFound.save();
-	return studentFound;
-};
+// const dropDownType = {
+// 	BEST_MATCH: 'Best Match',
+// 	HIGHEST_RATED: 'Highest Rated'
+// }
 
-module.exports = {
-	Student,
-	getStudents,
-	getStudentById,
-	addStudent,
-	deleteStudentById,
-	updateStudentById,
-	followInstructorById,
-};
+// router.get('/sort', function (req, res, next) {
+// 	const instructors = service.getInstructors();
+// 	const condition = req.query.condition.replaceAll('"', '')
+// 	if (condition === dropDownType.HIGHEST_RATED) {
+// 		console.log("pass1")
+// 		instructors.sort(function (a, b) { return b.Rating - a.Rating });
+// 	} else if (condition === dropDownType.BEST_MATCH) {
+// 		instructors.sort(function (a, b) { return b.experience - a.experience })
+// 	} else {
+// 		console.log('fail');
+// 	}
+// 	return res.send(instructors);
+// });
+
+// router.delete('/filter/:id', function (req, res, next) {
+// 	const instructors = service.getInstructors();
+// 	const id = JSON.stringify(req.body.id).replaceAll("\"", "")
+// 	console.log(typeof (id) + id)
+// 	const deleted = instructors.find(instructor => instructor.id.$oid === id);
+// 	if (deleted) {
+// 		instructors = instructors.filter(instructor => instructor.id.$oid !== id);
+// 		return res.send(deleted);
+// 	}
+// 	else {
+// 		return res.status(404).json({ message: 'instructor you are looking for does not exist' });
+// 	}
+// });
+
+module.exports = router;
