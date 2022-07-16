@@ -41,6 +41,9 @@ const StudentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    followedInstructors: {
+        type: [String]
+    }
 })
 
 const Student = mongoose.model('Student', StudentSchema);
@@ -158,10 +161,10 @@ const updateStudentById = (id, patch) => {
 //     return studentFound;
 
 // }
- const followInstructorById = async (id) => {
+ const followInstructorById = (id) => {
     const exampleStudentId = '62ce6616d2816a5b9eb398f2';
     try {
-        await Student.findById(exampleStudentId)
+        Student.findById(exampleStudentId)
         .then(student => {
             if(!student.followedInstructors.includes(id)) {
                 student.followedInstructors.push(id);
