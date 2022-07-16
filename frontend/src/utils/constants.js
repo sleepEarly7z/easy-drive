@@ -37,7 +37,7 @@ export const SORT_OPTIONS = [
         label: "experience (less to more)",
         value: "experienceAsc",
         payload: {
-            sortBy: 'year',
+            sortBy: 'experience',
             sortDir: 'asc'
         }
     },
@@ -45,7 +45,7 @@ export const SORT_OPTIONS = [
         label: "experience (more to less)",
         value: "experienceDesc",
         payload: {
-            sortBy: 'year',
+            sortBy: 'experience',
             sortDir: 'desc'
         }
     }

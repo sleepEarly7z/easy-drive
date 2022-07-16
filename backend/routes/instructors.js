@@ -21,8 +21,13 @@ const { protect } = require('../middleware/authMiddleware');
  * @error message
  */
 router.get('/', function (req, res) {
-	service
-		.getInstructors()
+	const query = req.query;
+
+	const getInstructors = (query)
+		? service.getQueriedInstructors(query)
+		: service.getInstructors()
+
+	getInstructors
 		.then((instructors) => {
 			res.status(200).send({ data: instructors });
 		})
@@ -152,8 +157,8 @@ router.delete('/:id', function (req, res) {
 	instructorDeleted
 		? res.status(200).send(instructorDeleted)
 		: res.status(424).send({
-				message: `failed to delete instructor ${id} from database`,
-		  });
+			message: `failed to delete instructor ${id} from database`,
+		});
 });
 
 // UPDATE
