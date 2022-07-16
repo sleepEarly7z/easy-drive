@@ -41,6 +41,9 @@ const StudentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    followedInstructors: {
+        type: [String]
+    }
 })
 
 const Student = mongoose.model('Student', StudentSchema);
