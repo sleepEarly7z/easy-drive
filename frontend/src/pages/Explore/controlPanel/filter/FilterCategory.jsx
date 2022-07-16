@@ -9,9 +9,13 @@ import {
     Collapse,
 } from '@mui/material'
 import { ExpandLess, ExpandMore } from '@mui/icons-material'
+import { useDispatch } from 'react-redux';
+import queryActions from '../../../../redux/query/actions';
 
 const FilterCategory = (props) => {
     const { category, filterBy, setFilterBy } = props;
+
+    const dispatch = useDispatch();
 
     const name = category.name
     const options = category.options
@@ -37,12 +41,14 @@ const FilterCategory = (props) => {
 
         // update filterBy
         updateFilterBy(name, newChecked);
+        const filterByCopy = JSON.parse(JSON.stringify(filterBy));
+        // TODO: setup the redux store in format of {'location': ['rmd', 'van'], 'license type':['class 4']}
+        dispatch(queryActions.updateQuery({ filterBy: filterByCopy }));
     }
 
     const updateFilterBy = (categoryName, checkedOptions) => {
-        console.log(filterBy);
         // find the categrory in the list in state and then update it
-        for (const category of filterBy) {
+        for (let category of filterBy) {
             if (category.categoryName === categoryName) {
                 category['options'] = checkedOptions;
                 return setFilterBy(filterBy);

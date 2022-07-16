@@ -4,8 +4,8 @@ import InstructorService from './service'
 
 export const getInstructorsAsync = createAsyncThunk(
     actionTypes.GET_INSTRUCTORS,
-    async () => {
-        return await InstructorService.getInstructors()
+    async (query) => {
+        return await InstructorService.getInstructors(query)
     },
 )
 
