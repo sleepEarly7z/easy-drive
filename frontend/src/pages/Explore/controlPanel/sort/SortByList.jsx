@@ -1,5 +1,5 @@
 import { SORT_OPTIONS } from "../../../../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import React, { useState } from 'react'
 import {
     ListSubheader,
@@ -19,11 +19,10 @@ const SortByList = (props) => {
         const value = event.target.value;
         // ui radio button
         setValue(value);
-
+        // update redux store
         const option = sortOptions.find(option => option.value === value);
         const sortBy = option.payload;
         dispatch(updateQueryAsync({ sortBy }));
-
     };
 
     return (
