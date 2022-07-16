@@ -1,13 +1,18 @@
 import { Box, Button } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux';
 
 import FilterByList from './filter/FilterByList';
 import SortByList from './sort/SortByList';
+import { getInstructorsAsync } from '../../../redux/instructors/thunks';
 
 const ControlPanel = (props) => {
-    const {
-        filterBy, setFilterBy,
-        sortBy, setSortBy
-    } = props;
+    const dispatch = useDispatch();
+    const query = useSelector((state) => (state.query));
+
+    const applyQuery = () => {
+        console.log('clicked');
+        dispatch(getInstructorsAsync(query));
+    }
 
     return (
         <Box
@@ -20,17 +25,13 @@ const ControlPanel = (props) => {
             }}
         >
 
-            <FilterByList
-                filterBy={filterBy}
-                setFilterBy={setFilterBy} />
+            <FilterByList />
 
-            <SortByList
-                sortBy={sortBy}
-                setSortBy={setSortBy} />
+            <SortByList />
 
             <Box sx={{ p: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: 1 }}>
                 <Button variant="outline-primary">reset</Button>
-                <Button onClick={() => { console.log(sortBy); console.log(filterBy) }}>apply</Button>
+                <Button onClick={applyQuery}>apply</Button>
             </Box>
         </Box>
     )

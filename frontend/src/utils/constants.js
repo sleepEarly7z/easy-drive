@@ -1,37 +1,52 @@
 export const FILTER_CATEGORIES = [
     {
         id: 1,
-        name: 'location',
+        name: 'city',
         options: ['Vancouver', 'Richmond', 'Burnaby'],
     },
     {
         id: 2,
-        name: 'availability',
-        options: [
-            '7 a.m. to 12 p.m. ',
-            '12 p.m. to 17 p.m. ',
-            '17 p.m. to 22 p.m.',
-        ],
-    },
-    {
-        id: 3,
         name: 'language',
         options: ['English', 'French', 'Mandarin', 'Cantonese', 'Korean'],
     },
     {
-        id: 4,
-        name: 'licence type',
-        options: ['class 7', 'class 5', 'class 4'],
+        id: 3,
+        name: 'license',
+        options: ['Class 7', 'Class 5', 'Class 4'],
     },
 ]
 
 export const SORT_OPTIONS = [
     {
         label: "rating (high to low)",
-        value: "ratingDesc"
+        value: "ratingDesc",
+        payload: {
+            sortBy: 'rating',
+            sortDir: 'desc'
+        }
     },
     {
         label: "rating (low to high)",
-        value: "ratingAsc"
+        value: "ratingAsc",
+        payload: {
+            sortBy: 'rating',
+            sortDir: 'asc'
+        }
+    },
+    {
+        label: "experience (less to more)",
+        value: "experienceAsc",
+        payload: {
+            sortBy: 'experience',
+            sortDir: 'asc'
+        }
+    },
+    {
+        label: "experience (more to less)",
+        value: "experienceDesc",
+        payload: {
+            sortBy: 'experience',
+            sortDir: 'desc'
+        }
     }
 ]
