@@ -9,7 +9,7 @@ import {
 } from '../../redux/instructors/thunks'
 import toast from 'react-hot-toast'
 
-// https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
+// https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631 
 
 const InformationInstructor = () => {
     const dispatch = useDispatch()
