@@ -9,6 +9,8 @@ import {
 } from '../../redux/instructors/thunks'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 
@@ -89,6 +91,19 @@ const InformationInstructor = () => {
               console.log(res.data.data)
                 setfirst_name(res.data.data.first_name)
                 setlast_name(res.data.data.last_name)
+                setEmail(res.data.data.email)
+                setPhone(res.data.data.phone)
+                setStreet(res.data.data.street)
+                setCity(res.data.data.city)
+                setProvince(res.data.data.province)
+                setcountry(res.data.data.country)
+                setCompany(res.data.data.company)
+                setLanguage(res.data.data.language)
+                setExperience(res.data.data.experience)
+                setLicense(res.data.data.license)
+                setDescription(res.data.data.description)
+                setIsCarProvided(res.data.data.isCarProvided)
+                setgender(res.data.data.gender)
             }).catch((err) => {
               alert(err);
             }
@@ -97,25 +112,6 @@ const InformationInstructor = () => {
           }
             sendGet();
       },[]);
-
-    const getInstructorById = async (id) => {
-        const response = await fetch(`http://localhost:5000/api/instructors/${id}`)
-        const data = await response.json()
-        setfirst_name(data.first_name)
-        setlast_name(data.last_name)
-        setEmail(data.email)
-        setPhone(data.phone)
-        setStreet(data.street)
-        setCity(data.city)
-        setProvince(data.province)
-        setcountry(data.country)
-        setCompany(data.company)
-        setLanguage(data.language)
-        setExperience(data.experience)
-        setLicense(data.license)
-        setDescription(data.description)
-        setIsCarProvided(data.isCarProvided)
-    }
 
 
     const handleSave = (e) => {
@@ -236,6 +232,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="enter phone number"
                                         onChange={handlePhone}
+                                        value = {phone || setPhone}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -247,6 +244,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="enter gender"
                                         onChange={handleGender}
+                                        value = {gender || setgender}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -256,6 +254,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="enter email id"
                                         onChange={handleEmail}
+                                        value = {email || setEmail}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -265,6 +264,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="street"
                                         onChange={handleStreet}
+                                        value = {street || setStreet}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -274,6 +274,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="city"
                                         onChange={handleCity}
+                                        value = {city || setCity}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -283,6 +284,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="Province"
                                         onChange={handleProvince}
+                                        value = {province || setProvince}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -292,6 +294,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="Country"
                                         onChange={handleCountry}
+                                        value = {country || setcountry}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -301,6 +304,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="Language"
                                         onChange={handleLanguage}
+                                        value = {language || setLanguage}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -310,31 +314,10 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="Company"
                                         onChange={handleCompany}
+                                        value = {company || setCompany}
                                     />
                                 </div>
                             </div>
-                            {/* <div className="row mt-3">
-                                <div className="col-md-6">
-                                    <label className="labels">
-                                        Car Provided
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="country"
-                                    />
-                                </div>
-                                <div className="col-md-6">
-                                    <label className="labels">
-                                        Pick-up/Drop-off
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="state"
-                                    />
-                                </div>
-                            </div> */}
                             <div className="mt-5 text-center">
                                 <button
                                     className="btn btn-primary profile-button me-5"
@@ -357,10 +340,6 @@ const InformationInstructor = () => {
                         <div className="p-3 py-5">
                             <div className="d-flex justify-content-between align-items-center experience">
                                 <span>Edit Experience</span>
-                                <span className="border px-3 p-1 add-experience">
-                                    <i className="fa fa-plus"></i>
-                                    &nbsp;Experience
-                                </span>
                             </div>
                             <br />
                             <div className="col-md-12">
@@ -372,6 +351,7 @@ const InformationInstructor = () => {
                                     className="form-control"
                                     placeholder="experience"
                                     onChange={handleExperience}
+                                    value = {experience || setExperience}
                                 />
                             </div>{' '}
                             <br />
@@ -382,6 +362,7 @@ const InformationInstructor = () => {
                                     className="form-control"
                                     placeholder="License"
                                     onChange={handleLicense}
+                                    value = {license || setLicense}
                                 />
                             </div>
                             <br />
@@ -392,6 +373,7 @@ const InformationInstructor = () => {
                                     className="form-control"
                                     placeholder="Description"
                                     onChange={handleDescription}
+                                    value = {description || setDescription}
                                 />
                             </div>
                             <br />
@@ -401,12 +383,36 @@ const InformationInstructor = () => {
                                     type="text"
                                     className="form-control"
                                     placeholder="Car Provided"
+
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {/* <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '30ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
+        <TextField
+          required
+          id="outlined-required"
+          label="First Name"
+          defaultValue="Hello World"
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Last Name"
+          defaultValue="Hello World"
+        />
+      </div>
+    </Box> */}
         </>
     )
 }
