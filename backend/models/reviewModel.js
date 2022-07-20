@@ -14,6 +14,6 @@ const reviewSchema = new mongoose.Schema({
     rating: {
         type: Number
     }
-})
+}, {timestamps : true});
 
 module.exports = mongoose.model('Review', reviewSchema);
