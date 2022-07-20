@@ -1,5 +1,5 @@
 import './index.scss'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { NavLink } from 'react-bootstrap'
 import styled from 'styled-components'
 import RateDisplay from '../ReviewRating/ReviewRating'
@@ -17,7 +17,7 @@ import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { followInstructorAsync, isInstructorFollowedAsync } from '../../redux/students/thunks';
+import { followInstructorAsync } from '../../redux/students/thunks';
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -61,32 +61,13 @@ const FollowActionButton = styled.button`
 
 export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch()
-    const [instructorFollowed, setInstructorFollowed] = useState(false);
-
-    // useEffect(() => {
-    //     dispatch(isInstructorFollowedAsync(instructor._id))
-    //         .then((result) => {
-    //             console.log(result)
-    //         setInstructorFollowed(JSON.stringify(result.payload.data));
-    //   }, [])});
-
     const followInstructor = (instructorID) => () => {
         console.log(instructorID)
         let id = {
             _id: instructorID
         }
-        dispatch(followInstructorAsync(id))
-            .then(() => {
-                dispatch(isInstructorFollowedAsync(id))
-                    .then(result => {
-                        setInstructorFollowed(JSON.stringify(result.payload.data))
-                        console.log(result)
-                    })
-            }).then(() => {
-                console.log(instructorFollowed)
-            })
-    }
-
+        dispatch(followInstructorAsync(id));
+      }
     return (
         <div>
             <div className="ReviewProfile">
@@ -127,7 +108,7 @@ export default function ReviewProfile({ instructor }) {
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
                             <FollowActionButton className="" onClick={followInstructor(instructor._id)}>
-                                {instructorFollowed ? 'unfollow' : 'follow'}
+                                Follow
                             </FollowActionButton>
                             <MessageActionButton className="">
                                 Message

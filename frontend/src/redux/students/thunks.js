@@ -36,10 +36,3 @@ export const followInstructorAsync = createAsyncThunk(
         return await StudentService.followInstructor(id);
     }
 )
-
-export const isInstructorFollowedAsync = createAsyncThunk(
-    actionTypes.CHECK_INSTRUCTOR_FOLLOWED,
-    async (id) => {
-        return await StudentService.isInstructorFollowed(id);
-    }
-)

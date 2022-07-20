@@ -141,23 +141,6 @@ router.patch('/followInstructor/:id', function (req, res, next) {
 		: res.status(424).send({ message: `failed to follow instructor ${id} from database` })
 });
 
-// check current instructor is already followed or not
-router.get('/checkFollowList/:id', function (req, res, next) {
-	const id = req.params.id;
-	service.isInstructorFollowed(id)
-		.then((student) => {
-			console.log("4" + student.followedInstructors.includes(id))
-			res.status(200).send({ data: student.followedInstructors.includes(id) })
-		})
-
-	// service.isInstructorFollowed(id)
-	// .then((isInstructorFollowed)=> {
-	// 	console.log("4"+isInstructorFollowed)
-	// 	res.status(200).send({data: isInstructorFollowed})
-	// })
-
-});
-
 // router.get('/filter', function (req, res) {
 // 	res.send(service.getInstructors());
 // });
