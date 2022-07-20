@@ -85,7 +85,7 @@ const InformationInstructor = () => {
 
     useEffect(() => {
         const sendGet = async () => {
-            const res = await axios.get('http://localhost:3001/instructors/62c627683211f7421b269ff2')
+            const res = await axios.get('http://localhost:3001/instructors/62d76018f36c6973468ba796')
             .then((res) =>{
               console.log(res.data)
               console.log(res.data.data)
@@ -118,7 +118,7 @@ const InformationInstructor = () => {
         // e.preventDefault()
 
         let instData = {
-            _id: '62c627683211f7421b269ff2',
+            _id: '62d76018f36c6973468ba796',
             first_name: first_name,
             last_name: last_name,
             email: email,
@@ -161,7 +161,7 @@ const InformationInstructor = () => {
         e.preventDefault()
 
         let instData = {
-            _id: '62a56dccfc13ae05bf00046a',
+            _id: '62d76018f36c6973468ba796',
             first_name: first_name,
             last_name: last_name,
             email: email,
