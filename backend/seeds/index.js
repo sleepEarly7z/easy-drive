@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Instructor = require('../models/instructorModel');
 const Student = require('../models/studentModel');
-const { Review } = require('../models/reviewModel');
+const Review = require('../models/reviewModel');
 
 const { TimeSlot, Appointment } = require('../services/appointmentService');
 
@@ -23,8 +23,8 @@ db.once("open", () => {
 
 const clearAll = async () => {
     // await Instructor.deleteMany({});
-    // await Appointment.deleteMany({});
     await Review.deleteMany({});
+    await Student.deleteMany({});
 }
 
 const seedInstructor = async () => {
@@ -56,8 +56,8 @@ const getNRamdonIdsFromModel = async (model, n) => {
 
 // random 5 student add 1 review to random 5 instructors
 const seedReviews = async () => {
-    const randomStudentIds = await getNRamdonIdsFromModel(Student, 5);
-    const randomInstructorIds = await getNRamdonIdsFromModel(Instructor, 5);
+    const randomStudentIds = await getNRamdonIdsFromModel(Student, 10);
+    const randomInstructorIds = await getNRamdonIdsFromModel(Instructor, 10);
 
     const randomReviewContent = [
         'Good instructor!',
