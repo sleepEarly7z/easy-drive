@@ -11,6 +11,8 @@ import {
 } from '@material-ui/core'
 import { Search } from '@material-ui/icons'
 import AddIcon from '@material-ui/icons/Add'
+import CloseIcon from '@material-ui/icons/Close'
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 
 import * as reviewService from './reviewService'
 import Controls from './controls/Controls'
@@ -18,6 +20,10 @@ import useTable from './useTable'
 import Popup from './Popup'
 import ReviewForm from './ReviewForm'
 import RatingStar from './RatingStar'
+
+import { useSelector, useDispatch } from 'react-redux'
+
+import { getReviewsByInstructorIdAsync } from '../../redux/reviews/thunks'
 
 const useStyles = makeStyles((theme) => ({
     pageContent: {
@@ -34,25 +40,27 @@ const useStyles = makeStyles((theme) => ({
 
 const headCells = [
     { id: 'fullName', label: 'Student Name' },
-    // { id: 'email', label: 'Email Address (Personal)' },
     { id: 'rating', label: 'Rating' },
     { id: 'comment', label: 'Comment' },
-    // { id: 'mobile', label: 'Mobile Number' },
     { id: 'classtype', label: 'Class Type' },
     { id: 'reviewDate', label: 'Time' },
     // { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
-export default function Reviews({ instructorId }) {
+export default function Reviews({ reviews }) {
+    // const reviews = useSelector(state => state.reviews.reviewsOfInstructor);
+
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
-    const [records, setRecords] = useState(reviewService.getAllReviews())
+    const [records, setRecords] = useState(reviews)
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
             return items
         },
     })
     const [openPopup, setOpenPopup] = useState(false)
+
+    console.log('reviews: ' + reviews)
 
     const {
         TblContainer,
@@ -77,8 +85,13 @@ export default function Reviews({ instructorId }) {
     }
 
     const addOrEdit = (employee, resetForm) => {
-        if (employee.id === 0) reviewService.insertReview(employee)
-        else reviewService.updateReview(employee)
+        if (employee.id === 0) {
+            // console.log('insert employee: ' + employee)
+            reviewService.insertReview(employee)
+        } else {
+            // console.log('update employee: ' + employee)
+            reviewService.updateReview(employee)
+        }
         resetForm()
         setRecordForEdit(null)
         setOpenPopup(false)
@@ -131,18 +144,16 @@ export default function Reviews({ instructorId }) {
                     <TblHead />
                     <TableBody>
                         {recordsAfterPagingAndSorting().map((item) => (
-                            <TableRow key={item.id}>
+                            <TableRow key={item._id}>
                                 <TableCell width={200}>
-                                    {item.fullName}
+                                    {/* {item.fullName} */}
+                                    {item.student_id}
                                 </TableCell>
-                                {/* <TableCell>
-										{item.email}
-									</TableCell> */}
                                 <TableCell width={150}>
                                     <RatingStar average={item.rating} />
                                 </TableCell>
                                 <TableCell width={300}>
-                                    {item.comment}
+                                    {item.comment_content}
                                 </TableCell>
                                 {/* <TableCell>
 										{item.mobile}
@@ -150,18 +161,18 @@ export default function Reviews({ instructorId }) {
                                 <TableCell>{item.classtype}</TableCell>
                                 <TableCell>{item.reviewDate}</TableCell>
                                 {/* <TableCell>
-										<Controls.ActionButton
-											color='primary'
-											onClick={() => {
-												openInPopup(item);
-											}}
-										>
-											<EditOutlinedIcon fontSize='small' />
-										</Controls.ActionButton>
-										<Controls.ActionButton color='secondary'>
-											<CloseIcon fontSize='small' />
-										</Controls.ActionButton>
-									</TableCell> */}
+                                    <Controls.ActionButton
+                                        color="primary"
+                                        onClick={() => {
+                                            openInPopup(item)
+                                        }}
+                                    >
+                                        <EditOutlinedIcon fontSize="small" />
+                                    </Controls.ActionButton>
+                                    <Controls.ActionButton color="secondary">
+                                        <CloseIcon fontSize="small" />
+                                    </Controls.ActionButton>
+                                </TableCell> */}
                             </TableRow>
                         ))}
                     </TableBody>

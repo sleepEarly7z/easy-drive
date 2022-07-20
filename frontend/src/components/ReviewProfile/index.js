@@ -15,9 +15,9 @@ import {
 
 import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
-import { useSelector } from 'react-redux'
+
 import { useDispatch } from 'react-redux'
-import { followInstructorAsync } from '../../redux/students/thunks';
+import { followInstructorAsync } from '../../redux/students/thunks'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -59,15 +59,15 @@ const FollowActionButton = styled.button`
 }
 `
 
-export default function ReviewProfile({ instructor }) {
+export default function ReviewProfile({ instructor, reviews }) {
     const dispatch = useDispatch()
     const followInstructor = (instructorID) => () => {
         console.log(instructorID)
         let id = {
-            _id: instructorID
+            _id: instructorID,
         }
-        dispatch(followInstructorAsync(id));
-      }
+        dispatch(followInstructorAsync(id))
+    }
     return (
         <div>
             <div className="ReviewProfile">
@@ -107,7 +107,10 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
-                            <FollowActionButton className="" onClick={followInstructor(instructor._id)}>
+                            <FollowActionButton
+                                className=""
+                                onClick={followInstructor(instructor._id)}
+                            >
                                 Follow
                             </FollowActionButton>
                             <MessageActionButton className="">
@@ -238,7 +241,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews instructorId={instructor._id} />
+                        <Reviews reviews={reviews} />
                     </div>
                 </div>
             </div>

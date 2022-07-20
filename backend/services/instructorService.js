@@ -200,7 +200,7 @@ const deleteInstructorById = (id) => {
 };
 
 /**
- * Update an instructor form database
+ * Update an instructor from database
  *
  * @param {string} id
  * @param {object} patch with properties need to update
@@ -208,20 +208,16 @@ const deleteInstructorById = (id) => {
  * @returns {object} instructor updated
  */
 const updateInstructorById = (id, patch) => {
-    // TODO
-    console.log("instrucotService 150")
-    Instructor.updateOne({ _id: id }, patch, (err, instructor) => {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log(instructor)
-        }
-    })
-    // ).then(() => {
-    //     return Instructor.findById(id);
-    // }
-    // );
-}
+	// TODO
+	console.log('instrucotService 150');
+	Instructor.updateOne({ _id: id }, patch, (err, instructor) => {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log(instructor);
+		}
+	});
+};
 
 // Generate Token
 // https://jwt.io/
@@ -236,32 +232,32 @@ const getQueriedInstructors = (query) => {
 
 	const findQuery = {};
 	if (city) {
-		const cities = (Array.isArray(city)) ? city : [city];
+		const cities = Array.isArray(city) ? city : [city];
 		findQuery['city'] = { $in: cities };
 	}
 	if (language) {
-		const languages = (Array.isArray(language)) ? language : [language];
+		const languages = Array.isArray(language)
+			? language
+			: [language];
 		findQuery['language'] = { $in: languages };
 	}
 	if (license) {
-		const licenses = (Array.isArray(license)) ? license : [license];
+		const licenses = Array.isArray(license) ? license : [license];
 		findQuery['license'] = { $in: licenses };
 	}
 
 	const sortQuery = {};
-	sortQuery[sortBy] = (sortDir === 'asc') ? 1 : -1;
+	sortQuery[sortBy] = sortDir === 'asc' ? 1 : -1;
 
 	// console.log(findQuery);
 	// console.log(sortQuery);
 
 	try {
-		return Instructor
-			.find(findQuery)
-			.sort(sortQuery);
+		return Instructor.find(findQuery).sort(sortQuery);
 	} catch (error) {
 		throw { type: 'DB', message: error };
 	}
-}
+};
 
 module.exports = {
 	getInstructors,
@@ -272,5 +268,5 @@ module.exports = {
 	getMe,
 	deleteInstructorById,
 	updateInstructorById,
-	getQueriedInstructors
+	getQueriedInstructors,
 };
