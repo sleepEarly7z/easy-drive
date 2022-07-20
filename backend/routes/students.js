@@ -150,6 +150,10 @@ router.get('/checkFollowList/:id', function (req, res, next) {
 			res.status(200).send({ data: student.followedInstructors.includes(id) })
 		})
 
+		.catch((error) => {
+			res.status(500).send({ error: error.message });
+		})
+
 	// service.isInstructorFollowed(id)
 	// .then((isInstructorFollowed)=> {
 	// 	console.log("4"+isInstructorFollowed)

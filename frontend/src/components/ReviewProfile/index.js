@@ -17,6 +17,7 @@ import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { followInstructorAsync, isInstructorFollowedAsync } from '../../redux/students/thunks';
 
 const MessageActionButton = styled.button`
@@ -61,14 +62,16 @@ const FollowActionButton = styled.button`
 
 export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch()
+    const params = useParams()
     const [instructorFollowed, setInstructorFollowed] = useState(false);
 
-    // useEffect(() => {
-    //     dispatch(isInstructorFollowedAsync(instructor._id))
-    //         .then((result) => {
-    //             console.log(result)
-    //         setInstructorFollowed(JSON.stringify(result.payload.data));
-    //   }, [])});
+    useEffect(() => {
+            dispatch(isInstructorFollowedAsync({_id: params.instructorId}))
+            .then(result => {
+                setInstructorFollowed(result.payload.data)
+            })
+    }, []);
+    
     const followInstructor = (instructorID) => () => {
         console.log(instructorID)
         let id = {
@@ -78,7 +81,7 @@ export default function ReviewProfile({ instructor }) {
             .then(() => {
                 dispatch(isInstructorFollowedAsync(id))
                     .then(result => {
-                        setInstructorFollowed(JSON.stringify(result.payload.data))
+                        setInstructorFollowed(!instructorFollowed)
                         console.log(result)
                     })
             }).then(() => {
