@@ -131,7 +131,7 @@ router.patch('/:id', function (req, res, next) {
 		: res.status(424).send({ message: `failed to update instructor ${id} from database` })
 });
 
-// UPDATE followed instructor
+// UPDATE followed instructors
 router.patch('/followInstructor/:id', function (req, res, next) {
 	const id = req.params.id;
 	const followInstructor = service.followInstructorById(id);
