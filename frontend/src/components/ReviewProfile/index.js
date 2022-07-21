@@ -16,7 +16,7 @@ import {
 import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
 
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { followInstructorAsync } from '../../redux/students/thunks'
 
 const MessageActionButton = styled.button`
@@ -59,8 +59,11 @@ const FollowActionButton = styled.button`
 }
 `
 
-export default function ReviewProfile({ instructor, reviews }) {
+export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch()
+    const currentInstructorReviews = useSelector(
+        (state) => state.reviews.reviewsOfInstructor,
+    )
     const followInstructor = (instructorID) => () => {
         console.log(instructorID)
         let id = {
@@ -241,7 +244,7 @@ export default function ReviewProfile({ instructor, reviews }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews reviews={reviews} />
+                        <Reviews reviews={currentInstructorReviews} />
                     </div>
                 </div>
             </div>

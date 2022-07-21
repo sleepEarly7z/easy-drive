@@ -21,9 +21,12 @@ import Popup from './Popup'
 import ReviewForm from './ReviewForm'
 import RatingStar from './RatingStar'
 
+import axios from 'axios'
+
 import { useSelector, useDispatch } from 'react-redux'
 
 import { getReviewsByInstructorIdAsync } from '../../redux/reviews/thunks'
+import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     pageContent: {
@@ -47,9 +50,9 @@ const headCells = [
     // { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
-export default function Reviews({ reviews }) {
-    // const reviews = useSelector(state => state.reviews.reviewsOfInstructor);
-
+const Reviews = ({ reviews }) => {
+    // const reduxReviews = useSelector(state => state.reviews.reviewsOfInstructor);
+    const params = useParams()
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState(reviews)
@@ -102,6 +105,22 @@ export default function Reviews({ reviews }) {
         setRecordForEdit(item)
         setOpenPopup(true)
     }
+
+    useEffect(() => {
+        const sendGet = async () => {
+            await axios
+                .get('http://localhost:3001/reviews/' + params.instructorId)
+                .then((res) => {
+                    setRecords(res.data.data)
+                    console.log(res)
+                    console.log(res.data.data)
+                })
+                .catch((err) => {
+                    alert(err)
+                })
+        }
+        sendGet()
+    }, [])
 
     return (
         <>
@@ -192,3 +211,5 @@ export default function Reviews({ reviews }) {
         </>
     )
 }
+
+export default Reviews

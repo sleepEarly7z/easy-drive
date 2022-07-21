@@ -8,4 +8,5 @@ export const actionTypes = {
 
     GET_INSTRUCTORS: 'instructors/getInstructors',
     GET_INSTRUCTORBYID: 'instructors/getInstructorById',
+    GET_INSTRUCTORREVIEWSBYID: 'instructors/getInstructorReviewsById',
 }
