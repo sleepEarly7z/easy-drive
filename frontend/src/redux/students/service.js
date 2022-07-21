@@ -52,7 +52,8 @@ const updateStudent = async (data) => {
         street,
         city,
         province,
-        country
+        country,
+        followedInstructors
     } = data
     const response = await fetch(`http://localhost:3001/students/${_id}`, {
         method: 'PATCH',
@@ -67,7 +68,8 @@ const updateStudent = async (data) => {
             street,
             city,
             province,
-            country
+            country,
+            followedInstructors
         }),
     })
 

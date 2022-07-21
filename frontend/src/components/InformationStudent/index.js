@@ -17,6 +17,7 @@ const InformationStudent = () => {
     const [city, setcity] = useState('')
     const [province, setprovince] = useState('')
     const [country, setcountry] = useState('')
+    const [following, setfollowing] = useState([])
 
     const handlefirst_name = (e) => {
         setfirst_name(e.target.value)
@@ -47,7 +48,6 @@ const InformationStudent = () => {
         const sendGet = async () => {
             const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
             .then((res) =>{
-                console.log(res.data)
                 setfirst_name(res.data.data.first_name)
                 setlast_name(res.data.data.last_name)
                 setemail(res.data.data.email)
@@ -56,6 +56,8 @@ const InformationStudent = () => {
                 setcity(res.data.data.city)
                 setprovince(res.data.data.province)
                 setcountry(res.data.data.country)
+                setfollowing(res.data.data.followedInstructors)
+                // console.log(following)
             }).catch((err) => {
               alert(err);
             }
@@ -78,6 +80,7 @@ const InformationStudent = () => {
             city: city,
             country: country,
             province: province,
+            followedInstructors: following
         }
 
         dispatch(updateStudentAsync(instData))
