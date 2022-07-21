@@ -118,11 +118,14 @@ const deleteStudentById = (id) => {
  */
 const updateStudentById = (id, patch) => {
     // TODO
-    // return Student.findByIdAndUpdate(id, patch, { new: true }, (err, Student) => {
-    //     if (err) return console.log(err);
-    //     console.log(Student);
-    // }
-    // );
+    console.log("StudentService121")
+    Student.updateOne({ _id: id }, patch, (err, stu) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(stu)
+        }
+    })
 }
 
 module.exports = {

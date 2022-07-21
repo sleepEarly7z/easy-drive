@@ -17,7 +17,23 @@
 }
 
 .ProfileInstructor__information{
-    display: flex;
-    margin-top: 20px;
+    display: absolute;
+    margin-top: -50px;
+    margin-left: 50px;
+    // position: absolute;
+}
 
+.InstSideMenuSingle {
+    margin-top: 50px;
+    display: flex;
+}
+
+.InstSideMenuProps {
+    margin-top: 20px;
+    margin-left: 50px;
+    display: flex;
+}
+
+.ProfileInstructor__Reviews{
+    display: absolute;
 }

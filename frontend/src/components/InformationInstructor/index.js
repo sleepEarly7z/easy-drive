@@ -318,22 +318,6 @@ const InformationInstructor = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="mt-5 text-center">
-                                <button
-                                    className="btn btn-primary profile-button me-5"
-                                    type="button"
-                                    onClick={handleSave}
-                                >
-                                    Save Profile
-                                </button>
-                                <button
-                                    className="btn btn-primary profile-button"
-                                    type="button"
-                                    onClick={handleDelete}
-                                >
-                                    Delete Profile
-                                </button>
-                            </div>
                         </div>
                     </div>
                     <div className="col-md-4">
@@ -387,6 +371,22 @@ const InformationInstructor = () => {
                                 />
                             </div>
                         </div>
+                        <div className="mt-5 text-center">
+                                <button
+                                    className="btn btn-primary profile-button me-5"
+                                    type="button"
+                                    onClick={handleSave}
+                                >
+                                    Save Profile
+                                </button>
+                                {/* <button
+                                    className="btn btn-primary profile-button"
+                                    type="button"
+                                    onClick={handleDelete}
+                                >
+                                    Delete Profile
+                                </button> */}
+                            </div>
                     </div>
                 </div>
             </div>

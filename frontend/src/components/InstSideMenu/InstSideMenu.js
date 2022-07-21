@@ -1,29 +1,32 @@
+import * as React from 'react';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
 
-// https://codepen.io/FlorinPop17/pen/EJKgKB
-import 'bootstrap/dist/css/bootstrap.min.css'
-import React from 'react';
-import cx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
-import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
-import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
+const style = {
+  width: '100%',
+  maxWidth: 360,
+  bgcolor: 'background.paper',
+};
 
-
-
-const InstSideMenu = () => {
-
-    return (
-        <>
-        </>
-
-
-
-
-    )
+export default function InstSideMenu() {
+  return (
+    <List sx={style} component="nav" aria-label="mailbox folders">
+      <ListItem button>
+        <ListItemText primary="Edit profile" />
+      </ListItem>
+      <Divider />
+      <ListItem button divider>
+        <ListItemText primary="See reviews" />
+      </ListItem>
+      <ListItem button>
+        <ListItemText primary="Change Password" />
+      </ListItem>
+      <Divider light />
+      <ListItem button>
+        <ListItemText primary="More" />
+      </ListItem>
+    </List>
+  );
 }
-
-export default InstSideMenu

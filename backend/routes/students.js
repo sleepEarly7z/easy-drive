@@ -125,10 +125,10 @@ router.patch('/:id', function (req, res, next) {
 	}
 
 	const instructorUpdated = service.updateStudentById(id, req.body);
-
-	(instructorUpdated)
-		? res.status(200).send(instructorUpdated)
-		: res.status(424).send({ message: `failed to update instructor ${id} from database` })
+	res.status(200);
+	// (instructorUpdated)
+	// 	? res.status(200).send(instructorUpdated)
+	// 	: res.status(424).send({ message: `failed to update instructor ${id} from database` })
 });
 
 // router.get('/filter', function (req, res) {
