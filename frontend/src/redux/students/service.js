@@ -44,7 +44,7 @@ const addStudent = async (data) => {
 
 const updateStudent = async (data) => {
     const {
-        id,
+        _id,
         first_name,
         last_name,
         email,
@@ -52,9 +52,10 @@ const updateStudent = async (data) => {
         street,
         city,
         province,
-        country
+        country,
+        followedInstructors
     } = data
-    const response = await fetch(`http://localhost:3001/students/${id}`, {
+    const response = await fetch(`http://localhost:3001/students/${_id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -67,7 +68,8 @@ const updateStudent = async (data) => {
             street,
             city,
             province,
-            country
+            country,
+            followedInstructors
         }),
     })
 

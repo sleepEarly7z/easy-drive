@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const instructorSchema = new mongoose.Schema({
+	role: {
+		type: String,
+		default: "instructor"
+	},
 	first_name: {
 		type: String,
 		required: true,

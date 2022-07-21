@@ -14,10 +14,6 @@ const reviewSchema = new mongoose.Schema({
     rating: {
         type: Number
     }
-})
+}, {timestamps : true});
 
-const Review = mongoose.model('Review', reviewSchema);
-
-module.exports = {
-    Review
-}
+module.exports = mongoose.model('Review', reviewSchema);
