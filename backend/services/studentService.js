@@ -1,53 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
-
-// const mongoose = require('mongoose');
-
-// const StudentSchema = new mongoose.Schema({
-// 	first_name: {
-// 		type: String,
-// 		required: true,
-// 	},
-// 	last_name: {
-// 		type: String,
-// 		required: true,
-// 	},
-// 	password: {
-// 		type: String,
-// 	},
-// 	email: {
-// 		type: String,
-// 		required: true,
-// 	},
-// 	phone: {
-// 		type: String,
-// 		required: true,
-// 	},
-// 	photo: {
-// 		type: String,
-// 		default: 'https://picsum.photos/200',
-// 	},
-// 	street: {
-// 		type: String,
-// 		required: true,
-// 	},
-// 	city: {
-// 		type: String,
-// 		required: true,
-// 	},
-// 	province: {
-// 		type: String,
-// 		required: true,
-// 	},
-// 	country: {
-// 		type: String,
-// 		required: true,
-// 	},
-// 	followedInstructors: {
-// 		type: [String],
-// 	},
-// });
-
-// const Student = mongoose.model('Student', StudentSchema);
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const Student = require('../models/studentModel');
 
@@ -185,6 +138,130 @@ const followInstructorById = (id) => {
 	} catch (error) {
 		throw { type: 'DB', message: error };
 	}
+};
+
+const registerStudent = async (student) => {
+	const {
+		first_name,
+		last_name,
+		password,
+		email,
+		phone,
+		photo,
+		street,
+		city,
+		province,
+		country,
+		followedInstructors,
+	} = student;
+
+	// Find if user already exists
+	const studentExists = await Student.findOne({ email });
+
+	if (studentExists) {
+		throw {
+			type: 'validation',
+			message: 'Student already exists',
+		};
+	}
+
+	// Hash password
+	// TODO: later after change all password in db into hashed password
+	const salt = await bcrypt.genSalt(10);
+	const hashedPassword = await bcrypt.hash(password, salt);
+
+	// Create user
+	const newStudent = await Student.create({
+		first_name,
+		last_name,
+		password,
+		email,
+		phone,
+		photo,
+		street,
+		city,
+		province,
+		country,
+		followedInstructors,
+	});
+
+	if (newStudent) {
+		return {
+			_id: newStudent._id,
+			name: newStudent.name,
+			email: newStudent.email,
+			password: newStudent.password,
+			token: generateToken(newStudent._id),
+		};
+	} else {
+		throw {
+			type: 'validation',
+			message: 'Invalid student data',
+		};
+	}
+};
+
+const loginInstructor = async (email, password) => {
+	// Find if user exists
+	const instructorFound = await Instructor.findOne({
+		email: email,
+	});
+
+	// Find if user and passwords match
+	if (
+		instructorFound &&
+		// (await bcrypt.compare(password, instructorFound.password))
+		password === instructorFound.password
+	) {
+		return {
+			_id: instructorFound._id,
+			name: instructorFound.name,
+			email: instructorFound.email,
+			password: instructorFound.password,
+			token: generateToken(instructorFound._id),
+		};
+	} else {
+		throw {
+			type: 'validation',
+			message: 'Invalid credentials',
+		};
+	}
+};
+
+const getMe = async (req) => {
+	const instructor = {
+		_id: req.instructor._id,
+		email: req.instructor.email,
+		first_name: req.instructor.first_name,
+		last_name: req.instructor.last_name,
+		// password: hashedPassword,
+		password: req.instructor.password,
+		email: req.instructor.email,
+		phone: req.instructor.phone,
+		gender: req.instructor.gender,
+		photo: req.instructor.phone,
+		rating: req.instructor.rating,
+		street: req.instructor.street,
+		city: req.instructor.city,
+		province: req.instructor.province,
+		country: req.instructor.country,
+		company: req.instructor.company,
+		language: req.instructor.language,
+		experience: req.instructor.experience,
+		license: req.instructor.license,
+		description: req.instructor.description,
+		isCarProvided: req.instructor.isCarProvided,
+	};
+
+	return instructor;
+};
+
+// Generate Token
+// https://jwt.io/
+const generateToken = (id) => {
+	return jwt.sign({ id }, 'abc123@!#', {
+		expiresIn: '30d',
+	});
 };
 
 module.exports = {
