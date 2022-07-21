@@ -3,6 +3,7 @@ import SidebarInstructor from '../../components/SidebarInstructor'
 import InformationInstructor from '../../components/InformationInstructor'
 import InstructorViewedReviews from '../../components/InstructorViewedReviews'
 import Reviews from '../../components/ReviewsList/Reviews'
+import InstSideMenu from '../../components/InstSideMenu/InstSideMenu'
 
 const ProfileInstructor = () => {
     return (
@@ -13,15 +14,17 @@ const ProfileInstructor = () => {
             <div className="ProfileInstructor__sidebar">
                 <SidebarInstructor />
             </div>
-            <div className="ProfileInstructor__information">
-                <InformationInstructor />
-            </div>
-            {/* <div className="sideAndInfo2">
+            <div className='InstSideMenuProps'>
+                {/* <div className='InstSideMenuSingle'> */}
+                <InstSideMenu/>
+                {/* </div> */}
+                <div className="ProfileInstructor__information">
                     <InformationInstructor />
-                </div> */}
-            <div>
-                <Reviews />
+                    <Reviews/>
+                </div>
             </div>
+
+            
         </>
     )
 }

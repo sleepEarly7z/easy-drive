@@ -1,7 +1,7 @@
 import './SidebarInstructor.scss'
 // https://codepen.io/FlorinPop17/pen/EJKgKB
 import 'bootstrap/dist/css/bootstrap.min.css'
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -11,6 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
+import axios from 'axios';
 
 const useStyles = makeStyles(({ palette }) => ({
     card: {
@@ -52,6 +53,52 @@ const useStyles = makeStyles(({ palette }) => ({
   }));
 
 const SidebarInstructor = () => {
+
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [first_name, setFirstName] = useState('');
+    const [last_name, setLastName] = useState('');
+    const [rating, setRating] = useState('');
+
+    const handlePhoneChange = (event) => {
+        setPhone(event.target.value);
+    }
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    }
+
+    const handleFirstNameChange = (event) => {
+        setFirstName(event.target.value);
+    }
+
+    const handleLastNameChange = (event) => {
+        setLastName(event.target.value);
+    }
+
+    const handleRatingChange = (event) => {
+        setRating(event.target.value);
+    }
+
+    useEffect (() => {
+      const sendGet = async () => {
+        const res = await axios.get('http://localhost:3001/instructors/62d76018f36c6973468ba796')
+        .then((res) =>{
+          setPhone(res.data.data.phone);
+          setEmail(res.data.data.email);
+          setFirstName(res.data.data.first_name);
+          setLastName(res.data.data.last_name);
+          setRating(res.data.data.rating);
+        }).catch((err) => {
+          alert(err);
+        }
+        );
+        // console.log(this.state.allRecipes);
+      }
+      sendGet();
+    },[]);
+
+
     const styles = useStyles();
     const shadowStyles = useFadedShadowStyles();
     const borderedGridStyles = useGutterBorderedGridStyles({
@@ -63,16 +110,16 @@ const SidebarInstructor = () => {
         <Card className={cx(styles.card, shadowStyles.root)}>
                 <CardContent>
                     <Avatar className={styles.avatar} src={'https://i.pravatar.cc/300'} />
-                    <h3 className={styles.heading}>Jack Li</h3>
-                    <span className={styles.subheader}>604-123-4567</span>
+                    <h3 className={styles.heading}>{first_name + " " + last_name}</h3>
+                    <span className={styles.subheader}>{phone}</span>
                     <br />
-                    <span className={styles.subheader}>xxx@gmail.com</span>
+                    <span className={styles.subheader}>{email}</span>
                 </CardContent>
             <Divider light />
                 <Box display={'flex'}>
                     <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
                     <p className={styles.statLabel}>Rating</p>
-                    <p className={styles.statValue}>3.14</p>
+                    <p className={styles.statValue}>{rating}</p>
                     </Box>
                     <Box p={2} flex={'auto'} className={borderedGridStyles.item} onClick = {() => {console.log("123")}}>
                     <p className={styles.statLabel}>Followers</p>
