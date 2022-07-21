@@ -1,5 +1,4 @@
 const express = require('express');
-const { default: InstructorService } = require('../../frontend/src/redux/instructors/service');
 const router = express.Router();
 
 const service = require('../services/reviewService');
