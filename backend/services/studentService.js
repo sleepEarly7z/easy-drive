@@ -1,53 +1,55 @@
 const { v4: uuidv4 } = require('uuid');
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const StudentSchema = new mongoose.Schema({
-	first_name: {
-		type: String,
-		required: true,
-	},
-	last_name: {
-		type: String,
-		required: true,
-	},
-	password: {
-		type: String,
-	},
-	email: {
-		type: String,
-		required: true,
-	},
-	phone: {
-		type: String,
-		required: true,
-	},
-	photo: {
-		type: String,
-		default: 'https://picsum.photos/200',
-	},
-	street: {
-		type: String,
-		required: true,
-	},
-	city: {
-		type: String,
-		required: true,
-	},
-	province: {
-		type: String,
-		required: true,
-	},
-	country: {
-		type: String,
-		required: true,
-	},
-	followedInstructors: {
-		type: [String],
-	},
-});
+// const StudentSchema = new mongoose.Schema({
+// 	first_name: {
+// 		type: String,
+// 		required: true,
+// 	},
+// 	last_name: {
+// 		type: String,
+// 		required: true,
+// 	},
+// 	password: {
+// 		type: String,
+// 	},
+// 	email: {
+// 		type: String,
+// 		required: true,
+// 	},
+// 	phone: {
+// 		type: String,
+// 		required: true,
+// 	},
+// 	photo: {
+// 		type: String,
+// 		default: 'https://picsum.photos/200',
+// 	},
+// 	street: {
+// 		type: String,
+// 		required: true,
+// 	},
+// 	city: {
+// 		type: String,
+// 		required: true,
+// 	},
+// 	province: {
+// 		type: String,
+// 		required: true,
+// 	},
+// 	country: {
+// 		type: String,
+// 		required: true,
+// 	},
+// 	followedInstructors: {
+// 		type: [String],
+// 	},
+// });
 
-const Student = mongoose.model('Student', StudentSchema);
+// const Student = mongoose.model('Student', StudentSchema);
+
+const Student = require('../models/studentModel');
 
 /**
  * Get all Students from database
@@ -122,17 +124,17 @@ const deleteStudentById = (id) => {
  * @returns {object} Student updated
  */
 const updateStudentById = (id, patch) => {
-    // TODO
-    console.log("StudentService121")
-    console.log(patch.followedInstructors)
-    Student.updateOne({ _id: id }, patch, (err, stu) => {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log(stu)
-        }
-    })
-}
+	// TODO
+	console.log('StudentService121');
+	console.log(patch.followedInstructors);
+	Student.updateOne({ _id: id }, patch, (err, stu) => {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log(stu);
+		}
+	});
+};
 
 /**
  * Update an Student's instructor follow list form database
