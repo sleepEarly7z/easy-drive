@@ -1,7 +1,10 @@
 import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import {updateStudentAsync} from '../../redux/students/thunks'
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 const InformationStudent = () => {
     const dispatch = useDispatch()
@@ -14,6 +17,7 @@ const InformationStudent = () => {
     const [city, setcity] = useState('')
     const [province, setprovince] = useState('')
     const [country, setcountry] = useState('')
+    const [following, setfollowing] = useState([])
 
     const handlefirst_name = (e) => {
         setfirst_name(e.target.value)
@@ -39,9 +43,51 @@ const InformationStudent = () => {
     const handlecountry = (e) => {
         setcountry(e.target.value)
     }
-    const handleOnchange = (e) => {
-        console.log(e.target.value)
+
+    useEffect(() => {
+        const sendGet = async () => {
+            const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
+            .then((res) =>{
+                setfirst_name(res.data.data.first_name)
+                setlast_name(res.data.data.last_name)
+                setemail(res.data.data.email)
+                setphone(res.data.data.phone)
+                setstreet(res.data.data.street)
+                setcity(res.data.data.city)
+                setprovince(res.data.data.province)
+                setcountry(res.data.data.country)
+                setfollowing(res.data.data.followedInstructors)
+                // console.log(following)
+            }).catch((err) => {
+              alert(err);
+            }
+            );
+            // console.log(this.state.allRecipes);
+          }
+            sendGet();
+      },[]);
+
+      const handleSave = (e) => {
+        // e.preventDefault()
+
+        let instData = {
+            _id: '62d761535c08a0f631db58a0',
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            phone: phone,
+            street: street,
+            city: city,
+            country: country,
+            province: province,
+            followedInstructors: following
+        }
+
+        dispatch(updateStudentAsync(instData))
+
+        toast.success('Save the changes successfully.')
     }
+
     return (
         <>
             <div className="container rounded bg-white mt-5 mb-5">
@@ -61,7 +107,7 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="first name"
-                                        value= ""
+                                        value= {first_name}
                                         onChange={handlefirst_name}
                                     />
                                 </div>
@@ -70,7 +116,7 @@ const InformationStudent = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        value=""
+                                        value= {last_name}
                                         placeholder="surname"
                                         onChange={handlelast_name}
                                     />
@@ -85,11 +131,37 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="enter phone number"
-                                        value=""
+                                        value= {phone}
                                         onChange={handlephone}
                                     />
                                 </div>
                                 <div className="col-md-12">
+                                    <label className="labels">Email ID</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="enter email id"
+                                        value= {email}
+                                        onChange={handleemail}
+                                    />
+                                </div>
+
+
+                            </div>
+                            <div className="mt-5 text-center">
+                                <button
+                                    onClick={handleSave}
+                                    className="btn btn-primary profile-button"
+                                    type="button"
+                                >
+                                    Save Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-5">
+                        <div className="p-3 py-5">
+                        <div className="col-md-12">
                                     <label className="labels">
                                         Street
                                     </label>
@@ -97,7 +169,7 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="enter street"
-                                        value=""
+                                        value= {street}
                                         onChange={handlestreet}
                                     />
                                 </div>
@@ -109,7 +181,7 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="enter city"
-                                        value=""
+                                        value= {city}
                                         onChange={handlecity}
                                     />
                                 </div>
@@ -119,7 +191,7 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="enter Province"
-                                        value=""
+                                        value= {province}
                                         onChange={handleprovince}
                                     />
                                 </div>
@@ -129,100 +201,11 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="enter country"
-                                        value=""
+                                        value= {country}
                                         onChange={handlecountry}
                                     />
                                 </div>
-                                <div className="col-md-12">
-                                    <label className="labels">Area</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="enter address line 2"
-                                        value=""
-                                        onChange={handleOnchange}
-                                    />
-                                </div>
-                                <div className="col-md-12">
-                                    <label className="labels">Email ID</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="enter email id"
-                                        value=""
-                                        onChange={handleemail}
-                                    />
-                                </div>
-                            </div>
-                            <div className="row mt-3">
-                                <div className="col-md-6">
-                                    <label className="labels">
-                                        Car Provided
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="country"
-                                        value=""
-                                        onChange={handleOnchange}
-                                    />
-                                </div>
-                                <div className="col-md-6">
-                                    <label className="labels">
-                                        Pick-up/Drop-off
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        value=""
-                                        placeholder="state"
-                                        onChange={handleOnchange}
-                                    />
-                                </div>
-                            </div>
-                            <div className="mt-5 text-center">
-                                <button
-                                    className="btn btn-primary profile-button"
-                                    type="button"
-                                >
-                                    Save Profile
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="p-3 py-5">
-                            <div className="d-flex justify-content-between align-items-center experience">
-                                <span>Edit Experience</span>
-                                <span className="border px-3 p-1 add-experience">
-                                    <i className="fa fa-plus"></i>
-                                    &nbsp;Experience
-                                </span>
-                            </div>
-                            <br />
-                            <div className="col-md-12">
-                                <label className="labels">
-                                    Experience in teaching
-                                </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="experience"
-                                    value=""
-                                    onChange={handleOnchange}
-                                />
-                            </div>{' '}
-                            <br />
-                            <div className="col-md-12">
-                                <label className="labels">className5/7</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="additional details"
-                                    value=""
-                                    onChange={handleOnchange}
-                                />
-                            </div>
+
                         </div>
                     </div>
                 </div>

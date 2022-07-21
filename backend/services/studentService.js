@@ -122,17 +122,17 @@ const deleteStudentById = (id) => {
  * @returns {object} Student updated
  */
 const updateStudentById = (id, patch) => {
-	// TODO
-	console.log('StudentService121');
-	console.log(patch.followedInstructors);
-	Student.updateOne({ _id: id }, patch, (err, stu) => {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log(stu);
-		}
-	});
-};
+    // TODO
+    console.log("StudentService121")
+    console.log(patch.followedInstructors)
+    Student.updateOne({ _id: id }, patch, (err, stu) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(stu)
+        }
+    })
+}
 
 /**
  * Update an Student's instructor follow list form database
