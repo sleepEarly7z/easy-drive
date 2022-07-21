@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { getInstructorsAsync } from '../../redux/instructors/thunks'
 import { reset } from '../../redux/authentication/reducer'
-import { loginAsync } from '../../redux/authentication/thunks'
+import { loginAsInstructorAsync } from '../../redux/authentication/thunks'
 
 import Loading from '../Animation/Loading'
 
@@ -63,8 +63,6 @@ const SignInForm = () => {
     const [isLoading, setIsLoading] = useState(false)
     const classes = useStyles()
 
-    // const list = useSelector((state) => state.instructors.list)
-
     useEffect(() => {
         dispatch(getInstructorsAsync())
     }, [dispatch])
@@ -101,21 +99,8 @@ const SignInForm = () => {
             password: formInputs.get('password'),
         }
 
-        // let foundInstructor = list.find(
-        //     (user) => user.email === formInputs.get('email'),
-        // )
-
-        // console.log(foundInstructor)
-        // if (!foundInstructor) {
-        //     toast.error('Username does not exist')
-        //     return
-        // }
-        // if (foundInstructor.password !== formInputs.get('password')) {
-        //     toast.error('Invalid combination of username and password')
-        //     return
-        // }
         console.log(userData)
-        dispatch(loginAsync(userData))
+        dispatch(loginAsInstructorAsync(userData))
     }
 
     return isLoading ? (
@@ -136,7 +121,7 @@ const SignInForm = () => {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Sign In As Instructor
                     </Typography>
                     <Box
                         component="form"
@@ -183,8 +168,8 @@ const SignInForm = () => {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <NavLink to="/" variant="body2">
-                                    Forgot password?
+                                <NavLink to="/sign-in-student" variant="body2">
+                                    {'Sign In As Student'}
                                 </NavLink>
                             </Grid>
                             <Grid item>
