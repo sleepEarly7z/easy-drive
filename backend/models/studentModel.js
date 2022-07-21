@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const StudentSchema = new mongoose.Schema({
+    role: {
+		type: String,
+		default: "student"
+	},
     first_name: {
         type: String,
         required: true
