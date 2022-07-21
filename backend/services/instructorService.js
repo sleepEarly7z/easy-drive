@@ -231,6 +231,7 @@ const getQueriedInstructors = (query) => {
 	const { city, language, license, sortBy, sortDir } = query;
 
 	const findQuery = {};
+	// TODO: kinda hardcoded, research refactor options
 	if (city) {
 		const cities = Array.isArray(city) ? city : [city];
 		findQuery['city'] = { $in: cities };
@@ -248,9 +249,6 @@ const getQueriedInstructors = (query) => {
 
 	const sortQuery = {};
 	sortQuery[sortBy] = sortDir === 'asc' ? 1 : -1;
-
-	// console.log(findQuery);
-	// console.log(sortQuery);
 
 	try {
 		return Instructor.find(findQuery).sort(sortQuery);
