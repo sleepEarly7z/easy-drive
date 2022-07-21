@@ -6,88 +6,95 @@ const service = require('../services/studentService');
 
 /**
  * Get all instructors
- * 
+ *
  * @verb GET
  * @endpoint /instructors
- * 
+ *
  * Responses:
  * Success:
  * @status 200 OK
  * @data instructors[]
- * 
+ *
  * Error:
  * @status 500 SERVER ERROR
  * @error message
  */
 router.get('/', function (req, res) {
-	service.getStudents()
+	service
+		.getStudents()
 		.then((students) => {
 			res.status(200).send({ data: students });
 		})
 		.catch((error) => {
 			res.status(500).send({ error: error.message });
-		})
+		});
 });
 
 /**
  *  Get an instructor
- * 
+ *
  *  @description get an instructor
- * 
+ *
  *  @verb GET
- *  @endpoint /instructors/:id
- * 
+ *  @endpoint /student/:id
+ *
  *  Request:
- *  @parameters 
- * 		id - instructor id
- * 
+ *  @parameters
+ * 		id - student id
+ *
  *  Response:
- *  Success: 
+ *  Success:
  *  @status 200 OK
  *  @data instructor
- * 
+ *
  * 	@status 404 NOT FOUND
  *  @error message
  */
 router.get('/:id', function (req, res) {
 	const id = req.params.id;
 
-	service.getStudentById(id)
+	service
+		.getStudentById(id)
 		.then((studentFound) => {
 			res.status(200).send({ data: studentFound });
 		})
 		.catch((error) => {
-			res.status(404).send({ error: { message: `cannot find STUDENT with id ${id}` } });
-		})
+			res.status(404).send({
+				error: {
+					message: `cannot find STUDENT with id ${id}`,
+				},
+			});
+		});
 });
 
 /**
  *  Register an instructor
- *  
+ *
  *  @description Add instructor data to database
- * 
+ *
  *  @verb POST
  *  @endpoint /instructors
- * 
+ *
  *  Request:
  *  @payload { Instructor }
- * 
+ *
  *  Response:
  *  Success:
  *  @status 200 OK
  *  @data { Instructor } instructor added
- * 
+ *
  *  Error:
  *  @status 400 BAD REQUEST
  * 	@error error messages
- * 
+ *
  *  @status 500 SERVER ERROR
  *  @error error messages
  */
 router.post('/', function (req, res) {
 	const inputInstructor = req.body;
 
-	service.addStudent(inputInstructor)
+	service
+		.addStudent(inputInstructor)
 		.then((instructorAdded) => {
 			res.status(200).send({ data: instructorAdded });
 		})
@@ -97,7 +104,7 @@ router.post('/', function (req, res) {
 			} else {
 				res.status(500).send({ error: error.message });
 			}
-		})
+		});
 });
 
 // DELETE
@@ -110,9 +117,13 @@ router.delete('/:id', function (req, res) {
 	}
 
 	const instructorDeleted = service.deleteStudentById(id);
-	(instructorDeleted)
+	instructorDeleted
 		? res.status(200).send(instructorDeleted)
-		: res.status(424).send({ message: `failed to delete instructor ${id} from database` })
+		: res
+				.status(424)
+				.send({
+					message: `failed to delete instructor ${id} from database`,
+				});
 });
 
 // UPDATE
@@ -136,9 +147,13 @@ router.patch('/followInstructor/:id', function (req, res, next) {
 	const id = req.params.id;
 	const followInstructor = service.followInstructorById(id);
 
-	(followInstructor)
+	followInstructor
 		? res.status(200).send(followInstructor)
-		: res.status(424).send({ message: `failed to follow instructor ${id} from database` })
+		: res
+				.status(424)
+				.send({
+					message: `failed to follow instructor ${id} from database`,
+				});
 });
 
 // router.get('/filter', function (req, res) {
