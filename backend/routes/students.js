@@ -119,11 +119,9 @@ router.delete('/:id', function (req, res) {
 	const instructorDeleted = service.deleteStudentById(id);
 	instructorDeleted
 		? res.status(200).send(instructorDeleted)
-		: res
-				.status(424)
-				.send({
-					message: `failed to delete instructor ${id} from database`,
-				});
+		: res.status(424).send({
+				message: `failed to delete instructor ${id} from database`,
+		  });
 });
 
 // UPDATE
@@ -136,14 +134,10 @@ router.patch('/:id', function (req, res, next) {
 	}
 
 	const instructorUpdated = service.updateStudentById(id, req.body);
-
-	instructorUpdated
-		? res.status(200).send(instructorUpdated)
-		: res
-				.status(424)
-				.send({
-					message: `failed to update instructor ${id} from database`,
-				});
+	res.status(200);
+	// (instructorUpdated)
+	// 	? res.status(200).send(instructorUpdated)
+	// 	: res.status(424).send({ message: `failed to update instructor ${id} from database` })
 });
 
 // UPDATE followed instructor
@@ -153,11 +147,9 @@ router.patch('/followInstructor/:id', function (req, res, next) {
 
 	followInstructor
 		? res.status(200).send(followInstructor)
-		: res
-				.status(424)
-				.send({
-					message: `failed to follow instructor ${id} from database`,
-				});
+		: res.status(424).send({
+				message: `failed to follow instructor ${id} from database`,
+		  });
 });
 
 // router.get('/filter', function (req, res) {
