@@ -4,6 +4,37 @@ const router = express.Router();
 const service = require('../services/reviewService');
 
 /**
+ * Get all reviews for one instructor
+ *
+ * @verb GET
+ * @endpoint /instructors
+ *
+ * Responses:
+ * Success:
+ * @status 200 OK
+ * @data instructors[]
+ *
+ * Error:
+ * @status 500 SERVER ERROR
+ * @error message
+ */
+//  router.get('/', function (req, res) {
+// 	const query = req.query;
+
+// 	const getInstructors = (query)
+// 		? service.getQueriedInstructors(query)
+// 		: service.getInstructors()
+
+// 	getInstructors
+// 		.then((instructors) => {
+// 			res.status(200).send({ data: instructors });
+// 		})
+// 		.catch((error) => {
+// 			res.status(500).send({ error: error.message });
+// 		});
+// });
+
+/**
  * Get all reviews of one instructor or one student
  *
  *  @description get one instructor's or student's reviews

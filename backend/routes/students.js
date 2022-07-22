@@ -38,7 +38,6 @@ router.get('/', function (req, res) {
  *
  *  @verb GET
  *  @endpoint /students/:id
-
  *
  *  Request:
  *  @parameters
@@ -134,6 +133,44 @@ router.get('/checkFollowList/:id', function (req, res, next) {
 	// })
 
 });
+
+
+// router.get('/filter', function (req, res) {
+// 	res.send(service.getInstructors());
+// });
+
+// const dropDownType = {
+// 	BEST_MATCH: 'Best Match',
+// 	HIGHEST_RATED: 'Highest Rated'
+// }
+
+// router.get('/sort', function (req, res, next) {
+// 	const instructors = service.getInstructors();
+// 	const condition = req.query.condition.replaceAll('"', '')
+// 	if (condition === dropDownType.HIGHEST_RATED) {
+// 		console.log("pass1")
+// 		instructors.sort(function (a, b) { return b.Rating - a.Rating });
+// 	} else if (condition === dropDownType.BEST_MATCH) {
+// 		instructors.sort(function (a, b) { return b.experience - a.experience })
+// 	} else {
+// 		console.log('fail');
+// 	}
+// 	return res.send(instructors);
+// });
+
+// router.delete('/filter/:id', function (req, res, next) {
+// 	const instructors = service.getInstructors();
+// 	const id = JSON.stringify(req.body.id).replaceAll("\"", "")
+// 	console.log(typeof (id) + id)
+// 	const deleted = instructors.find(instructor => instructor.id.$oid === id);
+// 	if (deleted) {
+// 		instructors = instructors.filter(instructor => instructor.id.$oid !== id);
+// 		return res.send(deleted);
+// 	}
+// 	else {
+// 		return res.status(404).json({ message: 'instructor you are looking for does not exist' });
+// 	}
+// });
 
 /**
  *  Register a student
