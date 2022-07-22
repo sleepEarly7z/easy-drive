@@ -110,10 +110,19 @@ const followInstructor = async (instructorId) => {
     return response.json()
 }
 
+const isInstructorFollowed = async (instructorId) => {
+    const response = await fetch('http://localhost:3001/students/checkFollowList/' + instructorId._id, {
+        method: 'GET',
+    })
+
+    return response.json()
+}
+
 export default {
     getStudents,
     addStudent,
     updateStudent,
     deleteStudent,
-    followInstructor
+    followInstructor,
+    isInstructorFollowed
 }
