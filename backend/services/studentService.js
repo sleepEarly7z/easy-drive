@@ -254,5 +254,8 @@ module.exports = {
     deleteStudentById,
     updateStudentById,
     followInstructorById,
-    isInstructorFollowed
+    isInstructorFollowed,
+	getMe,
+	loginStudent,
+	registerStudent,
 }
