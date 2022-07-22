@@ -97,37 +97,36 @@ const updateStudentById = (id, patch) => {
  *
  * @returns {object} Student's instructor follow list updated
  */
-
- const followInstructorById = (id) => {
-    const exampleStudentId = '62d761535c08a0f631db58a0';
-    try {
-        Student.findById(exampleStudentId)
-        .then(student => {
-            if(!student.followedInstructors.includes(id)) {
-                student.followedInstructors.push(id)
-                student.save()
-                console.log("new instructor is followed");
-            } else {
-                Student.updateOne({_id: exampleStudentId },{$pull: {followedInstructors : id}})
-                .then(()=> student.save())
-                console.log("instructor is unfollowed");
-            }
-
-        })
-        return id;
-      } catch (error) {
-        throw ({ type: 'DB', message: error })
-      }
-}
+const followInstructorById = (id) => {
+	const exampleStudentId = '62d761535c08a0f631db58a0';
+	try {
+		Student.findById(exampleStudentId).then((student) => {
+			if (!student.followedInstructors.includes(id)) {
+				student.followedInstructors.push(id);
+				student.save();
+				console.log('new instructor is followed');
+			} else {
+				Student.updateOne(
+					{ _id: exampleStudentId },
+					{ $pull: { followedInstructors: id } }
+				).then(() => student.save());
+				console.log('instructor is unfollowed');
+			}
+		});
+		return id;
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
 const isInstructorFollowed = (id) => {
-    const exampleStudentId = '62d761535c08a0f631db58a0';
-    try {
-        return Student.findById(exampleStudentId)
-      } catch (error) {
-        throw ({ type: 'DB', message: error })
-      }
-}
+	const exampleStudentId = '62d761535c08a0f631db58a0';
+	try {
+		return Student.findById(exampleStudentId);
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
 const registerStudent = async (student) => {
 	const {
@@ -245,7 +244,6 @@ const generateToken = (id) => {
 		expiresIn: '30d',
 	});
 };
-
 module.exports = {
     Student,
     getStudents,
