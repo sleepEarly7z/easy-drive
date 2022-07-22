@@ -144,6 +144,7 @@ const InformationStudent = () => {
                                         onChange={handleemail}
                                     />
                                 </div>
+
                             </div>
                             <div className="mt-5 text-center">
                                 <button
@@ -202,6 +203,7 @@ const InformationStudent = () => {
                                         onChange={handlecountry}
                                     />
                                 </div>
+
                         </div>
                     </div>
                 </div>
