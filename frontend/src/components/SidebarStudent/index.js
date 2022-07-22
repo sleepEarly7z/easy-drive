@@ -129,7 +129,7 @@ const SidebarStudent = () => {
                     </Box>
                 </Box>
         </Card>
-        <FollowingList showProp={show}/>
+        <FollowingList showBoolean={show} onClose = {() => setShow(false)}/>
         </>
     )
 }
