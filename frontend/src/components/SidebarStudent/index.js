@@ -10,6 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
 import axios from 'axios';
+import FollowingList from '../FollowingList/FollowingList';
 
 const useStyles = makeStyles(({ palette }) => ({
     card: {
@@ -50,12 +51,20 @@ const useStyles = makeStyles(({ palette }) => ({
     },
   }));
 
-const SidebarStudent = () => {
 
+
+const SidebarStudent = () => {
+    const [show, setShow] = useState(false);
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
+    const [followingList, setFollowingList] = useState({});
+
+    const handleFollowingList = (event) => {
+        setShow(!show);
+        console.log(show);
+    }
 
     const handlePhoneChange = (event) => {
         setPhone(event.target.value);
@@ -82,6 +91,7 @@ const SidebarStudent = () => {
           setEmail(res.data.data.email);
           setFirstName(res.data.data.first_name);
           setLastName(res.data.data.last_name);
+          setFollowingList(res.data.data.followedInstructors);
         }).catch((err) => {
           alert(err);
         }
@@ -109,7 +119,7 @@ const SidebarStudent = () => {
                 </CardContent>
             <Divider light />
                 <Box display={'flex'}>
-                    <Box p={2} flex={'auto'} className={borderedGridStyles.item} onClick = {() => {console.log("123")}}>
+                    <Box p={2} flex={'auto'} className={borderedGridStyles.item} onClick = {handleFollowingList}>
                     <p className={styles.statLabel}>Following</p>
                     <p className={styles.statValue}>12</p>
                     </Box>
@@ -119,6 +129,7 @@ const SidebarStudent = () => {
                     </Box>
                 </Box>
         </Card>
+        <FollowingList showProp={show}/>
         </>
     )
 }

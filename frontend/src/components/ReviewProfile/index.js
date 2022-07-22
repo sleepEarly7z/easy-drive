@@ -66,8 +66,6 @@ export default function ReviewProfile({ instructor }) {
     const currentInstructorReviews = useSelector(
         (state) => state.reviews.reviewsOfInstructor,
     )
-
-
     const params = useParams()
     const [instructorFollowed, setInstructorFollowed] = useState(false);
     const [following, setfollowing] = useState([]);

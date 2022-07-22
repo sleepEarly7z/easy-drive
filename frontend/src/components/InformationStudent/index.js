@@ -57,7 +57,6 @@ const InformationStudent = () => {
                 setprovince(res.data.data.province)
                 setcountry(res.data.data.country)
                 setfollowing(res.data.data.followedInstructors)
-                // console.log(following)
             }).catch((err) => {
               alert(err);
             }
