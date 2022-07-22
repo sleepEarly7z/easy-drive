@@ -3,6 +3,7 @@ import { REQUEST_STATE } from '../utils'
 import {
     getInstructorsAsync,
     getInstructorByIdAsync,
+    getReviewsByIdAsync,
     addInstructorAsync,
     updateInstructorAsync,
     deleteInstructorAsync,
@@ -17,6 +18,7 @@ const INITIAL_STATE = {
     viewCurrentInstructor: {},
     getInstructors: REQUEST_STATE.IDLE,
     getInstructorById: REQUEST_STATE.IDLE,
+    getReviewsById: REQUEST_STATE.IDLE,
     addInstructor: REQUEST_STATE.IDLE,
     deleteInstructor: REQUEST_STATE.IDLE,
     updateInstructor: REQUEST_STATE.IDLE,
@@ -55,6 +57,24 @@ const instructorsSlice = createSlice({
                 state.getInstructorById = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
+            .addCase(getReviewsByIdAsync.pending, (state) => {
+                state.getReviewsById = REQUEST_STATE.PENDING
+                state.error = null
+            })
+            .addCase(
+                getReviewsByIdAsync.fulfilled,
+                (state, action) => {
+                    state.getReviewsById = REQUEST_STATE.FULFILLED
+                    state.viewCurrentInstructor.reviews = action.payload.data
+                },
+            )
+            .addCase(
+                getReviewsByIdAsync.rejected,
+                (state, action) => {
+                    state.getReviewsById = REQUEST_STATE.REJECTED
+                    state.error = action.error
+                },
+            )
             .addCase(addInstructorAsync.pending, (state) => {
                 state.addInstructor = REQUEST_STATE.PENDING
                 state.error = null

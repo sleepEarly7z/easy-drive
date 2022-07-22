@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const service = require('../services/instructorService');
-const { protect } = require('../middleware/authMiddleware');
+const { protect } = require('../middleware/authMiddlewareInst');
 
 /**
  * Get all instructors
@@ -23,9 +23,9 @@ const { protect } = require('../middleware/authMiddleware');
 router.get('/', function (req, res) {
 	const query = req.query;
 
-	const getInstructors = (query)
+	const getInstructors = query
 		? service.getQueriedInstructors(query)
-		: service.getInstructors()
+		: service.getInstructors();
 
 	getInstructors
 		.then((instructors) => {
@@ -157,26 +157,25 @@ router.delete('/:id', function (req, res) {
 	instructorDeleted
 		? res.status(200).send(instructorDeleted)
 		: res.status(424).send({
-			message: `failed to delete instructor ${id} from database`,
-		});
+				message: `failed to delete instructor ${id} from database`,
+		  });
 });
 
 // UPDATE
 router.patch('/:id', function (req, res, next) {
 	const id = req.params.id;
-	console.log("instrucot route 121")
+	console.log('instrucot route 121');
 	const instructor = service.getInstructorById(id);
 
 	if (!instructor) {
 		return res.status(404).send(`instructor ${id} not found`);
 	}
-	console.log("instrucot route 127")
-	const instructorUpdated = service.updateInstructorById(id, req.body);
+	console.log('instrucot route 127');
+	const instructorUpdated = service.updateInstructorById(
+		id,
+		req.body
+	);
 	res.status(200);
-	// console.log(instructorUpdated);
-	// (instructorUpdated)
-	// 	? res.status(200).send(instructorUpdated)
-	// 	: res.status(424).send({ message: `failed to update instructor ${id} from database`})
 });
 
 router.get('/filter', function (req, res) {

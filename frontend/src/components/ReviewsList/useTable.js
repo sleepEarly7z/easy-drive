@@ -58,6 +58,8 @@ export default function useTable(records, headCells, filterFn) {
 									? order
 									: false
 							}
+							width={headCell.width}
+							align={'center'}
 						>
 							{headCell.disableSorting ? (
 								headCell.label

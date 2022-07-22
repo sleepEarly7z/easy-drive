@@ -16,6 +16,9 @@ import {
 import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { followInstructorAsync } from '../../redux/students/thunks'
+
 const MessageActionButton = styled.button`
     margin: 0 5px;
     padding: 8px 19px;
@@ -57,6 +60,17 @@ const FollowActionButton = styled.button`
 `
 
 export default function ReviewProfile({ instructor }) {
+    const dispatch = useDispatch()
+    const currentInstructorReviews = useSelector(
+        (state) => state.reviews.reviewsOfInstructor,
+    )
+    const followInstructor = (instructorID) => () => {
+        console.log(instructorID)
+        let id = {
+            _id: instructorID,
+        }
+        dispatch(followInstructorAsync(id))
+    }
     return (
         <div>
             <div className="ReviewProfile">
@@ -77,26 +91,29 @@ export default function ReviewProfile({ instructor }) {
                         </div>
                         <div className="d-flex mx-5 pt-2 pb-2 w-75">
                             <div>
-                                <p className="fw-bold h4 mt-5 mb-3">
+                                <div className="fw-bold h4 mt-5 mb-3">
                                     {instructor.first_name}{' '}
                                     {instructor.last_name}
-                                </p>
-                                <p className="text-muted mb-1">
+                                </div>
+                                <div className="text-muted mb-1">
                                     {instructor.license}
-                                </p>
-                                <p className="text-muted mb-1">
+                                </div>
+                                <div className="text-muted mb-1">
                                     {instructor.city}, {instructor.country}
-                                </p>
-                                <p className="d-flex text-muted d-flex mb-3">
+                                </div>
+                                <div className="d-flex text-muted d-flex mb-3">
                                     <RatingStar average={instructor.rating} />{' '}
                                     <div className="rating-number">
                                         {instructor.rating} / 5
                                     </div>
-                                </p>
+                                </div>
                             </div>
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
-                            <FollowActionButton className="">
+                            <FollowActionButton
+                                className=""
+                                onClick={followInstructor(instructor._id)}
+                            >
                                 Follow
                             </FollowActionButton>
                             <MessageActionButton className="">
@@ -134,56 +151,56 @@ export default function ReviewProfile({ instructor }) {
                     <div className="review-info-section">
                         <div className="col-12">
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                <p className="review-profile-info">
+                                <div className="review-profile-info">
                                     <AiFillMail className="review-profile-ai-icon" />
                                     Email
-                                </p>
+                                </div>
                                 <a className="review-profile-info-res" href="/">
                                     {instructor.email}
                                 </a>
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                <p className="review-profile-info">
+                                <div className="review-profile-info">
                                     <AiFillPhone className="review-profile-ai-icon" />
                                     Mobile
-                                </p>
-                                <p className="review-profile-info-res">
+                                </div>
+                                <div className="review-profile-info-res">
                                     {instructor.phone}
-                                </p>
+                                </div>
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                <p className="review-profile-info">
+                                <div className="review-profile-info">
                                     <AiTwotoneBank className="review-profile-ai-icon" />
                                     Company
-                                </p>
+                                </div>
                                 <NavLink to="/">{instructor.company}</NavLink>
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                <p className="review-profile-info">
+                                <div className="review-profile-info">
                                     <AiOutlineHighlight className="review-profile-ai-icon" />
                                     Languages
-                                </p>
-                                <p className="review-profile-info-res">
+                                </div>
+                                <div className="review-profile-info-res">
                                     {instructor.language}
-                                </p>
+                                </div>
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                <p className="review-profile-info">
+                                <div className="review-profile-info">
                                     <AiTwotoneSchedule className="review-profile-ai-icon" />
                                     Year of Experience
-                                </p>
-                                <p className="review-profile-info-res">
+                                </div>
+                                <div className="review-profile-info-res">
                                     {instructor.experience}
-                                </p>
+                                </div>
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
-                                <p className="review-profile-info">
+                                <div className="review-profile-info">
                                     <AiFillIdcard className="review-profile-ai-icon" />
                                     Liscense
-                                </p>
-                                <p className="review-profile-info-res">
+                                </div>
+                                <div className="review-profile-info-res">
                                     {instructor.license}
-                                </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -227,7 +244,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews instructorId={instructor._id} />
+                        <Reviews reviews={currentInstructorReviews} />
                     </div>
                 </div>
             </div>

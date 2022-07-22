@@ -3,5 +3,5 @@ export const actionTypes = {
     UPDATE_STUDENT: 'students/updateStudent',
     DELETE_STUDENT: 'students/deleteStudent',
     GET_STUDENT: 'students/getStudent',
-
+    FOLLOW_INSTRUCTOR: 'students/followInstructor'
 }

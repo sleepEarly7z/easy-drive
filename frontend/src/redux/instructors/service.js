@@ -1,50 +1,62 @@
 const getQueryString = (query) => {
-    if (!query) return null;
+    if (!query) return null
 
-    const { filterBy, sortBy } = query;
-    let params = new URLSearchParams();
+    const { filterBy, sortBy } = query
+    let params = new URLSearchParams()
 
     if (filterBy) {
         for (const category of filterBy) {
-            const { categoryName, options } = category;
+            const { categoryName, options } = category
             for (const option of options) {
-                params.append(categoryName, option);
+                params.append(categoryName, option)
             }
         }
     }
 
     if (sortBy) {
-        params.append('sortBy', sortBy.sortBy);
-        params.append('sortDir', sortBy.sortDir);
+        params.append('sortBy', sortBy.sortBy)
+        params.append('sortDir', sortBy.sortDir)
     }
 
-    return params.toString();
-};
+    return params.toString()
+}
 
 const getInstructors = async (query) => {
-    const queryString = getQueryString(query);
-    const url = (queryString)
+    const queryString = getQueryString(query)
+    const url = queryString
         ? `http://localhost:3001/instructors?${queryString}`
-        : `http://localhost:3001/instructors`;
+        : `http://localhost:3001/instructors`
 
-    console.log(url);
+    console.log(url)
 
     try {
         const response = await fetch(url, {
-            method: 'GET'
+            method: 'GET',
         })
-        return response.json();
+        return response.json()
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
 }
 
 const getInstructorById = async (id) => {
-    const response = await fetch('http://localhost:3001/instructors/' + id, {
+    const basicResponse = await fetch(
+        'http://localhost:3001/instructors/' + id,
+        {
+            method: 'GET',
+        },
+    )
+    // const basicReviews = await fetch('http://localhost:3001/reviews/' + id, {
+    //     method: 'GET',
+    // })
+    return basicResponse.json()
+}
+
+const getReviewsById = async (id) => {
+    const basicReviews = await fetch('http://localhost:3001/reviews/' + id, {
         method: 'GET',
     })
-    console.log('response: ' + response)
-    return response.json()
+    return basicReviews.json()
 }
 
 const addInstructor = async (data) => {
@@ -100,7 +112,7 @@ const addInstructor = async (data) => {
 }
 
 const updateInstructor = async (payload) => {
-    const temp = payload;
+    const temp = payload
     // console.log(temp)
     const {
         _id,
@@ -123,32 +135,35 @@ const updateInstructor = async (payload) => {
     } = payload
     // console.log(id)
     // console.log(payload)
-    const response = await fetch('http://localhost:3001/instructors/' + payload._id, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
+    const response = await fetch(
+        'http://localhost:3001/instructors/' + payload._id,
+        {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                _id,
+                first_name,
+                last_name,
+                password,
+                email,
+                phone,
+                street,
+                city,
+                province,
+                country,
+                company,
+                language,
+                experience,
+                license,
+                description,
+                time,
+                carIsProvided,
+            }),
         },
-        body: JSON.stringify({
-            _id,
-            first_name,
-            last_name,
-            password,
-            email,
-            phone,
-            street,
-            city,
-            province,
-            country,
-            company,
-            language,
-            experience,
-            license,
-            description,
-            time,
-            carIsProvided,
-        }),
-    })
-    console.log("97 service")
+    )
+    console.log('97 service')
     return response.json()
 }
 
@@ -180,7 +195,7 @@ const getFilter = async () => {
 const updateFilter = async (id) => {
     const response = await fetch(
         'http://localhost:3001/instructors/filter' +
-        JSON.stringify(id).replaceAll('"', ''),
+            JSON.stringify(id).replaceAll('"', ''),
         {
             method: 'DELETE',
             headers: {
@@ -223,6 +238,7 @@ const sortFilter = async (condition) => {
 const InstructorService = {
     getInstructors,
     getInstructorById,
+    getReviewsById,
     addInstructor,
     updateInstructor,
     deleteInstructor,
@@ -231,4 +247,4 @@ const InstructorService = {
     sortFilter,
 }
 
-export default InstructorService;
+export default InstructorService

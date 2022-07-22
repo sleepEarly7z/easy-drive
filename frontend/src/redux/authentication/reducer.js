@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { registerAsync, loginAsync, logoutAsync } from './thunks'
+import { registerAsync, loginAsInstructorAsync, loginAsStudentAsync, logoutAsync } from './thunks'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
@@ -41,15 +41,29 @@ export const authSlice = createSlice({
                 state.message = action.payload
                 state.user = null
             })
-            .addCase(loginAsync.pending, (state) => {
+            .addCase(loginAsInstructorAsync.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(loginAsync.fulfilled, (state, action) => {
+            .addCase(loginAsInstructorAsync.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.user = action.payload
             })
-            .addCase(loginAsync.rejected, (state, action) => {
+            .addCase(loginAsInstructorAsync.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+                state.user = null
+            })
+            .addCase(loginAsStudentAsync.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(loginAsStudentAsync.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.user = action.payload
+            })
+            .addCase(loginAsStudentAsync.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

@@ -96,9 +96,24 @@ const deleteStudent = async (id) => {
 	return data;
 }
 
+const followInstructor = async (instructorId) => {
+    const {id} = instructorId
+    // const id = JSON.stringify(instructorId);
+    const response = await fetch('http://localhost:3001/students/followInstructor/' + instructorId._id, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id}),
+    })
+
+    return response.json()
+}
+
 export default {
     getStudents,
     addStudent,
     updateStudent,
-    deleteStudent
+    deleteStudent,
+    followInstructor
 }
