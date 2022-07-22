@@ -1,5 +1,5 @@
 import './index.scss'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-bootstrap'
 import styled from 'styled-components'
 import RateDisplay from '../ReviewRating/ReviewRating'
@@ -17,7 +17,9 @@ import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { followInstructorAsync } from '../../redux/students/thunks'
+import { useParams } from 'react-router-dom'
+import { followInstructorAsync, isInstructorFollowedAsync } from '../../redux/students/thunks';
+
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -64,13 +66,48 @@ export default function ReviewProfile({ instructor }) {
     const currentInstructorReviews = useSelector(
         (state) => state.reviews.reviewsOfInstructor,
     )
+
+
+    const params = useParams()
+    const [instructorFollowed, setInstructorFollowed] = useState(false);
+    const [following, setfollowing] = useState([]);
+
+    useEffect(() => {
+            dispatch(isInstructorFollowedAsync({_id: params.instructorId}))
+            .then(result => {
+                setInstructorFollowed(result.payload.data)
+            })
+            // const sendGet = async () => {
+            //     const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
+            //     .then((res) =>{
+            //         setfollowing(res.data.data.followedInstructors)
+            //         // console.log(following)
+            //     }).catch((err) => {
+            //       alert(err);
+            //     }
+            //     );
+            //     // console.log(this.state.allRecipes);
+            //   }
+            //     sendGet();
+    }, []);
+
     const followInstructor = (instructorID) => () => {
         console.log(instructorID)
         let id = {
             _id: instructorID,
         }
         dispatch(followInstructorAsync(id))
+            .then(() => {
+                dispatch(isInstructorFollowedAsync(id))
+                    .then(result => {
+                        setInstructorFollowed(!instructorFollowed)
+                        console.log(result)
+                    })
+            }).then(() => {
+                console.log(instructorFollowed)
+            })
     }
+
     return (
         <div>
             <div className="ReviewProfile">
@@ -110,11 +147,9 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
-                            <FollowActionButton
-                                className=""
-                                onClick={followInstructor(instructor._id)}
-                            >
-                                Follow
+
+                            <FollowActionButton className="" onClick={followInstructor(instructor._id)}>
+                                {instructorFollowed ? 'unfollow' : 'follow'}
                             </FollowActionButton>
                             <MessageActionButton className="">
                                 Message
