@@ -46,7 +46,6 @@ const InformationStudent = () => {
 
     useEffect(() => {
         const sendGet = async () => {
-        
             const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
             .then((res) =>{
                 setfirst_name(res.data.data.first_name)
