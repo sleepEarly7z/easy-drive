@@ -14,14 +14,16 @@ const ratingItems = [
 
 const initialFValues = {
     id: 0,
-    fullName: '',
-    email: '',
-    comment: '',
-    rating: 1,
-    mobile: '',
-    city: '',
+    instructor_id: '62d7601ef36c6973468ba80f',
+    student_id: '62d761555c08a0f631db58a7',
+    // email: '',
+    comment_content: '',
+    // rating: 1,
+    // mobile: '',
+    // city: '',
     ratingStar: 'onestar',
-    classtypeId: '',
+    rating: 3,
+    // classtypeId: '',
     reviewDate: '',
     // hireDate: new Date(),
     // isPermanent: false,
@@ -33,24 +35,24 @@ export default function ReviewForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('fullName' in fieldValues)
-            temp.fullName = fieldValues.fullName
+        if ('student_id' in fieldValues)
+            temp.student_id = fieldValues.student_id
                 ? ''
                 : 'This field is required.'
-        if ('email' in fieldValues)
-            temp.email = /$^|.+@.+..+/.test(fieldValues.email)
-                ? ''
-                : 'Email is not valid.'
-        if ('mobile' in fieldValues)
-            temp.mobile =
-                fieldValues.mobile.length > 9
-                    ? ''
-                    : 'Minimum 10 numbers required.'
-        if ('classtypeId' in fieldValues)
-            temp.classtypeId =
-                fieldValues.classtypeId.length !== 0
-                    ? ''
-                    : 'This field is required.'
+        // if ('email' in fieldValues)
+        //     temp.email = /$^|.+@.+..+/.test(fieldValues.email)
+        //         ? ''
+        //         : 'Email is not valid.'
+        // if ('mobile' in fieldValues)
+        //     temp.mobile =
+        //         fieldValues.mobile.length > 9
+        //             ? ''
+        //             : 'Minimum 10 numbers required.'
+        // if ('classtypeId' in fieldValues)
+        //     temp.classtypeId =
+        //         fieldValues.classtypeId.length !== 0
+        //             ? ''
+        //             : 'This field is required.'
         setErrors({
             ...temp,
         })
@@ -87,34 +89,34 @@ export default function ReviewForm(props) {
             <Grid container>
                 <Grid item xs={6}>
                     <Controls.Input
-                        name="fullName"
+                        name="student_id"
                         label="Full Name"
-                        value={values.fullName}
+                        value={values.student_id}
                         onChange={handleInputChange}
-                        error={errors.fullName}
+                        error={errors.student_id}
                     />
-                    <Controls.Input
+                    {/* <Controls.Input
                         label="Email"
                         name="email"
                         value={values.email}
                         onChange={handleInputChange}
                         error={errors.email}
-                    />
+                    /> */}
                     <Controls.Input
-                        label="Comment"
-                        name="comment"
-                        value={values.comment}
+                        label="comment_content"
+                        name="comment_content"
+                        value={values.comment_content}
                         onChange={handleInputChange}
-                        error={errors.comment}
+                        error={errors.comment_content}
                     />
-                    <Controls.Input
+                    {/* <Controls.Input
                         label="Rating"
                         name="rating"
                         value={values.rating}
                         onChange={handleInputChange}
                         error={errors.rating}
-                    />
-                    <Controls.Input
+                    /> */}
+                    {/* <Controls.Input
                         label="Mobile"
                         name="mobile"
                         value={values.mobile}
@@ -126,7 +128,7 @@ export default function ReviewForm(props) {
                         name="city"
                         value={values.city}
                         onChange={handleInputChange}
-                    />
+                    /> */}
                 </Grid>
                 <Grid item xs={6}>
                     <Controls.RadioGroup
@@ -136,14 +138,14 @@ export default function ReviewForm(props) {
                         onChange={handleInputChange}
                         items={ratingItems}
                     />
-                    <Controls.Select
+                    {/* <Controls.Select
                         name="classtypeId"
                         label="Class Type"
                         value={values.classtypeId}
                         onChange={handleInputChange}
                         options={reviewService.getClasstypeCollection()}
                         error={errors.classtypeId}
-                    />
+                    /> */}
                     {/* <Controls.DatePicker
                         name="hireDate"
                         label="Hire Date"

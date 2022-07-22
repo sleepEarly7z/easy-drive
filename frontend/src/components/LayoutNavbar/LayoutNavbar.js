@@ -248,7 +248,7 @@ function LayoutNavbar() {
                     icon={<FaSignInAlt />}
                     text={'Log In/Register'}
                     name={'icon-button-signin'}
-                    to={'/sign-in'}
+                    to={'/sign-in-instructor'}
                 />
             )}
         </Navbar>

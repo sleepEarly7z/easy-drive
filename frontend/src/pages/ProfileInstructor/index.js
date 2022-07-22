@@ -20,7 +20,7 @@ const ProfileInstructor = () => {
                 {/* </div> */}
                 <div className="ProfileInstructor__information">
                     <InformationInstructor />
-                    <Reviews/>
+                    {/* <Reviews/> */}
                 </div>
             </div>
 
