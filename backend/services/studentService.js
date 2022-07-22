@@ -190,6 +190,7 @@ const loginStudent = async (email, password) => {
 			name: studentFound.name,
 			email: studentFound.email,
 			password: studentFound.password,
+			role: studentFound.role,
 			token: generateToken(studentFound._id),
 		};
 	} else {

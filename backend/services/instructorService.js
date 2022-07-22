@@ -151,6 +151,7 @@ const loginInstructor = async (email, password) => {
 			name: instructorFound.name,
 			email: instructorFound.email,
 			password: instructorFound.password,
+			role: instructorFound.role,
 			token: generateToken(instructorFound._id),
 		};
 	} else {
