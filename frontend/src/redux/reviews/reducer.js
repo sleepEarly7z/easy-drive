@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { REQUEST_STATE } from '../utils'
 import {
-    getReviewsByInstructorIdAsync,
-    getReviewsByStudentIdAsync,
+    getReviewsByIdAsync,
     addReviewAsync,
     // updateReviewAsync,
     deleteReviewAsync,
@@ -25,33 +24,15 @@ const reviewsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getReviewsByInstructorIdAsync.pending, (state) => {
-                state.getReviewsByInstructorId = REQUEST_STATE.PENDING
-                state.error = null
-            })
-            .addCase(
-                getReviewsByInstructorIdAsync.fulfilled,
-                (state, action) => {
-                    state.getReviewsByInstructorId = REQUEST_STATE.FULFILLED
-                    state.reviewsOfInstructor = action.payload.data
-                },
-            )
-            .addCase(
-                getReviewsByInstructorIdAsync.rejected,
-                (state, action) => {
-                    state.getReviewsByInstructorId = REQUEST_STATE.REJECTED
-                    state.error = action.error
-                },
-            )
-            .addCase(getReviewsByStudentIdAsync.pending, (state) => {
+            .addCase(getReviewsByIdAsync.pending, (state) => {
                 state.getReviewsByStudentId = REQUEST_STATE.PENDING
                 state.error = null
             })
-            .addCase(getReviewsByStudentIdAsync.fulfilled, (state, action) => {
+            .addCase(getReviewsByIdAsync.fulfilled, (state, action) => {
                 state.getReviewsByStudentId = REQUEST_STATE.FULFILLED
                 state.reviewsOfStudent = action.payload.data
             })
-            .addCase(getReviewsByStudentIdAsync.rejected, (state, action) => {
+            .addCase(getReviewsByIdAsync.rejected, (state, action) => {
                 state.getReviewsByStudentId = REQUEST_STATE.REJECTED
                 state.error = action.error
             })

@@ -56,12 +56,9 @@ const headCells = [
     // { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
-const Reviews = ({ reviews }) => {
+const Reviews = ({ idType }) => {
     const dispatch = useDispatch()
-
     const params = useParams()
-
-    // const user = useSelector((state) => state.auth.user)
 
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
@@ -72,8 +69,6 @@ const Reviews = ({ reviews }) => {
         },
     })
     const [openPopup, setOpenPopup] = useState(false)
-
-    console.log('reviews: ')
 
     const {
         TblContainer,
@@ -105,10 +100,7 @@ const Reviews = ({ reviews }) => {
             // employee.student_id = user._id // TODO: not fetched data?
             dispatch(addReviewAsync(employee))
         } else {
-            // console.log('update employee: ' + employee)
-            // reviewService.updateReview(employee)
             dispatch(updateReviewAsync(employee))
-
         }
         resetForm()
         setRecordForEdit(null)
@@ -121,10 +113,12 @@ const Reviews = ({ reviews }) => {
         setOpenPopup(true)
     }
 
+    const id = params.instructorId
+
     useEffect(() => {
         const sendGet = async () => {
             await axios
-                .get('http://localhost:3001/reviews/' + params.instructorId)
+                .get(`http://localhost:3001/reviews/${id}?idType=${idType}`)
                 .then((res) => {
                     setRecords(res.data.data)
                     console.log(res)

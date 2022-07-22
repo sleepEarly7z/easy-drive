@@ -67,7 +67,6 @@ export default function ReviewProfile({ instructor }) {
         (state) => state.reviews.reviewsOfInstructor,
     )
 
-
     const params = useParams()
     const [instructorFollowed, setInstructorFollowed] = useState(false);
     const [following, setfollowing] = useState([]);
@@ -279,7 +278,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews reviews={currentInstructorReviews} />
+                        <Reviews idType={"instructor"} />
                     </div>
                 </div>
             </div>
