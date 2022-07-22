@@ -64,12 +64,25 @@ export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch()
     const params = useParams()
     const [instructorFollowed, setInstructorFollowed] = useState(false);
+    const [following, setfollowing] = useState([]);
 
     useEffect(() => {
             dispatch(isInstructorFollowedAsync({_id: params.instructorId}))
             .then(result => {
                 setInstructorFollowed(result.payload.data)
             })
+            // const sendGet = async () => {
+            //     const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
+            //     .then((res) =>{
+            //         setfollowing(res.data.data.followedInstructors)
+            //         // console.log(following)
+            //     }).catch((err) => {
+            //       alert(err);
+            //     }
+            //     );
+            //     // console.log(this.state.allRecipes);
+            //   }
+            //     sendGet();
     }, []);
     
     const followInstructor = (instructorID) => () => {
