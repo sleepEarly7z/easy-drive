@@ -231,31 +231,12 @@ function LayoutNavbar() {
 
             {user ? (
                 <>
-                    {user.data.role === 'instructor' ? (
-                        <NavItem
-                            icon={
-                                <FontAwesomeIcon
-                                    icon={faUser}
-                                    color="#d7d5d5"
-                                />
-                            }
-                            text={'Profile'}
-                            name={'icon-button-profile'}
-                            to={`/profile-instructor/${user.data._id}`}
-                        />
-                    ) : (
-                        <NavItem
-                            icon={
-                                <FontAwesomeIcon
-                                    icon={faUser}
-                                    color="#d7d5d5"
-                                />
-                            }
-                            text={'Profile'}
-                            name={'icon-button-profile'}
-                            to={`/profile-student/${user.data._id}`}
-                        />
-                    )}
+                    <NavItem
+                        icon={<FontAwesomeIcon icon={faUser} color="#d7d5d5" />}
+                        text={'Profile'}
+                        name={'icon-button-profile'}
+                        to={'/profile-instructor'}
+                    />
                     <NavItem
                         icon={<FaSignOutAlt />}
                         text={'Sign Out'}
