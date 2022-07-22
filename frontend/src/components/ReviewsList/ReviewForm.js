@@ -5,11 +5,11 @@ import { useForm, Form } from './useForm'
 import * as reviewService from './reviewService'
 
 const ratingItems = [
-    { id: 'onestar', title: '1 star', number: 1 },
-    { id: 'twostars', title: '2 stars', number: 2 },
-    { id: 'threestars', title: '3 stars', number: 3 },
-    { id: 'fourstars', title: '4 stars', number: 4 },
-    { id: 'fivestars', title: '5 stars', number: 5 },
+    { id: 'onestar', title: '1 star' },
+    { id: 'twostars', title: '2 stars' },
+    { id: 'threestars', title: '3 stars' },
+    { id: 'fourstars', title: '4 stars' },
+    { id: 'fivestars', title: '5 stars' },
 ]
 
 const initialFValues = {
@@ -22,7 +22,7 @@ const initialFValues = {
     // mobile: '',
     // city: '',
     ratingStar: 'onestar',
-    rating: 1,
+    rating: 3,
     // classtypeId: '',
     reviewDate: '',
     // hireDate: new Date(),
@@ -35,10 +35,10 @@ export default function ReviewForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        // if ('student_id' in fieldValues)
-        //     temp.student_id = fieldValues.student_id
-        //         ? ''
-        //         : 'This field is required.'
+        if ('student_id' in fieldValues)
+            temp.student_id = fieldValues.student_id
+                ? ''
+                : 'This field is required.'
         // if ('email' in fieldValues)
         //     temp.email = /$^|.+@.+..+/.test(fieldValues.email)
         //         ? ''
