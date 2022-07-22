@@ -1,7 +1,10 @@
 const getReviewsById = async (id, idType) => {
-    const response = await fetch(`http://localhost:3001/reviews/${id}?idType=${idType}`, {
-        method: 'GET',
-    })
+    const response = await fetch(
+        `http://localhost:3001/reviews/${id}?idType=${idType}`,
+        {
+            method: 'GET',
+        },
+    )
     console.log('getReviewsById response: ' + response)
 
     const data = await response.json()
@@ -81,9 +84,9 @@ const deleteReview = async (id) => {
         throw new Error(errorMsg)
     }
     console.log('delete review: ' + data)
-    // return data
+    return data
     // return await getReviewsByStudentId(id)
-    return await getReviewsById(id, "student")
+    // return await getReviewsById(id, 'student')
 }
 
 const ReviewService = {

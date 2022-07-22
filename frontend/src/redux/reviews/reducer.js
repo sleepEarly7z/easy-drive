@@ -3,7 +3,7 @@ import { REQUEST_STATE } from '../utils'
 import {
     getReviewsByIdAsync,
     addReviewAsync,
-    // updateReviewAsync,
+    updateReviewAsync,
     deleteReviewAsync,
 } from './thunks'
 
@@ -13,7 +13,7 @@ const INITIAL_STATE = {
     getReviewsByInstructorId: REQUEST_STATE.IDLE,
     getReviewsByStudentId: REQUEST_STATE.IDLE,
     addReview: REQUEST_STATE.IDLE,
-    // updateReview: REQUEST_STATE.IDLE,
+    updateReview: REQUEST_STATE.IDLE,
     deleteReview: REQUEST_STATE.IDLE,
     error: null,
 }
@@ -48,18 +48,18 @@ const reviewsSlice = createSlice({
                 state.addReview = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
-            // .addCase(updateReviewAsync.pending, (state) => {
-            //     state.updateReview = REQUEST_STATE.PENDING
-            //     state.error = null
-            // })
-            // .addCase(updateReviewAsync.fulfilled, (state, action) => {
-            //     state.updateReview = REQUEST_STATE.FULFILLED
-            //     state.list = action.payload
-            // })
-            // .addCase(updateReviewAsync.rejected, (state, action) => {
-            //     state.updateReview = REQUEST_STATE.REJECTED
-            //     state.error = action.error
-            // })
+            .addCase(updateReviewAsync.pending, (state) => {
+                state.updateReview = REQUEST_STATE.PENDING
+                state.error = null
+            })
+            .addCase(updateReviewAsync.fulfilled, (state, action) => {
+                state.updateReview = REQUEST_STATE.FULFILLED
+                state.reviewsOfStudent = action.payload
+            })
+            .addCase(updateReviewAsync.rejected, (state, action) => {
+                state.updateReview = REQUEST_STATE.REJECTED
+                state.error = action.error
+            })
             .addCase(deleteReviewAsync.pending, (state) => {
                 state.deleteReview = REQUEST_STATE.PENDING
                 state.error = null
