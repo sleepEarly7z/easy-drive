@@ -15,10 +15,11 @@ import {
 
 import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { followInstructorAsync, isInstructorFollowedAsync } from '../../redux/students/thunks';
+
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -62,6 +63,10 @@ const FollowActionButton = styled.button`
 
 export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch()
+    const currentInstructorReviews = useSelector(
+        (state) => state.reviews.reviewsOfInstructor,
+    )
+
     const params = useParams()
     const [instructorFollowed, setInstructorFollowed] = useState(false);
     const [following, setfollowing] = useState([]);
@@ -84,13 +89,14 @@ export default function ReviewProfile({ instructor }) {
             //   }
             //     sendGet();
     }, []);
-    
+
     const followInstructor = (instructorID) => () => {
         console.log(instructorID)
         let id = {
-            _id: instructorID
+            _id: instructorID,
         }
         dispatch(followInstructorAsync(id))
+
             .then(() => {
                 dispatch(isInstructorFollowedAsync(id))
                     .then(result => {
@@ -141,8 +147,10 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
+
                             <FollowActionButton className="" onClick={followInstructor(instructor._id)}>
                                 {instructorFollowed ? 'unfollow' : 'follow'}
+
                             </FollowActionButton>
                             <MessageActionButton className="">
                                 Message
@@ -272,7 +280,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews instructorId={instructor._id} />
+                        <Reviews reviews={currentInstructorReviews} />
                     </div>
                 </div>
             </div>
