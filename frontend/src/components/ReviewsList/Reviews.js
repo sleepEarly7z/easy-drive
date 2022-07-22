@@ -51,7 +51,6 @@ const headCells = [
 ]
 
 const Reviews = ({ reviews }) => {
-    // const reduxReviews = useSelector(state => state.reviews.reviewsOfInstructor);
     const params = useParams()
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)

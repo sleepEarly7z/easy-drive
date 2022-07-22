@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const service = require('../services/studentService');
-const { protect } = require('../middleware/authMiddleware');
+const { protect } = require('../middleware/authMiddlewareStud');
 
 /**
  * Get all instructors
@@ -32,12 +32,12 @@ router.get('/', function (req, res) {
 });
 
 /**
- *  Get an instructor
+ *  Get a student
  *
- *  @description get an instructor
+ *  @description get a student
  *
  *  @verb GET
- *  @endpoint /student/:id
+ *  @endpoint /students/:id
  *
  *  Request:
  *  @parameters
@@ -176,7 +176,7 @@ router.patch('/followInstructor/:id', function (req, res, next) {
 router.post('/', function (req, res) {
 	const inputStudent = req.body;
 	service
-		.registerInstructor(inputStudent)
+		.registerStudent(inputStudent)
 		.then((studentAdded) => {
 			res.status(201).send({ data: studentAdded });
 		})

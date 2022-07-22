@@ -172,6 +172,7 @@ const registerStudent = async (student) => {
 
 	// Create user
 	const newStudent = await Student.create({
+		role: "student",
 		first_name,
 		last_name,
 		password,
@@ -182,7 +183,7 @@ const registerStudent = async (student) => {
 		city,
 		province,
 		country,
-		followedInstructors,
+		followedInstructors: [],
 	});
 
 	if (newStudent) {
@@ -201,24 +202,24 @@ const registerStudent = async (student) => {
 	}
 };
 
-const loginInstructor = async (email, password) => {
+const loginStudent = async (email, password) => {
 	// Find if user exists
-	const instructorFound = await Instructor.findOne({
+	const studentFound = await Student.findOne({
 		email: email,
 	});
 
 	// Find if user and passwords match
 	if (
-		instructorFound &&
-		// (await bcrypt.compare(password, instructorFound.password))
-		password === instructorFound.password
+		studentFound &&
+		// (await bcrypt.compare(password, studentFound.password))
+		password === studentFound.password
 	) {
 		return {
-			_id: instructorFound._id,
-			name: instructorFound.name,
-			email: instructorFound.email,
-			password: instructorFound.password,
-			token: generateToken(instructorFound._id),
+			_id: studentFound._id,
+			name: studentFound.name,
+			email: studentFound.email,
+			password: studentFound.password,
+			token: generateToken(studentFound._id),
 		};
 	} else {
 		throw {
@@ -229,31 +230,23 @@ const loginInstructor = async (email, password) => {
 };
 
 const getMe = async (req) => {
-	const instructor = {
-		_id: req.instructor._id,
-		email: req.instructor.email,
-		first_name: req.instructor.first_name,
-		last_name: req.instructor.last_name,
-		// password: hashedPassword,
-		password: req.instructor.password,
-		email: req.instructor.email,
-		phone: req.instructor.phone,
-		gender: req.instructor.gender,
-		photo: req.instructor.phone,
-		rating: req.instructor.rating,
-		street: req.instructor.street,
-		city: req.instructor.city,
-		province: req.instructor.province,
-		country: req.instructor.country,
-		company: req.instructor.company,
-		language: req.instructor.language,
-		experience: req.instructor.experience,
-		license: req.instructor.license,
-		description: req.instructor.description,
-		isCarProvided: req.instructor.isCarProvided,
+	const student = {
+		_id: req.student._id,
+		first_name: req.student.first_name,
+		last_name: req.student.last_name,
+		password: req.student.password,
+		email: req.student.email,
+		phone: req.student.phone,
+		photo: req.student.photo,
+		street: req.student.street,
+		city: req.student.city,
+		province: req.student.province,
+		country: req.student.country,
+		followedInstructors: req.student.followedInstructors,
 	};
+	console.log(student)
 
-	return instructor;
+	return student;
 };
 
 // Generate Token
@@ -272,4 +265,7 @@ module.exports = {
 	deleteStudentById,
 	updateStudentById,
 	followInstructorById,
+	registerStudent,
+	loginStudent,
+	getMe,
 };
