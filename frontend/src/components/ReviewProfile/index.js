@@ -67,6 +67,7 @@ export default function ReviewProfile({ instructor }) {
         (state) => state.reviews.reviewsOfInstructor,
     )
 
+
     const params = useParams()
     const [instructorFollowed, setInstructorFollowed] = useState(false);
     const [following, setfollowing] = useState([]);
@@ -96,7 +97,6 @@ export default function ReviewProfile({ instructor }) {
             _id: instructorID,
         }
         dispatch(followInstructorAsync(id))
-
             .then(() => {
                 dispatch(isInstructorFollowedAsync(id))
                     .then(result => {
@@ -150,7 +150,6 @@ export default function ReviewProfile({ instructor }) {
 
                             <FollowActionButton className="" onClick={followInstructor(instructor._id)}>
                                 {instructorFollowed ? 'unfollow' : 'follow'}
-
                             </FollowActionButton>
                             <MessageActionButton className="">
                                 Message

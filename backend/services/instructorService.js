@@ -96,6 +96,7 @@ const registerInstructor = async (instructor) => {
 
 	// Create user
 	const newInstructor = await Instructor.create({
+		role: 'isntructor',
 		first_name,
 		last_name,
 		// password: hashedPassword,

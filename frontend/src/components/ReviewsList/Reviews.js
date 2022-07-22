@@ -25,7 +25,12 @@ import axios from 'axios'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { getReviewsByInstructorIdAsync } from '../../redux/reviews/thunks'
+import {
+    addReviewAsync,
+    getReviewsByInstructorIdAsync,
+    updateReviewAsync,
+} from '../../redux/reviews/thunks'
+
 import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -42,16 +47,18 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const headCells = [
-    { id: 'fullName', label: 'Student Name' },
-    { id: 'rating', label: 'Rating' },
-    { id: 'comment', label: 'Comment' },
-    { id: 'classtype', label: 'Class Type' },
-    { id: 'reviewDate', label: 'Time' },
+    { id: 'fullName', label: 'Student Name', width: 300 },
+    { id: 'rating', label: 'Rating', width: 200 },
+    { id: 'comment', label: 'Comment', width: 600 },
+    // { id: 'classtype', label: 'Class Type' },
+    { id: 'reviewDate', label: 'Time', width: 300 },
+
     // { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
 const Reviews = ({ reviews }) => {
-    // const reduxReviews = useSelector(state => state.reviews.reviewsOfInstructor);
+    const dispatch = useDispatch()
+
     const params = useParams()
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
@@ -89,16 +96,20 @@ const Reviews = ({ reviews }) => {
 
     const addOrEdit = (employee, resetForm) => {
         if (employee.id === 0) {
-            // console.log('insert employee: ' + employee)
-            reviewService.insertReview(employee)
+            console.log('insert employee: ' + employee)
+            // reviewService.insertReview(employee)
+            dispatch(addReviewAsync(employee))
         } else {
             // console.log('update employee: ' + employee)
-            reviewService.updateReview(employee)
+            // reviewService.updateReview(employee)
+            dispatch(updateReviewAsync(employee))
+
         }
         resetForm()
         setRecordForEdit(null)
         setOpenPopup(false)
-        setRecords(reviewService.getAllReviews())
+        // setRecords(reviewService.getAllReviews())
+        // setRecords(dispatch(getReviewsByInstructorIdAsync(params.instructorId)))
     }
 
     const openInPopup = (item) => {
@@ -164,21 +175,23 @@ const Reviews = ({ reviews }) => {
                     <TableBody>
                         {recordsAfterPagingAndSorting().map((item) => (
                             <TableRow key={item._id}>
-                                <TableCell width={200}>
+                                <TableCell width={headCells[0].width}>
                                     {/* {item.fullName} */}
                                     {item.student_id}
                                 </TableCell>
-                                <TableCell width={150}>
+                                <TableCell width={headCells[1].width}>
                                     <RatingStar average={item.rating} />
                                 </TableCell>
-                                <TableCell width={300}>
+                                <TableCell width={headCells[2].width}>
                                     {item.comment_content}
                                 </TableCell>
                                 {/* <TableCell>
 										{item.mobile}
 									</TableCell> */}
-                                <TableCell>{item.classtype}</TableCell>
-                                <TableCell>{item.reviewDate}</TableCell>
+                                {/* <TableCell>{item.classtype}</TableCell> */}
+                                <TableCell width={headCells[3].width}>
+                                    {item.createdAt}
+                                </TableCell>
                                 {/* <TableCell>
                                     <Controls.ActionButton
                                         color="primary"
@@ -199,7 +212,7 @@ const Reviews = ({ reviews }) => {
                 <TblPagination />
             </Paper>
             <Popup
-                title="Employee Form"
+                title="Review Form"
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >

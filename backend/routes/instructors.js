@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const service = require('../services/instructorService');
-const { protect } = require('../middleware/authMiddleware');
+const { protect } = require('../middleware/authMiddlewareInst');
 
 /**
  * Get all instructors

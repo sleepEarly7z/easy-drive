@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const service = require('../services/studentService');
+const { protect } = require('../middleware/authMiddlewareStud');
 
 /**
  * Get all instructors
@@ -31,12 +32,13 @@ router.get('/', function (req, res) {
 });
 
 /**
- *  Get an instructor
+ *  Get a student
  *
- *  @description get an instructor
+ *  @description get a student
  *
  *  @verb GET
- *  @endpoint /student/:id
+ *  @endpoint /students/:id
+
  *
  *  Request:
  *  @parameters
@@ -64,46 +66,6 @@ router.get('/:id', function (req, res) {
 					message: `cannot find STUDENT with id ${id}`,
 				},
 			});
-		});
-});
-
-/**
- *  Register an instructor
- *
- *  @description Add instructor data to database
- *
- *  @verb POST
- *  @endpoint /instructors
- *
- *  Request:
- *  @payload { Instructor }
- *
- *  Response:
- *  Success:
- *  @status 200 OK
- *  @data { Instructor } instructor added
- *
- *  Error:
- *  @status 400 BAD REQUEST
- * 	@error error messages
- *
- *  @status 500 SERVER ERROR
- *  @error error messages
- */
-router.post('/', function (req, res) {
-	const inputInstructor = req.body;
-
-	service
-		.addStudent(inputInstructor)
-		.then((instructorAdded) => {
-			res.status(200).send({ data: instructorAdded });
-		})
-		.catch((error) => {
-			if (error.type === 'validation') {
-				res.status(400).send({ error: error.message });
-			} else {
-				res.status(500).send({ error: error.message });
-			}
 		});
 });
 
@@ -209,5 +171,75 @@ router.get('/checkFollowList/:id', function (req, res, next) {
 // 		return res.status(404).json({ message: 'instructor you are looking for does not exist' });
 // 	}
 // });
+
+/**
+ *  Register a student
+ *
+ *  @description Add student data to database
+ *
+ *  @verb POST
+ *  @endpoint /students
+ *
+ *  Request:
+ *  @payload { Student }
+ *
+ *  Response:
+ *  Success:
+ *  @status 201 OK
+ *  @data { Student } student created
+ *
+ *  Error:
+ *  @status 400 BAD REQUEST
+ * 	@error error messages
+ *
+ *  @status 500 SERVER ERROR
+ *  @error error messages
+ */
+router.post('/', function (req, res) {
+	const inputStudent = req.body;
+	service
+		.registerStudent(inputStudent)
+		.then((studentAdded) => {
+			res.status(201).send({ data: studentAdded });
+		})
+		.catch((error) => {
+			if (error.type === 'validation') {
+				res.status(400).send({ error: error.message });
+			} else {
+				res.status(500).send({ error: error.message });
+			}
+		});
+});
+
+router.post('/login', function (req, res) {
+	const { email, password } = req.body;
+	service
+		.loginStudent(email, password)
+		.then((studentLoggedIn) => {
+			res.status(200).send({ data: studentLoggedIn });
+		})
+		.catch((error) => {
+			if (error.type === 'validation') {
+				res.status(401).send({ error: error.message });
+			} else {
+				res.status(500).send({ error: error.message });
+			}
+		});
+});
+
+router.get('/login/me', protect, function (req, res) {
+	service
+		.getMe(req)
+		.then((me) => {
+			res.status(200).send({ data: me });
+		})
+		.catch((error) => {
+			if (error.type === 'validation') {
+				res.status(401).send({ error: error.message });
+			} else {
+				res.status(500).send({ error: error.message });
+			}
+		});
+});
 
 module.exports = router;
