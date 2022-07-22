@@ -5,7 +5,8 @@ import {
     addStudentAsync,
     updateStudentAsync,
     deleteStudentAsync,
-    followInstructorAsync
+    followInstructorAsync,
+    isInstructorFollowedAsync
 } from './thunks'
 
 const INITIAL_STATE = {
@@ -15,6 +16,7 @@ const INITIAL_STATE = {
     updateStudent: REQUEST_STATE.IDLE,
     deleteStudent: REQUEST_STATE.IDLE,
     followInstructor: REQUEST_STATE.IDLE,
+    isInstructorFollowed: REQUEST_STATE.IDLE,
     error: null,
 }
 
@@ -96,6 +98,21 @@ const studentsSlice = createSlice({
             )
             .addCase(followInstructorAsync.rejected, (state, action) => {
                 state.followInstructor = REQUEST_STATE.REJECTED
+                state.error = action.error
+            }
+            )
+            .addCase(isInstructorFollowedAsync.pending, (state) => {
+                state.isInstructorFollowed = REQUEST_STATE.PENDING
+                state.error = null
+            }
+            )
+            .addCase(isInstructorFollowedAsync.fulfilled, (state, action) => {
+                state.isInstructorFollowed = REQUEST_STATE.FULFILLED
+                state.list = action.payload
+            }
+            )
+            .addCase(isInstructorFollowedAsync.rejected, (state, action) => {
+                state.isInstructorFollowed = REQUEST_STATE.REJECTED
                 state.error = action.error
             }
             )

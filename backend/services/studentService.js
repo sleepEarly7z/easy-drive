@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+
 const Student = require('../models/studentModel');
 
 /**
@@ -97,18 +98,6 @@ const updateStudentById = (id, patch) => {
  *
  * @returns {object} Student's instructor follow list updated
  */
-// const followInstructorById = async (id) => {
-//     const exampleStudentId = '62ce6616d2816a5b9eb398f2';
-//     const studentFound = await Student.findById(exampleStudentId);
-//     const {_id,first_name,last_name,password,email,phone,photo,street,city,province,
-//         country,followedInstructors} =studentFound;
-//     // .then(student => {
-//         console.log(_id)
-//         console.log(followedInstructors)
-//         console.log(studentFound)
-//         console.log(studentFound._id)
-//         console.log(JSON.stringify(studentFound.followedInstructors))
-//         console.log(Array.isArray(studentFound.followedInstructors))
 
 //     if (!studentFound.followedInstructors.includes(id)) {
 //         studentFound.followedInstructors.push(id);
@@ -122,23 +111,6 @@ const updateStudentById = (id, patch) => {
 //     return studentFound;
 
 // }
-const followInstructorById = (id) => {
-	const exampleStudentId = '62ce6616d2816a5b9eb398f2';
-	try {
-		Student.findById(exampleStudentId).then((student) => {
-			if (!student.followedInstructors.includes(id)) {
-				student.followedInstructors.push(id);
-				console.log('new instructor is followed');
-			} else {
-				console.log('this instructor already followed');
-			}
-			student.save().catch((err) => console.log('error'));
-		});
-		return id;
-	} catch (error) {
-		throw { type: 'DB', message: error };
-	}
-};
 
 const registerStudent = async (student) => {
 	const {
@@ -257,6 +229,37 @@ const generateToken = (id) => {
 	});
 };
 
+ const followInstructorById = (id) => {
+    const exampleStudentId = '62d761535c08a0f631db58a0';
+    try {
+        Student.findById(exampleStudentId)
+        .then(student => {
+            if(!student.followedInstructors.includes(id)) {
+                student.followedInstructors.push(id)
+                student.save()
+                console.log("new instructor is followed");
+            } else {
+                Student.updateOne({_id: exampleStudentId },{$pull: {followedInstructors : id}})
+                .then(()=> student.save())
+                console.log("instructor is unfollowed");
+            }
+
+        })
+        return id;
+      } catch (error) {
+        throw ({ type: 'DB', message: error })
+      }
+}
+
+const isInstructorFollowed = (id) => {
+    const exampleStudentId = '62d761535c08a0f631db58a0';
+    try {
+        return Student.findById(exampleStudentId)
+      } catch (error) {
+        throw ({ type: 'DB', message: error })
+      }
+}
+
 module.exports = {
 	Student,
 	getStudents,
@@ -264,8 +267,9 @@ module.exports = {
 	addStudent,
 	deleteStudentById,
 	updateStudentById,
-	followInstructorById,
 	registerStudent,
 	loginStudent,
 	getMe,
+  followInstructorById,
+  isInstructorFollowed
 };

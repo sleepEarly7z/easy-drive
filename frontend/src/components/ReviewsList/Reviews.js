@@ -30,6 +30,7 @@ import {
     getReviewsByInstructorIdAsync,
     updateReviewAsync,
 } from '../../redux/reviews/thunks'
+
 import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -51,11 +52,13 @@ const headCells = [
     { id: 'comment', label: 'Comment', width: 600 },
     // { id: 'classtype', label: 'Class Type' },
     { id: 'reviewDate', label: 'Time', width: 300 },
+
     // { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
 const Reviews = ({ reviews }) => {
     const dispatch = useDispatch()
+
     const params = useParams()
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
@@ -100,6 +103,7 @@ const Reviews = ({ reviews }) => {
             // console.log('update employee: ' + employee)
             // reviewService.updateReview(employee)
             dispatch(updateReviewAsync(employee))
+
         }
         resetForm()
         setRecordForEdit(null)
