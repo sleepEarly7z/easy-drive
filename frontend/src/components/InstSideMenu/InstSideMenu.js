@@ -10,10 +10,18 @@ const style = {
   bgcolor: 'background.paper',
 };
 
-export default function InstSideMenu() {
+export default function InstSideMenu({section1, section2}) {
+
+  const scrollToSection = (elementRef) => {
+    window.scrollTo({
+        top: elementRef.current.offsetTop,
+        behavior: 'smooth',
+    })
+}
+
   return (
     <List sx={style} component="nav" aria-label="mailbox folders">
-      <ListItem button>
+      <ListItem button onClick={() => scrollToSection(section1)}>
         <ListItemText primary="Edit profile" />
       </ListItem>
       <Divider />

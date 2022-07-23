@@ -4,10 +4,15 @@ import InformationInstructor from '../../components/InformationInstructor'
 import InstructorViewedReviews from '../../components/InstructorViewedReviews'
 import Reviews from '../../components/ReviewsList/Reviews'
 import InstSideMenu from '../../components/InstSideMenu/InstSideMenu'
+import ScrollToTop from '../../components/HomePageSections/SectionTwo/ScrollToTop'
+import { useRef } from 'react'
 
 const ProfileInstructor = () => {
+    const information = useRef(null);
+
     return (
-        <>
+        <>  
+            <ScrollToTop />
             <div className="ProfileInstructor">
                 <h1>ProfileInstructor</h1>
             </div>
@@ -15,12 +20,9 @@ const ProfileInstructor = () => {
                 <SidebarInstructor />
             </div>
             <div className='InstSideMenuProps'>
-                {/* <div className='InstSideMenuSingle'> */}
-                <InstSideMenu/>
-                {/* </div> */}
-                <div className="ProfileInstructor__information">
-                    <InformationInstructor />
-                    {/* <Reviews/> */}
+                <InstSideMenu section1 = {information}/>
+                <div className="ProfileInstructor__information"  ref = {information} >
+                    <InformationInstructor/>
                 </div>
             </div>
 

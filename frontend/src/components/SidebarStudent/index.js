@@ -53,13 +53,14 @@ const useStyles = makeStyles(({ palette }) => ({
 
 
 
-const SidebarStudent = () => {
+const SidebarStudent = ({section1, section2}) => {
     const [show, setShow] = useState(false);
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
     const [followingList, setFollowingList] = useState({});
+
 
     const handleFollowingList = (event) => {
         setShow(!show);
