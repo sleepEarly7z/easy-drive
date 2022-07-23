@@ -1,7 +1,45 @@
 const express = require('express');
 const router = express.Router();
-
 const service = require('../services/reviewService');
+
+// helpers
+const errorWithMessage = (role, id) => ({
+	error: {
+		message: `cannot find reviews for ${role} ${id}`
+	}
+})
+
+router.get('/', async (req, res) => {
+	const { instructorId, studentId } = req.query;
+
+	if (!instructorId && !studentId) return res.status(400).send();
+	if (instructorId && studentId) return res.status(400).send();
+
+	let resultReviews = [];
+	let error = null;
+
+	if (instructorId) {
+		try {
+			resultReviews = await service.getReviewsByInstructorId(instructorId);
+		} catch {
+			error = errorWithMessage('instructor', instructorId)
+		}
+	}
+
+	if (studentId) {
+		try {
+			resultReviews = await service.getReviewsByStudentId(studentId);
+		} catch {
+			error = errorWithMessage('student', studentId)
+		}
+	}
+
+	if (!error) {
+		res.status(200).send(resultReviews);
+	} else {
+		res.status(400).send(error);
+	}
+});
 
 /**
  * Get all reviews of one instructor or one student
@@ -13,66 +51,30 @@ const service = require('../services/reviewService');
  *
  *  Request:
  *  @parameters
- * 		id - instructor/student id
+ * 		id - review id
  *
  *  Response:
  *  Success:
  *  @status 200 OK
- *  @data reviews
+ *  @data review
  *
  * 	@status 404 NOT FOUND
  *  @error message
  */
 router.get('/:id', function (req, res) {
-	const id = req.params.id;
-	const idType = req.query.idType;
-	if (idType === 'instructor') {
-		service
-			.getReviewsByInstructorId(id)
-			.then((reviews) => {
-				// console.log(reviews.length);
-				res.status(200).send({ data: reviews });
-			})
-			.catch((error) => {
-				res.status(404).send({
-					error: {
-						message: `cannot find reviews with instructor_id ${id}`,
-					},
-				});
+	const { id } = req.params;
+	service
+		.getReviewById(id)
+		.then((review) => {
+			res.status(200).send({ data: review });
+		})
+		.catch(() => {
+			res.status(404).send({
+				error: {
+					message: `cannot find review with review_id ${id}`,
+				},
 			});
-	} else if (idType === 'student') {
-		service
-			.getReviewsByStudentId(id)
-			.then((reviews) => {
-				res.status(200).send({ data: reviews });
-			})
-			.catch((error) => {
-				res.status(404).send({
-					error: {
-						message: `cannot find reviews with student_id ${id}`,
-					},
-				});
-			});
-	} else if (idType === 'review') {
-		service
-			.getReviewById(id)
-			.then((reviews) => {
-				res.status(200).send({ data: reviews });
-			})
-			.catch((error) => {
-				res.status(404).send({
-					error: {
-						message: `cannot find review with review_id ${id}`,
-					},
-				});
-			});
-	} else {
-		res.status(404).send({
-			error: {
-				message: `cannot find reviews with instructor_id/student_id ${id}`,
-			},
 		});
-	}
 });
 
 /**
