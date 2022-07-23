@@ -23,8 +23,8 @@ const ProfileInstructor = () => {
                 {/* <div className="InstSideMenuProps"> */}
                 {/* <div className='InstSideMenuSingle'> */}
                 <div className="InstSideMenuProps">
-                    <InstSideMenu />
-                    <div className="ProfileInstructor__information">
+                    <InstSideMenu section1={information}/>
+                    <div className="ProfileInstructor__information" ref={information}>
                         <InformationInstructor />
                     </div>
                 </div>
