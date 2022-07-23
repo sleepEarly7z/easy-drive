@@ -1,5 +1,13 @@
 const { Review } = require('../models/reviewModel');
 
+const getReviewById = async (id) => {
+	try {
+		return Review.findById(id);
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
+
 /**
  * Get a review with given instructor_id from database
  *
@@ -11,15 +19,6 @@ const { Review } = require('../models/reviewModel');
 const getReviewsByInstructorId = async (id) => {
 	try {
 		return Review.find({ instructor_id: id });
-	} catch (error) {
-		throw { type: 'DB', message: error };
-	}
-};
-
-const getRatingsByInstructorId = async (id) => {
-	try {
-		const reviews = await getReviewsByInstructorId(id);
-		const totalNumber = reviews.length;
 	} catch (error) {
 		throw { type: 'DB', message: error };
 	}
@@ -76,8 +75,6 @@ const addReview = async (review) => {
 const deleteReviewById = async (id) => {
 	try {
 		const review = await Review.findByIdAndDelete(id);
-		// return review;
-		// return getReviewsByStudentId(review.student_id);
 		return getReviewsByInstructorId(review.instructor_id);
 	} catch (error) {
 		throw { type: 'DB', message: error };
@@ -109,6 +106,7 @@ const updateReviewById = async (id, patch) => {
 module.exports = {
 	getReviewsByInstructorId,
 	getReviewsByStudentId,
+	getReviewById,
 	addReview,
 	deleteReviewById,
 	updateReviewById,

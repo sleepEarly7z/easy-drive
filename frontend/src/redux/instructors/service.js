@@ -52,13 +52,6 @@ const getInstructorById = async (id) => {
     return basicResponse.json()
 }
 
-const getReviewsById = async (id) => {
-    const basicReviews = await fetch('http://localhost:3001/reviews/' + id, {
-        method: 'GET',
-    })
-    return basicReviews.json()
-}
-
 const addInstructor = async (data) => {
     const {
         first_name,
@@ -238,7 +231,6 @@ const sortFilter = async (condition) => {
 const InstructorService = {
     getInstructors,
     getInstructorById,
-    getReviewsById,
     addInstructor,
     updateInstructor,
     deleteInstructor,

@@ -1,8 +1,12 @@
-const getReviewsByInstructorId = async (id) => {
-    const response = await fetch('http://localhost:3001/reviews/' + id, {
-        method: 'GET',
-    })
-    console.log('getReviewsByInstructorId response: ' + response)
+const getReviewsByUserId = async (id, idType) => {
+    console.log(idType);
+    const response = await fetch(
+        `http://localhost:3001/reviews?${idType}=${id}`,
+        {
+            method: 'GET',
+        },
+    )
+    console.log('getReviewsById response: ' + response)
 
     const data = await response.json()
     if (!response.ok) {
@@ -10,21 +14,6 @@ const getReviewsByInstructorId = async (id) => {
         throw new Error(errorMsg)
     }
 
-    return data
-}
-
-const getReviewsByStudentId = async (id) => {
-    const response = await fetch('http://localhost:3001/reviews/' + id, {
-        method: 'GET',
-    })
-    console.log('response: ' + response)
-
-    const data = await response.json()
-    if (!response.ok) {
-        const errorMsg = data?.message
-        throw new Error(errorMsg)
-    }
-    console.log('update review: ' + data)
     return data
 }
 
@@ -96,47 +85,16 @@ const deleteReview = async (id) => {
         throw new Error(errorMsg)
     }
     console.log('delete review: ' + data)
-    // return data
-    return await getReviewsByStudentId(id)
+    return data
+    // return await getReviewsByStudentId(id)
+    // return await getReviewsById(id, 'student')
 }
 
-// GET Rating
-// const getRating = async (id) => {
-//     const response = await fetch('http://localhost:3001/reviews/' + id, {
-//         method: 'GET',
-//     })
-
-//     const reviews = await response.json().data
-//     if (!response.ok) {
-//         const errorMsg = reviews?.message
-//         throw new Error(errorMsg)
-//     }
-//     console.log('getRating:  ' + reviews)
-//     const numberOfReviews = reviews.length
-//     const numberOfRatingOne = 0
-//     const numberOfRatingTwo = 0
-//     const numberOfRatingThree = 0
-//     const numberOfRatingFour = 0
-//     const numberOfRatingFive = 0
-//     const {
-//         average,
-//         ratingOne,
-//         ratingTwo,
-//         ratingThree,
-//         ratingFour,
-//         ratingFive,
-//     } = { data }
-
-//     return data
-// }
-
 const ReviewService = {
-    getReviewsByInstructorId,
-    getReviewsByStudentId,
+    getReviewsByUserId,
     addReview,
     updateReview,
     deleteReview,
-    // getRating,
 }
 
 export default ReviewService
