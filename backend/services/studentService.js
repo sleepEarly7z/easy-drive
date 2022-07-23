@@ -97,6 +97,7 @@ const updateStudentById = (id, patch) => {
  *
  * @returns {object} Student's instructor follow list updated
  */
+
 const followInstructorById = (id) => {
 	const exampleStudentId = '62d761535c08a0f631db58a0';
 	try {
@@ -244,6 +245,7 @@ const generateToken = (id) => {
 		expiresIn: '30d',
 	});
 };
+
 module.exports = {
     Student,
     getStudents,

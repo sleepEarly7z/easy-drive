@@ -1,0 +1,21 @@
+@import '../../App.scss';
+
+.FilterPanel {
+    height: 80%;
+}
+.filterPanel-Close-Button-div {
+    display: flex;
+}
+
+@media screen and (min-width: 700px) {
+    .filterPanel-Close-Button-div {
+        display: none;
+        transform: scale(0);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .FilterPanel {
+        display: none;
+    }
+}
