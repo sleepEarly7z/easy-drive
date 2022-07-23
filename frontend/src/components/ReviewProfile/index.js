@@ -96,6 +96,7 @@ export default function ReviewProfile({ instructor }) {
             _id: instructorID,
         }
         dispatch(followInstructorAsync(id))
+
             .then(() => {
                 dispatch(isInstructorFollowedAsync(id))
                     .then(result => {
@@ -149,6 +150,7 @@ export default function ReviewProfile({ instructor }) {
 
                             <FollowActionButton className="" onClick={followInstructor(instructor._id)}>
                                 {instructorFollowed ? 'unfollow' : 'follow'}
+
                             </FollowActionButton>
                             <MessageActionButton className="">
                                 Message

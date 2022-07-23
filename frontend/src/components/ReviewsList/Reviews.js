@@ -31,7 +31,6 @@ import {
     getReviewsByInstructorIdAsync,
     updateReviewAsync,
 } from '../../redux/reviews/thunks'
-
 import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -53,24 +52,22 @@ const headCells = [
     { id: 'comment', label: 'Comment', width: 600 },
     // { id: 'classtype', label: 'Class Type' },
     { id: 'reviewDate', label: 'Time', width: 300 },
-
     // { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
 const Reviews = ({ idType }) => {
     const dispatch = useDispatch()
     const params = useParams()
-
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
-    const [records, setRecords] = useState([])
+    const [records, setRecords] = useState(reviews)
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
             return items
         },
     })
     const [openPopup, setOpenPopup] = useState(false)
-
+    
     const {
         TblContainer,
         TblHead,
@@ -97,8 +94,6 @@ const Reviews = ({ idType }) => {
         if (employee.id === 0) {
             console.log('insert employee: ' + employee)
             // reviewService.insertReview(employee)
-            employee.instructor_id = params.instructorId
-            // employee.student_id = user._id // TODO: not fetched data?
             dispatch(addReviewAsync(employee))
         } else {
             dispatch(updateReviewAsync(employee))
@@ -106,6 +101,7 @@ const Reviews = ({ idType }) => {
         resetForm()
         setRecordForEdit(null)
         setOpenPopup(false)
+        // setRecords(reviewService.getAllReviews())
         // setRecords(dispatch(getReviewsByInstructorIdAsync(params.instructorId)))
     }
 

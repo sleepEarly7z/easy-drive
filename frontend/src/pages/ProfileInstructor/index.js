@@ -19,7 +19,6 @@ const ProfileInstructor = () => {
                 {/* <div className='InstSideMenuSingle'> */}
                 <div className="InstSideMenuProps">
                     <InstSideMenu />
-                    {/* </div> */}
                     <div className="ProfileInstructor__information">
                         <InformationInstructor />
                     </div>

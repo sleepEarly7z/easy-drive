@@ -77,17 +77,17 @@ const deleteStudentById = (id) => {
  * @returns {object} Student updated
  */
 const updateStudentById = (id, patch) => {
-	// TODO
-	console.log('StudentService121');
-	console.log(patch.followedInstructors);
-	Student.updateOne({ _id: id }, patch, (err, stu) => {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log(stu);
-		}
-	});
-};
+    // TODO
+    console.log("StudentService121")
+    console.log(patch.followedInstructors)
+    Student.updateOne({ _id: id }, patch, (err, stu) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(stu)
+        }
+    })
+}
 
 /**
  * Update an Student's instructor follow list form database
@@ -97,19 +97,36 @@ const updateStudentById = (id, patch) => {
  *
  * @returns {object} Student's instructor follow list updated
  */
+const followInstructorById = (id) => {
+	const exampleStudentId = '62d761535c08a0f631db58a0';
+	try {
+		Student.findById(exampleStudentId).then((student) => {
+			if (!student.followedInstructors.includes(id)) {
+				student.followedInstructors.push(id);
+				student.save();
+				console.log('new instructor is followed');
+			} else {
+				Student.updateOne(
+					{ _id: exampleStudentId },
+					{ $pull: { followedInstructors: id } }
+				).then(() => student.save());
+				console.log('instructor is unfollowed');
+			}
+		});
+		return id;
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
-//     if (!studentFound.followedInstructors.includes(id)) {
-//         studentFound.followedInstructors.push(id);
-//         console.log("new instructor is followed");
-//     } else {
-//         console.log("this instructor already followed");
-//     }
-//     await studentFound.save();
-//     //.then(() => {return id})
-//     //.catch(err=>console.log("error"))
-//     return studentFound;
-
-// }
+const isInstructorFollowed = (id) => {
+	const exampleStudentId = '62d761535c08a0f631db58a0';
+	try {
+		return Student.findById(exampleStudentId);
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
 const registerStudent = async (student) => {
 	const {
@@ -143,7 +160,7 @@ const registerStudent = async (student) => {
 
 	// Create user
 	const newStudent = await Student.create({
-		role: 'student',
+		role: "student",
 		first_name,
 		last_name,
 		password,
@@ -190,7 +207,6 @@ const loginStudent = async (email, password) => {
 			name: studentFound.name,
 			email: studentFound.email,
 			password: studentFound.password,
-			role: studentFound.role,
 			token: generateToken(studentFound._id),
 		};
 	} else {
@@ -216,7 +232,7 @@ const getMe = async (req) => {
 		country: req.student.country,
 		followedInstructors: req.student.followedInstructors,
 	};
-	console.log(student);
+	console.log(student)
 
 	return student;
 };
@@ -228,48 +244,16 @@ const generateToken = (id) => {
 		expiresIn: '30d',
 	});
 };
-
-const followInstructorById = (id) => {
-	const exampleStudentId = '62d761535c08a0f631db58a0';
-	try {
-		Student.findById(exampleStudentId).then((student) => {
-			if (!student.followedInstructors.includes(id)) {
-				student.followedInstructors.push(id);
-				student.save();
-				console.log('new instructor is followed');
-			} else {
-				Student.updateOne(
-					{ _id: exampleStudentId },
-					{ $pull: { followedInstructors: id } }
-				).then(() => student.save());
-				console.log('instructor is unfollowed');
-			}
-		});
-		return id;
-	} catch (error) {
-		throw { type: 'DB', message: error };
-	}
-};
-
-const isInstructorFollowed = (id) => {
-	const exampleStudentId = '62d761535c08a0f631db58a0';
-	try {
-		return Student.findById(exampleStudentId);
-	} catch (error) {
-		throw { type: 'DB', message: error };
-	}
-};
-
 module.exports = {
-	Student,
-	getStudents,
-	getStudentById,
-	addStudent,
-	deleteStudentById,
-	updateStudentById,
-	registerStudent,
-	loginStudent,
+    Student,
+    getStudents,
+    getStudentById,
+    addStudent,
+    deleteStudentById,
+    updateStudentById,
+    followInstructorById,
+    isInstructorFollowed,
 	getMe,
-	followInstructorById,
-	isInstructorFollowed,
-};
+	loginStudent,
+	registerStudent,
+}
