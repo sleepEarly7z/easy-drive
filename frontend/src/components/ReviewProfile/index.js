@@ -71,14 +71,6 @@ export default function ReviewProfile({ instructor }) {
 
     const params = useParams()
     const [instructorFollowed, setInstructorFollowed] = useState(false);
-    const [first_name, setfirst_name] = useState('')
-    const [last_name, setlast_name] = useState('')
-    const [email, setemail] = useState('')
-    const [phone, setphone] = useState('')
-    const [street, setstreet] = useState('')
-    const [city, setcity] = useState('')
-    const [province, setprovince] = useState('')
-    const [country, setcountry] = useState('')
     const [following, setfollowing] = useState([])
 
     useEffect(() => {
@@ -94,14 +86,6 @@ export default function ReviewProfile({ instructor }) {
                     if (res.data.data.followedInstructors.includes(params.instructorId)) {
                         setInstructorFollowed(true);
                     }
-                    setfirst_name(res.data.data.first_name)
-                setlast_name(res.data.data.last_name)
-                setemail(res.data.data.email)
-                setphone(res.data.data.phone)
-                setstreet(res.data.data.street)
-                setcity(res.data.data.city)
-                setprovince(res.data.data.province)
-                setcountry(res.data.data.country)
                 setfollowing(res.data.data.followedInstructors)
                     console.log(instructorFollowed)
                 }).catch((err) => {
@@ -111,57 +95,48 @@ export default function ReviewProfile({ instructor }) {
               }
                 sendGet();
     }, []);
-
-    const followInstructor = (instructorID) => () => {
-        // console.log(instructorID)
-        // let id = {
-        //     _id: instructorID,
-        // }
-        
+    
+    const followInstructor = (instructorID) => () => {        
         console.log(user.data._id)
         console.log(following)
         console.log(instructorFollowed)
         if (!instructorFollowed) {
-            // let insData = {
-            //     followedInstructors: following.push(instructorID)
-            // }
+            following.push(instructorID)
             let insData = {
                 _id: user.data._id,
-                first_name: first_name,
-                last_name: last_name,
-                email: email,
-                phone: phone,
-                street: street,
-                city: city,
-                country: country,
-                province: province,
-                followedInstructors: following.push(instructorID)
+                followedInstructors: following
             }
-            dispatch(updateStudentAsync({insData}))
-            .then(() => {
-                setInstructorFollowed(!instructorFollowed)
-            })
+            dispatch(updateStudentAsync(insData))
+            setInstructorFollowed(true)
         } else {
+            console.log("start filtering")
+            const result = following.filter(insID => insID !== instructorID)
+            console.log(result)
             dispatch(updateStudentAsync({
-                followedInstructors: following.filter(insID => insID === instructorID)
+                _id: user.data._id,
+                followedInstructors: result
             }))
-            .then(() => {
-                setInstructorFollowed(!instructorFollowed)
-            })
+            setInstructorFollowed(false)
         }
-        
-
-        // dispatch(followInstructorAsync(id))
-        //     .then(() => {
-        //         dispatch(isInstructorFollowedAsync(id))
-        //             .then(result => {
-        //                 setInstructorFollowed(!instructorFollowed)
-        //                 console.log(result)
-        //             })
-        //     }).then(() => {
-        //         console.log(instructorFollowed)
-        //     })
     }
+
+    // const followInstructor = (instructorID) => () => {
+    //     console.log(instructorID)
+    //     let id = {
+    //         _id: instructorID,
+    //     }
+    //     dispatch(followInstructorAsync(id))
+    //         .then(() => {
+    //             dispatch(isInstructorFollowedAsync(id))
+    //                 .then(result => {
+    //                     setInstructorFollowed(!instructorFollowed)
+    //                     console.log(result)
+    //                 })
+    //         }).then(() => {
+    //             console.log(instructorFollowed)
+    //         })
+    // }
+    
 
     return (
         <div>
