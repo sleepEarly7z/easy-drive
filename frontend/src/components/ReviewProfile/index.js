@@ -18,7 +18,8 @@ import RatingStar from '../ReviewRating/RatingStar'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { followInstructorAsync, isInstructorFollowedAsync } from '../../redux/students/thunks';
+import { updateStudentAsync,followInstructorAsync, isInstructorFollowedAsync } from '../../redux/students/thunks';
+import axios from 'axios'
 
 
 const MessageActionButton = styled.button`
@@ -66,46 +67,100 @@ export default function ReviewProfile({ instructor }) {
     const currentInstructorReviews = useSelector(
         (state) => state.reviews.reviewsOfInstructor,
     )
-
+    const { user } = useSelector((state) => state.auth)
 
     const params = useParams()
     const [instructorFollowed, setInstructorFollowed] = useState(false);
-    const [following, setfollowing] = useState([]);
+    const [first_name, setfirst_name] = useState('')
+    const [last_name, setlast_name] = useState('')
+    const [email, setemail] = useState('')
+    const [phone, setphone] = useState('')
+    const [street, setstreet] = useState('')
+    const [city, setcity] = useState('')
+    const [province, setprovince] = useState('')
+    const [country, setcountry] = useState('')
+    const [following, setfollowing] = useState([])
 
     useEffect(() => {
-            dispatch(isInstructorFollowedAsync({_id: params.instructorId}))
-            .then(result => {
-                setInstructorFollowed(result.payload.data)
-            })
-            // const sendGet = async () => {
-            //     const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
-            //     .then((res) =>{
-            //         setfollowing(res.data.data.followedInstructors)
-            //         // console.log(following)
-            //     }).catch((err) => {
-            //       alert(err);
-            //     }
-            //     );
-            //     // console.log(this.state.allRecipes);
-            //   }
-            //     sendGet();
+            // dispatch(isInstructorFollowedAsync({_id: params.instructorId}))
+            // .then(result => {
+            //     setInstructorFollowed(result.payload.data)
+            // })
+            console.log(user.data._id);
+            console.log(params.instructorId)
+            const sendGet = async () => {
+                const res = await axios.get('http://localhost:3001/students/' + user.data._id)
+                .then((res) =>{
+                    if (res.data.data.followedInstructors.includes(params.instructorId)) {
+                        setInstructorFollowed(true);
+                    }
+                    setfirst_name(res.data.data.first_name)
+                setlast_name(res.data.data.last_name)
+                setemail(res.data.data.email)
+                setphone(res.data.data.phone)
+                setstreet(res.data.data.street)
+                setcity(res.data.data.city)
+                setprovince(res.data.data.province)
+                setcountry(res.data.data.country)
+                setfollowing(res.data.data.followedInstructors)
+                    console.log(instructorFollowed)
+                }).catch((err) => {
+                  alert(err);
+                }
+                );
+              }
+                sendGet();
     }, []);
 
     const followInstructor = (instructorID) => () => {
-        console.log(instructorID)
-        let id = {
-            _id: instructorID,
-        }
-        dispatch(followInstructorAsync(id))
+        // console.log(instructorID)
+        // let id = {
+        //     _id: instructorID,
+        // }
+        
+        console.log(user.data._id)
+        console.log(following)
+        console.log(instructorFollowed)
+        if (!instructorFollowed) {
+            // let insData = {
+            //     followedInstructors: following.push(instructorID)
+            // }
+            let insData = {
+                _id: user.data._id,
+                first_name: first_name,
+                last_name: last_name,
+                email: email,
+                phone: phone,
+                street: street,
+                city: city,
+                country: country,
+                province: province,
+                followedInstructors: following.push(instructorID)
+            }
+            dispatch(updateStudentAsync({insData}))
             .then(() => {
-                dispatch(isInstructorFollowedAsync(id))
-                    .then(result => {
-                        setInstructorFollowed(!instructorFollowed)
-                        console.log(result)
-                    })
-            }).then(() => {
-                console.log(instructorFollowed)
+                setInstructorFollowed(!instructorFollowed)
             })
+        } else {
+            dispatch(updateStudentAsync({
+                followedInstructors: following.filter(insID => insID === instructorID)
+            }))
+            .then(() => {
+                setInstructorFollowed(!instructorFollowed)
+            })
+        }
+        
+
+        // dispatch(followInstructorAsync(id))
+        //     .then(() => {
+        //         dispatch(isInstructorFollowedAsync(id))
+        //             .then(result => {
+        //                 setInstructorFollowed(!instructorFollowed)
+        //                 console.log(result)
+        //             })
+        //     }).then(() => {
+        //         console.log(instructorFollowed)
+        //     })
     }
 
     return (
