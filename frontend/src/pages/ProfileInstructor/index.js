@@ -19,14 +19,19 @@ const ProfileInstructor = () => {
             <div className="ProfileInstructor__sidebar">
                 <SidebarInstructor />
             </div>
-            <div className='InstSideMenuProps'>
-                <InstSideMenu section1 = {information}/>
-                <div className="ProfileInstructor__information"  ref = {information} >
-                    <InformationInstructor/>
-                </div>
-            </div>
 
-            
+            <div className="">
+                {/* <div className="InstSideMenuProps"> */}
+                {/* <div className='InstSideMenuSingle'> */}
+                <div className="InstSideMenuProps">
+                    <InstSideMenu />
+                    <div className="ProfileInstructor__information">
+                        <InformationInstructor />
+                    </div>
+                </div>
+                <Reviews idType={'instructorId'} />
+            </div>
+            {/* </div> */}
         </>
     )
 }

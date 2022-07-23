@@ -14,7 +14,8 @@ import AddIcon from '@material-ui/icons/Add'
 import CloseIcon from '@material-ui/icons/Close'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 
-import * as reviewService from './reviewService'
+// import * as reviewService from './reviewService'
+import ReviewService from '../../redux/reviews/service'
 import Controls from './controls/Controls'
 import useTable from './useTable'
 import Popup from './Popup'
@@ -54,20 +55,18 @@ const headCells = [
     // { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
-const Reviews = ({ reviews }) => {
+const Reviews = ({ idType }) => {
     const dispatch = useDispatch()
     const params = useParams()
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
-    const [records, setRecords] = useState(reviews)
+    const [records, setRecords] = useState([]);
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
             return items
         },
     })
     const [openPopup, setOpenPopup] = useState(false)
-
-    console.log('reviews: ' + reviews)
 
     const {
         TblContainer,
@@ -97,8 +96,6 @@ const Reviews = ({ reviews }) => {
             // reviewService.insertReview(employee)
             dispatch(addReviewAsync(employee))
         } else {
-            // console.log('update employee: ' + employee)
-            // reviewService.updateReview(employee)
             dispatch(updateReviewAsync(employee))
         }
         resetForm()
@@ -113,20 +110,14 @@ const Reviews = ({ reviews }) => {
         setOpenPopup(true)
     }
 
+    const id = params.instructorId
+
     useEffect(() => {
-        const sendGet = async () => {
-            await axios
-                .get('http://localhost:3001/reviews/' + params.instructorId)
-                .then((res) => {
-                    setRecords(res.data.data)
-                    console.log(res)
-                    console.log(res.data.data)
-                })
-                .catch((err) => {
-                    alert(err)
-                })
+        const getReviews = async () => {
+            const reviews = await ReviewService.getReviewsByUserId(id, idType);
+            setRecords(reviews);
         }
-        sendGet()
+        getReviews();
     }, [])
 
     return (

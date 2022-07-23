@@ -2,17 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { actionTypes } from './actionTypes'
 import ReviewService from './service'
 
-export const getReviewsByInstructorIdAsync = createAsyncThunk(
-    actionTypes.GET_REVIEWS_BY_INSTRUCTOR_ID,
-    async (id) => {
-        return await ReviewService.getReviewsByInstructorId(id)
-    },
-)
-
-export const getReviewsByStudentIdAsync = createAsyncThunk(
-    actionTypes.GET_REVIEWS_BY_STUDENT_ID,
-    async (id) => {
-        return await ReviewService.getReviewsByStudentId(id)
+export const getReviewsByIdAsync = createAsyncThunk(
+    actionTypes.GET_REVIEWS_BY_USER_ID,
+    async (id, idType) => {
+        return await ReviewService.getReviewsByUserId(id, idType)
     },
 )
 
@@ -36,12 +29,3 @@ export const deleteReviewAsync = createAsyncThunk(
         return await ReviewService.deleteReview(id)
     },
 )
-
-// export const getRatingAsync = createAsyncThunk(
-//     actionTypes.GET_RATING,
-//     async (id) => {
-//         const result = await ReviewService.getRating(id)
-//         console.log('result:' + result)
-//         return await ReviewService.getRating(id)
-//     },
-// )
