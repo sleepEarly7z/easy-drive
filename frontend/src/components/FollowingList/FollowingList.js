@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
-export default function FollowingList( { showProp }) {
+export default function FollowingList(  props ) {
     const [showList, setShow] = useState(false);
     const [followingList, setFollowingList] = useState([]);
     const [followingList2, setFollowingList2] = useState([]);
@@ -21,67 +21,52 @@ export default function FollowingList( { showProp }) {
 
     useEffect (() => {
         async function mapIDtoName (temp2) {
-            let instID = [];
 
-            // const res = await axios.get(`http://localhost:3001/instructors/${temp2[1]}`);
-            // console.log(res)
-            // console.log(followingList2)
-            // followingList.push(res.data.data);
             axios.all(temp2.map(async (id) => {
                 const res = await axios.get(`http://localhost:3001/instructors/${id}`);
-                console.log(res)
-                followingList.push(res.data.data);
-                console.log(followingList)
+                await console.log(res)
+                followingList.push( await res.data.data);
+                await console.log(followingList)
             }
             ));
             return followingList;
         }
 
 
+
         async function sendGet () {
-          await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
-          .then ((res) => {
-            mapIDtoName(res.data.data.followedInstructors)
-            .then ((result) => {
-                console.log(result);
-                console.log(followingList);
-                return 1;
-            }) .then ((res) => {
-                console.log(res);
-            })
-          })
+          const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
+          console.log(res.data.data.followedInstructors)
+          setFollowingList(res.data.data.followedInstructors);
         }
         sendGet();
       },[]);
+
   
     return (
-        showProp && (
+
             <>
-        <Button variant="primary" onClick={handleShow}>
-          Launch demo modal
-        </Button>
   
-        <Modal show={showList} onHide={handleClose}>
+        <Modal show={props.showBoolean} onHide={props.onClose}>
           <Modal.Header closeButton>
             <Modal.Title>Following</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <ol>
-                <li>
-                    {followingList[0].first_name == undefined ? "" : followingList[0].first_name}
-                </li>
-                <li>
-                    {followingList[1].first_name == undefined ? "" : followingList[1].first_name}
-                </li>
+
+                    {followingList.map((instructor) => {
+                        return <li>{instructor}</li>
+                        }
+                        )}
+
             </ol></Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={props.onClose}>
               Go back
             </Button>
           </Modal.Footer>
         </Modal>
       </>
-        )
       
     );
 }
