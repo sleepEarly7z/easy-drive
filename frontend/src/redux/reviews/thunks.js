@@ -3,9 +3,9 @@ import { actionTypes } from './actionTypes'
 import ReviewService from './service'
 
 export const getReviewsByIdAsync = createAsyncThunk(
-    actionTypes.GET_REVIEWS_BY_ID,
+    actionTypes.GET_REVIEWS_BY_USER_ID,
     async (id, idType) => {
-        return await ReviewService.getReviewsById(id, idType)
+        return await ReviewService.getReviewsByUserId(id, idType)
     },
 )
 
