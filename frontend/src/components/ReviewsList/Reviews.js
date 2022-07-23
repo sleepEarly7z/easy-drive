@@ -60,7 +60,7 @@ const Reviews = ({ idType }) => {
     const params = useParams()
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
-    const [records, setRecords] = useState(reviews)
+    const [records, setRecords] = useState([]);
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
             return items
