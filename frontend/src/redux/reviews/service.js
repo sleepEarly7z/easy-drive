@@ -1,6 +1,7 @@
-const getReviewsById = async (id, idType) => {
+const getReviewsByUserId = async (id, idType) => {
+    console.log(idType);
     const response = await fetch(
-        `http://localhost:3001/reviews/${id}?idType=${idType}`,
+        `http://localhost:3001/reviews?${idType}=${id}`,
         {
             method: 'GET',
         },
@@ -90,7 +91,7 @@ const deleteReview = async (id) => {
 }
 
 const ReviewService = {
-    getReviewsById,
+    getReviewsByUserId,
     addReview,
     updateReview,
     deleteReview,

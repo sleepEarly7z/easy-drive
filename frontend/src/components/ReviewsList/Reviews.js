@@ -14,7 +14,8 @@ import AddIcon from '@material-ui/icons/Add'
 import CloseIcon from '@material-ui/icons/Close'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 
-import * as reviewService from './reviewService'
+// import * as reviewService from './reviewService'
+import ReviewService from '../../redux/reviews/service'
 import Controls from './controls/Controls'
 import useTable from './useTable'
 import Popup from './Popup'
@@ -116,19 +117,11 @@ const Reviews = ({ idType }) => {
     const id = params.instructorId
 
     useEffect(() => {
-        const sendGet = async () => {
-            await axios
-                .get(`http://localhost:3001/reviews/${id}?idType=${idType}`)
-                .then((res) => {
-                    setRecords(res.data.data)
-                    console.log(res)
-                    console.log(res.data.data)
-                })
-                .catch((err) => {
-                    alert(err)
-                })
+        const getReviews = async () => {
+            const reviews = await ReviewService.getReviewsByUserId(id, idType);
+            setRecords(reviews);
         }
-        sendGet()
+        getReviews();
     }, [])
 
     return (
