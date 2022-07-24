@@ -229,22 +229,30 @@ const generateToken = (id) => {
 	});
 };
 
- const followInstructorById = (instructorId,studentId) => {
+/**
+ * update an Student's following list by pushing the new instructorID
+ * to the given student id from database
+ *
+ * @param {string,string} id
+ *
+ * @returns {string} new followed instructor id
+ * @throws {object} error - type and messages
+ */
+const followInstructorById = async(instructorId,studentId) => {
     try {
-        Student.findById(studentId)
+        return Student.findById(studentId)
         .then(student => {
             if(!student.followedInstructors.includes(instructorId)) {
                 student.followedInstructors.push(instructorId)
-                student.save()
+                // student.save()
                 console.log("new instructor is followed");
             } else {
                 Student.updateOne({_id: studentId },{$pull: {followedInstructors : instructorId}})
-                .then(()=> student.save())
+                // .then(()=> student.save())
                 console.log("instructor is unfollowed");
             }
-
+			return student;
         })
-        return instructorId;
       } catch (error) {
         throw ({ type: 'DB', message: error })
       }

@@ -105,11 +105,25 @@ const followInstructor = async (userId) => {
         body: JSON.stringify(userId),
     })
 
-    return response.json()
+    const data = await response.json();
+	if (!response.ok) {
+		const errorMsg = data?.message;
+		throw new Error(errorMsg);
+	}
+
+	return data;
 }
 
 const isInstructorFollowed = async (userId) => {
     const response = await fetch('http://localhost:3001/students/'+ userId.studentId +'/followedInstructors/' + userId.instructorId, {
+        method: 'GET',
+    })
+
+    return response.json()
+}
+
+const getFollowingList = async (userId) => {
+    const response = await fetch('http://localhost:3001/students/followingList/'+ userId.studentId, {
         method: 'GET',
     })
 
@@ -122,5 +136,6 @@ export default {
     updateStudent,
     deleteStudent,
     followInstructor,
-    isInstructorFollowed
+    isInstructorFollowed,
+    getFollowingList,
 }

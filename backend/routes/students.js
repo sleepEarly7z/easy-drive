@@ -103,18 +103,29 @@ router.patch('/:id', function (req, res, next) {
 });
 
 // UPDATE followed instructors
-router.patch('/followInstructor/:id', function (req, res, next) {
-	const studId = req.params.id;
+router.patch('/followInstructor/:studentId', function (req, res, next) {
+	const studId = req.params.studentId;
 	console.log(req.body)
 	const instId = req.body.instructorId;
 	console.log(studId);
-	const followInstructor = service.followInstructorById(instId,studId);
+	service.followInstructorById(instId,studId)
+	.then((student) => {
+		console.log(student)
+		res.status(200).send({ data : student.followedInstructors})
+	})
+	.catch((error) => {
+		res.status(424).send({
+			error: {
+				message: `failed to follow instructor ${instId} from database. ${error}`,
+			},
+		});
+	});
 
-	followInstructor
-		? res.status(200).send(followInstructor)
-		: res.status(424).send({
-				message: `failed to follow instructor ${instId} from database`,
-		  });
+	// followInstructor
+	// 	? res.status(200).send(followInstructor.followedInstructors)
+	// 	: res.status(424).send({
+	// 			message: `failed to follow instructor ${instId} from database`,
+	// 	  });
 });
 
 // check current instructor is already followed or not
@@ -127,8 +138,31 @@ router.get('/:studentId/followedInstructors/:instructorId', function (req, res, 
 			res.status(200).send({ data: student.followedInstructors.includes(instId) })
 		})
 		.catch((error) => {
-			res.status(500).send({ error: error.message });
+			res.status(404).send({
+				error: {
+					message: `cannot find STUDENT with id ${id}`,
+				},
+			});
+		});
+});
+
+// get current student's following list
+router.get('/followingList/:studentId', function (req, res, next) {
+	const studId = req.params.studentId;
+	console.log('studentID: ' + studId)
+	service.
+		getStudentById(studId)
+		.then((student) => {
+			console.log("student.js console: following list:  " + student.followedInstructors)
+			res.status(200).send({ data: student.followedInstructors })
 		})
+		.catch((error) => {
+			res.status(404).send({
+				error: {
+					message: `cannot find STUDENT with id ${id}`,
+				},
+			});
+		});
 });
 
 // router.get('/filter', function (req, res) {

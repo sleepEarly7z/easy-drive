@@ -17,7 +17,8 @@ import RatingStar from '../ReviewRating/RatingStar'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
-import { followInstructorAsync, isInstructorFollowedAsync } from '../../redux/students/thunks';
+import { followInstructorAsync, isInstructorFollowedAsync,
+         getFollowingListAsync } from '../../redux/students/thunks';
 import axios from 'axios'
 
 
@@ -67,29 +68,39 @@ export default function ReviewProfile({ instructor }) {
         (state) => state.reviews.reviewsOfInstructor,
     )
     const { user } = useSelector((state) => state.auth)
-
+    const student = useSelector((state) => state.students)
     const params = useParams()
     const [instructorFollowed, setInstructorFollowed] = useState(false);
     const [isRoleInstructor, setIsRoleInstructor] = useState(false);
     const [isSignedIn, setIsSignedIn] = useState(false);
 
     useEffect(() => {
+        console.log(user)
         if (user !== null) {
             setIsSignedIn(true);
             console.log(user.data._id);
-            ToggleIsRoleInstructor();
-            if (!ToggleIsRoleInstructor) {
-                let id = {
-                    instructorId: params.instructorId,
-                    studentId: user.data._id
+            //ToggleIsRoleInstructor();
+            console.log('hello0')
+            console.log(ToggleIsRoleInstructor())
+            ToggleIsRoleInstructor()
+            .then((result)=>{
+                if (!result) {
+                    console.log('hello1')
+                    let id = {
+                        instructorId: params.instructorId,
+                        studentId: user.data._id
+                    }
+                    console.log('hello2')
+                    dispatch(getFollowingListAsync({ studentId: user.data._id }));
+                    dispatch(isInstructorFollowedAsync(id))
+                        .then(result => {
+                            console.log(result)
+                            setInstructorFollowed(result.payload.data)
+                        })
+                    console.log(params.instructorId)
                 }
-                dispatch(isInstructorFollowedAsync(id))
-                    .then(result => {
-                        console.log(result)
-                        setInstructorFollowed(result.payload.data)
-                    })
-                console.log(params.instructorId)
-            }
+            })
+            console.log('hello3')
         }
     }, []);
 
