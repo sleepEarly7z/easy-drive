@@ -67,7 +67,6 @@ const Reviews = ({ idType }) => {
         },
     })
     const [openPopup, setOpenPopup] = useState(false)
-
     const {
         TblContainer,
         TblHead,
