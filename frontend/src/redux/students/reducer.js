@@ -19,7 +19,7 @@ const INITIAL_STATE = {
     deleteStudent: REQUEST_STATE.IDLE,
     followInstructor: REQUEST_STATE.IDLE,
     isInstructorFollowed: REQUEST_STATE.IDLE,
-    getFollowingListAsync: REQUEST_STATE.IDLE,
+    getFollowingList: REQUEST_STATE.IDLE,
     error: null,
 }
 
@@ -111,7 +111,7 @@ const studentsSlice = createSlice({
             )
             .addCase(isInstructorFollowedAsync.fulfilled, (state, action) => {
                 state.isInstructorFollowed = REQUEST_STATE.FULFILLED
-                //state.list = action.payload
+                state.list = action.payload
             }
             )
             .addCase(isInstructorFollowedAsync.rejected, (state, action) => {
@@ -120,17 +120,17 @@ const studentsSlice = createSlice({
             }
             )
             .addCase(getFollowingListAsync.pending, (state) => {
-                state.isInstructorFollowed = REQUEST_STATE.PENDING
+                state.getFollowingList = REQUEST_STATE.PENDING
                 state.error = null
             }
             )
             .addCase(getFollowingListAsync.fulfilled, (state, action) => {
-                state.isInstructorFollowed = REQUEST_STATE.FULFILLED
+                state.getFollowingList = REQUEST_STATE.FULFILLED
                 state.followingList = action.payload
             }
             )
             .addCase(getFollowingListAsync.rejected, (state, action) => {
-                state.isInstructorFollowed = REQUEST_STATE.REJECTED
+                state.getFollowingList = REQUEST_STATE.REJECTED
                 state.error = action.error
             }
             )

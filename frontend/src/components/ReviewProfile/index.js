@@ -17,8 +17,10 @@ import RatingStar from '../ReviewRating/RatingStar'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
-import { followInstructorAsync, isInstructorFollowedAsync,
-         getFollowingListAsync } from '../../redux/students/thunks';
+import {
+    followInstructorAsync, isInstructorFollowedAsync,
+    getFollowingListAsync
+} from '../../redux/students/thunks';
 import axios from 'axios'
 
 
@@ -83,23 +85,23 @@ export default function ReviewProfile({ instructor }) {
             console.log('hello0')
             console.log(ToggleIsRoleInstructor())
             ToggleIsRoleInstructor()
-            .then((result)=>{
-                if (!result) {
-                    console.log('hello1')
-                    let id = {
-                        instructorId: params.instructorId,
-                        studentId: user.data._id
+                .then((result) => {
+                    if (!result) {
+                        console.log('hello1')
+                        let id = {
+                            instructorId: params.instructorId,
+                            studentId: user.data._id
+                        }
+                        console.log('hello2')
+                        dispatch(getFollowingListAsync({ studentId: user.data._id }));
+                        dispatch(isInstructorFollowedAsync(id))
+                            .then(result => {
+                                console.log(result)
+                                setInstructorFollowed(result.payload.data)
+                            })
+                        console.log(params.instructorId)
                     }
-                    console.log('hello2')
-                    dispatch(getFollowingListAsync({ studentId: user.data._id }));
-                    dispatch(isInstructorFollowedAsync(id))
-                        .then(result => {
-                            console.log(result)
-                            setInstructorFollowed(result.payload.data)
-                        })
-                    console.log(params.instructorId)
-                }
-            })
+                })
             console.log('hello3')
         }
     }, []);
@@ -128,7 +130,7 @@ export default function ReviewProfile({ instructor }) {
 
     const toggleIsFollowed = (instructorID) => () => {
         if (user !== null) {
-            console.log(instructorID)
+            console.log(student)
             let id = {
                 instructorId: params.instructorId,
                 studentId: user.data._id
@@ -138,6 +140,7 @@ export default function ReviewProfile({ instructor }) {
                     dispatch(isInstructorFollowedAsync(id))
                         .then(result => {
                             setInstructorFollowed(!instructorFollowed)
+                            console.log(student)
                         })
                 });
         }

@@ -244,11 +244,11 @@ const followInstructorById = async(instructorId,studentId) => {
         .then(student => {
             if(!student.followedInstructors.includes(instructorId)) {
                 student.followedInstructors.push(instructorId)
-                // student.save()
+                student.save()
                 console.log("new instructor is followed");
             } else {
                 Student.updateOne({_id: studentId },{$pull: {followedInstructors : instructorId}})
-                // .then(()=> student.save())
+                .then(()=> student.save())
                 console.log("instructor is unfollowed");
             }
 			return student;
