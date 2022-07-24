@@ -111,7 +111,7 @@ const studentsSlice = createSlice({
             )
             .addCase(isInstructorFollowedAsync.fulfilled, (state, action) => {
                 state.isInstructorFollowed = REQUEST_STATE.FULFILLED
-                state.list = action.payload
+                // state.list = action.payload
             }
             )
             .addCase(isInstructorFollowedAsync.rejected, (state, action) => {
