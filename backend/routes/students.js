@@ -104,35 +104,31 @@ router.patch('/:id', function (req, res, next) {
 
 // UPDATE followed instructors
 router.patch('/followInstructor/:id', function (req, res, next) {
-	const id = req.params.id;
-	const followInstructor = service.followInstructorById(id);
+	const studId = req.params.id;
+	console.log(req.body)
+	const instId = req.body.instructorId;
+	console.log(studId);
+	const followInstructor = service.followInstructorById(instId,studId);
 
 	followInstructor
 		? res.status(200).send(followInstructor)
 		: res.status(424).send({
-				message: `failed to follow instructor ${id} from database`,
+				message: `failed to follow instructor ${instId} from database`,
 		  });
 });
 
 // check current instructor is already followed or not
-router.get('/checkFollowList/:id', function (req, res, next) {
-	const id = req.params.id;
-	service.isInstructorFollowed(id)
+router.get('/:studentId/followedInstructors/:instructorId', function (req, res, next) {
+	const studId = req.params.studentId;
+	const instId = req.params.instructorId;
+	service.getStudentById(studId)
 		.then((student) => {
-			console.log("4" + student.followedInstructors.includes(id))
-			res.status(200).send({ data: student.followedInstructors.includes(id) })
+			console.log("student.js console: " + student.followedInstructors.includes(instId))
+			res.status(200).send({ data: student.followedInstructors.includes(instId) })
 		})
-
 		.catch((error) => {
 			res.status(500).send({ error: error.message });
 		})
-
-	// service.isInstructorFollowed(id)
-	// .then((isInstructorFollowed)=> {
-	// 	console.log("4"+isInstructorFollowed)
-	// 	res.status(200).send({data: isInstructorFollowed})
-	// })
-
 });
 
 // router.get('/filter', function (req, res) {

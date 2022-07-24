@@ -138,7 +138,7 @@ const SignInForm = () => {
                             name="email"
                             autoComplete="email"
                             autoFocus
-                            value="ebassford0@zimbio.com"
+                            value="cnears1@barnesandnoble.com"
                         />
                         <TextField
                             margin="normal"
@@ -149,7 +149,7 @@ const SignInForm = () => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            value="yVEvUBfHVCJr"
+                            value="M8agJW"
                         />
                         <FormControlLabel
                             control={

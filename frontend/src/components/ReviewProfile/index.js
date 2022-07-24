@@ -16,10 +16,9 @@ import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { followInstructorAsync, isInstructorFollowedAsync } from '../../redux/students/thunks';
 import axios from 'axios'
-import { NavLink, useNavigate } from 'react-router-dom'
 
 
 const MessageActionButton = styled.button`
@@ -78,20 +77,23 @@ export default function ReviewProfile({ instructor }) {
         if (user !== null) {
             setIsSignedIn(true);
             console.log(user.data._id);
-        }
-        console.log(1)
-        ToggleIsRoleInstructor();
-        if (!isRoleInstructor) {
-            console.log(2)
-            dispatch(isInstructorFollowedAsync({ _id: params.instructorId }))
-                .then(result => {
-                    setInstructorFollowed(result.payload.data)
-                })
-            console.log(params.instructorId)
+            ToggleIsRoleInstructor();
+            if (!ToggleIsRoleInstructor) {
+                let id = {
+                    instructorId: params.instructorId,
+                    studentId: user.data._id
+                }
+                dispatch(isInstructorFollowedAsync(id))
+                    .then(result => {
+                        console.log(result)
+                        setInstructorFollowed(result.payload.data)
+                    })
+                console.log(params.instructorId)
+            }
         }
     }, []);
 
-    const ToggleIsRoleInstructor = async() => {
+    const ToggleIsRoleInstructor = async () => {
         console.log(3)
         console.log(user)
         if (user !== null) {
@@ -100,14 +102,11 @@ export default function ReviewProfile({ instructor }) {
                     console.log(res.data.data !== null && (res.data.data.role === "instructor"));
                     if (res.data.data !== null && (res.data.data.role === "instructor")) {
                         setIsRoleInstructor(true)
-                        console.log(4)
                         return true;
                     } else {
                         setIsRoleInstructor(false)
-                        console.log(isRoleInstructor)
                         return false;
                     }
-
                 }).catch((err) => {
                     alert(err);
                 }
@@ -120,18 +119,16 @@ export default function ReviewProfile({ instructor }) {
         if (user !== null) {
             console.log(instructorID)
             let id = {
-                _id: instructorID,
+                instructorId: params.instructorId,
+                studentId: user.data._id
             }
             dispatch(followInstructorAsync(id))
                 .then(() => {
                     dispatch(isInstructorFollowedAsync(id))
                         .then(result => {
                             setInstructorFollowed(!instructorFollowed)
-                            console.log(result)
                         })
-                }).then(() => {
-                    console.log(instructorFollowed)
-                })
+                });
         }
     }
 
@@ -181,10 +178,10 @@ export default function ReviewProfile({ instructor }) {
                                         {'Follow'}
                                     </NavLink>
                                 </FollowActionButton>) :
-                            isRoleInstructor ? <></> :
-                                (<FollowActionButton className="" onClick={toggleIsFollowed(instructor._id)}>
-                                    {instructorFollowed ? 'unfollow' : 'Follow'}
-                                </FollowActionButton>)}
+                                isRoleInstructor ? <></> :
+                                    (<FollowActionButton className="" onClick={toggleIsFollowed(instructor._id)}>
+                                        {instructorFollowed ? 'unfollow' : 'Follow'}
+                                    </FollowActionButton>)}
 
                             <MessageActionButton className="">
                                 Message
