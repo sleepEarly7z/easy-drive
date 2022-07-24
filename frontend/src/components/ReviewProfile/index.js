@@ -86,6 +86,7 @@ export default function ReviewProfile({ instructor }) {
             console.log(ToggleIsRoleInstructor())
             ToggleIsRoleInstructor()
                 .then((result) => {
+                    console.log(result);
                     if (!result) {
                         console.log('hello1')
                         let id = {
@@ -109,23 +110,24 @@ export default function ReviewProfile({ instructor }) {
     const ToggleIsRoleInstructor = async () => {
         console.log(3)
         console.log(user)
+        let isInstructor = false;
         if (user !== null) {
             const res = await axios.get('http://localhost:3001/instructors/' + user.data._id)
                 .then((res) => {
                     console.log(res.data.data !== null && (res.data.data.role === "instructor"));
                     if (res.data.data !== null && (res.data.data.role === "instructor")) {
                         setIsRoleInstructor(true)
-                        return true;
+                        console.log(4)
+                        isInstructor = true;
                     } else {
                         setIsRoleInstructor(false)
-                        return false;
+                        isInstructor = false;
                     }
                 }).catch((err) => {
                     alert(err);
                 }
                 );
-        }
-        return false;
+        } return isInstructor;
     }
 
     const toggleIsFollowed = (instructorID) => () => {
