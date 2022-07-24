@@ -117,9 +117,7 @@ export default function ReviewProfile({ instructor }) {
     }
 
     const toggleIsFollowed = (instructorID) => () => {
-        if (user === null) {
-            //todo: redirect to login page
-        } else {
+        if (user !== null) {
             console.log(instructorID)
             let id = {
                 _id: instructorID,
@@ -178,15 +176,15 @@ export default function ReviewProfile({ instructor }) {
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
                             {!isSignedIn ?
-                                <FollowActionButton className="" >
+                                (<FollowActionButton className="" >
                                     <NavLink to="/sign-in-student" variant="body2">
                                         {'Follow'}
                                     </NavLink>
-                                </FollowActionButton> :
-                                isRoleInstructor ? <></> :
-                                    (<FollowActionButton className="" onClick={toggleIsFollowed(instructor._id)}>
-                                        {instructorFollowed ? 'unfollow' : 'Follow'}
-                                    </FollowActionButton>)}
+                                </FollowActionButton>) :
+                            isRoleInstructor ? <></> :
+                                (<FollowActionButton className="" onClick={toggleIsFollowed(instructor._id)}>
+                                    {instructorFollowed ? 'unfollow' : 'Follow'}
+                                </FollowActionButton>)}
 
                             <MessageActionButton className="">
                                 Message
