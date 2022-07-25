@@ -11,8 +11,10 @@ import {
 } from '@material-ui/core'
 import { Search } from '@material-ui/icons'
 import AddIcon from '@material-ui/icons/Add'
-import CloseIcon from '@material-ui/icons/Close'
+import DeleteIcon from '@material-ui/icons/Delete'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
+import Notification from './Notification'
+import ConfirmDialog from './ConfirmDialog'
 
 // import * as reviewService from './reviewService'
 import ReviewService from '../../redux/reviews/service'
@@ -52,7 +54,7 @@ const headCells = [
     { id: 'comment', label: 'Comment', width: 600 },
     // { id: 'classtype', label: 'Class Type' },
     { id: 'reviewDate', label: 'Time', width: 300 },
-    // { id: 'actions', label: 'Actions', disableSorting: true },
+    { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
 const Reviews = ({ idType }) => {
@@ -60,13 +62,24 @@ const Reviews = ({ idType }) => {
     const params = useParams()
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
-    const [records, setRecords] = useState([]);
+    const [records, setRecords] = useState([])
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
             return items
         },
     })
     const [openPopup, setOpenPopup] = useState(false)
+    const [notify, setNotify] = useState({
+        isOpen: false,
+        message: '',
+        type: '',
+    })
+    const [confirmDialog, setConfirmDialog] = useState({
+        isOpen: false,
+        title: '',
+        subTitle: '',
+    })
+
     const {
         TblContainer,
         TblHead,
@@ -100,6 +113,11 @@ const Reviews = ({ idType }) => {
         resetForm()
         setRecordForEdit(null)
         setOpenPopup(false)
+        setNotify({
+            isOpen: true,
+            message: 'Submitted Successfully',
+            type: 'success',
+        })
         // setRecords(reviewService.getAllReviews())
         // setRecords(dispatch(getReviewsByInstructorIdAsync(params.instructorId)))
     }
@@ -109,14 +127,28 @@ const Reviews = ({ idType }) => {
         setOpenPopup(true)
     }
 
+    const onDelete = (id) => {
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false,
+        })
+        // employeeService.deleteEmployee(id);
+        // setRecords(employeeService.getAllEmployees())
+        setNotify({
+            isOpen: true,
+            message: 'Deleted Successfully',
+            type: 'error',
+        })
+    }
+
     const id = params.instructorId
 
     useEffect(() => {
         const getReviews = async () => {
-            const reviews = await ReviewService.getReviewsByUserId(id, idType);
-            setRecords(reviews);
+            const reviews = await ReviewService.getReviewsByUserId(id, idType)
+            setRecords(reviews)
         }
-        getReviews();
+        getReviews()
     }, [])
 
     return (
@@ -191,6 +223,32 @@ const Reviews = ({ idType }) => {
                                         <CloseIcon fontSize="small" />
                                     </Controls.ActionButton>
                                 </TableCell> */}
+                                <TableCell>
+                                    <Controls.ActionButton
+                                        color="primary"
+                                        onClick={() => {
+                                            openInPopup(item)
+                                        }}
+                                    >
+                                        <EditOutlinedIcon fontSize="small" />
+                                    </Controls.ActionButton>
+                                    <Controls.ActionButton
+                                        color="secondary"
+                                        onClick={() => {
+                                            setConfirmDialog({
+                                                isOpen: true,
+                                                title: 'Are you sure to delete this record?',
+                                                subTitle:
+                                                    "You can't undo this operation",
+                                                onConfirm: () => {
+                                                    onDelete(item.id)
+                                                },
+                                            })
+                                        }}
+                                    >
+                                        <DeleteIcon fontSize="small" />
+                                    </Controls.ActionButton>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -207,6 +265,11 @@ const Reviews = ({ idType }) => {
                     addOrEdit={addOrEdit}
                 />
             </Popup>
+            <Notification notify={notify} setNotify={setNotify} />
+            <ConfirmDialog
+                confirmDialog={confirmDialog}
+                setConfirmDialog={setConfirmDialog}
+            />
         </>
     )
 }

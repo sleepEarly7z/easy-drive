@@ -27,11 +27,11 @@ function App() {
                     <Route path="about" element={<About />} />
 
                     <Route
-                        path="profile-student"
+                        path="profile-student/:studentId"
                         element={<ProfileStudent />}
                     />
                     <Route
-                        path="profile-instructor"
+                        path="profile-instructor/:instructorId"
                         element={<ProfileInstructor />}
                     />
                     <Route path="sign-in-instructor" element={<SignIn role="instructor" />} />

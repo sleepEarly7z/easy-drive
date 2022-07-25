@@ -181,6 +181,7 @@ const registerStudent = async (student) => {
 			name: newStudent.name,
 			email: newStudent.email,
 			password: newStudent.password,
+			role: newStudent.role,
 			token: generateToken(newStudent._id),
 		};
 	} else {
