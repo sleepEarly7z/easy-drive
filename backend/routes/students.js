@@ -110,8 +110,8 @@ router.patch('/followInstructor/:studentId', function (req, res, next) {
 	console.log(studId);
 	service.followInstructorById(instId,studId)
 	.then((student) => {
-		console.log(student)
-		res.status(200).send({ data : student.followedInstructors})
+		console.log(student.followedInstructors)
+		return res.status(200).send({ data : student.followedInstructors})
 	})
 	.catch((error) => {
 		res.status(424).send({

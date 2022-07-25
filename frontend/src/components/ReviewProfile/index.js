@@ -130,7 +130,7 @@ export default function ReviewProfile({ instructor }) {
         } return isInstructor;
     }
 
-    const toggleIsFollowed = (instructorID) => () => {
+    const toggleIsFollowed = () => () => {
         if (user !== null) {
             console.log(student)
             let id = {
@@ -195,7 +195,7 @@ export default function ReviewProfile({ instructor }) {
                                     </NavLink>
                                 </FollowActionButton>) :
                                 isRoleInstructor ? <></> :
-                                    (<FollowActionButton className="" onClick={toggleIsFollowed(instructor._id)}>
+                                    (<FollowActionButton className="" onClick={toggleIsFollowed()}>
                                         {instructorFollowed ? 'unfollow' : 'Follow'}
                                     </FollowActionButton>)}
 

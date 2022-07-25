@@ -240,18 +240,19 @@ const generateToken = (id) => {
  */
 const followInstructorById = async(instructorId,studentId) => {
     try {
-        return Student.findById(studentId)
+        return await Student.findById(studentId)
         .then(student => {
             if(!student.followedInstructors.includes(instructorId)) {
                 student.followedInstructors.push(instructorId)
                 student.save()
                 console.log("new instructor is followed");
+				return student;
             } else {
                 Student.updateOne({_id: studentId },{$pull: {followedInstructors : instructorId}})
                 .then(()=> student.save())
                 console.log("instructor is unfollowed");
+				return Student.findById(studentId);
             }
-			return student;
         })
       } catch (error) {
         throw ({ type: 'DB', message: error })
