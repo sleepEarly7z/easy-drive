@@ -14,6 +14,7 @@
     "dotenv": "^16.0.1",
     "express": "~4.16.1",
     "express-async-handler": "^1.2.0",
+    "force": "^0.0.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.3",
     "morgan": "~1.9.1",
