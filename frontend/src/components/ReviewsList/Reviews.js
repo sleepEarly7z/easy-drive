@@ -32,6 +32,7 @@ import {
     addReviewAsync,
     getReviewsByInstructorIdAsync,
     updateReviewAsync,
+    deleteReviewAsync,
 } from '../../redux/reviews/thunks'
 import { useParams } from 'react-router-dom'
 
@@ -131,6 +132,7 @@ const Reviews = ({ idType }) => {
             ...confirmDialog,
             isOpen: false,
         })
+        dispatch(deleteReviewAsync(id))
         // employeeService.deleteEmployee(id);
         // setRecords(employeeService.getAllEmployees())
         setNotify({
@@ -240,7 +242,7 @@ const Reviews = ({ idType }) => {
                                                 subTitle:
                                                     "You can't undo this operation",
                                                 onConfirm: () => {
-                                                    onDelete(item.id)
+                                                    onDelete(item._id)
                                                 },
                                             })
                                         }}
