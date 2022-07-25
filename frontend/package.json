@@ -109,7 +109,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "heroku-postbuild": "cd backend && npm install --force && npm start"
+    "heroku-postbuild": "cd backend && npm install --force && npm run build"
   },
   "eslintConfig": {
     "extends": [
