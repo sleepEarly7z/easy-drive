@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
     Paper,
-    Grid,
     makeStyles,
     TableBody,
     TableRow,
@@ -23,11 +22,10 @@ import Popup from './Popup'
 import ReviewForm from './ReviewForm'
 import RatingStar from './RatingStar'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import {
     addReviewAsync,
-    getReviewsByInstructorIdAsync,
     updateReviewAsync,
     deleteReviewAsync,
 } from '../../redux/reviews/thunks'
@@ -50,7 +48,6 @@ const headCells = [
     { id: 'fullName', label: 'Student Name', width: 300 },
     { id: 'rating', label: 'Rating', width: 200 },
     { id: 'comment', label: 'Comment', width: 600 },
-    // { id: 'classtype', label: 'Class Type' },
     { id: 'reviewDate', label: 'Time', width: 300 },
     { id: 'actions', label: 'Actions', disableSorting: true },
 ]
@@ -103,9 +100,6 @@ const Reviews = ({ idType }) => {
     }
 
     const changeRatingValue = (review) => {
-        // if (review.ratingStar === 'onestar') {
-        //     review.rating = 1
-        // }
         switch (review.ratingStar) {
             case 'onestar':
                 review.rating = 1
@@ -159,7 +153,6 @@ const Reviews = ({ idType }) => {
             isOpen: false,
         })
         dispatch(deleteReviewAsync(id))
-        // employeeService.deleteEmployee(id);
         // setRecords(employeeService.getAllEmployees())
         setNotify({
             isOpen: true,
@@ -192,16 +185,6 @@ const Reviews = ({ idType }) => {
                         }}
                         onChange={handleSearch}
                     />
-                    {/* <Grid container spacing={2}>
-                        <Grid item xs={8}>
-                            <Controls.Select
-                                name="ratingId"
-                                label="Rating"
-                                // onChange={handleInputChange}
-                                options={reviewService.getRatingCollection()}
-                            />
-                        </Grid>
-                    </Grid> */}
                     <Controls.Button
                         text="Add New"
                         variant="outlined"
@@ -228,26 +211,9 @@ const Reviews = ({ idType }) => {
                                 <TableCell width={headCells[2].width}>
                                     {item.comment_content}
                                 </TableCell>
-                                {/* <TableCell>
-										{item.mobile}
-									</TableCell> */}
-                                {/* <TableCell>{item.classtype}</TableCell> */}
                                 <TableCell width={headCells[3].width}>
                                     {item.createdAt}
                                 </TableCell>
-                                {/* <TableCell>
-                                    <Controls.ActionButton
-                                        color="primary"
-                                        onClick={() => {
-                                            openInPopup(item)
-                                        }}
-                                    >
-                                        <EditOutlinedIcon fontSize="small" />
-                                    </Controls.ActionButton>
-                                    <Controls.ActionButton color="secondary">
-                                        <CloseIcon fontSize="small" />
-                                    </Controls.ActionButton>
-                                </TableCell> */}
                                 <TableCell>
                                     <Controls.ActionButton
                                         color="primary"
