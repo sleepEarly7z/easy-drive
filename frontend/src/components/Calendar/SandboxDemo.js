@@ -1,14 +1,11 @@
 import * as React from 'react'
+import { useState } from 'react'
 import Paper from '@mui/material/Paper'
 import FormGroup from '@mui/material/FormGroup'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Typography from '@mui/material/FormControl'
 import { styled } from '@mui/material/styles'
-import Radio from '@mui/material/Radio'
-import RadioGroup from '@mui/material/RadioGroup'
-import FormControl from '@mui/material/FormControl'
-import FormLabel from '@mui/material/FormLabel'
 import {
     ViewState,
     EditingState,
@@ -16,26 +13,25 @@ import {
 } from '@devexpress/dx-react-scheduler'
 import {
     Scheduler,
-    DayView,
     WeekView,
-    MonthView,
     Appointments,
     AppointmentForm,
     AppointmentTooltip,
     DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui'
 
-import { appointments } from '../../utils/appointments'
-import { useState } from 'react'
+// import { appointments } from '../../../demo-data/appointments'
 
-// source: https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/views/
+import { appointments } from '../../utils/appointments'
 
 const PREFIX = 'Demo'
+// #FOLD_BLOCK
 export const classes = {
     container: `${PREFIX}-container`,
     text: `${PREFIX}-text`,
     formControlLabel: `${PREFIX}-formControlLabel`,
 }
+// #FOLD_BLOCK
 const StyledDiv = styled('div')(({ theme }) => ({
     [`&.${classes.container}`]: {
         margin: theme.spacing(2),
@@ -48,11 +44,7 @@ const StyledDiv = styled('div')(({ theme }) => ({
     },
 }))
 
-// const current = new Date()
-// const currentDate = `${current.getFullYear()}-${
-//     current.getMonth() + 1
-// }-${current.getDate()}`
-// const currentDate = '2022-05-25';
+// const currentDate = '2018-06-27'
 const editingOptionsList = [
     { id: 'allowAdding', text: 'Adding' },
     { id: 'allowDeleting', text: 'Deleting' },
@@ -103,7 +95,7 @@ const EditingOptionsSelector = ({ options, onOptionsChange }) => (
     </StyledDiv>
 )
 
-const CalendarSchedular = ({ page, instructorId }) => {
+const SandboxDemo = () => {
     const [data, setData] = React.useState(appointments)
     const [editingOptions, setEditingOptions] = React.useState({
         allowAdding: true,
@@ -150,20 +142,16 @@ const CalendarSchedular = ({ page, instructorId }) => {
         [setData, setIsAppointmentBeingCreated, data],
     )
     const onAddedAppointmentChange = React.useCallback((appointment) => {
-        // if (page !== 'reviewpage') {
         setAddedAppointment(appointment)
         setIsAppointmentBeingCreated(true)
-        // }
     })
     const handleEditingOptionsChange = React.useCallback(({ target }) => {
         const { value } = target
         const { [value]: checked } = editingOptions
-        // if (page !== 'reviewpage') {
         setEditingOptions({
             ...editingOptions,
             [value]: !checked,
         })
-        // }
     })
 
     const TimeTableCell = React.useCallback(
@@ -202,78 +190,16 @@ const CalendarSchedular = ({ page, instructorId }) => {
     )
 
     const [currentDate, setCurrentDate] = useState(new Date())
-    // (`${currentDate.getFullYear()}`-`${currentDate.getMonth() + 1}`-`${currentDate.getDate()}`, []);
-
-    const [viewmode, setViewmode] = React.useState('month')
-
-    const handleViewChange = (event) => {
-        setViewmode(event.target.value)
-    }
 
     return (
         <React.Fragment>
-            {/* {page !== 'reviewpage' && ( */}
             <EditingOptionsSelector
                 options={editingOptions}
                 onOptionsChange={handleEditingOptionsChange}
             />
-            {/* )} */}
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    marginTop: '5px',
-                    marginBottom: '10px',
-                }}
-            >
-                <div
-                    style={{
-                        fontSize: '18px',
-                        fontWeight: '850',
-                        paddingBottom: '10px',
-                        marginRight: 'auto',
-                        color: '#adb2af',
-                    }}
-                >
-                    {months[currentDate.getMonth()]},{' '}
-                    {currentDate.getFullYear()}
-                </div>
-                <FormControl>
-                    {/* <FormLabel id="demo-radio-buttons-group-label">
-                        View
-                    </FormLabel> */}
-                    <RadioGroup
-                        row
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="month"
-                        name="radio-buttons-group"
-                        value={viewmode}
-                        onChange={handleViewChange}
-                    >
-                        <FormControlLabel
-                            value="month"
-                            control={<Radio />}
-                            label="Month"
-                        />
-                        <FormControlLabel
-                            value="week"
-                            control={<Radio />}
-                            label="Week"
-                        />
-                        <FormControlLabel
-                            value="day"
-                            control={<Radio />}
-                            label="Day"
-                        />
-                    </RadioGroup>
-                </FormControl>
-            </div>
             <Paper>
                 <Scheduler data={data} height={600}>
-                    <ViewState
-                        currentDate={currentDate}
-                        onCurrentDateChange={() => setCurrentDate(currentDate)}
-                    />
+                    <ViewState currentDate={currentDate} />
                     <EditingState
                         onCommitChanges={onCommitChanges}
                         addedAppointment={addedAppointment}
@@ -281,43 +207,32 @@ const CalendarSchedular = ({ page, instructorId }) => {
                     />
 
                     <IntegratedEditing />
-
-                    {viewmode === 'month' && <MonthView />}
-                    {viewmode === 'week' && (
-                        <WeekView
-                            startDayHour={10}
-                            endDayHour={19}
-                            timeTableCellComponent={TimeTableCell}
-                        />
-                    )}
-                    {viewmode === 'day' && <DayView />}
+                    <WeekView
+                        startDayHour={9}
+                        endDayHour={19}
+                        timeTableCellComponent={TimeTableCell}
+                    />
 
                     <Appointments />
 
-                    {/* {page !== 'reviewpage' && ( */}
-                    <>
-                        <AppointmentTooltip
-                            showOpenButton
-                            showDeleteButton={allowDeleting}
-                        />
-                        <AppointmentForm
-                            commandButtonComponent={CommandButton}
-                            readOnly={
-                                isAppointmentBeingCreated
-                                    ? false
-                                    : !allowUpdating
-                            }
-                        />
-                        <DragDropProvider
-                            allowDrag={allowDrag}
-                            allowResize={allowResize}
-                        />
-                    </>
-                    {/* )} */}
+                    <AppointmentTooltip
+                        showOpenButton
+                        showDeleteButton={allowDeleting}
+                    />
+                    <AppointmentForm
+                        commandButtonComponent={CommandButton}
+                        readOnly={
+                            isAppointmentBeingCreated ? false : !allowUpdating
+                        }
+                    />
+                    <DragDropProvider
+                        allowDrag={allowDrag}
+                        allowResize={allowResize}
+                    />
                 </Scheduler>
             </Paper>
         </React.Fragment>
     )
 }
 
-export default CalendarSchedular
+export default SandboxDemo
