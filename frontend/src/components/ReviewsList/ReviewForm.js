@@ -2,19 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { Grid } from '@material-ui/core'
 import Controls from './controls/Controls'
 import { useForm, Form } from './useForm'
-import * as reviewService from './reviewService'
+import { useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 const ratingItems = [
-    { id: 'onestar', title: '1 star' },
-    { id: 'twostars', title: '2 stars' },
-    { id: 'threestars', title: '3 stars' },
-    { id: 'fourstars', title: '4 stars' },
-    { id: 'fivestars', title: '5 stars' },
+    { id: 'onestar', title: '1 star', number: 1 },
+    { id: 'twostars', title: '2 stars', number: 2 },
+    { id: 'threestars', title: '3 stars', number: 3 },
+    { id: 'fourstars', title: '4 stars', number: 4 },
+    { id: 'fivestars', title: '5 stars', number: 5 },
 ]
 
 const initialFValues = {
     id: 0,
-    instructor_id: '62d7601ef36c6973468ba80f',
+    instructor_id: '',
     student_id: '62d761555c08a0f631db58a7',
     // email: '',
     comment_content: '',
@@ -22,7 +23,7 @@ const initialFValues = {
     // mobile: '',
     // city: '',
     ratingStar: 'onestar',
-    rating: 3,
+    rating: 1,
     // classtypeId: '',
     reviewDate: '',
     // hireDate: new Date(),
@@ -60,6 +61,12 @@ export default function ReviewForm(props) {
         if (fieldValues === values)
             return Object.values(temp).every((x) => x === '')
     }
+
+    const { user } = useSelector((state) => state.auth)
+    const params = useParams();
+
+    initialFValues.student_id = user.data._id
+    initialFValues.instructor_id = params.instructorId
 
     const {
         values,

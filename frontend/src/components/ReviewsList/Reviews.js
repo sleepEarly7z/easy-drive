@@ -16,15 +16,12 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Notification from './Notification'
 import ConfirmDialog from './ConfirmDialog'
 
-// import * as reviewService from './reviewService'
 import ReviewService from '../../redux/reviews/service'
 import Controls from './controls/Controls'
 import useTable from './useTable'
 import Popup from './Popup'
 import ReviewForm from './ReviewForm'
 import RatingStar from './RatingStar'
-
-import axios from 'axios'
 
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -64,6 +61,9 @@ const Reviews = ({ idType }) => {
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState([])
+
+    const id = params.instructorId
+
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
             return items
@@ -102,13 +102,39 @@ const Reviews = ({ idType }) => {
         })
     }
 
-    const addOrEdit = (employee, resetForm) => {
-        if (employee.id === 0) {
-            console.log('insert employee: ' + employee)
-            // reviewService.insertReview(employee)
-            dispatch(addReviewAsync(employee))
+    const changeRatingValue = (review) => {
+        // if (review.ratingStar === 'onestar') {
+        //     review.rating = 1
+        // }
+        switch (review.ratingStar) {
+            case 'onestar':
+                review.rating = 1
+                return
+            case 'twostars':
+                review.rating = 2
+                return
+            case 'threestars':
+                review.rating = 3
+                return
+            case 'fourstars':
+                review.rating = 4
+                return
+            case 'fivestars':
+                review.rating = 5
+                return
+            default:
+                return
+        }
+    }
+
+    const addOrEdit = (review, resetForm) => {
+        changeRatingValue(review)
+
+        if (review.id === 0) {
+            console.log('insert review: ' + review)
+            dispatch(addReviewAsync(review))
         } else {
-            dispatch(updateReviewAsync(employee))
+            dispatch(updateReviewAsync(review))
         }
         resetForm()
         setRecordForEdit(null)
@@ -141,8 +167,6 @@ const Reviews = ({ idType }) => {
             type: 'error',
         })
     }
-
-    const id = params.instructorId
 
     useEffect(() => {
         const getReviews = async () => {
