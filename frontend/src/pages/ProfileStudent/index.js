@@ -4,7 +4,8 @@ import InformationStudent from '../../components/InformationStudent'
 import InstSideMenu from '../../components/InstSideMenu/InstSideMenu'
 import ScrollToTop from '../../components/HomePageSections/SectionTwo/ScrollToTop'
 import { useRef } from 'react'
-
+import StuSideMenu from '../../components/StuSideMenu/StuSideMenu'
+import StudentMap from '../../components/StudentMap/StudentMap'
 const ProfileStudent = () => {
     const information = useRef(null);
 
@@ -19,13 +20,13 @@ const ProfileStudent = () => {
             </div>
 
             <div className="StuSideMenuProps">
-                <InstSideMenu section1 = {information}/>
+                <StuSideMenu section1 = {information}/>
                 <div className="ProfileStudent__information" ref = {information}>
                     <InformationStudent/>
                     {/* <Reviews/> */}
                 </div>
-
             </div>
+            <StudentMap/>
         </>
     )
 }

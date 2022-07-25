@@ -29,7 +29,7 @@ export default function InstSideMenu({section1, section2}) {
         <ListItemText primary="See reviews" />
       </ListItem>
       <ListItem button>
-        <ListItemText primary="Change Password" />
+        <ListItemText primary="Show Map" />
       </ListItem>
       <Divider light />
       <ListItem button>
