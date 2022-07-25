@@ -23,7 +23,7 @@ const initialFValues = {
     // mobile: '',
     // city: '',
     ratingStar: 'onestar',
-    rating: 1,
+    // rating: 1,
     // classtypeId: '',
     reviewDate: '',
     // hireDate: new Date(),
