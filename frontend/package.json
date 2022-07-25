@@ -102,7 +102,7 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "concurrently \"node scripts/start.js\" \"npm install --force\"",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "heroku-postbuild": "cd backend && npm install --force && npm run build"
