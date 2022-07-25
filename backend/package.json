@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "heroku-postbuild": "cd frontend && npm install --force && npm run build"
+    "heroku-postbuild": "cd frontend && npm install --save-dev react-dev-utils && npm install --force && npm run build"
+  },
+  "engines": {
+    "node": "16.13.2",
+    "npm": "8.1.2"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
