@@ -1,38 +1,45 @@
 const express = require('express');
 const router = express.Router();
-
 const service = require('../services/reviewService');
 
-/**
- * Get all reviews for one instructor
- *
- * @verb GET
- * @endpoint /instructors
- *
- * Responses:
- * Success:
- * @status 200 OK
- * @data instructors[]
- *
- * Error:
- * @status 500 SERVER ERROR
- * @error message
- */
-//  router.get('/', function (req, res) {
-// 	const query = req.query;
+// helpers
+const errorWithMessage = (role, id) => ({
+	error: {
+		message: `cannot find reviews for ${role} ${id}`
+	}
+})
 
-// 	const getInstructors = (query)
-// 		? service.getQueriedInstructors(query)
-// 		: service.getInstructors()
+router.get('/', async (req, res) => {
+	const { instructorId, studentId } = req.query;
 
-// 	getInstructors
-// 		.then((instructors) => {
-// 			res.status(200).send({ data: instructors });
-// 		})
-// 		.catch((error) => {
-// 			res.status(500).send({ error: error.message });
-// 		});
-// });
+	if (!instructorId && !studentId) return res.status(400).send();
+	if (instructorId && studentId) return res.status(400).send();
+
+	let resultReviews = [];
+	let error = null;
+
+	if (instructorId) {
+		try {
+			resultReviews = await service.getReviewsByInstructorId(instructorId);
+		} catch {
+			error = errorWithMessage('instructor', instructorId)
+		}
+	}
+
+	if (studentId) {
+		try {
+			resultReviews = await service.getReviewsByStudentId(studentId);
+		} catch {
+			error = errorWithMessage('student', studentId)
+		}
+	}
+
+	if (!error) {
+		res.status(200).send(resultReviews);
+	} else {
+		res.status(400).send(error);
+	}
+});
 
 /**
  * Get all reviews of one instructor or one student
@@ -44,29 +51,27 @@ const service = require('../services/reviewService');
  *
  *  Request:
  *  @parameters
- * 		id - instructor/student id
+ * 		id - review id
  *
  *  Response:
  *  Success:
  *  @status 200 OK
- *  @data reviews
+ *  @data review
  *
  * 	@status 404 NOT FOUND
  *  @error message
  */
 router.get('/:id', function (req, res) {
-	const id = req.params.id;
-
+	const { id } = req.params;
 	service
-		.getReviewsByInstructorId(id)
-		.then((reviews) => {
-			// console.log(reviews.length);
-			res.status(200).send({ data: reviews });
+		.getReviewById(id)
+		.then((review) => {
+			res.status(200).send({ data: review });
 		})
-		.catch((error) => {
+		.catch(() => {
 			res.status(404).send({
 				error: {
-					message: `cannot find reviews with instructor_id/student_id ${id}`,
+					message: `cannot find review with review_id ${id}`,
 				},
 			});
 		});

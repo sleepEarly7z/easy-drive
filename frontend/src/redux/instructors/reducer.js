@@ -57,24 +57,6 @@ const instructorsSlice = createSlice({
                 state.getInstructorById = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
-            .addCase(getReviewsByIdAsync.pending, (state) => {
-                state.getReviewsById = REQUEST_STATE.PENDING
-                state.error = null
-            })
-            .addCase(
-                getReviewsByIdAsync.fulfilled,
-                (state, action) => {
-                    state.getReviewsById = REQUEST_STATE.FULFILLED
-                    state.viewCurrentInstructor.reviews = action.payload.data
-                },
-            )
-            .addCase(
-                getReviewsByIdAsync.rejected,
-                (state, action) => {
-                    state.getReviewsById = REQUEST_STATE.REJECTED
-                    state.error = action.error
-                },
-            )
             .addCase(addInstructorAsync.pending, (state) => {
                 state.addInstructor = REQUEST_STATE.PENDING
                 state.error = null

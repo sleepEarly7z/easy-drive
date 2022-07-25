@@ -1,8 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
-
 const Student = require('../models/studentModel');
 
 /**
@@ -89,28 +87,6 @@ const updateStudentById = (id, patch) => {
         }
     })
 }
-
-/**
- * Update an Student's instructor follow list form database
- *
- * @param {string} id
- * @param {object} patch with properties need to update
- *
- * @returns {object} Student's instructor follow list updated
- */
-
-//     if (!studentFound.followedInstructors.includes(id)) {
-//         studentFound.followedInstructors.push(id);
-//         console.log("new instructor is followed");
-//     } else {
-//         console.log("this instructor already followed");
-//     }
-//     await studentFound.save();
-//     //.then(() => {return id})
-//     //.catch(err=>console.log("error"))
-//     return studentFound;
-
-// }
 
 const registerStudent = async (student) => {
 	const {

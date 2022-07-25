@@ -12,7 +12,6 @@ export const store = configureStore({
         users: usersReducer,
         instructors: instructorsReducer,
         students: studentsReducer,
-
         reviews: reviewsReducer,
         auth: authReducer,
         query: queryReducer,

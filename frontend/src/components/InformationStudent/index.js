@@ -57,7 +57,6 @@ const InformationStudent = () => {
                 setprovince(res.data.data.province)
                 setcountry(res.data.data.country)
                 setfollowing(res.data.data.followedInstructors)
-                // console.log(following)
             }).catch((err) => {
               alert(err);
             }
@@ -145,7 +144,6 @@ const InformationStudent = () => {
                                         onChange={handleemail}
                                     />
                                 </div>
-
                             </div>
                             <div className="mt-5 text-center">
                                 <button
@@ -204,7 +202,6 @@ const InformationStudent = () => {
                                         onChange={handlecountry}
                                     />
                                 </div>
-
                         </div>
                     </div>
                 </div>

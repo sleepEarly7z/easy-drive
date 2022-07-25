@@ -38,7 +38,6 @@ router.get('/', function (req, res) {
  *
  *  @verb GET
  *  @endpoint /students/:id
-
  *
  *  Request:
  *  @parameters
@@ -164,6 +163,7 @@ router.get('/followingList/:studentId', function (req, res, next) {
 			});
 		});
 });
+
 
 // router.get('/filter', function (req, res) {
 // 	res.send(service.getInstructors());

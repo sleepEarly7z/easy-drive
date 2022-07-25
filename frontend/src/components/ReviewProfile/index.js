@@ -105,6 +105,7 @@ export default function ReviewProfile({ instructor }) {
                 })
             console.log('hello3')
         }
+ 
     }, []);
 
     const ToggleIsRoleInstructor = async () => {
@@ -327,7 +328,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews reviews={currentInstructorReviews} />
+                        <Reviews idType={"instructorId"} />
                     </div>
                 </div>
             </div>
