@@ -79,7 +79,6 @@ const Reviews = ({ idType }) => {
         title: '',
         subTitle: '',
     })
-
     const {
         TblContainer,
         TblHead,
