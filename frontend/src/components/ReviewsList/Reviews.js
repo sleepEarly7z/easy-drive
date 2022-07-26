@@ -230,30 +230,54 @@ const Reviews = ({ idType }) => {
                                     {item.createdAt}
                                 </TableCell>
                                 <TableCell>
-                                    <Controls.ActionButton
-                                        color="primary"
-                                        onClick={() => {
-                                            openInPopup(item)
-                                        }}
-                                    >
-                                        <EditOutlinedIcon fontSize="small" />
-                                    </Controls.ActionButton>
-                                    <Controls.ActionButton
-                                        color="secondary"
-                                        onClick={() => {
-                                            setConfirmDialog({
-                                                isOpen: true,
-                                                title: 'Are you sure to delete this record?',
-                                                subTitle:
-                                                    "You can't undo this operation",
-                                                onConfirm: () => {
-                                                    onDelete(item._id)
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <DeleteIcon fontSize="small" />
-                                    </Controls.ActionButton>
+                                    {user ? (
+                                        <>
+                                            <Controls.ActionButton
+                                                color="primary"
+                                                onClick={() => {
+                                                    openInPopup(item)
+                                                }}
+                                            >
+                                                <EditOutlinedIcon fontSize="small" />
+                                            </Controls.ActionButton>
+
+                                            <Controls.ActionButton
+                                                color="secondary"
+                                                onClick={() => {
+                                                    setConfirmDialog({
+                                                        isOpen: true,
+                                                        title: 'Are you sure to delete this record?',
+                                                        subTitle:
+                                                            "You can't undo this operation",
+                                                        onConfirm: () => {
+                                                            onDelete(item._id)
+                                                        },
+                                                    })
+                                                }}
+                                            >
+                                                <DeleteIcon fontSize="small" />
+                                            </Controls.ActionButton>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Controls.ActionButton
+                                                color="primary"
+                                                onClick={() => {
+                                                    navigate('/sign-in-student')
+                                                }}
+                                            >
+                                                <EditOutlinedIcon fontSize="small" />
+                                            </Controls.ActionButton>
+                                            <Controls.ActionButton
+                                                color="secondary"
+                                                onClick={() => {
+                                                    navigate('/sign-in-student')
+                                                }}
+                                            >
+                                                <DeleteIcon fontSize="small" />
+                                            </Controls.ActionButton>
+                                        </>
+                                    )}
                                 </TableCell>
                             </TableRow>
                         ))}
