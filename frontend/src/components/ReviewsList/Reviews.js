@@ -22,7 +22,8 @@ import Popup from './Popup'
 import ReviewForm from './ReviewForm'
 import RatingStar from './RatingStar'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import {
     addReviewAsync,
@@ -53,6 +54,7 @@ const headCells = [
 ]
 
 const Reviews = ({ idType }) => {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const params = useParams()
     const classes = useStyles()
@@ -60,6 +62,8 @@ const Reviews = ({ idType }) => {
     const [records, setRecords] = useState([])
 
     const id = params.instructorId
+    const { user } = useSelector((state) => state.auth)
+
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
             return items
@@ -184,16 +188,28 @@ const Reviews = ({ idType }) => {
                         }}
                         onChange={handleSearch}
                     />
-                    <Controls.Button
-                        text="Add New"
-                        variant="outlined"
-                        startIcon={<AddIcon />}
-                        className={classes.newButton}
-                        onClick={() => {
-                            setOpenPopup(true)
-                            setRecordForEdit(null)
-                        }}
-                    />
+                    {user ? (
+                        <Controls.Button
+                            text="Add New"
+                            variant="outlined"
+                            startIcon={<AddIcon />}
+                            className={classes.newButton}
+                            onClick={() => {
+                                setOpenPopup(true)
+                                setRecordForEdit(null)
+                            }}
+                        />
+                    ) : (
+                        <Controls.Button
+                            text="Add New"
+                            variant="outlined"
+                            startIcon={<AddIcon />}
+                            className={classes.newButton}
+                            onClick={() => {
+                                navigate('/sign-in-student')
+                            }}
+                        />
+                    )}
                 </Toolbar>
                 <TblContainer>
                     <TblHead />
