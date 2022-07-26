@@ -77,17 +77,17 @@ const deleteStudentById = (id) => {
  * @returns {object} Student updated
  */
 const updateStudentById = (id, patch) => {
-    // TODO
-    console.log("StudentService121")
-    console.log(patch.followedInstructors)
-    Student.updateOne({ _id: id }, patch, (err, stu) => {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log(stu)
-        }
-    })
-}
+	// TODO
+	console.log('StudentService121');
+	console.log(patch.followedInstructors);
+	Student.updateOne({ _id: id }, patch, (err, stu) => {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log(stu);
+		}
+	});
+};
 
 /**
  * Update an Student's instructor follow list form database
@@ -161,7 +161,7 @@ const registerStudent = async (student) => {
 
 	// Create user
 	const newStudent = await Student.create({
-		role: "student",
+		role: 'student',
 		first_name,
 		last_name,
 		password,
@@ -178,10 +178,18 @@ const registerStudent = async (student) => {
 	if (newStudent) {
 		return {
 			_id: newStudent._id,
-			name: newStudent.name,
+			role: newStudent.role,
+			first_name: newStudent.first_name,
+			last_name: newStudent.last_name,
 			email: newStudent.email,
 			password: newStudent.password,
-			role: newStudent.role,
+			phone: newStudent.phone,
+			photo: newStudent.photo,
+			street: newStudent.street,
+			city: newStudent.city,
+			province: newStudent.province,
+			country: newStudent.country,
+			followedInstructors: newStudent.followedInstructors,
 			token: generateToken(newStudent._id),
 		};
 	} else {
@@ -206,9 +214,18 @@ const loginStudent = async (email, password) => {
 	) {
 		return {
 			_id: studentFound._id,
-			name: studentFound.name,
+			role: studentFound.role,
+			first_name: studentFound.first_name,
+			last_name: studentFound.last_name,
 			email: studentFound.email,
 			password: studentFound.password,
+			phone: studentFound.phone,
+			photo: studentFound.photo,
+			street: studentFound.street,
+			city: studentFound.city,
+			province: studentFound.province,
+			country: studentFound.country,
+			followedInstructors: studentFound.followedInstructors,
 			token: generateToken(studentFound._id),
 		};
 	} else {
@@ -222,6 +239,7 @@ const loginStudent = async (email, password) => {
 const getMe = async (req) => {
 	const student = {
 		_id: req.student._id,
+		role: req.student.role,
 		first_name: req.student.first_name,
 		last_name: req.student.last_name,
 		password: req.student.password,
@@ -234,7 +252,7 @@ const getMe = async (req) => {
 		country: req.student.country,
 		followedInstructors: req.student.followedInstructors,
 	};
-	console.log(student)
+	console.log(student);
 
 	return student;
 };
@@ -248,15 +266,15 @@ const generateToken = (id) => {
 };
 
 module.exports = {
-    Student,
-    getStudents,
-    getStudentById,
-    addStudent,
-    deleteStudentById,
-    updateStudentById,
-    followInstructorById,
-    isInstructorFollowed,
+	Student,
+	getStudents,
+	getStudentById,
+	addStudent,
+	deleteStudentById,
+	updateStudentById,
+	followInstructorById,
+	isInstructorFollowed,
 	getMe,
 	loginStudent,
 	registerStudent,
-}
+};

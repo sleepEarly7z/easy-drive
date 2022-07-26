@@ -121,9 +121,25 @@ const registerInstructor = async (instructor) => {
 	if (newInstructor) {
 		return {
 			_id: newInstructor._id,
-			name: newInstructor.name,
+			role: newInstructor.role,
+			first_name: newInstructor.first_name,
+			last_name: newInstructor.last_name,
 			email: newInstructor.email,
 			password: newInstructor.password,
+			phone: newInstructor.phone,
+			gender: newInstructor.gender,
+			photo: newInstructor.phone,
+			rating: newInstructor.rating,
+			street: newInstructor.street,
+			city: newInstructor.city,
+			province: newInstructor.province,
+			country: newInstructor.country,
+			company: newInstructor.company,
+			language: newInstructor.language,
+			experience: newInstructor.experience,
+			license: newInstructor.license,
+			description: newInstructor.description,
+			isCarProvided: newInstructor.isCarProvided,
 			token: generateToken(newInstructor._id),
 		};
 	} else {
@@ -148,10 +164,25 @@ const loginInstructor = async (email, password) => {
 	) {
 		return {
 			_id: instructorFound._id,
-			name: instructorFound.name,
+			role: instructorFound.role,
+			first_name: instructorFound.first_name,
+			last_name: instructorFound.last_name,
 			email: instructorFound.email,
 			password: instructorFound.password,
-			role: instructorFound.role,
+			phone: instructorFound.phone,
+			gender: instructorFound.gender,
+			photo: instructorFound.phone,
+			rating: instructorFound.rating,
+			street: instructorFound.street,
+			city: instructorFound.city,
+			province: instructorFound.province,
+			country: instructorFound.country,
+			company: instructorFound.company,
+			language: instructorFound.language,
+			experience: instructorFound.experience,
+			license: instructorFound.license,
+			description: instructorFound.description,
+			isCarProvided: instructorFound.isCarProvided,
 			token: generateToken(instructorFound._id),
 		};
 	} else {
@@ -165,6 +196,7 @@ const loginInstructor = async (email, password) => {
 const getMe = async (req) => {
 	const instructor = {
 		_id: req.instructor._id,
+		role: req.instructor.role,
 		email: req.instructor.email,
 		first_name: req.instructor.first_name,
 		last_name: req.instructor.last_name,

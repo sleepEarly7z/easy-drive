@@ -3,11 +3,7 @@ const mongoose = require('mongoose');
 const Instructor = require('../models/instructorModel');
 const Student = require('../models/studentModel');
 const Review = require('../models/reviewModel');
-
-const {
-	TimeSlot,
-	Appointment,
-} = require('../services/appointmentService');
+const { Appointment } = require('../models/appointmentModel');
 
 const { instructors, students } = require('./seedHelpers');
 const { TIME_SLOTS, AVAIL_DATES } = require('../utils/constants');
@@ -126,7 +122,7 @@ const seedAppointments = async () => {
 		console.log(id);
 
 		const newAppointment = new Appointment({
-			instructor: id._id,
+			instructor_id: id._id,
 			dates: [],
 		});
 
@@ -146,8 +142,9 @@ const seedAppointments = async () => {
 				const newTimeSlotFilled = {
 					isBooked: true,
 					range: slot,
-					studentId:
-						studentIds[Math.floor(Math.random() * 19)]._id,
+					student_id:
+						studentIds[Math.floor(Math.random() * 19)]
+							._id,
 				};
 
 				Math.floor(Math.random() * 6) % 2
@@ -168,7 +165,7 @@ const seedAppointments = async () => {
 };
 
 seedAppointments().then(() => {
-// clearAll().then(() => {
+	// clearAll().then(() => {
 	mongoose.connection.close();
 	console.log('MongoDB connection closed');
 });
