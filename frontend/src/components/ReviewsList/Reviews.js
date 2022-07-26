@@ -51,7 +51,8 @@ const Reviews = ({ idType, page }) => {
     const params = useParams()
     const classes = useStyles()
 
-    const id = params.instructorId
+    const id =
+        idType === 'instructorId' ? params.instructorId : params.studentId
     const { user } = useSelector((state) => state.auth)
 
     const [recordForEdit, setRecordForEdit] = useState(null)
@@ -83,7 +84,7 @@ const Reviews = ({ idType, page }) => {
                   { id: 'reviewDate', label: 'Time', width: 300 },
               ]
             : [
-                  { id: 'fullName', label: 'Student Name', width: 300 },
+                  { id: 'fullName', label: 'Instructor Name', width: 300 },
                   { id: 'rating', label: 'Rating', width: 200 },
                   { id: 'comment', label: 'Comment', width: 600 },
                   { id: 'reviewDate', label: 'Time', width: 300 },
@@ -167,6 +168,8 @@ const Reviews = ({ idType, page }) => {
         })
         dispatch(deleteReviewAsync(id))
         // setRecords(employeeService.getAllEmployees())
+        // const reviews = ReviewService.getReviewsByUserId(id, idType)
+        // setRecords(reviews)
         setNotify({
             isOpen: true,
             message: 'Deleted Successfully',

@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import Switch from '@mui/material/Switch'
 import { makeStyles } from '@material-ui/core/styles'
 import { NavLink, useNavigate } from 'react-router-dom'
 
@@ -21,7 +22,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { getInstructorsAsync } from '../../redux/instructors/thunks'
 import { reset } from '../../redux/authentication/reducer'
-import { loginAsInstructorAsync } from '../../redux/authentication/thunks'
+import {
+    loginAsInstructorAsync,
+    loginAsStudentAsync,
+} from '../../redux/authentication/thunks'
 
 import Loading from '../Animation/Loading'
 
@@ -56,16 +60,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
+const label = { inputProps: { 'aria-label': 'Switch demo' } }
+
 const SignInForm = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const [state, setState] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
     const classes = useStyles()
 
-    useEffect(() => {
-        dispatch(getInstructorsAsync())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getInstructorsAsync())
+    // }, [dispatch])
 
     const { user, isError, isSuccess, message } = useSelector(
         (state) => state.auth,
@@ -100,7 +107,16 @@ const SignInForm = () => {
         }
 
         console.log(userData)
-        dispatch(loginAsInstructorAsync(userData))
+        if (state === true) {
+            dispatch(loginAsInstructorAsync(userData))
+        } else {
+            dispatch(loginAsStudentAsync(userData))
+        }
+    }
+
+    const handleSwitch = (event) => {
+        setState(event.target.checked)
+        // console.log("state: " + state)
     }
 
     return isLoading ? (
@@ -121,7 +137,7 @@ const SignInForm = () => {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign In As Instructor
+                        Sign In
                     </Typography>
                     <Box
                         component="form"
@@ -138,7 +154,7 @@ const SignInForm = () => {
                             name="email"
                             autoComplete="email"
                             autoFocus
-                            value="billieeasd@gmail.com"
+                            // value="billieeasd@gmail.com"
                         />
                         <TextField
                             margin="normal"
@@ -149,14 +165,32 @@ const SignInForm = () => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            value="1asdj12"
+                            // value="1asdj12"
                         />
-                        <FormControlLabel
-                            control={
-                                <Checkbox value="remember" color="primary" />
-                            }
-                            label="Remember me"
-                        />
+                        <Grid
+                            container
+                            // alignItems="center"
+                            // justifyContent="center"
+                            justifyContent="flex-end"
+                        >
+                            <Switch
+                                {...label}
+                                checked={state}
+                                color="warning"
+                                onChange={handleSwitch}
+                            />
+                            {state === true ? (
+                                <div
+                                    style={{ fontWeight: '500', marginTop: '6px' }}
+                                >
+                                    Instructor
+                                </div>
+                            ) : (
+                                <div style={{ color: 'grey', marginTop: '6px' }}>
+                                    Instructor
+                                </div>
+                            )}
+                        </Grid>
                         <Button
                             className={classes.buttonRight}
                             type="submit"
@@ -166,11 +200,12 @@ const SignInForm = () => {
                         >
                             Sign In
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <NavLink to="/sign-in-student" variant="body2">
-                                    {'Sign In As Student'}
-                                </NavLink>
+                        <Grid
+                            container
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            {/* <Grid item xs>
                             </Grid>
                             <Grid item>
                                 <NavLink
@@ -180,6 +215,11 @@ const SignInForm = () => {
                                     {"Don't have an account? Sign Up"}
                                 </NavLink>
                             </Grid>
+                        </Grid> */}
+
+                            <NavLink to="/sign-up-instructor" variant="body2">
+                                {"Don't have an account? Sign Up"}
+                            </NavLink>
                         </Grid>
                     </Box>
                 </Box>
