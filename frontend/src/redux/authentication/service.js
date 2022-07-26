@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const INST_API_URL = 'https://easy-drive-405found.herokuapp.com/instructors/'
-const STUD_API_URL = 'https://easy-drive-405found.herokuapp.com/students/'
+const INST_API_URL = 'http://localhost:3001/instructors/'
+const STUD_API_URL = 'http://localhost:3001/students/'
 
 // Register as instructor
 const registerAsInstructor = async (userData) => {

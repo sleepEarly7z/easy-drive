@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { updateStudentAsync } from '../../redux/students/thunks'
+import {updateStudentAsync} from '../../redux/students/thunks'
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 const InformationStudent = () => {
     const dispatch = useDispatch()
@@ -46,30 +46,27 @@ const InformationStudent = () => {
 
     useEffect(() => {
         const sendGet = async () => {
-            const res = await axios
-                .get(
-                    'https://easy-drive-405found.herokuapp.com/students/62d761535c08a0f631db58a0',
-                )
-                .then((res) => {
-                    setfirst_name(res.data.data.first_name)
-                    setlast_name(res.data.data.last_name)
-                    setemail(res.data.data.email)
-                    setphone(res.data.data.phone)
-                    setstreet(res.data.data.street)
-                    setcity(res.data.data.city)
-                    setprovince(res.data.data.province)
-                    setcountry(res.data.data.country)
-                    setfollowing(res.data.data.followedInstructors)
-                })
-                .catch((err) => {
-                    alert(err)
-                })
+            const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
+            .then((res) =>{
+                setfirst_name(res.data.data.first_name)
+                setlast_name(res.data.data.last_name)
+                setemail(res.data.data.email)
+                setphone(res.data.data.phone)
+                setstreet(res.data.data.street)
+                setcity(res.data.data.city)
+                setprovince(res.data.data.province)
+                setcountry(res.data.data.country)
+                setfollowing(res.data.data.followedInstructors)
+            }).catch((err) => {
+              alert(err);
+            }
+            );
             // console.log(this.state.allRecipes);
-        }
-        sendGet()
-    }, [])
+          }
+            sendGet();
+      },[]);
 
-    const handleSave = (e) => {
+      const handleSave = (e) => {
         // e.preventDefault()
 
         let instData = {
@@ -82,7 +79,7 @@ const InformationStudent = () => {
             city: city,
             country: country,
             province: province,
-            followedInstructors: following,
+            followedInstructors: following
         }
 
         dispatch(updateStudentAsync(instData))
@@ -109,7 +106,7 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="first name"
-                                        value={first_name}
+                                        value= {first_name}
                                         onChange={handlefirst_name}
                                     />
                                 </div>
@@ -118,7 +115,7 @@ const InformationStudent = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        value={last_name}
+                                        value= {last_name}
                                         placeholder="surname"
                                         onChange={handlelast_name}
                                     />
@@ -133,7 +130,7 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="enter phone number"
-                                        value={phone}
+                                        value= {phone}
                                         onChange={handlephone}
                                     />
                                 </div>
@@ -143,7 +140,7 @@ const InformationStudent = () => {
                                         type="text"
                                         className="form-control"
                                         placeholder="enter email id"
-                                        value={email}
+                                        value= {email}
                                         onChange={handleemail}
                                     />
                                 </div>
@@ -161,46 +158,50 @@ const InformationStudent = () => {
                     </div>
                     <div className="col-md-5">
                         <div className="p-3 py-5">
-                            <div className="col-md-12">
-                                <label className="labels">Street</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="enter street"
-                                    value={street}
-                                    onChange={handlestreet}
-                                />
-                            </div>
-                            <div className="col-md-12">
-                                <label className="labels">City</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="enter city"
-                                    value={city}
-                                    onChange={handlecity}
-                                />
-                            </div>
-                            <div className="col-md-12">
-                                <label className="labels">Province</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="enter Province"
-                                    value={province}
-                                    onChange={handleprovince}
-                                />
-                            </div>
-                            <div className="col-md-12">
-                                <label className="labels">Country</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="enter country"
-                                    value={country}
-                                    onChange={handlecountry}
-                                />
-                            </div>
+                        <div className="col-md-12">
+                                    <label className="labels">
+                                        Street
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="enter street"
+                                        value= {street}
+                                        onChange={handlestreet}
+                                    />
+                                </div>
+                                <div className="col-md-12">
+                                    <label className="labels">
+                                        City
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="enter city"
+                                        value= {city}
+                                        onChange={handlecity}
+                                    />
+                                </div>
+                                <div className="col-md-12">
+                                    <label className="labels">Province</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="enter Province"
+                                        value= {province}
+                                        onChange={handleprovince}
+                                    />
+                                </div>
+                                <div className="col-md-12">
+                                    <label className="labels">Country</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="enter country"
+                                        value= {country}
+                                        onChange={handlecountry}
+                                    />
+                                </div>
                         </div>
                     </div>
                 </div>
