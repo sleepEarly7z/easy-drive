@@ -16,13 +16,6 @@ export const getInstructorByIdAsync = createAsyncThunk(
     },
 )
 
-export const addInstructorAsync = createAsyncThunk(
-    actionTypes.ADD_INSTRUCTOR,
-    async (data) => {
-        return await InstructorService.addInstructor(data)
-    },
-)
-
 export const updateInstructorAsync = createAsyncThunk(
     actionTypes.UPDATE_INSTRUCTOR,
     async (instData) => {

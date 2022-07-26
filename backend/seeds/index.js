@@ -147,9 +147,9 @@ const seedAppointments = async () => {
 							._id,
 				};
 
-				Math.floor(Math.random() * 6) % 2
-					? sampleTimeSlots.push(newTimeSlot)
-					: sampleTimeSlots.push(newTimeSlotFilled);
+				Math.floor(Math.random() * 6) % 3 === 0
+					? sampleTimeSlots.push(newTimeSlotFilled)
+					: sampleTimeSlots.push(newTimeSlot);
 				// sampleTimeSlots.push(newTimeSlot);
 			}
 
@@ -165,7 +165,7 @@ const seedAppointments = async () => {
 };
 
 seedAppointments().then(() => {
-	// clearAll().then(() => {
+// clearAll().then(() => {
 	mongoose.connection.close();
 	console.log('MongoDB connection closed');
 });

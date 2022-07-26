@@ -86,8 +86,6 @@ const deleteReview = async (id) => {
     }
     console.log('delete review: ' + data)
     return data
-    // return await getReviewsByStudentId(id)
-    // return await getReviewsById(id, 'student')
 }
 
 const ReviewService = {

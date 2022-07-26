@@ -27,7 +27,7 @@ const getAppointmentsByInstructorId = async (id) => {
 const getAppointmentsByStudentId = async (id) => {
 	try {
 		return Appointment.find({
-			dates: { time_slots: { isBooked: true, student_id: id } },
+			'dates.time_slots.student_id': id,
 		});
 	} catch (error) {
 		throw { type: 'DB', message: error };
