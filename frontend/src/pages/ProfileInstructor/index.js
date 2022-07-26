@@ -28,7 +28,7 @@ const ProfileInstructor = () => {
                         <InformationInstructor />
                     </div>
                 </div>
-                <Reviews idType={'instructorId'} />
+                <Reviews idType={'instructorId'} page={"reviewPage"} />
             </div>
             {/* </div> */}
         </>

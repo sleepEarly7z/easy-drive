@@ -45,24 +45,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-const headCells = [
-    { id: 'fullName', label: 'Student Name', width: 300 },
-    { id: 'rating', label: 'Rating', width: 200 },
-    { id: 'comment', label: 'Comment', width: 600 },
-    { id: 'reviewDate', label: 'Time', width: 300 },
-    { id: 'actions', label: 'Actions', disableSorting: true },
-]
-
-const Reviews = ({ idType }) => {
+const Reviews = ({ idType, page }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const params = useParams()
     const classes = useStyles()
-    const [recordForEdit, setRecordForEdit] = useState(null)
-    const [records, setRecords] = useState([])
 
     const id = params.instructorId
     const { user } = useSelector((state) => state.auth)
+
+    const [recordForEdit, setRecordForEdit] = useState(null)
+    const [records, setRecords] = useState([])
 
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
@@ -80,6 +73,23 @@ const Reviews = ({ idType }) => {
         title: '',
         subTitle: '',
     })
+
+    const headCells =
+        page === 'reviewPage'
+            ? [
+                  { id: 'fullName', label: 'Student Name', width: 300 },
+                  { id: 'rating', label: 'Rating', width: 200 },
+                  { id: 'comment', label: 'Comment', width: 600 },
+                  { id: 'reviewDate', label: 'Time', width: 300 },
+              ]
+            : [
+                  { id: 'fullName', label: 'Student Name', width: 300 },
+                  { id: 'rating', label: 'Rating', width: 200 },
+                  { id: 'comment', label: 'Comment', width: 600 },
+                  { id: 'reviewDate', label: 'Time', width: 300 },
+                  { id: 'actions', label: 'Actions', disableSorting: true },
+              ]
+
     const {
         TblContainer,
         TblHead,
@@ -230,7 +240,7 @@ const Reviews = ({ idType }) => {
                                     {item.createdAt}
                                 </TableCell>
                                 <TableCell>
-                                    {user ? (
+                                    {page === 'profilePage' && (
                                         <>
                                             <Controls.ActionButton
                                                 color="primary"
@@ -253,25 +263,6 @@ const Reviews = ({ idType }) => {
                                                             onDelete(item._id)
                                                         },
                                                     })
-                                                }}
-                                            >
-                                                <DeleteIcon fontSize="small" />
-                                            </Controls.ActionButton>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                onClick={() => {
-                                                    navigate('/sign-in-student')
-                                                }}
-                                            >
-                                                <EditOutlinedIcon fontSize="small" />
-                                            </Controls.ActionButton>
-                                            <Controls.ActionButton
-                                                color="secondary"
-                                                onClick={() => {
-                                                    navigate('/sign-in-student')
                                                 }}
                                             >
                                                 <DeleteIcon fontSize="small" />

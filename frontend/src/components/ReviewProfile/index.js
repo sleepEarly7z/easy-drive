@@ -19,8 +19,10 @@ import RatingStar from '../ReviewRating/RatingStar'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { followInstructorAsync, isInstructorFollowedAsync } from '../../redux/students/thunks';
-
+import {
+    followInstructorAsync,
+    isInstructorFollowedAsync,
+} from '../../redux/students/thunks'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -69,14 +71,15 @@ export default function ReviewProfile({ instructor }) {
     )
 
     const params = useParams()
-    const [instructorFollowed, setInstructorFollowed] = useState(false);
-    const [following, setfollowing] = useState([]);
+    const [instructorFollowed, setInstructorFollowed] = useState(false)
+    const [following, setfollowing] = useState([])
 
     useEffect(() => {
-        dispatch(isInstructorFollowedAsync({ _id: params.instructorId }))
-            .then(result => {
+        dispatch(isInstructorFollowedAsync({ _id: params.instructorId })).then(
+            (result) => {
                 setInstructorFollowed(result.payload.data)
-            })
+            },
+        )
         // const sendGet = async () => {
         //     const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
         //     .then((res) =>{
@@ -89,7 +92,7 @@ export default function ReviewProfile({ instructor }) {
         //     // console.log(this.state.allRecipes);
         //   }
         //     sendGet();
-    }, []);
+    }, [])
 
     const followInstructor = (instructorID) => () => {
         console.log(instructorID)
@@ -97,14 +100,13 @@ export default function ReviewProfile({ instructor }) {
             _id: instructorID,
         }
         dispatch(followInstructorAsync(id))
-
             .then(() => {
-                dispatch(isInstructorFollowedAsync(id))
-                    .then(result => {
-                        setInstructorFollowed(!instructorFollowed)
-                        console.log(result)
-                    })
-            }).then(() => {
+                dispatch(isInstructorFollowedAsync(id)).then((result) => {
+                    setInstructorFollowed(!instructorFollowed)
+                    console.log(result)
+                })
+            })
+            .then(() => {
                 console.log(instructorFollowed)
             })
     }
@@ -148,10 +150,11 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
-
-                            <FollowActionButton className="" onClick={followInstructor(instructor._id)}>
+                            <FollowActionButton
+                                className=""
+                                onClick={followInstructor(instructor._id)}
+                            >
                                 {instructorFollowed ? 'unfollow' : 'follow'}
-
                             </FollowActionButton>
                             <MessageActionButton className="">
                                 Message
@@ -252,9 +255,7 @@ export default function ReviewProfile({ instructor }) {
                             chedule Preview
                         </div>
                     </div>
-                    <CalendarSchedular
-                        pageType="review"
-                    />
+                    <CalendarSchedular pageType="review" />
                     {/* <SandboxDemo /> */}
 
                     {/* line breaker */}
@@ -281,7 +282,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews idType={"instructorId"} />
+                        <Reviews idType={"instructorId"} page={"reviewPage"} />
                     </div>
                 </div>
             </div>
