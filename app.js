@@ -31,4 +31,7 @@ app.use('/appointments', appointmentsRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/students', studentsRouter);
 
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'frontend/build/index.html'));
+});
 module.exports = app;
