@@ -9,8 +9,8 @@ import {
 } from '../../redux/instructors/thunks'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
 
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 
@@ -36,7 +36,7 @@ const InformationInstructor = () => {
 
     const handlefirst_name = (e) => {
         setfirst_name(e.target.value)
-        return first_name;
+        return first_name
     }
     const handlelast_name = (e) => {
         setlast_name(e.target.value)
@@ -83,34 +83,36 @@ const InformationInstructor = () => {
 
     useEffect(() => {
         const sendGet = async () => {
-            const res = await axios.get('http://localhost:3001/instructors/62d76018f36c6973468ba796')
-            .then((res) =>{
-              console.log(res.data)
-              console.log(res.data.data)
-                setfirst_name(res.data.data.first_name)
-                setlast_name(res.data.data.last_name)
-                setEmail(res.data.data.email)
-                setPhone(res.data.data.phone)
-                setStreet(res.data.data.street)
-                setCity(res.data.data.city)
-                setProvince(res.data.data.province)
-                setcountry(res.data.data.country)
-                setCompany(res.data.data.company)
-                setLanguage(res.data.data.language)
-                setExperience(res.data.data.experience)
-                setLicense(res.data.data.license)
-                setDescription(res.data.data.description)
-                setIsCarProvided(res.data.data.isCarProvided)
-                setgender(res.data.data.gender)
-            }).catch((err) => {
-              alert(err);
-            }
-            );
+            const res = await axios
+                .get(
+                    'https://easy-drive-405found.herokuapp.com/instructors/62d76018f36c6973468ba796',
+                )
+                .then((res) => {
+                    console.log(res.data)
+                    console.log(res.data.data)
+                    setfirst_name(res.data.data.first_name)
+                    setlast_name(res.data.data.last_name)
+                    setEmail(res.data.data.email)
+                    setPhone(res.data.data.phone)
+                    setStreet(res.data.data.street)
+                    setCity(res.data.data.city)
+                    setProvince(res.data.data.province)
+                    setcountry(res.data.data.country)
+                    setCompany(res.data.data.company)
+                    setLanguage(res.data.data.language)
+                    setExperience(res.data.data.experience)
+                    setLicense(res.data.data.license)
+                    setDescription(res.data.data.description)
+                    setIsCarProvided(res.data.data.isCarProvided)
+                    setgender(res.data.data.gender)
+                })
+                .catch((err) => {
+                    alert(err)
+                })
             // console.log(this.state.allRecipes);
-          }
-            sendGet();
-      },[]);
-
+        }
+        sendGet()
+    }, [])
 
     const handleSave = (e) => {
         // e.preventDefault()
@@ -206,7 +208,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder={'first name'}
                                         onChange={handlefirst_name}
-                                        value = {first_name || setfirst_name}
+                                        value={first_name || setfirst_name}
                                     />
                                 </div>
                                 <div className="col-md-6">
@@ -216,7 +218,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="last name"
                                         onChange={handlelast_name}
-                                        value = {last_name || handlelast_name}
+                                        value={last_name || handlelast_name}
                                     />
                                 </div>
                             </div>
@@ -230,19 +232,17 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="enter phone number"
                                         onChange={handlePhone}
-                                        value = {phone || setPhone}
+                                        value={phone || setPhone}
                                     />
                                 </div>
                                 <div className="col-md-12">
-                                    <label className="labels">
-                                        Gender
-                                    </label>
+                                    <label className="labels">Gender</label>
                                     <input
                                         type="text"
                                         className="form-control"
                                         placeholder="enter gender"
                                         onChange={handleGender}
-                                        value = {gender || setgender}
+                                        value={gender || setgender}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -252,7 +252,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="enter email id"
                                         onChange={handleEmail}
-                                        value = {email || setEmail}
+                                        value={email || setEmail}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -262,7 +262,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="street"
                                         onChange={handleStreet}
-                                        value = {street || setStreet}
+                                        value={street || setStreet}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -272,7 +272,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="city"
                                         onChange={handleCity}
-                                        value = {city || setCity}
+                                        value={city || setCity}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -282,7 +282,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="Province"
                                         onChange={handleProvince}
-                                        value = {province || setProvince}
+                                        value={province || setProvince}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -292,7 +292,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="Country"
                                         onChange={handleCountry}
-                                        value = {country || setcountry}
+                                        value={country || setcountry}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -302,7 +302,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="Language"
                                         onChange={handleLanguage}
-                                        value = {language || setLanguage}
+                                        value={language || setLanguage}
                                     />
                                 </div>
                                 <div className="col-md-12">
@@ -312,7 +312,7 @@ const InformationInstructor = () => {
                                         className="form-control"
                                         placeholder="Company"
                                         onChange={handleCompany}
-                                        value = {company || setCompany}
+                                        value={company || setCompany}
                                     />
                                 </div>
                             </div>
@@ -333,7 +333,7 @@ const InformationInstructor = () => {
                                     className="form-control"
                                     placeholder="experience"
                                     onChange={handleExperience}
-                                    value = {experience || setExperience}
+                                    value={experience || setExperience}
                                 />
                             </div>{' '}
                             <br />
@@ -344,7 +344,7 @@ const InformationInstructor = () => {
                                     className="form-control"
                                     placeholder="License"
                                     onChange={handleLicense}
-                                    value = {license || setLicense}
+                                    value={license || setLicense}
                                 />
                             </div>
                             <br />
@@ -355,7 +355,7 @@ const InformationInstructor = () => {
                                     className="form-control"
                                     placeholder="Description"
                                     onChange={handleDescription}
-                                    value = {description || setDescription}
+                                    value={description || setDescription}
                                 />
                             </div>
                             <br />
@@ -365,26 +365,25 @@ const InformationInstructor = () => {
                                     type="text"
                                     className="form-control"
                                     placeholder="Car Provided"
-
                                 />
                             </div>
                         </div>
                         <div className="mt-5 text-center">
-                                <button
-                                    className="btn btn-primary profile-button me-5"
-                                    type="button"
-                                    onClick={handleSave}
-                                >
-                                    Save Profile
-                                </button>
-                                {/* <button
+                            <button
+                                className="btn btn-primary profile-button me-5"
+                                type="button"
+                                onClick={handleSave}
+                            >
+                                Save Profile
+                            </button>
+                            {/* <button
                                     className="btn btn-primary profile-button"
                                     type="button"
                                     onClick={handleDelete}
                                 >
                                     Delete Profile
                                 </button> */}
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
