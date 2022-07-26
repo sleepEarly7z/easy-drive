@@ -254,7 +254,7 @@ const Reviews = ({ idType }) => {
                                     >
                                         <DeleteIcon fontSize="small" />
                                     </Controls.ActionButton>
-                                </TableCell>
+                                </TableCell> 
                             </TableRow>
                         ))}
                     </TableBody>
