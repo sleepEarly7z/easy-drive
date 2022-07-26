@@ -6,6 +6,9 @@ import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Typography from '@mui/material/FormControl'
 import { styled } from '@mui/material/styles'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import FormControl from '@mui/material/FormControl'
 import {
     ViewState,
     EditingState,
@@ -13,7 +16,12 @@ import {
 } from '@devexpress/dx-react-scheduler'
 import {
     Scheduler,
+    DayView,
     WeekView,
+    MonthView,
+    Toolbar,
+    DateNavigator,
+    ViewSwitcher,
     Appointments,
     AppointmentForm,
     AppointmentTooltip,
@@ -191,14 +199,70 @@ const SandboxDemo = () => {
 
     const [currentDate, setCurrentDate] = useState(new Date())
 
+    const [viewmode, setViewmode] = React.useState('month')
+
+    const handleViewChange = (event) => {
+        setViewmode(event.target.value)
+    }
+
     return (
         <React.Fragment>
             <EditingOptionsSelector
                 options={editingOptions}
                 onOptionsChange={handleEditingOptionsChange}
             />
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '5px',
+                    marginBottom: '10px',
+                }}
+            >
+                <div
+                    style={{
+                        fontSize: '20px',
+                        fontWeight: '850',
+                        paddingBottom: '10px',
+                        marginRight: 'auto',
+                        color: '#adb2af',
+                    }}
+                >
+                    {months[currentDate.getMonth()]},{' '}
+                    {currentDate.getFullYear()}
+                </div>
+                <FormControl>
+                    {/* <FormLabel id="demo-radio-buttons-group-label">
+                        View
+                    </FormLabel> */}
+                    <RadioGroup
+                        row
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="month"
+                        name="radio-buttons-group"
+                        value={viewmode}
+                        onChange={handleViewChange}
+                    >
+                        <FormControlLabel
+                            value="month"
+                            control={<Radio />}
+                            label="Month"
+                        />
+                        <FormControlLabel
+                            value="week"
+                            control={<Radio />}
+                            label="Week"
+                        />
+                        <FormControlLabel
+                            value="day"
+                            control={<Radio />}
+                            label="Day"
+                        />
+                    </RadioGroup>
+                </FormControl>
+            </div>
             <Paper>
-                <Scheduler data={data} height={600}>
+                <Scheduler data={data} height={650}>
                     <ViewState currentDate={currentDate} />
                     <EditingState
                         onCommitChanges={onCommitChanges}
@@ -207,11 +271,28 @@ const SandboxDemo = () => {
                     />
 
                     <IntegratedEditing />
-                    <WeekView
+                    {/* <WeekView
                         startDayHour={9}
                         endDayHour={19}
                         timeTableCellComponent={TimeTableCell}
-                    />
+                    /> */}
+
+                    {viewmode === 'month' && <MonthView />}
+                    {viewmode === 'week' && (
+                        <WeekView
+                            startDayHour={9}
+                            endDayHour={19}
+                            timeTableCellComponent={TimeTableCell}
+                        />
+                    )}
+                    {viewmode === 'day' && <DayView />}
+                    {/* <MonthView />
+                    <WeekView
+                            startDayHour={9}
+                            endDayHour={19}
+                            timeTableCellComponent={TimeTableCell}
+                        />
+                    <DayView /> */}
 
                     <Appointments />
 
@@ -219,6 +300,11 @@ const SandboxDemo = () => {
                         showOpenButton
                         showDeleteButton={allowDeleting}
                     />
+
+                    {/* <Toolbar />
+                    <DateNavigator />
+                    <ViewSwitcher /> */}
+
                     <AppointmentForm
                         commandButtonComponent={CommandButton}
                         readOnly={

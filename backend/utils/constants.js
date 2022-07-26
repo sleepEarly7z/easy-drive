@@ -16,6 +16,40 @@ const TIME_SLOTS = [
     '22 - 23'
 ];
 
+const AVAIL_DATES = [
+    new Date("07/18/2022"),
+    new Date("07/19/2022"),
+    new Date("07/20/2022"),
+    new Date("07/21/2022"),
+    new Date("07/22/2022"),
+    new Date("07/25/2022"),
+    new Date("07/26/2022"),
+    new Date("07/27/2022"),
+    new Date("07/28/2022"),
+    new Date("07/29/2022"),
+    new Date("08/01/2022"),
+    new Date("08/02/2022"),
+    new Date("08/03/2022"),
+    new Date("08/04/2022"),
+    new Date("08/05/2022"),
+    new Date("08/08/2022"),
+    new Date("08/09/2022"),
+    new Date("08/10/2022"),
+    new Date("08/11/2022"),
+    new Date("08/12/2022"),
+    new Date("08/15/2022"),
+    new Date("08/16/2022"),
+    new Date("08/17/2022"),
+    new Date("08/18/2022"),
+    new Date("08/19/2022"),
+    new Date("08/22/2022"),
+    new Date("08/23/2022"),
+    new Date("08/24/2022"),
+    new Date("08/25/2022"),
+    new Date("08/26/2022"),
+]
+
 module.exports = {
-    TIME_SLOTS
+    TIME_SLOTS,
+    AVAIL_DATES
 }

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState } from 'react'
 import Paper from '@mui/material/Paper'
 import FormGroup from '@mui/material/FormGroup'
 import Checkbox from '@mui/material/Checkbox'
@@ -8,7 +9,6 @@ import { styled } from '@mui/material/styles'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControl from '@mui/material/FormControl'
-import FormLabel from '@mui/material/FormLabel'
 import {
     ViewState,
     EditingState,
@@ -26,16 +26,15 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui'
 
 import { appointments } from '../../utils/appointments'
-import { useState } from 'react'
-
-// source: https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/views/
 
 const PREFIX = 'Demo'
+// #FOLD_BLOCK
 export const classes = {
     container: `${PREFIX}-container`,
     text: `${PREFIX}-text`,
     formControlLabel: `${PREFIX}-formControlLabel`,
 }
+// #FOLD_BLOCK
 const StyledDiv = styled('div')(({ theme }) => ({
     [`&.${classes.container}`]: {
         margin: theme.spacing(2),
@@ -48,11 +47,7 @@ const StyledDiv = styled('div')(({ theme }) => ({
     },
 }))
 
-// const current = new Date()
-// const currentDate = `${current.getFullYear()}-${
-//     current.getMonth() + 1
-// }-${current.getDate()}`
-// const currentDate = '2022-05-25';
+// const currentDate = '2018-06-27'
 const editingOptionsList = [
     { id: 'allowAdding', text: 'Adding' },
     { id: 'allowDeleting', text: 'Deleting' },
@@ -103,7 +98,7 @@ const EditingOptionsSelector = ({ options, onOptionsChange }) => (
     </StyledDiv>
 )
 
-const CalendarSchedular = ({ page, instructorId }) => {
+const CalendarSchedular = () => {
     const [data, setData] = React.useState(appointments)
     const [editingOptions, setEditingOptions] = React.useState({
         allowAdding: true,
@@ -150,20 +145,16 @@ const CalendarSchedular = ({ page, instructorId }) => {
         [setData, setIsAppointmentBeingCreated, data],
     )
     const onAddedAppointmentChange = React.useCallback((appointment) => {
-        // if (page !== 'reviewpage') {
         setAddedAppointment(appointment)
         setIsAppointmentBeingCreated(true)
-        // }
     })
     const handleEditingOptionsChange = React.useCallback(({ target }) => {
         const { value } = target
         const { [value]: checked } = editingOptions
-        // if (page !== 'reviewpage') {
         setEditingOptions({
             ...editingOptions,
             [value]: !checked,
         })
-        // }
     })
 
     const TimeTableCell = React.useCallback(
@@ -202,7 +193,6 @@ const CalendarSchedular = ({ page, instructorId }) => {
     )
 
     const [currentDate, setCurrentDate] = useState(new Date())
-    // (`${currentDate.getFullYear()}`-`${currentDate.getMonth() + 1}`-`${currentDate.getDate()}`, []);
 
     const [viewmode, setViewmode] = React.useState('month')
 
@@ -212,12 +202,10 @@ const CalendarSchedular = ({ page, instructorId }) => {
 
     return (
         <React.Fragment>
-            {/* {page !== 'reviewpage' && ( */}
             <EditingOptionsSelector
                 options={editingOptions}
                 onOptionsChange={handleEditingOptionsChange}
             />
-            {/* )} */}
             <div
                 style={{
                     display: 'flex',
@@ -228,7 +216,7 @@ const CalendarSchedular = ({ page, instructorId }) => {
             >
                 <div
                     style={{
-                        fontSize: '18px',
+                        fontSize: '20px',
                         fontWeight: '850',
                         paddingBottom: '10px',
                         marginRight: 'auto',
@@ -269,11 +257,8 @@ const CalendarSchedular = ({ page, instructorId }) => {
                 </FormControl>
             </div>
             <Paper>
-                <Scheduler data={data} height={600}>
-                    <ViewState
-                        currentDate={currentDate}
-                        onCurrentDateChange={() => setCurrentDate(currentDate)}
-                    />
+                <Scheduler data={data} height={650}>
+                    <ViewState currentDate={currentDate} />
                     <EditingState
                         onCommitChanges={onCommitChanges}
                         addedAppointment={addedAppointment}
@@ -281,39 +266,50 @@ const CalendarSchedular = ({ page, instructorId }) => {
                     />
 
                     <IntegratedEditing />
+                    {/* <WeekView
+                        startDayHour={9}
+                        endDayHour={19}
+                        timeTableCellComponent={TimeTableCell}
+                    /> */}
 
                     {viewmode === 'month' && <MonthView />}
                     {viewmode === 'week' && (
                         <WeekView
-                            startDayHour={10}
+                            startDayHour={9}
                             endDayHour={19}
                             timeTableCellComponent={TimeTableCell}
                         />
                     )}
                     {viewmode === 'day' && <DayView />}
+                    {/* <MonthView />
+                    <WeekView
+                            startDayHour={9}
+                            endDayHour={19}
+                            timeTableCellComponent={TimeTableCell}
+                        />
+                    <DayView /> */}
 
                     <Appointments />
 
-                    {/* {page !== 'reviewpage' && ( */}
-                    <>
-                        <AppointmentTooltip
-                            showOpenButton
-                            showDeleteButton={allowDeleting}
-                        />
-                        <AppointmentForm
-                            commandButtonComponent={CommandButton}
-                            readOnly={
-                                isAppointmentBeingCreated
-                                    ? false
-                                    : !allowUpdating
-                            }
-                        />
-                        <DragDropProvider
-                            allowDrag={allowDrag}
-                            allowResize={allowResize}
-                        />
-                    </>
-                    {/* )} */}
+                    <AppointmentTooltip
+                        showOpenButton
+                        showDeleteButton={allowDeleting}
+                    />
+
+                    {/* <Toolbar />
+                    <DateNavigator />
+                    <ViewSwitcher /> */}
+
+                    <AppointmentForm
+                        commandButtonComponent={CommandButton}
+                        readOnly={
+                            isAppointmentBeingCreated ? false : !allowUpdating
+                        }
+                    />
+                    <DragDropProvider
+                        allowDrag={allowDrag}
+                        allowResize={allowResize}
+                    />
                 </Scheduler>
             </Paper>
         </React.Fragment>

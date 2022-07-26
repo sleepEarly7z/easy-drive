@@ -252,11 +252,10 @@ export default function ReviewProfile({ instructor }) {
                             chedule Preview
                         </div>
                     </div>
-                    {/* <CalendarSchedular
-                        page="reviewpage"
-                        instructorId={instructor._id}
-                    /> */}
-                    <SandboxDemo />
+                    <CalendarSchedular
+                        pageType="review"
+                    />
+                    {/* <SandboxDemo /> */}
 
                     {/* line breaker */}
                     <div className="line-breaker-1"></div>
