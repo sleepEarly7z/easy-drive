@@ -58,7 +58,7 @@ const Reviews = ({ idType }) => {
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState([])
-    
+
     const id = params.instructorId
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
@@ -232,32 +232,6 @@ const Reviews = ({ idType }) => {
                                                     "You can't undo this operation",
                                                 onConfirm: () => {
                                                     onDelete(item._id)
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <DeleteIcon fontSize="small" />
-                                    </Controls.ActionButton>
-                                </TableCell> */}
-                                <TableCell>
-                                    <Controls.ActionButton
-                                        color="primary"
-                                        onClick={() => {
-                                            openInPopup(item)
-                                        }}
-                                    >
-                                        <EditOutlinedIcon fontSize="small" />
-                                    </Controls.ActionButton>
-                                    <Controls.ActionButton
-                                        color="secondary"
-                                        onClick={() => {
-                                            setConfirmDialog({
-                                                isOpen: true,
-                                                title: 'Are you sure to delete this record?',
-                                                subTitle:
-                                                    "You can't undo this operation",
-                                                onConfirm: () => {
-                                                    onDelete(item.id)
                                                 },
                                             })
                                         }}
