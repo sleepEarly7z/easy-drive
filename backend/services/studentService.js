@@ -76,17 +76,9 @@ const deleteStudentById = (id) => {
  *
  * @returns {object} Student updated
  */
-const updateStudentById = (id, patch) => {
-    // TODO
-    console.log("StudentService121")
-    console.log(patch.followedInstructors)
-    Student.updateOne({ _id: id }, patch, (err, stu) => {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log(stu)
-        }
-    })
+const updateStudentById = async (id, patch) => {
+	// https://mongoosejs.com/docs/documents.html#updating-using-queries
+	await Student.findOneAndUpdate({ _id: id }, patch, { runValidators: true });
 }
 
 const registerStudent = async (student) => {
@@ -216,24 +208,24 @@ const generateToken = (id) => {
  * @returns {string} new followed instructor id
  * @throws {object} error - type and messages
  */
-const followInstructorById = async(instructorId,studentId) => {
-    try {
-        return Student.findById(studentId)
-        .then(student => {
-            if(!student.followedInstructors.includes(instructorId)) {
-                student.followedInstructors.push(instructorId)
-                student.save()
-                console.log("new instructor is followed");
-            } else {
-                Student.updateOne({_id: studentId },{$pull: {followedInstructors : instructorId}})
-                .then(()=> student.save())
-                console.log("instructor is unfollowed");
-            }
-			return student;
-        })
-      } catch (error) {
-        throw ({ type: 'DB', message: error })
-      }
+const followInstructorById = async (instructorId, studentId) => {
+	try {
+		return Student.findById(studentId)
+			.then(student => {
+				if (!student.followedInstructors.includes(instructorId)) {
+					student.followedInstructors.push(instructorId)
+					student.save()
+					console.log("new instructor is followed");
+				} else {
+					Student.updateOne({ _id: studentId }, { $pull: { followedInstructors: instructorId } })
+						.then(() => student.save())
+					console.log("instructor is unfollowed");
+				}
+				return student;
+			})
+	} catch (error) {
+		throw ({ type: 'DB', message: error })
+	}
 }
 
 module.exports = {
@@ -246,5 +238,5 @@ module.exports = {
 	registerStudent,
 	loginStudent,
 	getMe,
-  	followInstructorById,
+	followInstructorById,
 };
