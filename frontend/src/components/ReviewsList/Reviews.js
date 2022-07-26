@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
     Paper,
-    Grid,
     makeStyles,
     TableBody,
     TableRow,
@@ -16,7 +15,6 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Notification from './Notification'
 import ConfirmDialog from './ConfirmDialog'
 
-// import * as reviewService from './reviewService'
 import ReviewService from '../../redux/reviews/service'
 import Controls from './controls/Controls'
 import useTable from './useTable'
@@ -24,14 +22,12 @@ import Popup from './Popup'
 import ReviewForm from './ReviewForm'
 import RatingStar from './RatingStar'
 
-import axios from 'axios'
-
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import {
     addReviewAsync,
-    getReviewsByInstructorIdAsync,
     updateReviewAsync,
+    deleteReviewAsync,
 } from '../../redux/reviews/thunks'
 import { useParams } from 'react-router-dom'
 
@@ -52,7 +48,6 @@ const headCells = [
     { id: 'fullName', label: 'Student Name', width: 300 },
     { id: 'rating', label: 'Rating', width: 200 },
     { id: 'comment', label: 'Comment', width: 600 },
-    // { id: 'classtype', label: 'Class Type' },
     { id: 'reviewDate', label: 'Time', width: 300 },
     { id: 'actions', label: 'Actions', disableSorting: true },
 ]
@@ -63,6 +58,8 @@ const Reviews = ({ idType }) => {
     const classes = useStyles()
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState([])
+    
+    const id = params.instructorId
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
             return items
@@ -101,13 +98,36 @@ const Reviews = ({ idType }) => {
         })
     }
 
-    const addOrEdit = (employee, resetForm) => {
-        if (employee.id === 0) {
-            console.log('insert employee: ' + employee)
-            // reviewService.insertReview(employee)
-            dispatch(addReviewAsync(employee))
+    const changeRatingValue = (review) => {
+        switch (review.ratingStar) {
+            case 'onestar':
+                review.rating = 1
+                return
+            case 'twostars':
+                review.rating = 2
+                return
+            case 'threestars':
+                review.rating = 3
+                return
+            case 'fourstars':
+                review.rating = 4
+                return
+            case 'fivestars':
+                review.rating = 5
+                return
+            default:
+                return
+        }
+    }
+
+    const addOrEdit = (review, resetForm) => {
+        changeRatingValue(review)
+
+        if (review.id === 0) {
+            console.log('insert review: ' + review)
+            dispatch(addReviewAsync(review))
         } else {
-            dispatch(updateReviewAsync(employee))
+            dispatch(updateReviewAsync(review))
         }
         resetForm()
         setRecordForEdit(null)
@@ -131,7 +151,7 @@ const Reviews = ({ idType }) => {
             ...confirmDialog,
             isOpen: false,
         })
-        // employeeService.deleteEmployee(id);
+        dispatch(deleteReviewAsync(id))
         // setRecords(employeeService.getAllEmployees())
         setNotify({
             isOpen: true,
@@ -139,8 +159,6 @@ const Reviews = ({ idType }) => {
             type: 'error',
         })
     }
-
-    const id = params.instructorId
 
     useEffect(() => {
         const getReviews = async () => {
@@ -166,16 +184,6 @@ const Reviews = ({ idType }) => {
                         }}
                         onChange={handleSearch}
                     />
-                    {/* <Grid container spacing={2}>
-                        <Grid item xs={8}>
-                            <Controls.Select
-                                name="ratingId"
-                                label="Rating"
-                                // onChange={handleInputChange}
-                                options={reviewService.getRatingCollection()}
-                            />
-                        </Grid>
-                    </Grid> */}
                     <Controls.Button
                         text="Add New"
                         variant="outlined"
@@ -202,14 +210,10 @@ const Reviews = ({ idType }) => {
                                 <TableCell width={headCells[2].width}>
                                     {item.comment_content}
                                 </TableCell>
-                                {/* <TableCell>
-										{item.mobile}
-									</TableCell> */}
-                                {/* <TableCell>{item.classtype}</TableCell> */}
                                 <TableCell width={headCells[3].width}>
                                     {item.createdAt}
                                 </TableCell>
-                                {/* <TableCell>
+                                <TableCell>
                                     <Controls.ActionButton
                                         color="primary"
                                         onClick={() => {
@@ -218,8 +222,21 @@ const Reviews = ({ idType }) => {
                                     >
                                         <EditOutlinedIcon fontSize="small" />
                                     </Controls.ActionButton>
-                                    <Controls.ActionButton color="secondary">
-                                        <CloseIcon fontSize="small" />
+                                    <Controls.ActionButton
+                                        color="secondary"
+                                        onClick={() => {
+                                            setConfirmDialog({
+                                                isOpen: true,
+                                                title: 'Are you sure to delete this record?',
+                                                subTitle:
+                                                    "You can't undo this operation",
+                                                onConfirm: () => {
+                                                    onDelete(item._id)
+                                                },
+                                            })
+                                        }}
+                                    >
+                                        <DeleteIcon fontSize="small" />
                                     </Controls.ActionButton>
                                 </TableCell> */}
                                 <TableCell>

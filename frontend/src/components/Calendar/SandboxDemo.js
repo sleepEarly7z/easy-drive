@@ -19,11 +19,16 @@ import {
     DayView,
     WeekView,
     MonthView,
+    Toolbar,
+    DateNavigator,
+    ViewSwitcher,
     Appointments,
     AppointmentForm,
     AppointmentTooltip,
     DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui'
+
+// import { appointments } from '../../../demo-data/appointments'
 
 import { appointments } from '../../utils/appointments'
 
@@ -98,7 +103,7 @@ const EditingOptionsSelector = ({ options, onOptionsChange }) => (
     </StyledDiv>
 )
 
-const CalendarSchedular = () => {
+const SandboxDemo = () => {
     const [data, setData] = React.useState(appointments)
     const [editingOptions, setEditingOptions] = React.useState({
         allowAdding: true,
@@ -316,4 +321,4 @@ const CalendarSchedular = () => {
     )
 }
 
-export default CalendarSchedular
+export default SandboxDemo

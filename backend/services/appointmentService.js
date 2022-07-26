@@ -1,53 +1,40 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
-
-const express = require('express');
-const router = express.Router();
+const { Appointment } = require('../models/appointmentModel');
 
 /**
- * timeSlot is a subdocument of appointment
- * 
- * useful references
- * https://mongoosejs.com/docs/subdocs.html#finding-a-subdocument
- * https://mongoosejs.com/docs/subdocs.html#adding-subdocs-to-arrays
- * https://mongoosejs.com/docs/subdocs.html#removing-subdocs
+ * Get a review with given instructor_id from database
+ *
+ * @param {string} id
+ *
+ * @returns {object} reviews with given instructor_id
+ * @throws {object} error - type and messages
  */
-const timeSlotSchema = new mongoose.Schema({
-    range: {
-        type: String // '7am-8am'
-    },
-    isBooked: {
-        type: Boolean,
-        default: false
-    },
-    studentId: {
-        // TODO add reference to student schema
-        type: String
-    }
-});
-
-const TimeSlot = mongoose.model('TimeSlot', timeSlotSchema);
-
-const appointmentSchema = new mongoose.Schema({
-    instructor: {
-        type: Schema.Types.ObjectId, ref: 'Instructor'
-    },
-    time_slots: [timeSlotSchema]
-})
-
-const Appointment = mongoose.model('Appointment', appointmentSchema);
+const getAppointmentsByInstructorId = async (id) => {
+	try {
+		return Appointment.find({ instructor_id: id });
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
 /**
- * Get all appointments with given instructor id
- * 
- * @returns {Array}
+ * Get a review with given student_id from database
+ *
+ * @param {string} id
+ *
+ * @returns {object} reviews with given student_id
+ * @throws {object} error - type and messages
  */
-const getAppointmentsByInstructorId = (id) => {
-    // TODO
-}
+const getAppointmentsByStudentId = async (id) => {
+	try {
+		return Appointment.find({
+			dates: { time_slots: { isBooked: true, student_id: id } },
+		});
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
 module.exports = {
-    TimeSlot,
-    Appointment,
-    getAppointmentsByInstructorId
-}
+	getAppointmentsByInstructorId,
+	getAppointmentsByStudentId,
+};
