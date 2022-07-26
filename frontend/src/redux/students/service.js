@@ -96,22 +96,34 @@ const deleteStudent = async (id) => {
 	return data;
 }
 
-const followInstructor = async (instructorId) => {
-    const {id} = instructorId
-    // const id = JSON.stringify(instructorId);
-    const response = await fetch('http://localhost:3001/students/followInstructor/' + instructorId._id, {
+const followInstructor = async (userId) => {
+    const response = await fetch('http://localhost:3001/students/followInstructor/' + userId.studentId, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({id}),
+        body: JSON.stringify(userId),
+    })
+
+    const data = await response.json();
+	if (!response.ok) {
+		const errorMsg = data?.message;
+		throw new Error(errorMsg);
+	}
+
+	return data;
+}
+
+const isInstructorFollowed = async (userId) => {
+    const response = await fetch('http://localhost:3001/students/'+ userId.studentId +'/followedInstructors/' + userId.instructorId, {
+        method: 'GET',
     })
 
     return response.json()
 }
 
-const isInstructorFollowed = async (instructorId) => {
-    const response = await fetch('http://localhost:3001/students/checkFollowList/' + instructorId._id, {
+const getFollowingList = async (userId) => {
+    const response = await fetch('http://localhost:3001/students/followingList/'+ userId.studentId, {
         method: 'GET',
     })
 
@@ -124,5 +136,6 @@ export default {
     updateStudent,
     deleteStudent,
     followInstructor,
-    isInstructorFollowed
+    isInstructorFollowed,
+    getFollowingList,
 }

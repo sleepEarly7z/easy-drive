@@ -89,46 +89,6 @@ const updateStudentById = (id, patch) => {
     })
 }
 
-/**
- * Update an Student's instructor follow list form database
- *
- * @param {string} id
- * @param {object} patch with properties need to update
- *
- * @returns {object} Student's instructor follow list updated
- */
-
-const followInstructorById = (id) => {
-	const exampleStudentId = '62d761535c08a0f631db58a0';
-	try {
-		Student.findById(exampleStudentId).then((student) => {
-			if (!student.followedInstructors.includes(id)) {
-				student.followedInstructors.push(id);
-				student.save();
-				console.log('new instructor is followed');
-			} else {
-				Student.updateOne(
-					{ _id: exampleStudentId },
-					{ $pull: { followedInstructors: id } }
-				).then(() => student.save());
-				console.log('instructor is unfollowed');
-			}
-		});
-		return id;
-	} catch (error) {
-		throw { type: 'DB', message: error };
-	}
-};
-
-const isInstructorFollowed = (id) => {
-	const exampleStudentId = '62d761535c08a0f631db58a0';
-	try {
-		return Student.findById(exampleStudentId);
-	} catch (error) {
-		throw { type: 'DB', message: error };
-	}
-};
-
 const registerStudent = async (student) => {
 	const {
 		first_name,
@@ -247,16 +207,44 @@ const generateToken = (id) => {
 	});
 };
 
-module.exports = {
-    Student,
-    getStudents,
-    getStudentById,
-    addStudent,
-    deleteStudentById,
-    updateStudentById,
-    followInstructorById,
-    isInstructorFollowed,
-	getMe,
-	loginStudent,
-	registerStudent,
+/**
+ * update an Student's following list by pushing the new instructorID
+ * to the given student id from database
+ *
+ * @param {string,string} id
+ *
+ * @returns {string} new followed instructor id
+ * @throws {object} error - type and messages
+ */
+const followInstructorById = async(instructorId,studentId) => {
+    try {
+        return Student.findById(studentId)
+        .then(student => {
+            if(!student.followedInstructors.includes(instructorId)) {
+                student.followedInstructors.push(instructorId)
+                student.save()
+                console.log("new instructor is followed");
+            } else {
+                Student.updateOne({_id: studentId },{$pull: {followedInstructors : instructorId}})
+                .then(()=> student.save())
+                console.log("instructor is unfollowed");
+            }
+			return student;
+        })
+      } catch (error) {
+        throw ({ type: 'DB', message: error })
+      }
 }
+
+module.exports = {
+	Student,
+	getStudents,
+	getStudentById,
+	addStudent,
+	deleteStudentById,
+	updateStudentById,
+	registerStudent,
+	loginStudent,
+	getMe,
+  	followInstructorById,
+};
