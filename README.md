@@ -1,8 +1,8 @@
 # CPSC 455 Project
 
-CPSC 455 2022S **Team 405 Found**
+CPSC 455 2022S **Team 405 Found** 
 
-## Project Description
+## Project Description 
 
 -   The targeted users for this project are driving instructors and people seeking to get driver's licenses in BC. It provides a platform for student drivers to find ideal instructors based on locations, services they need, etc.
 -   Future drivers can browse a list of instructors. They can also rate instructors. Instructors can put their information on the website to advertise their services. Users can create accounts to see their reviews/advertisements.
