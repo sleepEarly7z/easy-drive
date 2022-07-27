@@ -69,7 +69,6 @@ const updateInstructor = async (payload) => {
         time,
         carIsProvided,
     } = payload
-
     const response = await fetch(
         'https://easy-drive-405found.herokuapp.com/instructors/' + payload._id,
         {
