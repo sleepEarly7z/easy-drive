@@ -23,9 +23,7 @@ function App() {
                         element={<ProfileRateReview />}
                     />
                     <Route path="explore" element={<Explore />} />
-
                     <Route path="about" element={<About />} />
-
                     <Route
                         path="profile-student/:studentId"
                         element={<ProfileStudent />}
@@ -34,8 +32,7 @@ function App() {
                         path="profile-instructor/:instructorId"
                         element={<ProfileInstructor />}
                     />
-                    <Route path="sign-in" element={<SignIn role="instructor" />} />
-                    {/* <Route path="sign-in-student" element={<SignIn role="student" />} /> */}
+                    <Route path="sign-in" element={<SignIn />} />
                     <Route
                         path="sign-up-instructor"
                         element={<SignUp role="instructor" />}

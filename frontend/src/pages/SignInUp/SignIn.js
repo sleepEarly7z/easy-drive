@@ -1,4 +1,4 @@
-import SignInInstructor from '../../components/SignInForm/SignInForm'
+import SignInForm from '../../components/SignInForm/SignInForm'
 
 const SignIn = () => {
     return (
@@ -6,9 +6,9 @@ const SignIn = () => {
             className="SignIn"
             style={{ marginTop: '120px', minHeight: '600px' }}
         >
-            <SignInInstructor />
+            <SignInForm />
         </div>
-    );
+    )
 }
 
 export default SignIn
