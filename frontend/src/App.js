@@ -34,8 +34,8 @@ function App() {
                         path="profile-instructor/:instructorId"
                         element={<ProfileInstructor />}
                     />
-                    <Route path="sign-in-instructor" element={<SignIn role="instructor" />} />
-                    <Route path="sign-in-student" element={<SignIn role="student" />} />
+                    <Route path="sign-in" element={<SignIn role="instructor" />} />
+                    {/* <Route path="sign-in-student" element={<SignIn role="student" />} /> */}
                     <Route
                         path="sign-up-instructor"
                         element={<SignUp role="instructor" />}
