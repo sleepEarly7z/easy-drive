@@ -84,7 +84,7 @@ const SidebarStudent = ({ section1, section2 }) => {
         const sendGet = async () => {
             const res = await axios
                 .get(
-                    'https://easy-drive-405found.herokuapp.com/students/62d761535c08a0f631db58a0',
+                    'https://ezdrive-test-merge.herokuapp.com/students/62d761535c08a0f631db58a0',
                 )
                 .then((res) => {
                     setPhone(res.data.data.phone)
