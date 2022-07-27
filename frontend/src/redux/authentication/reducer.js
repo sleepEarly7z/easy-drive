@@ -24,6 +24,16 @@ export const authSlice = createSlice({
             state.isInstructor = false
             state.message = ''
         },
+        toggleFollowInstructor: (state, action) => {
+            const { instructorId } = action.payload;
+            let ids = state.user.data?.followedInstructor;
+            if (!ids.includes(instructorId)) {
+                ids.push(instructorId);
+            } else {
+                ids.splice(ids.indexOf(instructorId), 1);
+            }
+            state.user.data.followedInstructor = ids;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -75,5 +85,5 @@ export const authSlice = createSlice({
     },
 })
 
-export const { reset } = authSlice.actions
+export const { reset, toggleFollowInstructor } = authSlice.actions
 export default authSlice.reducer
