@@ -74,10 +74,11 @@ export default function ReviewProfile({ instructor }) {
             </FollowActionButton>
         )
         if (user && user.data.role === 'student')
-            return (<FollowButton instructorId={instructor._id} />)
+            return (<ToggleFollowButton instructorId={instructor._id} />)
     }
 
-    const FollowButton = ({ instructorId }) => {
+    // a component for toggling follow instructor
+    const ToggleFollowButton = ({ instructorId }) => {
         const followedInstructors = useSelector((state) => (state.auth.user.data.followedInstructors));
 
         const [isFollowing, setIsFollowing] = React.useState(followedInstructors.includes(instructor._id));
