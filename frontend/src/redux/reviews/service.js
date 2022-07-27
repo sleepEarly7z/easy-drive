@@ -1,5 +1,5 @@
 const getReviewsByUserId = async (id, idType) => {
-    console.log(idType)
+    console.log(idType);
     const response = await fetch(
         `https://ezdrive-test-merge.herokuapp.com/reviews?${idType}=${id}`,
         {
@@ -20,21 +20,18 @@ const getReviewsByUserId = async (id, idType) => {
 const addReview = async (payload) => {
     const { instructor_id, student_id, comment_content, rating } = payload
 
-    const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/reviews',
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                instructor_id,
-                student_id,
-                comment_content,
-                rating,
-            }),
+    const response = await fetch('https://ezdrive-test-merge.herokuapp.com/reviews', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
         },
-    )
+        body: JSON.stringify({
+            instructor_id,
+            student_id,
+            comment_content,
+            rating,
+        }),
+    })
 
     const data = await response.json()
     if (!response.ok) {
@@ -50,22 +47,19 @@ const updateReview = async (payload) => {
 
     console.log(_id)
     console.log(payload)
-    const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/reviews/' + _id,
-        {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                _id,
-                instructor_id,
-                student_id,
-                comment_content,
-                rating,
-            }),
+    const response = await fetch('https://ezdrive-test-merge.herokuapp.com/reviews/' + _id, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
         },
-    )
+        body: JSON.stringify({
+            _id,
+            instructor_id,
+            student_id,
+            comment_content,
+            rating,
+        }),
+    })
 
     const data = await response.json()
     if (!response.ok) {
@@ -78,15 +72,12 @@ const updateReview = async (payload) => {
 
 // DELETE
 const deleteReview = async (id) => {
-    const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/reviews/' + id,
-        {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+    const response = await fetch('https://ezdrive-test-merge.herokuapp.com/reviews/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
         },
-    )
+    })
 
     const data = await response.json()
     if (!response.ok) {
@@ -95,8 +86,6 @@ const deleteReview = async (id) => {
     }
     console.log('delete review: ' + data)
     return data
-    // return await getReviewsByStudentId(id)
-    // return await getReviewsById(id, 'student')
 }
 
 const ReviewService = {
