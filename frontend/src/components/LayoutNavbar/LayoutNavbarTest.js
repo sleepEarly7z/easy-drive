@@ -1,5 +1,3 @@
-// Version 2
-
 import './index.css'
 import Box from '@mui/material/Box'
 import SwipeableDrawer from '@mui/material/SwipeableDrawer'
