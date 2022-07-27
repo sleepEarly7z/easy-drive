@@ -1,8 +1,9 @@
 import './index.scss'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import RateDisplay from '../ReviewRating/ReviewRating'
 import CalendarSchedular from '../Calendar/CalendarSchedular'
+import { toggleFollowInstructorAsync } from '../../redux/authentication/thunks'
 import {
     AiFillMail,
     AiFillPhone,
@@ -16,12 +17,7 @@ import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, useParams } from 'react-router-dom'
-import {
-    followInstructorAsync, isInstructorFollowedAsync,
-    getFollowingListAsync
-} from '../../redux/students/thunks';
-import axios from 'axios'
+import { NavLink } from 'react-router-dom'
 
 
 const MessageActionButton = styled.button`
@@ -65,90 +61,44 @@ const FollowActionButton = styled.button`
 `
 
 export default function ReviewProfile({ instructor }) {
-    const dispatch = useDispatch()
-    const currentInstructorReviews = useSelector(
-        (state) => state.reviews.reviewsOfInstructor,
-    )
-    const { user } = useSelector((state) => state.auth)
-    const student = useSelector((state) => state.students)
-    const params = useParams()
-    const [instructorFollowed, setInstructorFollowed] = useState(false);
-    const [isRoleInstructor, setIsRoleInstructor] = useState(false);
-    const [isSignedIn, setIsSignedIn] = useState(false);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        console.log(user)
-        if (user !== null) {
-            setIsSignedIn(true);
-            console.log(user.data._id);
-            //ToggleIsRoleInstructor();
-            console.log('hello0')
-            console.log(ToggleIsRoleInstructor())
-            ToggleIsRoleInstructor()
-                .then((result) => {
-                    console.log(result);
-                    if (!result) {
-                        console.log('hello1')
-                        let id = {
-                            instructorId: params.instructorId,
-                            studentId: user.data._id
-                        }
-                        console.log('hello2')
-                        dispatch(getFollowingListAsync({ studentId: user.data._id }));
-                        dispatch(isInstructorFollowedAsync(id))
-                            .then(result => {
-                                console.log(result)
-                                setInstructorFollowed(result.payload.data)
-                            })
-                        console.log(params.instructorId)
-                    }
-                })
-            console.log('hello3')
-        }
- 
-    }, []);
+    const user = useSelector((state) => (state.auth.user));
 
-    const ToggleIsRoleInstructor = async () => {
-        console.log(3)
-        console.log(user)
-        let isInstructor = false;
-        if (user !== null) {
-            const res = await axios.get('http://localhost:3001/instructors/' + user.data._id)
-                .then((res) => {
-                    console.log(res.data.data !== null && (res.data.data.role === "instructor"));
-                    if (res.data.data !== null && (res.data.data.role === "instructor")) {
-                        setIsRoleInstructor(true)
-                        console.log(4)
-                        isInstructor = true;
-                    } else {
-                        setIsRoleInstructor(false)
-                        isInstructor = false;
-                    }
-                }).catch((err) => {
-                    alert(err);
-                }
-                );
-        } return isInstructor;
+    const renderFollowButton = () => {
+        if (!user) return (
+            <FollowActionButton >
+                <NavLink to="/sign-in-student" variant="body2">
+                    {'Follow'}
+                </NavLink>
+            </FollowActionButton>
+        )
+        if (user && user.data.role === 'student')
+            return (<ToggleFollowButton instructorId={instructor._id} />)
     }
 
-    const toggleIsFollowed = () => () => {
-        if (user !== null) {
-            console.log(student)
-            let id = {
-                instructorId: params.instructorId,
-                studentId: user.data._id
-            }
-            dispatch(followInstructorAsync(id))
-                .then(() => {
-                    dispatch(isInstructorFollowedAsync(id))
-                        .then(result => {
-                            setInstructorFollowed(!instructorFollowed)
-                            console.log(student)
-                        })
-                });
-        }
-    }
+    // a component for toggling follow instructor
+    const ToggleFollowButton = ({ instructorId }) => {
+        const followedInstructors = useSelector((state) => (state.auth.user.data.followedInstructors));
 
+        const [isFollowing, setIsFollowing] = React.useState(followedInstructors.includes(instructorId));
+
+        const toggleFollow = () => {
+            // update redux store and db
+            dispatch(toggleFollowInstructorAsync(instructorId));
+        }
+
+        // upon change of followedInstructors redux state, change ui
+        React.useEffect(() => {
+            setIsFollowing(followedInstructors.includes(instructorId));
+        }, [followedInstructors, instructorId])
+
+        return (
+            <FollowActionButton onClick={toggleFollow}>
+                {isFollowing ? 'unfollow' : 'follow'}
+            </FollowActionButton>
+        );
+    }
 
     return (
         <div>
@@ -189,17 +139,7 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
-                            {!isSignedIn ?
-                                (<FollowActionButton className="" >
-                                    <NavLink to="/sign-in-student" variant="body2">
-                                        {'Follow'}
-                                    </NavLink>
-                                </FollowActionButton>) :
-                                isRoleInstructor ? <></> :
-                                    (<FollowActionButton className="" onClick={toggleIsFollowed()}>
-                                        {instructorFollowed ? 'unfollow' : 'Follow'}
-                                    </FollowActionButton>)}
-
+                            {renderFollowButton()}
                             <MessageActionButton className="">
                                 Message
                             </MessageActionButton>

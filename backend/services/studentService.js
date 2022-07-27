@@ -75,18 +75,10 @@ const deleteStudentById = (id) => {
  *
  * @returns {object} Student updated
  */
-const updateStudentById = (id, patch) => {
-	// TODO
-	console.log('StudentService121');
-	console.log(patch.followedInstructors);
-	Student.updateOne({ _id: id }, patch, (err, stu) => {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log(stu);
-		}
-	});
-};
+const updateStudentById = async (id, patch) => {
+	// https://mongoosejs.com/docs/documents.html#updating-using-queries
+	await Student.findOneAndUpdate({ _id: id }, patch, { runValidators: true });
+}
 
 const registerStudent = async (student) => {
 	const {
@@ -224,36 +216,6 @@ const generateToken = (id) => {
 	});
 };
 
-/**
- * update an Student's following list by pushing the new instructorID
- * to the given student id from database
- *
- * @param {string,string} id
- *
- * @returns {string} new followed instructor id
- * @throws {object} error - type and messages
- */
-const followInstructorById = async(instructorId,studentId) => {
-    try {
-        return await Student.findById(studentId)
-        .then(student => {
-            if(!student.followedInstructors.includes(instructorId)) {
-                student.followedInstructors.push(instructorId)
-                student.save()
-                console.log("new instructor is followed");
-				return student;
-            } else {
-                Student.updateOne({_id: studentId },{$pull: {followedInstructors : instructorId}})
-                .then(()=> student.save())
-                console.log("instructor is unfollowed");
-				return Student.findById(studentId);
-            }
-        })
-      } catch (error) {
-        throw ({ type: 'DB', message: error })
-      }
-}
-
 module.exports = {
 	Student,
 	getStudents,
@@ -261,9 +223,7 @@ module.exports = {
 	addStudent,
 	deleteStudentById,
 	updateStudentById,
-	followInstructorById,
-	isInstructorFollowed,
-	getMe,
-	loginStudent,
 	registerStudent,
+	loginStudent,
+	getMe
 };

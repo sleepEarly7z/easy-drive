@@ -42,100 +42,42 @@ const addStudent = async (data) => {
     return result
 }
 
-const updateStudent = async (data) => {
-    const {
-        _id,
-        first_name,
-        last_name,
-        email,
-        phone,
-        street,
-        city,
-        province,
-        country,
-        followedInstructors
-    } = data
-    const response = await fetch(`http://localhost:3001/students/${_id}`, {
+const updateStudent = async (id, patch) => {
+    const response = await fetch(`http://localhost:3001/students/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            first_name,
-            last_name,
-            email,
-            phone,
-            street,
-            city,
-            province,
-            country,
-            followedInstructors
-        }),
+        body: JSON.stringify(patch),
     })
-
     return response.json()
 }
 
 const deleteStudent = async (id) => {
-	const response = await fetch(
-		'http://localhost:3001/students/' + id,
-		{
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		}
-	);
-
-	const data = await response.json();
-	if (!response.ok) {
-		const errorMsg = data?.message;
-		throw new Error(errorMsg);
-	}
-
-	return data;
-}
-
-const followInstructor = async (userId) => {
-    const response = await fetch('http://localhost:3001/students/followInstructor/' + userId.studentId, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userId),
-    })
+    const response = await fetch(
+        'http://localhost:3001/students/' + id,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+    );
 
     const data = await response.json();
-	if (!response.ok) {
-		const errorMsg = data?.message;
-		throw new Error(errorMsg);
-	}
+    if (!response.ok) {
+        const errorMsg = data?.message;
+        throw new Error(errorMsg);
+    }
 
-	return data;
+    return data;
 }
 
-const isInstructorFollowed = async (userId) => {
-    const response = await fetch('http://localhost:3001/students/'+ userId.studentId +'/followedInstructors/' + userId.instructorId, {
-        method: 'GET',
-    })
-
-    return response.json()
-}
-
-const getFollowingList = async (userId) => {
-    const response = await fetch('http://localhost:3001/students/followingList/'+ userId.studentId, {
-        method: 'GET',
-    })
-
-    return response.json()
-}
-
-export default {
+const studentService = {
     getStudents,
     addStudent,
     updateStudent,
-    deleteStudent,
-    followInstructor,
-    isInstructorFollowed,
-    getFollowingList,
+    deleteStudent
 }
+
+export default studentService;

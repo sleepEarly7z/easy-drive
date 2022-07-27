@@ -1,6 +1,44 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { actionTypes } from './actionTypes'
 import AuthService from './service'
+import studentService from '../students/service'
+
+export const toggleFollowInstructorAsync = createAsyncThunk(
+    actionTypes.TOGGLE_FOLLOW_INSTRUCTOR,
+    async (instructorId, { getState, rejectWithValue }) => {
+        const studentId = getState().auth.user.data._id;
+        const currIds = getState().auth.user.data.followedInstructors;
+
+        const { action, updatedIds } =
+            (currIds.includes(instructorId))
+                ? {
+                    updatedIds: currIds.filter((id) => (id !== instructorId)),
+                    action: 'follow'
+                }
+                : {
+                    updatedIds: currIds.reduce((updatedIds, id) => {
+                        updatedIds.push(id);
+                        return updatedIds;
+                    }, [instructorId]),
+                    action: 'unfollow'
+                }
+        try {
+            await studentService.updateStudent(studentId, { followedInstructors: updatedIds })
+            const currentUser = JSON.parse(localStorage.getItem('user'));
+            const updatedUser = {
+                ...currentUser,
+                data: {
+                    ...currentUser.data,
+                    followedInstructors: updatedIds
+                }
+            }
+            localStorage.setItem('user', JSON.stringify(updatedUser))
+            return updatedIds;
+        } catch {
+            rejectWithValue(`Failed to ${action} instructor`);
+        }
+    }
+)
 
 // Register new instructor
 export const registerAsync = createAsyncThunk(
