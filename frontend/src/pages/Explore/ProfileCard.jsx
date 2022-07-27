@@ -10,9 +10,12 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import LanguageIcon from '@mui/icons-material/Language';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleFollowInstructorAsync } from '../../redux/authentication/thunks'
 
 const ProfileCard = (props) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const {
         id,
@@ -24,14 +27,36 @@ const ProfileCard = (props) => {
         rating
     } = props;
 
-    const [isBookMarked, setIsBookMarked] = React.useState(false);
+    const user = useSelector((state) => (state.auth.user));
+
+    // a component for toggling follow instructor
+    const ToggleFollowButton = ({ instructorId }) => {
+        const followedInstructors = useSelector((state) => (state.auth.user.data.followedInstructors));
+
+        const [isFollowing, setIsFollowing] = React.useState(followedInstructors.includes(instructorId));
+
+        const toggleFollow = () => {
+            // update redux store, db, locals
+            dispatch(toggleFollowInstructorAsync(instructorId));
+        }
+
+        // upon change of followedInstructors redux state, change ui
+        React.useEffect(() => {
+            setIsFollowing(followedInstructors.includes(instructorId));
+        }, [followedInstructors, instructorId])
+
+        return (
+            <IconButton variant="text"
+                onClick={toggleFollow}>
+                {(isFollowing)
+                    ? <BookmarkIcon />
+                    : <BookmarkBorderIcon />}
+            </IconButton>
+        );
+    }
 
     const getInitial = (name) => {
         return name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
-    }
-
-    const toggleBookmark = () => {
-        setIsBookMarked(!isBookMarked);
     }
 
     const viewProfile = () => {
@@ -74,12 +99,10 @@ const ProfileCard = (props) => {
                         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
                             <Button variant="text"
                                 onClick={viewProfile}>profile</Button>
-                            <IconButton variant="text"
-                                onClick={toggleBookmark}>
-                                {(isBookMarked)
-                                    ? <BookmarkIcon />
-                                    : <BookmarkBorderIcon />}
-                            </IconButton>
+                            {(user && user.data.role === 'student') &&
+                                <ToggleFollowButton instructorId={id} />
+                            }
+
                         </Box>
                     </Box>
                 </Box>

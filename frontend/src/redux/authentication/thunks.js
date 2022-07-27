@@ -24,6 +24,15 @@ export const toggleFollowInstructorAsync = createAsyncThunk(
                 }
         try {
             await studentService.updateStudent(studentId, { followedInstructors: updatedIds })
+            const currentUser = JSON.parse(localStorage.getItem('user'));
+            const updatedUser = {
+                ...currentUser,
+                data: {
+                    ...currentUser.data,
+                    followedInstructors: updatedIds
+                }
+            }
+            localStorage.setItem('user', JSON.stringify(updatedUser))
             return updatedIds;
         } catch {
             rejectWithValue(`Failed to ${action} instructor`);

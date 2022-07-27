@@ -81,7 +81,7 @@ export default function ReviewProfile({ instructor }) {
     const ToggleFollowButton = ({ instructorId }) => {
         const followedInstructors = useSelector((state) => (state.auth.user.data.followedInstructors));
 
-        const [isFollowing, setIsFollowing] = React.useState(followedInstructors.includes(instructor._id));
+        const [isFollowing, setIsFollowing] = React.useState(followedInstructors.includes(instructorId));
 
         const toggleFollow = () => {
             // update redux store and db
@@ -90,8 +90,8 @@ export default function ReviewProfile({ instructor }) {
 
         // upon change of followedInstructors redux state, change ui
         React.useEffect(() => {
-            setIsFollowing(followedInstructors.includes(instructor._id));
-        }, [followedInstructors])
+            setIsFollowing(followedInstructors.includes(instructorId));
+        }, [followedInstructors, instructorId])
 
         return (
             <FollowActionButton onClick={toggleFollow}>
