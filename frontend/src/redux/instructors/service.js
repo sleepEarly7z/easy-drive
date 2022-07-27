@@ -46,6 +46,11 @@ const getInstructorById = async (id) => {
             method: 'GET',
         },
     )
+<<<<<<< HEAD
+    return basicResponse.json()
+}
+
+=======
     // const basicReviews = await fetch('https://easy-drive-405found.herokuapp.com/reviews/' + id, {
     //     method: 'GET',
     // })
@@ -107,9 +112,8 @@ const addInstructor = async (data) => {
     return result
 }
 
+>>>>>>> Cathy-Deploy2
 const updateInstructor = async (payload) => {
-    const temp = payload
-    // console.log(temp)
     const {
         _id,
         first_name,
@@ -129,8 +133,7 @@ const updateInstructor = async (payload) => {
         time,
         carIsProvided,
     } = payload
-    // console.log(id)
-    // console.log(payload)
+    
     const response = await fetch(
         'https://easy-drive-405found.herokuapp.com/instructors/' + payload._id,
         {
@@ -241,7 +244,6 @@ const sortFilter = async (condition) => {
 const InstructorService = {
     getInstructors,
     getInstructorById,
-    addInstructor,
     updateInstructor,
     deleteInstructor,
     getFilter,

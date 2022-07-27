@@ -19,7 +19,6 @@ const INITIAL_STATE = {
     getInstructors: REQUEST_STATE.IDLE,
     getInstructorById: REQUEST_STATE.IDLE,
     getReviewsById: REQUEST_STATE.IDLE,
-    addInstructor: REQUEST_STATE.IDLE,
     deleteInstructor: REQUEST_STATE.IDLE,
     updateInstructor: REQUEST_STATE.IDLE,
     getFilter: REQUEST_STATE.IDLE,
@@ -55,18 +54,6 @@ const instructorsSlice = createSlice({
             })
             .addCase(getInstructorByIdAsync.rejected, (state, action) => {
                 state.getInstructorById = REQUEST_STATE.REJECTED
-                state.error = action.error
-            })
-            .addCase(addInstructorAsync.pending, (state) => {
-                state.addInstructor = REQUEST_STATE.PENDING
-                state.error = null
-            })
-            .addCase(addInstructorAsync.fulfilled, (state, action) => {
-                state.addInstructor = REQUEST_STATE.FULFILLED
-                state.list.push(action.payload)
-            })
-            .addCase(addInstructorAsync.rejected, (state, action) => {
-                state.addInstructor = REQUEST_STATE.REJECTED
                 state.error = action.error
             })
             .addCase(updateInstructorAsync.pending, (state) => {

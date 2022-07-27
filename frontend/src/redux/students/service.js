@@ -141,5 +141,9 @@ export default {
     updateStudent,
     deleteStudent,
     followInstructor,
+<<<<<<< HEAD
+    isInstructorFollowed
+=======
     isInstructorFollowed,
+>>>>>>> Cathy-Deploy2
 }

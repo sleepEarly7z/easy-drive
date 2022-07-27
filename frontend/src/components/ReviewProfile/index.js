@@ -4,6 +4,7 @@ import { NavLink } from 'react-bootstrap'
 import styled from 'styled-components'
 import RateDisplay from '../ReviewRating/ReviewRating'
 import CalendarSchedular from '../Calendar/CalendarSchedular'
+import SandboxDemo from '../Calendar/SandboxDemo'
 import {
     AiFillMail,
     AiFillPhone,
@@ -254,10 +255,8 @@ export default function ReviewProfile({ instructor }) {
                             chedule Preview
                         </div>
                     </div>
-                    <CalendarSchedular
-                        page="reviewpage"
-                        instructorId={instructor._id}
-                    />
+                    <CalendarSchedular pageType="review" />
+                    {/* <SandboxDemo /> */}
 
                     {/* line breaker */}
                     <div className="line-breaker-1"></div>
@@ -283,7 +282,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews idType={'instructorId'} />
+                        <Reviews idType={'instructorId'} page={'reviewPage'} />
                     </div>
                 </div>
             </div>
