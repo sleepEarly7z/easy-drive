@@ -5,9 +5,6 @@ import { ReactComponent as HomeIcon } from '../../assets/images/svg/home.svg'
 import { ReactComponent as MenuIcon } from '../../assets/images/svg/menu.svg'
 import { ReactComponent as BellIcon } from '../../assets/images/svg/bell.svg'
 import { ReactComponent as MessengerIcon } from '../../assets/images/svg/messenger.svg'
-import { ReactComponent as CaretIcon } from '../../assets/images/svg/caret.svg'
-import { ReactComponent as ProfileIcon } from '../../assets/images/svg/profile.svg'
-// import { ReactComponent as PlusIcon } from '../../assets/images/svg/plus.svg'
 import { ReactComponent as CogIcon } from '../../assets/images/svg/cog.svg'
 import { ReactComponent as ChevronIcon } from '../../assets/images/svg/chevron.svg'
 import { ReactComponent as ArrowIcon } from '../../assets/images/svg/arrow.svg'
@@ -97,7 +94,7 @@ function LayoutNavbar() {
                     icon={<FaSignInAlt />}
                     text={'Log In/Register'}
                     name={'icon-button-signin'}
-                    to={'/sign-in-instructor'}
+                    to={'/sign-in'}
                 />
             )}
         </Navbar>
