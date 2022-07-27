@@ -25,14 +25,15 @@ export const authSlice = createSlice({
             state.message = ''
         },
         toggleFollowInstructor: (state, action) => {
-            const { instructorId } = action.payload;
-            let ids = state.user.data?.followedInstructor;
+            const instructorId = action.payload;
+            const currState = JSON.parse(JSON.stringify(state));
+            let ids = currState.user.data.followedInstructors;
             if (!ids.includes(instructorId)) {
                 ids.push(instructorId);
             } else {
                 ids.splice(ids.indexOf(instructorId), 1);
             }
-            state.user.data.followedInstructor = ids;
+            state.user.data.followedInstructors = ids;
         }
     },
     extraReducers: (builder) => {

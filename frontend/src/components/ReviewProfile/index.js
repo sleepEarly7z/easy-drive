@@ -72,15 +72,14 @@ export default function ReviewProfile({ instructor }) {
     //                                 </NavLink>
     //                             </FollowActionButton>)
 
-    const FollowButton = () => {
+    const FollowButton = ({ instructorId }) => {
         const [isFollowing, setIsFollowing] = React.useState(user.followedInstructors.includes(instructor._id));
 
         const toggleFollow = () => {
             // update ui
             setIsFollowing(!isFollowing);
             // update redux store
-            dispatch(toggleFollowInstructor({ instructorId: instructor._id }));
-
+            dispatch(toggleFollowInstructor(instructorId));
             // update db
         }
 
@@ -130,7 +129,7 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
-                            {(user.role === 'student') && <FollowButton />}
+                            {(user.role === 'student') && <FollowButton instructorId={instructor._id} />}
                             <MessageActionButton className="">
                                 Message
                             </MessageActionButton>
