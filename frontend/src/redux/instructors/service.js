@@ -24,8 +24,8 @@ const getQueryString = (query) => {
 const getInstructors = async (query) => {
     const queryString = getQueryString(query)
     const url = queryString
-        ? `http://localhost:3001/instructors?${queryString}`
-        : `http://localhost:3001/instructors`
+        ? `https://easy-drive-405found.herokuapp.com/instructors?${queryString}`
+        : `https://easy-drive-405found.herokuapp.com/instructors`
 
     console.log(url)
 
@@ -41,14 +41,78 @@ const getInstructors = async (query) => {
 
 const getInstructorById = async (id) => {
     const basicResponse = await fetch(
-        'http://localhost:3001/instructors/' + id,
+        'https://easy-drive-405found.herokuapp.com/instructors/' + id,
         {
             method: 'GET',
         },
     )
+<<<<<<< HEAD
     return basicResponse.json()
 }
 
+=======
+    // const basicReviews = await fetch('https://easy-drive-405found.herokuapp.com/reviews/' + id, {
+    //     method: 'GET',
+    // })
+    return basicResponse.json()
+}
+
+const addInstructor = async (data) => {
+    const {
+        first_name,
+        last_name,
+        password,
+        email,
+        phone,
+        street,
+        city,
+        country,
+        company,
+        language,
+        experience,
+        license,
+        description,
+        time,
+        carIsProvided,
+    } = data
+
+    const response = await fetch(
+        'https://easy-drive-405found.herokuapp.com/instructors',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                first_name,
+                last_name,
+                password,
+                email,
+                phone,
+                street,
+                city,
+                country,
+                company,
+                language,
+                experience,
+                license,
+                description,
+                time,
+                carIsProvided,
+            }),
+        },
+    )
+
+    const result = await response.json()
+    if (!response.ok) {
+        const errorMsg = result?.message
+        throw new Error(errorMsg)
+    }
+
+    return result
+}
+
+>>>>>>> Cathy-Deploy2
 const updateInstructor = async (payload) => {
     const {
         _id,
@@ -71,7 +135,7 @@ const updateInstructor = async (payload) => {
     } = payload
     
     const response = await fetch(
-        'http://localhost:3001/instructors/' + payload._id,
+        'https://easy-drive-405found.herokuapp.com/instructors/' + payload._id,
         {
             method: 'PATCH',
             headers: {
@@ -104,12 +168,15 @@ const updateInstructor = async (payload) => {
 
 // DELETE
 const deleteInstructor = async (id) => {
-    const response = await fetch('http://localhost:3001/instructors/' + id, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
+    const response = await fetch(
+        'https://easy-drive-405found.herokuapp.com/instructors/' + id,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         },
-    })
+    )
 
     const data = await response.json()
     if (!response.ok) {
@@ -121,15 +188,18 @@ const deleteInstructor = async (id) => {
 }
 
 const getFilter = async () => {
-    const response = await fetch('http://localhost:3001/instructors/filter', {
-        method: 'GET',
-    })
+    const response = await fetch(
+        'https://easy-drive-405found.herokuapp.com/instructors/filter',
+        {
+            method: 'GET',
+        },
+    )
     return response.json()
 }
 
 const updateFilter = async (id) => {
     const response = await fetch(
-        'http://localhost:3001/instructors/filter' +
+        'https://easy-drive-405found.herokuapp.com/instructors/filter' +
             JSON.stringify(id).replaceAll('"', ''),
         {
             method: 'DELETE',
@@ -154,7 +224,8 @@ const sortFilter = async (condition) => {
     const querystring = 'condition=' + JSON.stringify(condition.condition)
     console.log(querystring)
     const response = await fetch(
-        'http://localhost:3001/instructors/sort?' + querystring,
+        'https://easy-drive-405found.herokuapp.com/instructors/sort?' +
+            querystring,
         {
             method: 'GET',
         },

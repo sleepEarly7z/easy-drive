@@ -81,7 +81,7 @@ export default function ReviewProfile({ instructor }) {
             },
         )
         // const sendGet = async () => {
-        //     const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
+        //     const res = await axios.get('https://easy-drive-405found.herokuapp.com/students/62d761535c08a0f631db58a0')
         //     .then((res) =>{
         //         setfollowing(res.data.data.followedInstructors)
         //         // console.log(following)
@@ -282,7 +282,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews idType={"instructorId"} page={"reviewPage"} />
+                        <Reviews idType={'instructorId'} page={'reviewPage'} />
                     </div>
                 </div>
             </div>

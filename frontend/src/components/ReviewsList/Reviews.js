@@ -57,7 +57,7 @@ const Reviews = ({ idType, page }) => {
 
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [records, setRecords] = useState([])
-
+    
     const [filterFn, setFilterFn] = useState({
         fn: (items) => {
             return items
