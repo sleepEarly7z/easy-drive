@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { registerAsync, loginAsInstructorAsync, loginAsStudentAsync, logoutAsync } from './thunks'
+import { registerAsync, loginAsInstructorAsync, loginAsStudentAsync, logoutAsync, toggleFollowInstructorAsync } from './thunks'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
@@ -23,21 +23,13 @@ export const authSlice = createSlice({
             state.isSuccess = false
             state.isInstructor = false
             state.message = ''
-        },
-        toggleFollowInstructor: (state, action) => {
-            const instructorId = action.payload;
-            const currState = JSON.parse(JSON.stringify(state));
-            let ids = currState.user.data.followedInstructors;
-            if (!ids.includes(instructorId)) {
-                ids.push(instructorId);
-            } else {
-                ids.splice(ids.indexOf(instructorId), 1);
-            }
-            state.user.data.followedInstructors = ids;
         }
     },
     extraReducers: (builder) => {
         builder
+            .addCase(toggleFollowInstructorAsync.fulfilled, (state, action) => {
+                state.user.data.followedInstructors = action.payload;
+            })
             .addCase(registerAsync.pending, (state) => {
                 state.isLoading = true
             })
@@ -86,5 +78,5 @@ export const authSlice = createSlice({
     },
 })
 
-export const { reset, toggleFollowInstructor } = authSlice.actions
+export const { reset } = authSlice.actions
 export default authSlice.reducer

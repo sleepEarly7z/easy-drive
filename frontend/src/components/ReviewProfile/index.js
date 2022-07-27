@@ -1,9 +1,9 @@
 import './index.scss'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import RateDisplay from '../ReviewRating/ReviewRating'
 import CalendarSchedular from '../Calendar/CalendarSchedular'
-import { toggleFollowInstructor } from '../../redux/authentication/reducer'
+import { toggleFollowInstructorAsync } from '../../redux/authentication/thunks'
 import {
     AiFillMail,
     AiFillPhone,
@@ -17,7 +17,7 @@ import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 const MessageActionButton = styled.button`
@@ -62,26 +62,35 @@ const FollowActionButton = styled.button`
 
 export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch();
-    const params = useParams()
 
-    const user = useSelector((state) => (state.auth.user.data));
+    const user = useSelector((state) => (state.auth.user));
 
-    // <FollowActionButton className="" >
-    //                                 <NavLink to="/sign-in-student" variant="body2">
-    //                                     {'Follow'}
-    //                                 </NavLink>
-    //                             </FollowActionButton>)
+    const renderFollowButton = () => {
+        if (!user) return (
+            <FollowActionButton >
+                <NavLink to="/sign-in-student" variant="body2">
+                    {'Follow'}
+                </NavLink>
+            </FollowActionButton>
+        )
+        if (user && user.data.role === 'student')
+            return (<FollowButton instructorId={instructor._id} />)
+    }
 
     const FollowButton = ({ instructorId }) => {
-        const [isFollowing, setIsFollowing] = React.useState(user.followedInstructors.includes(instructor._id));
+        const followedInstructors = useSelector((state) => (state.auth.user.data.followedInstructors));
+
+        const [isFollowing, setIsFollowing] = React.useState(followedInstructors.includes(instructor._id));
 
         const toggleFollow = () => {
-            // update ui
-            setIsFollowing(!isFollowing);
-            // update redux store
-            dispatch(toggleFollowInstructor(instructorId));
-            // update db
+            // update redux store and db
+            dispatch(toggleFollowInstructorAsync(instructorId));
         }
+
+        // upon change of followedInstructors redux state, change ui
+        React.useEffect(() => {
+            setIsFollowing(followedInstructors.includes(instructor._id));
+        }, [followedInstructors])
 
         return (
             <FollowActionButton onClick={toggleFollow}>
@@ -129,7 +138,7 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
-                            {(user.role === 'student') && <FollowButton instructorId={instructor._id} />}
+                            {renderFollowButton()}
                             <MessageActionButton className="">
                                 Message
                             </MessageActionButton>
