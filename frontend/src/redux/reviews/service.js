@@ -1,7 +1,7 @@
 const getReviewsByUserId = async (id, idType) => {
-    console.log(idType);
+    console.log(idType)
     const response = await fetch(
-        `http://localhost:3001/reviews?${idType}=${id}`,
+        `https://easy-drive-405found.herokuapp.com/reviews?${idType}=${id}`,
         {
             method: 'GET',
         },
@@ -20,18 +20,21 @@ const getReviewsByUserId = async (id, idType) => {
 const addReview = async (payload) => {
     const { instructor_id, student_id, comment_content, rating } = payload
 
-    const response = await fetch('http://localhost:3001/reviews', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
+    const response = await fetch(
+        'https://easy-drive-405found.herokuapp.com/reviews',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                instructor_id,
+                student_id,
+                comment_content,
+                rating,
+            }),
         },
-        body: JSON.stringify({
-            instructor_id,
-            student_id,
-            comment_content,
-            rating,
-        }),
-    })
+    )
 
     const data = await response.json()
     if (!response.ok) {
@@ -47,19 +50,22 @@ const updateReview = async (payload) => {
 
     console.log(_id)
     console.log(payload)
-    const response = await fetch('http://localhost:3001/reviews/' + _id, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
+    const response = await fetch(
+        'https://easy-drive-405found.herokuapp.com/reviews/' + _id,
+        {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                _id,
+                instructor_id,
+                student_id,
+                comment_content,
+                rating,
+            }),
         },
-        body: JSON.stringify({
-            _id,
-            instructor_id,
-            student_id,
-            comment_content,
-            rating,
-        }),
-    })
+    )
 
     const data = await response.json()
     if (!response.ok) {
@@ -72,12 +78,15 @@ const updateReview = async (payload) => {
 
 // DELETE
 const deleteReview = async (id) => {
-    const response = await fetch('http://localhost:3001/reviews/' + id, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
+    const response = await fetch(
+        'https://easy-drive-405found.herokuapp.com/reviews/' + id,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         },
-    })
+    )
 
     const data = await response.json()
     if (!response.ok) {
