@@ -1,6 +1,6 @@
 const addUser = async (name) => {
     const response = await fetch(
-        'https://easy-drive-405found.herokuapp.com/users',
+        'https://ezdrive-test-merge.herokuapp.com/users',
         {
             method: 'POST',
             headers: {
@@ -21,7 +21,7 @@ const addUser = async (name) => {
 
 const getUsers = async () => {
     const response = await fetch(
-        'https://easy-drive-405found.herokuapp.com/users',
+        'https://ezdrive-test-merge.herokuapp.com/users',
         {
             method: 'GET',
         },

@@ -1,7 +1,7 @@
 const getReviewsByUserId = async (id, idType) => {
     console.log(idType)
     const response = await fetch(
-        `https://easy-drive-405found.herokuapp.com/reviews?${idType}=${id}`,
+        `https://ezdrive-test-merge.herokuapp.com/reviews?${idType}=${id}`,
         {
             method: 'GET',
         },
@@ -21,7 +21,7 @@ const addReview = async (payload) => {
     const { instructor_id, student_id, comment_content, rating } = payload
 
     const response = await fetch(
-        'https://easy-drive-405found.herokuapp.com/reviews',
+        'https://ezdrive-test-merge.herokuapp.com/reviews',
         {
             method: 'POST',
             headers: {
@@ -51,7 +51,7 @@ const updateReview = async (payload) => {
     console.log(_id)
     console.log(payload)
     const response = await fetch(
-        'https://easy-drive-405found.herokuapp.com/reviews/' + _id,
+        'https://ezdrive-test-merge.herokuapp.com/reviews/' + _id,
         {
             method: 'PATCH',
             headers: {
@@ -79,7 +79,7 @@ const updateReview = async (payload) => {
 // DELETE
 const deleteReview = async (id) => {
     const response = await fetch(
-        'https://easy-drive-405found.herokuapp.com/reviews/' + id,
+        'https://ezdrive-test-merge.herokuapp.com/reviews/' + id,
         {
             method: 'DELETE',
             headers: {
