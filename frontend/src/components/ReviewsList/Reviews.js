@@ -104,10 +104,11 @@ const Reviews = ({ idType, page }) => {
             fn: (items) => {
                 if (target.value === '') return items
                 else
-                    return items.filter((x) =>
-                        x.fullName
-                            .toLowerCase()
-                            .includes(target.value.toLowerCase()),
+                    return items.filter(
+                        (x) => x.fullName,
+                        // TODO: convert id to student name
+                        // .toLowerCase()
+                        // .includes(target.value.toLowerCase()),
                     )
             },
         })
@@ -189,7 +190,7 @@ const Reviews = ({ idType, page }) => {
         <>
             <Paper className={classes.pageContent}>
                 <Toolbar>
-                    <Controls.Input
+                    <Controls.SearchInput
                         label="Search Reviews"
                         className={classes.searchInput}
                         InputProps={{

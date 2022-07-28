@@ -40,7 +40,7 @@ export default function ReviewForm(props) {
     }
 
     const { user } = useSelector((state) => state.auth)
-    const params = useParams();
+    const params = useParams()
 
     initialFValues.student_id = user.data._id
     initialFValues.instructor_id = params.instructorId
@@ -70,8 +70,8 @@ export default function ReviewForm(props) {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Grid container>
-                <Grid item xs={6}>
+            {/* <Grid container> */}
+            {/* <Grid item xs={6}>
                     <Controls.Input
                         name="student_id"
                         label="Full Name"
@@ -86,25 +86,32 @@ export default function ReviewForm(props) {
                         onChange={handleInputChange}
                         error={errors.comment_content}
                     />
-                </Grid>
-                <Grid item xs={6}>
-                    <Controls.RadioGroup
-                        name="ratingStar"
-                        label="Rating Star"
-                        value={values.ratingStar}
-                        onChange={handleInputChange}
-                        items={ratingItems}
-                    />
-                    <div>
-                        <Controls.Button type="submit" text="Submit" />
-                        <Controls.Button
-                            text="Reset"
-                            color="default"
-                            onClick={resetForm}
-                        />
-                    </div>
-                </Grid>
-            </Grid>
+                </Grid> */}
+            {/* <Grid item xs={6}> */}
+            <Controls.RadioGroup
+                name="ratingStar"
+                label="Rating Star"
+                value={values.ratingStar}
+                onChange={handleInputChange}
+                items={ratingItems}
+            />
+            <Controls.CommentInput
+                label="comment_content"
+                name="comment_content"
+                value={values.comment_content}
+                onChange={handleInputChange}
+                error={errors.comment_content}
+            />
+            <div>
+                <Controls.Button type="submit" text="Submit" />
+                <Controls.Button
+                    text="Reset"
+                    color="default"
+                    onClick={resetForm}
+                />
+            </div>
+            {/* </Grid> */}
+            {/* </Grid> */}
         </Form>
     )
 }
