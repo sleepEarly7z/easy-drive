@@ -210,8 +210,10 @@ const Reviews = ({ idType, page }) => {
                             startIcon={<AddIcon />}
                             className={classes.newButton}
                             onClick={() => {
-                                if (user.data.role === "instructor") {
-                                    toast.error("Sorry, instructors cannot write reviews")
+                                if (user.data.role === 'instructor') {
+                                    toast.error(
+                                        'Sorry, instructors cannot write reviews',
+                                    )
                                 } else {
                                     setOpenPopup(true)
                                     setRecordForEdit(null)
@@ -226,7 +228,7 @@ const Reviews = ({ idType, page }) => {
                             className={classes.newButton}
                             onClick={() => {
                                 navigate('/sign-in')
-                                toast.error("Please sign in first!")
+                                toast.error('Please sign in first!')
                             }}
                         />
                     )}
