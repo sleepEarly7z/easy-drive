@@ -48,7 +48,7 @@ const InformationStudent = () => {
         const sendGet = async () => {
             const res = await axios
                 .get(
-                    'https://ezdrive-test-merge.herokuapp.com/students/62d761535c08a0f631db58a0',
+                    'https://ezdrive-test-3.herokuapp.com/students/62d761535c08a0f631db58a0',
                 )
                 .then((res) => {
                     setfirst_name(res.data.data.first_name)

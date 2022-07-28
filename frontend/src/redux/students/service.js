@@ -1,6 +1,6 @@
 const getStudents = async () => {
     const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/students',
+        'https://ezdrive-test-3.herokuapp.com/students',
         {
             method: 'GET',
         },
@@ -21,7 +21,7 @@ const addStudent = async (data) => {
         country,
     } = data
     const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/students',
+        'https://ezdrive-test-3.herokuapp.com/students',
         {
             method: 'POST',
             headers: {
@@ -62,7 +62,7 @@ const updateStudent = async (data) => {
         followedInstructors,
     } = data
     const response = await fetch(
-        `https://ezdrive-test-merge.herokuapp.com/students/${_id}`,
+        `https://ezdrive-test-3.herokuapp.com/students/${_id}`,
         {
             method: 'PATCH',
             headers: {
@@ -87,7 +87,7 @@ const updateStudent = async (data) => {
 
 const deleteStudent = async (id) => {
     const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/students/' + id,
+        'https://ezdrive-test-3.herokuapp.com/students/' + id,
         {
             method: 'DELETE',
             headers: {
@@ -109,7 +109,7 @@ const followInstructor = async (instructorId) => {
     const { id } = instructorId
     // const id = JSON.stringify(instructorId);
     const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/students/followInstructor/' +
+        'https://ezdrive-test-3.herokuapp.com/students/followInstructor/' +
             instructorId._id,
         {
             method: 'PATCH',
@@ -125,7 +125,7 @@ const followInstructor = async (instructorId) => {
 
 const isInstructorFollowed = async (instructorId) => {
     const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/students/checkFollowList/' +
+        'https://ezdrive-test-3.herokuapp.com/students/checkFollowList/' +
             instructorId._id,
         {
             method: 'GET',

@@ -24,8 +24,8 @@ const getQueryString = (query) => {
 const getInstructors = async (query) => {
     const queryString = getQueryString(query)
     const url = queryString
-        ? `https://ezdrive-test-merge.herokuapp.com/instructors?${queryString}`
-        : `https://ezdrive-test-merge.herokuapp.com/instructors`
+        ? `https://ezdrive-test-3.herokuapp.com/instructors?${queryString}`
+        : `https://ezdrive-test-3.herokuapp.com/instructors`
 
     console.log(url)
 
@@ -41,7 +41,7 @@ const getInstructors = async (query) => {
 
 const getInstructorById = async (id) => {
     const basicResponse = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/instructors/' + id,
+        'https://ezdrive-test-3.herokuapp.com/instructors/' + id,
         {
             method: 'GET',
         },
@@ -69,9 +69,9 @@ const updateInstructor = async (payload) => {
         time,
         carIsProvided,
     } = payload
-    
+
     const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/instructors/' + payload._id,
+        'https://ezdrive-test-3.herokuapp.com/instructors/' + payload._id,
         {
             method: 'PATCH',
             headers: {
@@ -104,12 +104,15 @@ const updateInstructor = async (payload) => {
 
 // DELETE
 const deleteInstructor = async (id) => {
-    const response = await fetch('https://ezdrive-test-merge.herokuapp.com/instructors/' + id, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
+    const response = await fetch(
+        'https://ezdrive-test-3.herokuapp.com/instructors/' + id,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         },
-    })
+    )
 
     const data = await response.json()
     if (!response.ok) {
@@ -121,15 +124,18 @@ const deleteInstructor = async (id) => {
 }
 
 const getFilter = async () => {
-    const response = await fetch('https://ezdrive-test-merge.herokuapp.com/instructors/filter', {
-        method: 'GET',
-    })
+    const response = await fetch(
+        'https://ezdrive-test-3.herokuapp.com/instructors/filter',
+        {
+            method: 'GET',
+        },
+    )
     return response.json()
 }
 
 const updateFilter = async (id) => {
     const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/instructors/filter' +
+        'https://ezdrive-test-3.herokuapp.com/instructors/filter' +
             JSON.stringify(id).replaceAll('"', ''),
         {
             method: 'DELETE',
@@ -154,7 +160,7 @@ const sortFilter = async (condition) => {
     const querystring = 'condition=' + JSON.stringify(condition.condition)
     console.log(querystring)
     const response = await fetch(
-        'https://ezdrive-test-merge.herokuapp.com/instructors/sort?' + querystring,
+        'https://ezdrive-test-3.herokuapp.com/instructors/sort?' + querystring,
         {
             method: 'GET',
         },

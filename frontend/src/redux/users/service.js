@@ -1,5 +1,5 @@
 const addUser = async (name) => {
-    const response = await fetch('https://ezdrive-test-merge.herokuapp.com/users', {
+    const response = await fetch('https://ezdrive-test-3.herokuapp.com/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ const addUser = async (name) => {
 }
 
 const getUsers = async () => {
-    const response = await fetch('https://ezdrive-test-merge.herokuapp.com/users', {
+    const response = await fetch('https://ezdrive-test-3.herokuapp.com/users', {
         method: 'GET',
     })
     return response.json()
