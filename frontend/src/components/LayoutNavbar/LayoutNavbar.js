@@ -1,29 +1,182 @@
-// Version 2
-
 import './index.css'
+import Box from '@mui/material/Box'
+import SwipeableDrawer from '@mui/material/SwipeableDrawer'
+import Button from '@mui/material/Button'
+import List from '@mui/material/List'
+import Divider from '@mui/material/Divider'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import InboxIcon from '@mui/icons-material/MoveToInbox'
+import MailIcon from '@mui/icons-material/Mail'
+import SettingsIcon from '@material-ui/icons/Settings'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+
 import { ReactComponent as HomeIcon } from '../../assets/images/svg/home.svg'
 import { ReactComponent as MenuIcon } from '../../assets/images/svg/menu.svg'
 import { ReactComponent as BellIcon } from '../../assets/images/svg/bell.svg'
 import { ReactComponent as MessengerIcon } from '../../assets/images/svg/messenger.svg'
-import { ReactComponent as CogIcon } from '../../assets/images/svg/cog.svg'
-import { ReactComponent as ChevronIcon } from '../../assets/images/svg/chevron.svg'
-import { ReactComponent as ArrowIcon } from '../../assets/images/svg/arrow.svg'
-import { ReactComponent as BoltIcon } from '../../assets/images/svg/bolt.svg'
 
-import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
+import { FaSignInAlt } from 'react-icons/fa'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { CSSTransition } from 'react-transition-group'
 import { useNavigate } from 'react-router-dom'
 
 import { reset } from '../../redux/authentication/reducer'
 import { logoutAsync } from '../../redux/authentication/thunks'
 
 function LayoutNavbar() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const { user } = useSelector((state) => state.auth)
+    const [state, setState] = React.useState({
+        top: false,
+        left: false,
+        bottom: false,
+        right: false,
+    })
+
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (
+            event &&
+            event.type === 'keydown' &&
+            (event.key === 'Tab' || event.key === 'Shift')
+        ) {
+            return
+        }
+
+        setState({ ...state, [anchor]: open })
+    }
+
+    const handleViewProfile = () => {
+        navigate(`/profile-${user.data.role}/${user.data._id}`)
+        window.location.reload(false)
+    }
+
+    const handleSignOut = () => {
+        dispatch(logoutAsync())
+        dispatch(reset())
+        navigate('/explore')
+    }
+
+    const list = (anchor) => (
+        <Box
+            sx={{
+                width: 'auto',
+            }}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+        >
+            <List>
+                <ListItem disablePadding>
+                    <div className="d-flex flex-row mt-4 mb-3">
+                        <img
+                            className="photo"
+                            src={user.data.photo}
+                            alt=""
+                            style={{
+                                width: '60px',
+                                height: '60px',
+                                marginLeft: '20px',
+                                borderRadius: '50%',
+                                objectFit: 'cover',
+                            }}
+                        />
+                        <div style={{ marginLeft: '15px' }}>
+                            <div className="d-flex">
+                                <div
+                                    style={{
+                                        fontSize: '20px',
+                                        fontWeight: '800',
+                                    }}
+                                >
+                                    {user.data.first_name} {user.data.last_name}
+                                </div>
+                                {user.data.role === 'instructor' && (
+                                    <div
+                                        style={{
+                                            fontSize: '13px',
+                                            marginTop: '8px',
+                                            marginLeft: '10px',
+                                            color: '#ffb341',
+                                            fontWeight: '500',
+                                        }}
+                                    >
+                                        {user.data.role}
+                                    </div>
+                                )}
+                            </div>
+                            <div
+                                className="d-flex"
+                                style={{
+                                    fontSize: '14px',
+                                    color: '#484a4d',
+                                }}
+                            >
+                                <LocationOnIcon
+                                    style={{ fontSize: 18, marginTop: 2 }}
+                                />
+                                {user.data.city}
+                            </div>
+                        </div>
+                    </div>
+                </ListItem>
+                <ListItem key={'View Profile'} disablePadding>
+                    <ListItemButton onClick={handleViewProfile}>
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'View Profile'} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key={'Message'} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <MailIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Message'} />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+            <Divider />
+            <List>
+                <ListItem key={'Help'} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Help'} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key={'Settings'} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <SettingsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Settings'} />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+            <Divider />
+            <List>
+                <ListItem key={'Sign Out'} disablePadding>
+                    <ListItemButton onClick={handleSignOut}>
+                        <ListItemIcon>
+                            <ExitToAppIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Sign Out'} />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+        </Box>
+    )
     return (
         <Navbar>
             <NavItem text={'Easy'} name={'icon-button-logo'} />
@@ -52,42 +205,35 @@ function LayoutNavbar() {
 
             {user ? (
                 <>
-                    {/* <NavItem
-                        icon={<FontAwesomeIcon icon={faUser} color="#d7d5d5" />}
-                        text={'Profile'}
-                        name={'icon-button-profile'}
-                        to={'/profile-instructor'}
-                    /> */}
-                    {user.data.role === 'instructor' ? (
-                        <NavItem
-                            icon={
-                                <FontAwesomeIcon
-                                    icon={faUser}
-                                    color="#d7d5d5"
-                                />
-                            }
-                            text={'Profile'}
-                            name={'icon-button-profile'}
-                            to={`/profile-instructor/${user.data._id}`}
-                        />
-                    ) : (
-                        <NavItem
-                            icon={
-                                <FontAwesomeIcon
-                                    icon={faUser}
-                                    color="#d7d5d5"
-                                />
-                            }
-                            text={'Profile'}
-                            name={'icon-button-profile'}
-                            to={`/profile-student/${user.data._id}`}
-                        />
-                    )}
-                    <NavItem
-                        icon={<FaSignOutAlt />}
-                        text={'Sign Out'}
-                        name={'icon-button-signout'}
-                    ></NavItem>
+                    <div>
+                        <div className="">
+                            <div className="icon-button-profile">
+                                <Button onClick={toggleDrawer('right', true)}>
+                                    <FontAwesomeIcon
+                                        icon={faUser}
+                                        color="#d7d5d5"
+                                    />
+                                </Button>
+                            </div>
+                            <div
+                                className="icon-text-me"
+                                style={{ color: '#d7d5d5' }}
+                            >
+                                Me
+                            </div>
+                        </div>
+                        <SwipeableDrawer
+                            anchor={'right'}
+                            open={state['right']}
+                            onClose={toggleDrawer('right', false)}
+                            onOpen={toggleDrawer('right', true)}
+                            PaperProps={{
+                                style: { marginTop: '5rem', width: '25%' },
+                            }}
+                        >
+                            {list('right')}
+                        </SwipeableDrawer>
+                    </div>
                 </>
             ) : (
                 <NavItem
@@ -156,107 +302,4 @@ function NavItem(props) {
     )
 }
 
-function DropdownMenu() {
-    const [activeMenu, setActiveMenu] = useState('main')
-    const [menuHeight, setMenuHeight] = useState(null)
-    const dropdownRef = useRef(null)
-
-    useEffect(() => {
-        setMenuHeight(dropdownRef.current?.firstChild.offsetHeight)
-    }, [])
-
-    function calcHeight(el) {
-        const height = el.offsetHeight
-        setMenuHeight(height)
-    }
-
-    function DropdownItem(props) {
-        return (
-            <a
-                href="# "
-                className="menu-item"
-                onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
-            >
-                <span className="icon-button">{props.leftIcon}</span>
-                {props.children}
-                <span className="icon-right">{props.rightIcon}</span>
-            </a>
-        )
-    }
-
-    return (
-        <div
-            className="dropdown"
-            style={{ height: menuHeight * 1.15 }}
-            ref={dropdownRef}
-        >
-            <CSSTransition
-                in={activeMenu === 'main'}
-                timeout={500}
-                classNames="menu-primary"
-                unmountOnExit
-                onEnter={calcHeight}
-            >
-                <div className="menu">
-                    <DropdownItem>My Profile</DropdownItem>
-                    <DropdownItem
-                        leftIcon={<CogIcon />}
-                        rightIcon={<ChevronIcon />}
-                        goToMenu="settings"
-                    >
-                        Settings
-                    </DropdownItem>
-                    <DropdownItem
-                        leftIcon="🦧"
-                        rightIcon={<ChevronIcon />}
-                        goToMenu="animals"
-                    >
-                        Animals
-                    </DropdownItem>
-                    <DropdownItem>Sign Out</DropdownItem>
-                </div>
-            </CSSTransition>
-
-            <CSSTransition
-                in={activeMenu === 'settings'}
-                timeout={500}
-                classNames="menu-secondary"
-                unmountOnExit
-                onEnter={calcHeight}
-            >
-                <div className="menu">
-                    <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
-                        <h2>My Tutorial</h2>
-                    </DropdownItem>
-                    <DropdownItem leftIcon={<BoltIcon />}>HTML</DropdownItem>
-                    <DropdownItem leftIcon={<BoltIcon />}>CSS</DropdownItem>
-                    <DropdownItem leftIcon={<BoltIcon />}>
-                        JavaScript
-                    </DropdownItem>
-                    <DropdownItem leftIcon={<BoltIcon />}>
-                        Awesome!
-                    </DropdownItem>
-                </div>
-            </CSSTransition>
-
-            <CSSTransition
-                in={activeMenu === 'animals'}
-                timeout={500}
-                classNames="menu-secondary"
-                unmountOnExit
-                onEnter={calcHeight}
-            >
-                <div className="menu">
-                    <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
-                        <h2>Animals</h2>
-                    </DropdownItem>
-                    <DropdownItem leftIcon="🦘">Kangaroo</DropdownItem>
-                    <DropdownItem leftIcon="🐸">Frog</DropdownItem>
-                    <DropdownItem leftIcon="🦋">Horse?</DropdownItem>
-                    <DropdownItem leftIcon="🦔">Hedgehog</DropdownItem>
-                </div>
-            </CSSTransition>
-        </div>
-    )
-}
 export default LayoutNavbar
