@@ -8,8 +8,11 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
+import SettingsIcon from '@material-ui/icons/Settings'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 import { ReactComponent as HomeIcon } from '../../assets/images/svg/home.svg'
 import { ReactComponent as MenuIcon } from '../../assets/images/svg/menu.svg'
@@ -33,6 +36,9 @@ import { reset } from '../../redux/authentication/reducer'
 import { logoutAsync } from '../../redux/authentication/thunks'
 
 function LayoutNavbarTest() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const { user } = useSelector((state) => state.auth)
     const [state, setState] = React.useState({
         top: false,
@@ -53,45 +59,126 @@ function LayoutNavbarTest() {
         setState({ ...state, [anchor]: open })
     }
 
+    const handleViewProfile = () => {
+        navigate(`/profile-${user.data.role}/${user.data._id}`)
+        window.location.reload(false)
+    }
+
+    const handleSignOut = () => {
+        dispatch(logoutAsync())
+        dispatch(reset())
+        navigate('/explore')
+    }
+
     const list = (anchor) => (
         <Box
             sx={{
-                width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 550,
+                width: 'auto',
             }}
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map(
-                    (text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? (
-                                        <InboxIcon />
-                                    ) : (
-                                        <MailIcon />
-                                    )}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ),
-                )}
+                <ListItem disablePadding>
+                    <div className="d-flex flex-row mt-4 mb-3">
+                        <img
+                            className="photo"
+                            src={user.data.photo}
+                            alt=""
+                            style={{
+                                width: '60px',
+                                height: '60px',
+                                marginLeft: '20px',
+                                borderRadius: '50%',
+                                objectFit: 'cover',
+                            }}
+                        />
+                        <div style={{ marginLeft: '15px' }}>
+                            <div className="d-flex">
+                                <div
+                                    style={{
+                                        fontSize: '20px',
+                                        fontWeight: '800',
+                                    }}
+                                >
+                                    {user.data.first_name} {user.data.last_name}
+                                </div>
+                                {user.data.role === 'instructor' && (
+                                    <div
+                                        style={{
+                                            fontSize: '13px',
+                                            marginTop: '8px',
+                                            marginLeft: '10px',
+                                            color: '#ffb341',
+                                            fontWeight: '500',
+                                        }}
+                                    >
+                                        {user.data.role}
+                                    </div>
+                                )}
+                            </div>
+                            <div
+                                className="d-flex"
+                                style={{
+                                    fontSize: '14px',
+                                    color: '#484a4d',
+                                }}
+                            >
+                                <LocationOnIcon
+                                    style={{ fontSize: 18, marginTop: 2 }}
+                                />
+                                {user.data.city}
+                            </div>
+                        </div>
+                    </div>
+                </ListItem>
+                <ListItem key={'View Profile'} disablePadding>
+                    <ListItemButton onClick={handleViewProfile}>
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'View Profile'} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key={'Message'} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <MailIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Message'} />
+                    </ListItemButton>
+                </ListItem>
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                <ListItem key={'Help'} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Help'} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key={'Settings'} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <SettingsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Settings'} />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+            <Divider />
+            <List>
+                <ListItem key={'Sign Out'} disablePadding>
+                    <ListItemButton onClick={handleSignOut}>
+                        <ListItemIcon>
+                            <ExitToAppIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Sign Out'} />
+                    </ListItemButton>
+                </ListItem>
             </List>
         </Box>
     )
