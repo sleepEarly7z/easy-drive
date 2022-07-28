@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import {
     Paper,
     makeStyles,
@@ -209,8 +210,12 @@ const Reviews = ({ idType, page }) => {
                             startIcon={<AddIcon />}
                             className={classes.newButton}
                             onClick={() => {
-                                setOpenPopup(true)
-                                setRecordForEdit(null)
+                                if (user.data.role === "instructor") {
+                                    toast.error("Sorry, instructors cannot write reviews")
+                                } else {
+                                    setOpenPopup(true)
+                                    setRecordForEdit(null)
+                                }
                             }}
                         />
                     ) : (
@@ -220,7 +225,8 @@ const Reviews = ({ idType, page }) => {
                             startIcon={<AddIcon />}
                             className={classes.newButton}
                             onClick={() => {
-                                navigate('/sign-in-student')
+                                navigate('/sign-in')
+                                toast.error("Please sign in first!")
                             }}
                         />
                     )}
