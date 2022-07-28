@@ -45,7 +45,6 @@ const FollowActionButton = styled.button`
   background: #f4ca59;
   color: #242327;
   cursor: pointer;
-  // border: 2px solid #242327;
   outline: 0;
   font-weight: 700;
   width: 100px;
@@ -67,11 +66,11 @@ export default function ReviewProfile({ instructor }) {
 
     const renderFollowButton = () => {
         if (!user) return (
-            <FollowActionButton >
-                <NavLink to="/sign-in-student" variant="body2">
-                    {'Follow'}
-                </NavLink>
-            </FollowActionButton>
+            <NavLink to="/sign-in-student">
+                <FollowActionButton >
+                    Follow
+                </FollowActionButton>
+            </NavLink>
         )
         if (user && user.data.role === 'student')
             return (<ToggleFollowButton instructorId={instructor._id} />)
