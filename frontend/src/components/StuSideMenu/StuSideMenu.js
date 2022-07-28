@@ -15,20 +15,7 @@ const style = {
 
 export default function StuSideMenu({section1, section2}) {
     const [show, setShow] = useState(false);
-    const [street, setStreet] = useState('');
-    const [city, setCity] = useState('');
-    const [province, setProvince] = useState('');
-    useEffect(() => {
-        const res = axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
-        .then((res) =>{
-            setStreet(res.data.data.street);
-            setCity(res.data.data.city);
-            setProvince(res.data.data.province);
-        }).catch((err) => {
-          alert(err);
-        }
-        );
-    })
+
 
   const scrollToSection = (elementRef) => {
     window.scrollTo({
