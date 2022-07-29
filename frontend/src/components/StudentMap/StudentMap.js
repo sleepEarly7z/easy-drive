@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 
 
 
+
 export default function StudentMap(props) {
   const params = useParams();
   const { isLoaded } = useLoadScript({
@@ -23,7 +24,7 @@ export default function StudentMap(props) {
   useEffect(() => {
 
     async function componentDidMount() {
-      const firstResponce = await axios.get(`https://easy-drive-405found.herokuapp.com/students/${params.studentId}`);
+      const firstResponce = await axios.get(`https://ezdrive-test-3.herokuapp.com/students/${params.studentId}`);
       // console.log(firstResponce.data.data);
       const streeturl = firstResponce.data.data.street.split(' ').join('+');
       const cityurl = firstResponce.data.data.city.split(' ').join('+');

@@ -85,7 +85,7 @@ const SidebarStudent = ({ section1, section2 }) => {
 
     useEffect(() => {
         async function componentDidMount() {
-            const res = await axios.get(`https://easy-drive-405found.herokuapp.com/students/${params.studentId}`)
+            const res = await axios.get(`https://ezdrive-test-3.herokuapp.com/students/${params.studentId}`)
             setPhone(res.data.data.phone)
             setEmail(res.data.data.email)
             setFirstName(res.data.data.first_name)
