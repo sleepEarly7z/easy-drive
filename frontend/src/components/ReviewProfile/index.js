@@ -80,7 +80,7 @@ export default function ReviewProfile({ instructor }) {
             },
         )
         // const sendGet = async () => {
-        //     const res = await axios.get('https://easy-drive-405found.herokuapp.com/students/62d761535c08a0f631db58a0')
+        //     const res = await axios.get('https://ezdrive-test-3.herokuapp.com/students/62d761535c08a0f631db58a0')
         //     .then((res) =>{
         //         setfollowing(res.data.data.followedInstructors)
         //         // console.log(following)
@@ -254,10 +254,8 @@ export default function ReviewProfile({ instructor }) {
                             chedule Preview
                         </div>
                     </div>
-                    <CalendarSchedular
-                        page="reviewpage"
-                        instructorId={instructor._id}
-                    />
+                    <CalendarSchedular pageType="review" />
+                    {/* <SandboxDemo /> */}
 
                     {/* line breaker */}
                     <div className="line-breaker-1"></div>
@@ -283,7 +281,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     <div className="d-flex mb-4">
-                        <Reviews idType={'instructorId'} />
+                        <Reviews idType={'instructorId'} page={'reviewPage'} />
                     </div>
                 </div>
             </div>

@@ -1,10 +1,9 @@
+const API_URL = 'https://ezdrive-test-3.herokuapp.com/'
+
 const getStudents = async () => {
-    const response = await fetch(
-        'https://easy-drive-405found.herokuapp.com/students',
-        {
-            method: 'GET',
-        },
-    )
+    const response = await fetch(`${API_URL}students`, {
+        method: 'GET',
+    })
     // console.log("getInstructors()");
     return response.json()
 }
@@ -20,25 +19,22 @@ const addStudent = async (data) => {
         province,
         country,
     } = data
-    const response = await fetch(
-        'https://easy-drive-405found.herokuapp.com/students',
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                first_name,
-                last_name,
-                email,
-                phone,
-                street,
-                city,
-                province,
-                country,
-            }),
+    const response = await fetch(`${API_URL}students`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
         },
-    )
+        body: JSON.stringify({
+            first_name,
+            last_name,
+            email,
+            phone,
+            street,
+            city,
+            province,
+            country,
+        }),
+    })
 
     const result = await response.json()
     if (!response.ok) {
@@ -61,40 +57,34 @@ const updateStudent = async (data) => {
         country,
         followedInstructors,
     } = data
-    const response = await fetch(
-        `https://easy-drive-405found.herokuapp.com/students/${_id}`,
-        {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                first_name,
-                last_name,
-                email,
-                phone,
-                street,
-                city,
-                province,
-                country,
-                followedInstructors,
-            }),
+    const response = await fetch(`${API_URL}students/${_id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
         },
-    )
+        body: JSON.stringify({
+            first_name,
+            last_name,
+            email,
+            phone,
+            street,
+            city,
+            province,
+            country,
+            followedInstructors,
+        }),
+    })
 
     return response.json()
 }
 
 const deleteStudent = async (id) => {
-    const response = await fetch(
-        'https://easy-drive-405found.herokuapp.com/students/' + id,
-        {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+    const response = await fetch(`${API_URL}students/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
         },
-    )
+    })
 
     const data = await response.json()
     if (!response.ok) {
@@ -109,8 +99,7 @@ const followInstructor = async (instructorId) => {
     const { id } = instructorId
     // const id = JSON.stringify(instructorId);
     const response = await fetch(
-        'https://easy-drive-405found.herokuapp.com/students/followInstructor/' +
-            instructorId._id,
+        `${API_URL}students/followInstructor/` + instructorId._id,
         {
             method: 'PATCH',
             headers: {
@@ -125,8 +114,7 @@ const followInstructor = async (instructorId) => {
 
 const isInstructorFollowed = async (instructorId) => {
     const response = await fetch(
-        'https://easy-drive-405found.herokuapp.com/students/checkFollowList/' +
-            instructorId._id,
+        `${API_URL}students/checkFollowList/` + instructorId._id,
         {
             method: 'GET',
         },

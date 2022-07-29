@@ -1,5 +1,4 @@
 export const actionTypes = {
-    ADD_INSTRUCTOR: 'instructors/addInstructor',
     UPDATE_INSTRUCTOR: 'instructors/updateInstructor',
     DELETE_INSTRUCTOR: 'instructors/deleteInstructor',
     UPDATE_FILTER: 'instructors/filter/updateFilter',

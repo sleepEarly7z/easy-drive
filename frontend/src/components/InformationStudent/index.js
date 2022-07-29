@@ -49,7 +49,7 @@ const InformationStudent = () => {
         const sendGet = async () => {
             const res = await axios
                 .get(
-                    `https://easy-drive-405found.herokuapp.com/students/${params.studentId}`,
+                    `https://ezdrive-test-3.herokuapp.com/students/${params.studentId}`,
                 )
                 .then((res) => {
                     setfirst_name(res.data.data.first_name)

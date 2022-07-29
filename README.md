@@ -21,10 +21,10 @@ CPSC 455 2022S **Team 405 Found**
 
 **Standard Requirements**
 
--   [ ] Manage user registration/login/authentication
+-   [x] Manage user registration/login/authentication
 -   [x] Edit instructor/student profile page
--   [ ] Add/Delete/Update user reviews(**ongoing**)
--   [ ] Like and save instructors to "My Favourite Instructors List"
+-   [x] Add/Delete/Update user reviews(**ongoing**)
+-   [x] Like and save instructors to "My Favourite Instructors List"
 -   [x] Filter instructors according to a search criteria
 -   [x] Sort reviews according to rating
 -   [x] List instructor availability in a calendar view (**ongoing**)
