@@ -42,87 +42,42 @@ const addStudent = async (data) => {
     return result
 }
 
-const updateStudent = async (data) => {
-    const {
-        _id,
-        first_name,
-        last_name,
-        email,
-        phone,
-        street,
-        city,
-        province,
-        country,
-        followedInstructors
-    } = data
-    const response = await fetch(`http://localhost:3001/students/${_id}`, {
+const updateStudent = async (id, patch) => {
+    const response = await fetch(`http://localhost:3001/students/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            first_name,
-            last_name,
-            email,
-            phone,
-            street,
-            city,
-            province,
-            country,
-            followedInstructors
-        }),
+        body: JSON.stringify(patch),
     })
-
     return response.json()
 }
 
 const deleteStudent = async (id) => {
-	const response = await fetch(
-		'http://localhost:3001/students/' + id,
-		{
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		}
-	);
+    const response = await fetch(
+        'http://localhost:3001/students/' + id,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+    );
 
-	const data = await response.json();
-	if (!response.ok) {
-		const errorMsg = data?.message;
-		throw new Error(errorMsg);
-	}
+    const data = await response.json();
+    if (!response.ok) {
+        const errorMsg = data?.message;
+        throw new Error(errorMsg);
+    }
 
-	return data;
+    return data;
 }
 
-const followInstructor = async (instructorId) => {
-    const {id} = instructorId
-    // const id = JSON.stringify(instructorId);
-    const response = await fetch('http://localhost:3001/students/followInstructor/' + instructorId._id, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({id}),
-    })
-
-    return response.json()
-}
-
-const isInstructorFollowed = async (instructorId) => {
-    const response = await fetch('http://localhost:3001/students/checkFollowList/' + instructorId._id, {
-        method: 'GET',
-    })
-
-    return response.json()
-}
-
-export default {
+const studentService = {
     getStudents,
     addStudent,
     updateStudent,
-    deleteStudent,
-    followInstructor,
-    isInstructorFollowed
+    deleteStudent
 }
+
+export default studentService;

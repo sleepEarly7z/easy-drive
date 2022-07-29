@@ -1,9 +1,9 @@
 import './index.scss'
-import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-bootstrap'
+import React from 'react'
 import styled from 'styled-components'
 import RateDisplay from '../ReviewRating/ReviewRating'
 import CalendarSchedular from '../Calendar/CalendarSchedular'
+import { toggleFollowInstructorAsync } from '../../redux/authentication/thunks'
 import {
     AiFillMail,
     AiFillPhone,
@@ -17,8 +17,7 @@ import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { followInstructorAsync, isInstructorFollowedAsync } from '../../redux/students/thunks';
+import { NavLink } from 'react-router-dom'
 
 
 const MessageActionButton = styled.button`
@@ -46,7 +45,6 @@ const FollowActionButton = styled.button`
   background: #f4ca59;
   color: #242327;
   cursor: pointer;
-  // border: 2px solid #242327;
   outline: 0;
   font-weight: 700;
   width: 100px;
@@ -62,50 +60,43 @@ const FollowActionButton = styled.button`
 `
 
 export default function ReviewProfile({ instructor }) {
-    const dispatch = useDispatch()
-    const currentInstructorReviews = useSelector(
-        (state) => state.reviews.reviewsOfInstructor,
-    )
+    const dispatch = useDispatch();
 
-    const params = useParams()
-    const [instructorFollowed, setInstructorFollowed] = useState(false);
-    const [following, setfollowing] = useState([]);
+    const user = useSelector((state) => (state.auth.user));
 
-    useEffect(() => {
-        dispatch(isInstructorFollowedAsync({ _id: params.instructorId }))
-            .then(result => {
-                setInstructorFollowed(result.payload.data)
-            })
-        // const sendGet = async () => {
-        //     const res = await axios.get('http://localhost:3001/students/62d761535c08a0f631db58a0')
-        //     .then((res) =>{
-        //         setfollowing(res.data.data.followedInstructors)
-        //         // console.log(following)
-        //     }).catch((err) => {
-        //       alert(err);
-        //     }
-        //     );
-        //     // console.log(this.state.allRecipes);
-        //   }
-        //     sendGet();
-    }, []);
+    const renderFollowButton = () => {
+        if (!user) return (
+            <NavLink to="/sign-in-student">
+                <FollowActionButton >
+                    Follow
+                </FollowActionButton>
+            </NavLink>
+        )
+        if (user && user.data.role === 'student')
+            return (<ToggleFollowButton instructorId={instructor._id} />)
+    }
 
-    const followInstructor = (instructorID) => () => {
-        console.log(instructorID)
-        let id = {
-            _id: instructorID,
+    // a component for toggling follow instructor
+    const ToggleFollowButton = ({ instructorId }) => {
+        const followedInstructors = useSelector((state) => (state.auth.user.data.followedInstructors));
+
+        const [isFollowing, setIsFollowing] = React.useState(followedInstructors.includes(instructorId));
+
+        const toggleFollow = () => {
+            // update redux store and db
+            dispatch(toggleFollowInstructorAsync(instructorId));
         }
-        dispatch(followInstructorAsync(id))
 
-            .then(() => {
-                dispatch(isInstructorFollowedAsync(id))
-                    .then(result => {
-                        setInstructorFollowed(!instructorFollowed)
-                        console.log(result)
-                    })
-            }).then(() => {
-                console.log(instructorFollowed)
-            })
+        // upon change of followedInstructors redux state, change ui
+        React.useEffect(() => {
+            setIsFollowing(followedInstructors.includes(instructorId));
+        }, [followedInstructors, instructorId])
+
+        return (
+            <FollowActionButton onClick={toggleFollow}>
+                {isFollowing ? 'unfollow' : 'follow'}
+            </FollowActionButton>
+        );
     }
 
     return (
@@ -147,11 +138,7 @@ export default function ReviewProfile({ instructor }) {
                             </div>
                         </div>
                         <div className="FollowActionButton d-flex mt-5 ml-auto flex-column pt-3">
-
-                            <FollowActionButton className="" onClick={followInstructor(instructor._id)}>
-                                {instructorFollowed ? 'unfollow' : 'follow'}
-
-                            </FollowActionButton>
+                            {renderFollowButton()}
                             <MessageActionButton className="">
                                 Message
                             </MessageActionButton>
