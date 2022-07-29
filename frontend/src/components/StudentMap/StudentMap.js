@@ -21,7 +21,7 @@ export default function StudentMap(props) {
   useEffect(() => {
 
     async function componentDidMount() {
-      const firstResponce = await axios.get('https://easy-drive-405found.herokuapp.com/students/62d761535c08a0f631db58a0');
+      const firstResponce = await axios.get('https://ezdrive-test-3.herokuapp.com/students/62d761535c08a0f631db58a0');
       // console.log(firstResponce.data.data);
       const streeturl = firstResponce.data.data.street.split(' ').join('+');
       const cityurl = firstResponce.data.data.city.split(' ').join('+');
