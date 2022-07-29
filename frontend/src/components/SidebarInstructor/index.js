@@ -135,17 +135,6 @@ const SidebarInstructor = () => {
                         p={2}
                         flex={'auto'}
                         className={borderedGridStyles.item}
-                        onClick={() => {
-                            console.log('123')
-                        }}
-                    >
-                        <p className={styles.statLabel}>Followers</p>
-                        <p className={styles.statValue}>12</p>
-                    </Box>
-                    <Box
-                        p={2}
-                        flex={'auto'}
-                        className={borderedGridStyles.item}
                     >
                         <p className={styles.statLabel}>Reviews</p>
                         <p className={styles.statValue}>3</p>
