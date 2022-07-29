@@ -3,19 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Instructor = require('../models/instructorModel');
-
-/**
- * Get all instructors from database
- *
- * @returns {Array} a list of all instructors stored in BD
- */
-const getInstructors = async () => {
-	try {
-		return Instructor.find({});
-	} catch (error) {
-		throw { type: 'DB', message: error };
-	}
-};
+const helpers = require('../utils/helpers');
+const { DEFAULT_SORT_BY, DEFUALT_SORT_DIR, DEFAULT_OFFSET, DEFAULT_LIMIT } = require('../utils/constants');
 
 /**
  * Get an instructor with given id from database
@@ -261,38 +250,50 @@ const generateToken = (id) => {
 	});
 };
 
-const getQueriedInstructors = (query) => {
-	const { city, language, license, sortBy, sortDir } = query;
-
+const getQueriedInstructors = async (query) => {
 	const findQuery = {};
-	// TODO: kinda hardcoded, research refactor options
-	if (city) {
-		const cities = Array.isArray(city) ? city : [city];
-		findQuery['city'] = { $in: cities };
-	}
-	if (language) {
-		const languages = Array.isArray(language)
-			? language
-			: [language];
-		findQuery['language'] = { $in: languages };
-	}
-	if (license) {
-		const licenses = Array.isArray(license) ? license : [license];
-		findQuery['license'] = { $in: licenses };
-	}
+	const sortQuery = { DEFAULT_SORT_BY: DEFUALT_SORT_DIR };
+	let offset = DEFAULT_OFFSET;
+	let limit = DEFAULT_LIMIT;
 
-	const sortQuery = {};
-	sortQuery[sortBy] = sortDir === 'asc' ? 1 : -1;
+	if (query) {
+		const { city, language, license, sortBy, sortDir, offset, limit } = query;
+
+		if (city) {
+			const cities = helpers.toArray(city);
+			findQuery['city'] = { $in: cities };
+		}
+		if (language) {
+			const languages = helpers.toArray(language);
+			findQuery['language'] = { $in: languages };
+		}
+		if (license) {
+			const licenses = helpers.toArray(license);
+			findQuery['license'] = { $in: licenses };
+		}
+
+		if (sortBy && sortDir) {
+			sortQuery[sortBy] = (sortDir === 'asc') ? 1 : -1;
+		}
+
+		if (offset) offset = offset;
+		if (limit) limit = limit;
+	};
 
 	try {
-		return Instructor.find(findQuery).sort(sortQuery);
+		const total = await Instructor.count(findQuery);
+		const data = await Instructor
+			.find(findQuery)
+			.sort(sortQuery)
+			.skip(offset)
+			.limit(limit);
+		return { total, data };
 	} catch (error) {
-		throw { type: 'DB', message: error };
+		throw error;
 	}
 };
 
 module.exports = {
-	getInstructors,
 	getInstructorById,
 	addInstructor,
 	registerInstructor,
