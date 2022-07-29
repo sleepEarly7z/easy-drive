@@ -42,7 +42,7 @@ const getInstructors = async (query) => {
 }
 
 const getInstructorById = async (id) => {
-    const basicResponse = await fetch(`${API_URL}instructors/` + id, {
+    const basicResponse = await fetch(`${API_URL}instructors/${id}` , {
         method: 'GET',
     })
     return basicResponse.json()
@@ -69,7 +69,7 @@ const updateInstructor = async (payload) => {
         carIsProvided,
     } = payload
 
-    const response = await fetch(`${API_URL}instructors/` + payload._id, {
+    const response = await fetch(`${API_URL}instructors/${payload._id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ const updateInstructor = async (payload) => {
 
 // DELETE
 const deleteInstructor = async (id) => {
-    const response = await fetch(`${API_URL}instructors/` + id, {
+    const response = await fetch(`${API_URL}instructors/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -116,60 +116,11 @@ const deleteInstructor = async (id) => {
     return data
 }
 
-const getFilter = async () => {
-    const response = await fetch(`${API_URL}instructors/filter`, {
-        method: 'GET',
-    })
-    return response.json()
-}
-
-const updateFilter = async (id) => {
-    const response = await fetch(
-        `${API_URL}instructors/filter` + JSON.stringify(id).replaceAll('"', ''),
-        {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(id),
-        },
-    )
-
-    const data = await response.json()
-    if (!response.ok) {
-        const errorMsg = data?.message
-        throw new Error(errorMsg)
-    }
-
-    return data
-}
-
-const sortFilter = async (condition) => {
-    console.log(JSON.stringify(condition))
-    const querystring = 'condition=' + JSON.stringify(condition.condition)
-    console.log(querystring)
-    const response = await fetch(`${API_URL}instructors/sort?` + querystring, {
-        method: 'GET',
-    })
-
-    console.log(response)
-    const data = await response.json()
-    if (!response.ok) {
-        const errorMsg = data?.message
-        throw new Error(errorMsg)
-    }
-
-    return data
-}
-
 const InstructorService = {
     getInstructors,
     getInstructorById,
     updateInstructor,
-    deleteInstructor,
-    getFilter,
-    updateFilter,
-    sortFilter,
+    deleteInstructor
 }
 
 export default InstructorService

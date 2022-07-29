@@ -81,96 +81,24 @@ router.delete('/:id', function (req, res) {
 	instructorDeleted
 		? res.status(200).send(instructorDeleted)
 		: res.status(424).send({
-				message: `failed to delete instructor ${id} from database`,
-		  });
+			message: `failed to delete instructor ${id} from database`,
+		});
 });
 
 // UPDATE
 router.patch('/:id', function (req, res, next) {
-	const id = req.params.id;
-	const instructor = service.getStudentById(id);
+	const { id } = req.params;
+	const patch = req.body;
+	if (!id || !patch) return res.status(400).send();
 
-	if (!instructor) {
-		return res.status(404).send(`student ${id} not found`);
-	}
+	const student = service.getStudentById(id);
+	if (!student) return res.status(404).send(`student ${id} not found`);
 
-	const instructorUpdated = service.updateStudentById(id, req.body);
-	res.status(200);
-	// (instructorUpdated)
-	// 	? res.status(200).send(instructorUpdated)
-	// 	: res.status(424).send({ message: `failed to update instructor ${id} from database` })
+	const instructorUpdated = service.updateStudentById(id, patch);
+	(instructorUpdated)
+		? res.status(200).send(instructorUpdated)
+		: res.status(424).send({ message: `failed to update instructor ${id} from database` })
 });
-
-// UPDATE followed instructors
-router.patch('/followInstructor/:id', function (req, res, next) {
-	const id = req.params.id;
-	const followInstructor = service.followInstructorById(id);
-
-	followInstructor
-		? res.status(200).send(followInstructor)
-		: res.status(424).send({
-				message: `failed to follow instructor ${id} from database`,
-		  });
-});
-
-// check current instructor is already followed or not
-router.get('/checkFollowList/:id', function (req, res, next) {
-	const id = req.params.id;
-	service.isInstructorFollowed(id)
-		.then((student) => {
-			console.log("4" + student.followedInstructors.includes(id))
-			res.status(200).send({ data: student.followedInstructors.includes(id) })
-		})
-
-		.catch((error) => {
-			res.status(500).send({ error: error.message });
-		})
-
-	// service.isInstructorFollowed(id)
-	// .then((isInstructorFollowed)=> {
-	// 	console.log("4"+isInstructorFollowed)
-	// 	res.status(200).send({data: isInstructorFollowed})
-	// })
-
-});
-
-
-// router.get('/filter', function (req, res) {
-// 	res.send(service.getInstructors());
-// });
-
-// const dropDownType = {
-// 	BEST_MATCH: 'Best Match',
-// 	HIGHEST_RATED: 'Highest Rated'
-// }
-
-// router.get('/sort', function (req, res, next) {
-// 	const instructors = service.getInstructors();
-// 	const condition = req.query.condition.replaceAll('"', '')
-// 	if (condition === dropDownType.HIGHEST_RATED) {
-// 		console.log("pass1")
-// 		instructors.sort(function (a, b) { return b.Rating - a.Rating });
-// 	} else if (condition === dropDownType.BEST_MATCH) {
-// 		instructors.sort(function (a, b) { return b.experience - a.experience })
-// 	} else {
-// 		console.log('fail');
-// 	}
-// 	return res.send(instructors);
-// });
-
-// router.delete('/filter/:id', function (req, res, next) {
-// 	const instructors = service.getInstructors();
-// 	const id = JSON.stringify(req.body.id).replaceAll("\"", "")
-// 	console.log(typeof (id) + id)
-// 	const deleted = instructors.find(instructor => instructor.id.$oid === id);
-// 	if (deleted) {
-// 		instructors = instructors.filter(instructor => instructor.id.$oid !== id);
-// 		return res.send(deleted);
-// 	}
-// 	else {
-// 		return res.status(404).json({ message: 'instructor you are looking for does not exist' });
-// 	}
-// });
 
 /**
  *  Register a student

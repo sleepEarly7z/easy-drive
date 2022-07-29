@@ -5,18 +5,15 @@ import {
     addStudentAsync,
     updateStudentAsync,
     deleteStudentAsync,
-    followInstructorAsync,
-    isInstructorFollowedAsync
 } from './thunks'
 
 const INITIAL_STATE = {
     list: [],
+    currentStudent: {},
     getStudents: REQUEST_STATE.IDLE,
     addStudent: REQUEST_STATE.IDLE,
     updateStudent: REQUEST_STATE.IDLE,
     deleteStudent: REQUEST_STATE.IDLE,
-    followInstructor: REQUEST_STATE.IDLE,
-    isInstructorFollowed: REQUEST_STATE.IDLE,
     error: null,
 }
 
@@ -83,36 +80,6 @@ const studentsSlice = createSlice({
             )
             .addCase(deleteStudentAsync.rejected, (state, action) => {
                 state.deleteStudent = REQUEST_STATE.REJECTED
-                state.error = action.error
-            }
-            )
-            .addCase(followInstructorAsync.pending, (state) => {
-                state.followInstructor = REQUEST_STATE.PENDING
-                state.error = null
-            }
-            )
-            .addCase(followInstructorAsync.fulfilled, (state, action) => {
-                state.followInstructor = REQUEST_STATE.FULFILLED
-                state.list = action.payload
-            }
-            )
-            .addCase(followInstructorAsync.rejected, (state, action) => {
-                state.followInstructor = REQUEST_STATE.REJECTED
-                state.error = action.error
-            }
-            )
-            .addCase(isInstructorFollowedAsync.pending, (state) => {
-                state.isInstructorFollowed = REQUEST_STATE.PENDING
-                state.error = null
-            }
-            )
-            .addCase(isInstructorFollowedAsync.fulfilled, (state, action) => {
-                state.isInstructorFollowed = REQUEST_STATE.FULFILLED
-                state.list = action.payload
-            }
-            )
-            .addCase(isInstructorFollowedAsync.rejected, (state, action) => {
-                state.isInstructorFollowed = REQUEST_STATE.REJECTED
                 state.error = action.error
             }
             )
