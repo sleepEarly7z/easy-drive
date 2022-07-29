@@ -5,4 +5,5 @@ export const actionTypes = {
     GET_STUDENT: 'students/getStudent',
     FOLLOW_INSTRUCTOR: 'students/followInstructor',
     CHECK_INSTRUCTOR_FOLLOWED: 'students/followList',
+    GET_FOLLOWING_LIST: 'students/getFollowingList',
 }
