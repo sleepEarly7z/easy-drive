@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider'
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded'
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles(({ palette }) => ({
     card: {
@@ -53,6 +54,7 @@ const useStyles = makeStyles(({ palette }) => ({
 }))
 
 const SidebarInstructor = () => {
+    const params = useParams()
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [first_name, setFirstName] = useState('')
@@ -83,7 +85,7 @@ const SidebarInstructor = () => {
         const sendGet = async () => {
             const res = await axios
                 .get(
-                    'https://easy-drive-405found.herokuapp.com/instructors/62d76018f36c6973468ba796',
+                    `https://easy-drive-405found.herokuapp.com/instructors/${params.instructorId}`,
                 )
                 .then((res) => {
                     setPhone(res.data.data.phone)

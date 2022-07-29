@@ -11,6 +11,7 @@ import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded'
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered'
 import axios from 'axios'
 import FollowingList from '../FollowingList/FollowingList'
+import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles(({ palette }) => ({
     card: {
@@ -59,6 +60,7 @@ const SidebarStudent = ({ section1, section2 }) => {
     const [last_name, setLastName] = useState('')
     const [followingList, setFollowingList] = useState({})
     const [followingListLength, setFollowingListLength] = useState(0)
+    const params = useParams()
 
     const handleFollowingList = (event) => {
         setShow(!show)
@@ -83,7 +85,7 @@ const SidebarStudent = ({ section1, section2 }) => {
 
     useEffect(() => {
         async function componentDidMount() {
-            const res = await axios.get('https://easy-drive-405found.herokuapp.com/students/62d761535c08a0f631db58a0')
+            const res = await axios.get(`https://easy-drive-405found.herokuapp.com/students/${params.studentId}`)
             setPhone(res.data.data.phone)
             setEmail(res.data.data.email)
             setFirstName(res.data.data.first_name)

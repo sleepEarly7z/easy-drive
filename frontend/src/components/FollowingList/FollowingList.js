@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 export default function FollowingList(props) {
     const [showList, setShow] = useState(false)
     const [followingList, setFollowingList] = useState([])
     const [followingList2, setFollowingList2] = useState([])
     var followingList3 = [1, 2, 3]
+    const params = useParams()
 
     const handleClose = () => {
         setShow(false)
@@ -33,7 +35,7 @@ export default function FollowingList(props) {
 
         async function sendGet() {
             const res = await axios.get(
-                'https://easy-drive-405found.herokuapp.com/students/62d761535c08a0f631db58a0',
+                `https://easy-drive-405found.herokuapp.com/students/${params.studentId}`,
             )
             console.log(res.data.data.followedInstructors)
             setFollowingList(res.data.data.followedInstructors)
