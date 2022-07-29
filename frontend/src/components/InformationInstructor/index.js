@@ -11,12 +11,14 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import { useParams } from 'react-router-dom'
 
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 
 const InformationInstructor = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const params = useParams()
 
     const [first_name, setfirst_name] = useState('')
     const [last_name, setlast_name] = useState('')
@@ -85,7 +87,7 @@ const InformationInstructor = () => {
         const sendGet = async () => {
             const res = await axios
                 .get(
-                    'https://ezdrive-test-3.herokuapp.com/instructors/62d76018f36c6973468ba796',
+                    `https://ezdrive-test-3.herokuapp.com/instructors/${params.instructorId}`,
                 )
                 .then((res) => {
                     console.log(res.data)
@@ -118,7 +120,7 @@ const InformationInstructor = () => {
         // e.preventDefault()
 
         let instData = {
-            _id: '62d76018f36c6973468ba796',
+            _id: params.instructorId,
             first_name: first_name,
             last_name: last_name,
             email: email,

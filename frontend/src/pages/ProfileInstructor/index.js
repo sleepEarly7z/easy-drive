@@ -29,9 +29,10 @@ const ProfileInstructor = () => {
                         ref={information}
                     >
                         <InformationInstructor />
+                        <Reviews idType={'instructorId'} page={'reviewPage'} />
                     </div>
                 </div>
-                <Reviews idType={'instructorId'} page={'reviewPage'} />
+                
             </div>
             {/* </div> */}
         </>

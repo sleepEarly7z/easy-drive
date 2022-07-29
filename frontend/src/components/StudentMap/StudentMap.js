@@ -5,11 +5,14 @@ import "./StudentMap.scss";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
 
 
 
 
 export default function StudentMap(props) {
+  const params = useParams();
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk",
   });
@@ -21,7 +24,7 @@ export default function StudentMap(props) {
   useEffect(() => {
 
     async function componentDidMount() {
-      const firstResponce = await axios.get('https://ezdrive-test-3.herokuapp.com/students/62d761535c08a0f631db58a0');
+      const firstResponce = await axios.get(`https://ezdrive-test-3.herokuapp.com/students/${params.studentId}`);
       // console.log(firstResponce.data.data);
       const streeturl = firstResponce.data.data.street.split(' ').join('+');
       const cityurl = firstResponce.data.data.city.split(' ').join('+');
