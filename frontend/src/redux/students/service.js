@@ -1,4 +1,4 @@
-const API_URL = 'https://ezdrive-test-merge.herokuapp.com/'
+const API_URL = 'https://ezdrive-test-3.herokuapp.com/'
 
 const getStudents = async () => {
     const response = await fetch(`${API_URL}students`, {

@@ -21,7 +21,7 @@ export default function FollowingList(props) {
             axios.all(
                 temp2.map(async (id) => {
                     const res = await axios.get(
-                        `https://ezdrive-test-merge.herokuapp.com/${id}`,
+                        `https://ezdrive-test-3.herokuapp.com/${id}`,
                     )
                     await console.log(res)
                     followingList.push(await res.data.data)
@@ -33,7 +33,7 @@ export default function FollowingList(props) {
 
         async function sendGet() {
             const res = await axios.get(
-                'https://ezdrive-test-merge.herokuapp.com/students/62d761535c08a0f631db58a0',
+                'https://ezdrive-test-3.herokuapp.com/students/62d761535c08a0f631db58a0',
             )
             console.log(res.data.data.followedInstructors)
             setFollowingList(res.data.data.followedInstructors)
