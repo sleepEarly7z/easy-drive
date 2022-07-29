@@ -45,9 +45,6 @@ export default function StuSideMenu({section1, section2}) {
         <ListItemText primary="Show Map" onClick={handleClick}/>
       </ListItem>
       <Divider light />
-      <ListItem button>
-        <ListItemText primary="Student More" />
-      </ListItem>
     </List>
     <StudentMap showBoolean={show} onClose = {() => setShow(false)}/>
     </>

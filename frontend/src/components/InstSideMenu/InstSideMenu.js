@@ -28,13 +28,7 @@ export default function InstSideMenu({section1, section2}) {
       <ListItem button divider>
         <ListItemText primary="See reviews" />
       </ListItem>
-      <ListItem button>
-        <ListItemText primary="Show Map" />
-      </ListItem>
       <Divider light />
-      <ListItem button>
-        <ListItemText primary="More" />
-      </ListItem>
     </List>
   );
 }
