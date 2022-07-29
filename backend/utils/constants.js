@@ -16,6 +16,15 @@ const TIME_SLOTS = [
     '22 - 23'
 ];
 
+const DEFAULT_SORT_BY = 'rating';
+const DEFAULT_SORT_DIR = 'desc';
+const DEFAULT_OFFSET = 0;
+const DEFAULT_LIMIT = 10;
+
 module.exports = {
-    TIME_SLOTS
+    TIME_SLOTS,
+    DEFAULT_SORT_BY,
+    DEFAULT_SORT_DIR,
+    DEFAULT_OFFSET,
+    DEFAULT_LIMIT
 }

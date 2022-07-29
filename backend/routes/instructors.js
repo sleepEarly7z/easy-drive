@@ -20,20 +20,13 @@ const { protect } = require('../middleware/authMiddlewareInst');
  * @status 500 SERVER ERROR
  * @error message
  */
-router.get('/', function (req, res) {
-	const query = req.query;
-
-	const getInstructors = query
-		? service.getQueriedInstructors(query)
-		: service.getInstructors();
-
-	getInstructors
-		.then((instructors) => {
-			res.status(200).send({ data: instructors });
-		})
-		.catch((error) => {
-			res.status(500).send({ error: error.message });
-		});
+router.get('/', async (req, res) => {
+	try {
+		const result = await service.getQueriedInstructors(req.query);
+		res.status(200).send(result);
+	} catch (error) {
+		res.status(500).send();
+	}
 });
 
 /**
@@ -157,8 +150,8 @@ router.delete('/:id', function (req, res) {
 	instructorDeleted
 		? res.status(200).send(instructorDeleted)
 		: res.status(424).send({
-				message: `failed to delete instructor ${id} from database`,
-		  });
+			message: `failed to delete instructor ${id} from database`,
+		});
 });
 
 // UPDATE
