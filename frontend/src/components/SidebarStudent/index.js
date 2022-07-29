@@ -11,6 +11,7 @@ import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded'
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered'
 import axios from 'axios'
 import FollowingList from '../FollowingList/FollowingList'
+import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles(({ palette }) => ({
     card: {
@@ -58,6 +59,8 @@ const SidebarStudent = ({ section1, section2 }) => {
     const [first_name, setFirstName] = useState('')
     const [last_name, setLastName] = useState('')
     const [followingList, setFollowingList] = useState({})
+    const [followingListLength, setFollowingListLength] = useState(0)
+    const params = useParams()
 
     const handleFollowingList = (event) => {
         setShow(!show)
@@ -81,23 +84,16 @@ const SidebarStudent = ({ section1, section2 }) => {
     }
 
     useEffect(() => {
-        const sendGet = async () => {
-            const res = await axios
-                .get(
-                    'https://ezdrive-test-3.herokuapp.com/students/62d761535c08a0f631db58a0',
-                )
-                .then((res) => {
-                    setPhone(res.data.data.phone)
-                    setEmail(res.data.data.email)
-                    setFirstName(res.data.data.first_name)
-                    setLastName(res.data.data.last_name)
-                    setFollowingList(res.data.data.followedInstructors)
-                })
-                .catch((err) => {
-                    alert(err)
-                })
+        async function componentDidMount() {
+            const res = await axios.get(`https://ezdrive-test-3.herokuapp.com/students/${params.studentId}`)
+            setPhone(res.data.data.phone)
+            setEmail(res.data.data.email)
+            setFirstName(res.data.data.first_name)
+            setLastName(res.data.data.last_name)
+            setFollowingList(res.data.data.followedInstructors)
+            setFollowingListLength(res.data.data.followedInstructors.length)
         }
-        sendGet()
+        componentDidMount()
     }, [])
 
     const styles = useStyles()
@@ -130,7 +126,7 @@ const SidebarStudent = ({ section1, section2 }) => {
                         onClick={handleFollowingList}
                     >
                         <p className={styles.statLabel}>Following</p>
-                        <p className={styles.statValue}>12</p>
+                        <p className={styles.statValue}>{followingListLength}</p>
                     </Box>
                     <Box
                         p={2}

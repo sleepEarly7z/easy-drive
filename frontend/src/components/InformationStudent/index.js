@@ -5,10 +5,11 @@ import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { updateStudentAsync } from '../../redux/students/thunks'
+import { useParams } from 'react-router-dom'
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 const InformationStudent = () => {
     const dispatch = useDispatch()
-
+    const params = useParams()
     const [first_name, setfirst_name] = useState('')
     const [last_name, setlast_name] = useState('')
     const [email, setemail] = useState('')
@@ -48,7 +49,7 @@ const InformationStudent = () => {
         const sendGet = async () => {
             const res = await axios
                 .get(
-                    'https://ezdrive-test-3.herokuapp.com/students/62d761535c08a0f631db58a0',
+                    `https://ezdrive-test-3.herokuapp.com/students/${params.studentId}`,
                 )
                 .then((res) => {
                     setfirst_name(res.data.data.first_name)
@@ -73,7 +74,7 @@ const InformationStudent = () => {
         // e.preventDefault()
 
         let instData = {
-            _id: '62d761535c08a0f631db58a0',
+            _id: params.studentId,
             first_name: first_name,
             last_name: last_name,
             email: email,
