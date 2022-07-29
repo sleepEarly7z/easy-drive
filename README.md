@@ -2,6 +2,9 @@
 
 CPSC 455 2022S **Team 405 Found**
 
+## High-level Description
+Welcome to ezdrive! The ultimate website for finding a local driving instructor nearby you, or post our own business by registering as an instructor! The explore page contains all the instructors we have and you can filter them using the panel on the left. You can also register as a student/instructor and edit your profile. Find a great instructor? Leave him/her a review and give a 5 out 5 rating.
+
 ## Project Description
 
 -   The targeted users for this project are driving instructors and people seeking to get driver's licenses in BC. It provides a platform for student drivers to find ideal instructors based on locations, services they need, etc.
