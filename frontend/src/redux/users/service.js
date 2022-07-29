@@ -1,5 +1,7 @@
+const API_URL = 'https://ezdrive-test-3.herokuapp.com/'
+
 const addUser = async (name) => {
-    const response = await fetch('https://ezdrive-test-3.herokuapp.com/users', {
+    const response = await fetch(`${API_URL}users`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -17,7 +19,7 @@ const addUser = async (name) => {
 }
 
 const getUsers = async () => {
-    const response = await fetch('https://ezdrive-test-3.herokuapp.com/users', {
+    const response = await fetch(`${API_URL}users`, {
         method: 'GET',
     })
     return response.json()

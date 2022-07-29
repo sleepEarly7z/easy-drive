@@ -8,10 +8,10 @@ import ScrollToTop from '../../components/HomePageSections/SectionTwo/ScrollToTo
 import { useRef } from 'react'
 
 const ProfileInstructor = () => {
-    const information = useRef(null);
+    const information = useRef(null)
 
     return (
-        <>  
+        <>
             <ScrollToTop />
             <div className="ProfileInstructor">
                 <h1>ProfileInstructor</h1>
@@ -23,12 +23,15 @@ const ProfileInstructor = () => {
                 {/* <div className="InstSideMenuProps"> */}
                 {/* <div className='InstSideMenuSingle'> */}
                 <div className="InstSideMenuProps">
-                    <InstSideMenu section1={information}/>
-                    <div className="ProfileInstructor__information" ref={information}>
+                    <InstSideMenu section1={information} />
+                    <div
+                        className="ProfileInstructor__information"
+                        ref={information}
+                    >
                         <InformationInstructor />
                     </div>
                 </div>
-                <Reviews idType={'instructorId'} page={"reviewPage"} />
+                <Reviews idType={'instructorId'} page={'reviewPage'} />
             </div>
             {/* </div> */}
         </>

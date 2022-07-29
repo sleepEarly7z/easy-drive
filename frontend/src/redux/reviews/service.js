@@ -1,11 +1,10 @@
+const API_URL = 'https://ezdrive-test-3.herokuapp.com/'
+
 const getReviewsByUserId = async (id, idType) => {
     console.log(idType)
-    const response = await fetch(
-        `https://ezdrive-test-3.herokuapp.com/reviews?${idType}=${id}`,
-        {
-            method: 'GET',
-        },
-    )
+    const response = await fetch(`${API_URL}reviews?${idType}=${id}`, {
+        method: 'GET',
+    })
     console.log('getReviewsById response: ' + response)
 
     const data = await response.json()
@@ -20,21 +19,18 @@ const getReviewsByUserId = async (id, idType) => {
 const addReview = async (payload) => {
     const { instructor_id, student_id, comment_content, rating } = payload
 
-    const response = await fetch(
-        'https://ezdrive-test-3.herokuapp.com/reviews',
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                instructor_id,
-                student_id,
-                comment_content,
-                rating,
-            }),
+    const response = await fetch(`${API_URL}reviews`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
         },
-    )
+        body: JSON.stringify({
+            instructor_id,
+            student_id,
+            comment_content,
+            rating,
+        }),
+    })
 
     const data = await response.json()
     if (!response.ok) {
@@ -50,22 +46,19 @@ const updateReview = async (payload) => {
 
     console.log(_id)
     console.log(payload)
-    const response = await fetch(
-        'https://ezdrive-test-3.herokuapp.com/reviews/' + _id,
-        {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                _id,
-                instructor_id,
-                student_id,
-                comment_content,
-                rating,
-            }),
+    const response = await fetch(`${API_URL}reviews/${_id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
         },
-    )
+        body: JSON.stringify({
+            _id,
+            instructor_id,
+            student_id,
+            comment_content,
+            rating,
+        }),
+    })
 
     const data = await response.json()
     if (!response.ok) {
@@ -78,15 +71,12 @@ const updateReview = async (payload) => {
 
 // DELETE
 const deleteReview = async (id) => {
-    const response = await fetch(
-        'https://ezdrive-test-3.herokuapp.com/reviews/' + id,
-        {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+    const response = await fetch(`${API_URL}reviews/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
         },
-    )
+    })
 
     const data = await response.json()
     if (!response.ok) {

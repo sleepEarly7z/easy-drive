@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import {
     Paper,
     makeStyles,
@@ -104,10 +105,11 @@ const Reviews = ({ idType, page }) => {
             fn: (items) => {
                 if (target.value === '') return items
                 else
-                    return items.filter((x) =>
-                        x.fullName
-                            .toLowerCase()
-                            .includes(target.value.toLowerCase()),
+                    return items.filter(
+                        (x) => x.fullName,
+                        // TODO: convert id to student name
+                        // .toLowerCase()
+                        // .includes(target.value.toLowerCase()),
                     )
             },
         })
@@ -189,7 +191,7 @@ const Reviews = ({ idType, page }) => {
         <>
             <Paper className={classes.pageContent}>
                 <Toolbar>
-                    <Controls.Input
+                    <Controls.SearchInput
                         label="Search Reviews"
                         className={classes.searchInput}
                         InputProps={{
@@ -208,8 +210,14 @@ const Reviews = ({ idType, page }) => {
                             startIcon={<AddIcon />}
                             className={classes.newButton}
                             onClick={() => {
-                                setOpenPopup(true)
-                                setRecordForEdit(null)
+                                if (user.data.role === 'instructor') {
+                                    toast.error(
+                                        'Sorry, instructors cannot write reviews',
+                                    )
+                                } else {
+                                    setOpenPopup(true)
+                                    setRecordForEdit(null)
+                                }
                             }}
                         />
                     ) : (
@@ -219,7 +227,8 @@ const Reviews = ({ idType, page }) => {
                             startIcon={<AddIcon />}
                             className={classes.newButton}
                             onClick={() => {
-                                navigate('/sign-in-student')
+                                navigate('/sign-in')
+                                toast.error('Please sign in first!')
                             }}
                         />
                     )}
