@@ -18,19 +18,24 @@ import { ReactComponent as HomeIcon } from '../../assets/images/svg/home.svg'
 import { ReactComponent as MenuIcon } from '../../assets/images/svg/menu.svg'
 import { ReactComponent as BellIcon } from '../../assets/images/svg/bell.svg'
 import { ReactComponent as MessengerIcon } from '../../assets/images/svg/messenger.svg'
+import { ReactComponent as CogIcon } from '../../assets/images/svg/cog.svg'
+import { ReactComponent as ChevronIcon } from '../../assets/images/svg/chevron.svg'
+import { ReactComponent as ArrowIcon } from '../../assets/images/svg/arrow.svg'
+import { ReactComponent as BoltIcon } from '../../assets/images/svg/bolt.svg'
 
-import { FaSignInAlt } from 'react-icons/fa'
+import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { CSSTransition } from 'react-transition-group'
 import { useNavigate } from 'react-router-dom'
 
 import { reset } from '../../redux/authentication/reducer'
 import { logoutAsync } from '../../redux/authentication/thunks'
 
-function LayoutNavbar() {
+function LayoutNavbarTest() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -302,4 +307,4 @@ function NavItem(props) {
     )
 }
 
-export default LayoutNavbar
+export default LayoutNavbarTest

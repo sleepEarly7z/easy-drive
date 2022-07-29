@@ -83,7 +83,7 @@ const SidebarInstructor = () => {
         const sendGet = async () => {
             const res = await axios
                 .get(
-                    'https://easy-drive-405found.herokuapp.com/instructors/62d76018f36c6973468ba796',
+                    'https://ezdrive-test-3.herokuapp.com/instructors/62d76018f36c6973468ba796',
                 )
                 .then((res) => {
                     setPhone(res.data.data.phone)
