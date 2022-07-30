@@ -7,6 +7,7 @@ import TopRecommended from '../../components/HomePageSections/SectionThree'
 import TopReivews from '../../components/HomePageSections/SectionFour'
 import ScrollToTop from '../../components/HomePageSections/SectionTwo/ScrollToTop'
 import OurTeam from '../../components/HomePageSections/SectionFive'
+import Contact from '../../components/HomePageSections/SectionSix/Contact'
 
 const Home = () => {
     const slider = useRef(null)
@@ -14,6 +15,7 @@ const Home = () => {
     const topinstructors = useRef(null)
     const topreviews = useRef(null)
     const ourteam = useRef(null)
+    const contactus = useRef(null)
 
     return (
         <>
@@ -46,7 +48,9 @@ const Home = () => {
                     <OurTeam />
                 </div>
 
-                <div className="section_title">Start your journey</div>
+                <div ref={contactus} className="sectionSix">
+                    <Contact />
+                </div>
             </div>
         </>
     )
