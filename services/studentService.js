@@ -275,6 +275,6 @@ module.exports = {
 	updateStudentById,
 	registerStudent,
 	loginStudent,
-	getMe
+	getMe,
 	getNearbyInstructors,
 };
