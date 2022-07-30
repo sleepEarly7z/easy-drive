@@ -1,9 +1,8 @@
 import React from 'react';
-import LinearProgress from '@mui/material/LinearProgress';
-
 import Box from '@mui/material/Box';
 import { orange } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { LinearProgress } from '@mui/material';
 
 const theme = createTheme({
     palette: {

@@ -39,7 +39,8 @@ const useStudent = (studentId) => {
             const name = `${data.first_name} ${data.last_name}`;
             const instructor = {
                 name,
-                instuctorId: id
+                id,
+                photoUrl: data.photo
             }
 
             instructors.push(instructor);
