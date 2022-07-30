@@ -1,4 +1,4 @@
-const API_URL = 'https://ezdrive-test-3.herokuapp.com/'
+const API_URL = 'https://ezdrive-test-merge.herokuapp.com/'
 
 const getReviewsByUserId = async (id, idType) => {
     console.log(idType)
