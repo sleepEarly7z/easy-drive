@@ -19,7 +19,6 @@ import RatingStar from '../ReviewRating/RatingStar'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-
 const MessageActionButton = styled.button`
     margin: 0 5px;
     padding: 8px 19px;
@@ -60,43 +59,46 @@ const FollowActionButton = styled.button`
 `
 
 export default function ReviewProfile({ instructor }) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
-    const user = useSelector((state) => (state.auth.user));
+    const user = useSelector((state) => state.auth.user)
 
     const renderFollowButton = () => {
-        if (!user) return (
-            <NavLink to="/sign-in-student">
-                <FollowActionButton >
-                    Follow
-                </FollowActionButton>
-            </NavLink>
-        )
+        if (!user)
+            return (
+                <NavLink to="/sign-in">
+                    <FollowActionButton>Follow</FollowActionButton>
+                </NavLink>
+            )
         if (user && user.data.role === 'student')
-            return (<ToggleFollowButton instructorId={instructor._id} />)
+            return <ToggleFollowButton instructorId={instructor._id} />
     }
 
     // a component for toggling follow instructor
     const ToggleFollowButton = ({ instructorId }) => {
-        const followedInstructors = useSelector((state) => (state.auth.user.data.followedInstructors));
+        const followedInstructors = useSelector(
+            (state) => state.auth.user.data.followedInstructors,
+        )
 
-        const [isFollowing, setIsFollowing] = React.useState(followedInstructors.includes(instructorId));
+        const [isFollowing, setIsFollowing] = React.useState(
+            followedInstructors.includes(instructorId),
+        )
 
         const toggleFollow = () => {
             // update redux store and db
-            dispatch(toggleFollowInstructorAsync(instructorId));
+            dispatch(toggleFollowInstructorAsync(instructorId))
         }
 
         // upon change of followedInstructors redux state, change ui
         React.useEffect(() => {
-            setIsFollowing(followedInstructors.includes(instructorId));
+            setIsFollowing(followedInstructors.includes(instructorId))
         }, [followedInstructors, instructorId])
 
         return (
             <FollowActionButton onClick={toggleFollow}>
-                {isFollowing ? 'unfollow' : 'follow'}
+                {isFollowing ? 'Unfollow' : 'Follow'}
             </FollowActionButton>
-        );
+        )
     }
 
     return (
@@ -219,7 +221,7 @@ export default function ReviewProfile({ instructor }) {
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <div className="review-profile-info">
                                     <AiFillIdcard className="review-profile-ai-icon" />
-                                    Liscense
+                                    License
                                 </div>
                                 <div className="review-profile-info-res">
                                     {instructor.license}
