@@ -221,7 +221,7 @@ export default function ReviewProfile({ instructor }) {
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <div className="review-profile-info">
                                     <AiFillIdcard className="review-profile-ai-icon" />
-                                    Liscense
+                                    License
                                 </div>
                                 <div className="review-profile-info-res">
                                     {instructor.license}
