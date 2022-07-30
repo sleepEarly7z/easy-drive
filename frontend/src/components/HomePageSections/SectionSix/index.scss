@@ -14,6 +14,7 @@
   border-radius: 0 20px 20px 0;
             // top-left top-right bottom-right bottom-left. 
   background: #f4ca59;
+  margin-top: 30px;
   background: -moz-linear-gradient(
     -45deg,
     #f4ca59 0%,
@@ -48,11 +49,15 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4ca59', endColorstr='#2e279d', GradientType=1 );
   .title_contactcomponent  {
     color: #fff;
+    font-size: 34px;
+    font-weight: 600;
   }
 }
 
 .title_contactcomponent {
   color: white;
+  font-size: 34px;
+  font-weight: 600;
 }
 
 .img {
@@ -65,7 +70,7 @@
   height: 62px;
   background: transparent;
   color: rgba(255, 255, 255, 0.8) !important;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 0px;
   box-shadow: none !important;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -89,6 +94,8 @@
   &:active {
     background: transparent;
     border-color: rgba(255, 255, 255, 0.5) !important;
+    outline: none !important;
+    box-shadow: none;
   }
 }
 
@@ -106,11 +113,11 @@ textarea.form-control_contactcomponent {
 }
 
 .btn_contactcomponent {
-  padding: 12px 16px;
+  padding: 10px 18px;
   cursor: pointer;
   border-width: 1px;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   -webkit-box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
@@ -129,6 +136,7 @@ textarea.form-control_contactcomponent {
   .title_contactcomponent {
     color: #000;
     position: relative;
+    padding-top: 30px;
     &:after {
       position: absolute;
       bottom: 0;
@@ -142,7 +150,7 @@ textarea.form-control_contactcomponent {
   .dbox_contactcomponent {
     width: 100%;
     // color: rgba(255,255,255,.8);
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     &:last-child() {
       margin-bottom: 0;
     }
@@ -151,11 +159,13 @@ textarea.form-control_contactcomponent {
       margin-bottom: 0;
       span {
         font-weight: 400;
+        font-size: 18px;
         color: #000;
       }
       a {
         color: rgba(0, 0, 0, 0.3);
         margin-left: 5px;
+        font-size: 17px;
       }
     }
     .icon_contactcomponent {
@@ -169,7 +179,7 @@ textarea.form-control_contactcomponent {
       }
     }
     .text_contactcomponent {
-      width: calc(100% - 50px);
+      width: calc(100% - 70px);
     }
 
     a {
@@ -186,31 +196,16 @@ textarea.form-control_contactcomponent {
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5 {
-  line-height: 1.5;
-  font-weight: 400;
-  font-family: "Poppins", Arial, sans-serif;
-  color: #000;
-}
-
-
 #contactForm_contactcomponent {
   .form-control_contactcomponent {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
 .openforsuggestions {
-  margin-top: 10px;
+  margin-top: 20px;
+  font-size: 16px;
+  color:#767676;
 }
 
 .form-group-btn_contactcomponent {

@@ -88,17 +88,19 @@ function Contact() {
                                             <div className="text_contactcomponent pl-3">
                                                 <p>
                                                     <span>Website:</span>
-                                                    <a href="#">yoursite.com</a>
+                                                    <a href="# ">
+                                                        yoursite.com
+                                                    </a>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <div className="contact-wrap_contactcomponent w-100 p-lg-5 p-4">
-                                        <h3 className="title_contactcomponent mb-4">
+                                    <div className="contact-wrap_contactcomponent w-100 p-lg-5 p-5">
+                                        <div className="title_contactcomponent mb-4">
                                             Get in touch
-                                        </h3>
+                                        </div>
                                         <form
                                             id="contactForm_contactcomponent"
                                             className="contactForm_contactcomponent"
