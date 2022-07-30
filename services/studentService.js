@@ -219,16 +219,18 @@ const generateToken = (id) => {
 };
 
 const getNearbyInstructors = async (id, city, street, province) => {
+	console.log(id, city, street, province);
 	const promises = [];
 	const stustreet = street.split(' ').join('%20');
 	const stucity = city.split(' ').join('%20');
 	const stuprovince = province.split(' ').join('%20');
 
-	return Promise.resolve(service.getInstructors()).then((instructors) => {
+	return Promise.resolve(service.getQueriedInstructors()).then((instructors) => {
+		// console.log(instructors);
 		const promiseArr = [];
 		// const res = axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=Washington%2C%20DC&destinations=New%20York%20City%2C%20NY&units=imperial&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`)
 
-		for(i of instructors) {
+		for(i of instructors.data) {
 			const instStreet = i.street.split(' ').join('%20');
 			const instCity = i.city.split(' ').join('%20');
 			const instProvince = i.province.split(' ').join('%20');
@@ -240,7 +242,7 @@ const getNearbyInstructors = async (id, city, street, province) => {
 	)
 	.then((res) => {
 		const resultArray = [];
-		Promise.all(res).then((values) => {
+		return Promise.all(res).then((values) => {
 			for (i of values) {
 				if(i.data.rows[0].elements[0].status === 'OK') {
 					// console.log(i.data.rows[0].elements[0].distance.text);
@@ -252,6 +254,7 @@ const getNearbyInstructors = async (id, city, street, province) => {
 				}
 			}
 			console.log(resultArray);
+			return resultArray;
 		}
 		).catch((err) => {
 			console.log(err);
@@ -275,6 +278,6 @@ module.exports = {
 	updateStudentById,
 	registerStudent,
 	loginStudent,
-	getMe
+	getMe,
 	getNearbyInstructors,
 };
