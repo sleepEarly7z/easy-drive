@@ -129,6 +129,13 @@ textarea.form-control_contactcomponent {
 .btn-primary_contactcomponent {
   background: #d62196 !important;
   border-color: #d62196 !important;
+  font-weight: 600;
+  color: #fff;
+}
+
+.btn-primary_contactcomponent:hover {
+  opacity: 0.8;
+  font-weight: 800;
   color: #fff;
 }
 

@@ -207,11 +207,17 @@ function Contact() {
                                                 </div>
                                                 <div className="col-md-12">
                                                     <div className="form-group-btn_contactcomponent">
-                                                        <input
+                                                        {/* <input
                                                             type="submit"
                                                             value="Send Message"
                                                             className="btn_contactcomponent btn-primary_contactcomponent"
-                                                        />
+                                                        /> */}
+                                                        <button
+                                                            type="submit"
+                                                            className="btn_contactcomponent btn-primary_contactcomponent"
+                                                        >
+                                                            Send Message
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
