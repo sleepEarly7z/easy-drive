@@ -96,7 +96,7 @@ export default function ReviewProfile({ instructor }) {
 
         return (
             <FollowActionButton onClick={toggleFollow}>
-                {isFollowing ? 'unfollow' : 'follow'}
+                {isFollowing ? 'Unfollow' : 'Follow'}
             </FollowActionButton>
         )
     }
