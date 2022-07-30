@@ -1,23 +1,48 @@
-import React, { useState } from 'react'
-import toast from 'react-hot-toast'
+import React, { useState, useRef } from 'react'
 import './index.scss'
+import emailjs from '@emailjs/browser'
+import toast from 'react-hot-toast'
 
 function Contact() {
+    const form = useRef()
+
     const [state, setState] = useState({
         name: '',
         email: '',
-        subject: '',
+        title: '',
         message: '',
     })
 
-    const { name, email, subject, message } = state
-    const handleSubmit = (e) => {
+    const { name, email, title, message } = state
+
+    const sendEmail = (e) => {
         e.preventDefault()
-        if (!name || !email || !subject || !message) {
+        if (!name || !email || !title || !message) {
             toast.error('Please provide value in each input field')
         } else {
-            setState({ name: '', email: '', subject: '', message: '' })
-            toast.success('Form Submitted Successfully')
+            emailjs
+                .sendForm(
+                    'service_sfbul2h',
+                    'template_w46unwe',
+                    form.current,
+                    '4p6bkvBs2PDpNapX9',
+                )
+                .then(
+                    (result) => {
+                        console.log(result.text)
+                        setState({
+                            name: '',
+                            email: '',
+                            title: '',
+                            message: '',
+                        })
+                        toast.success('Message has been sent successfully!')
+                    },
+                    (error) => {
+                        console.log(error.text)
+                        toast.success('Message error')
+                    },
+                )
         }
     }
 
@@ -102,9 +127,10 @@ function Contact() {
                                             Get in touch
                                         </div>
                                         <form
+                                            ref={form}
                                             id="contactForm_contactcomponent"
                                             className="contactForm_contactcomponent"
-                                            onSubmit={handleSubmit}
+                                            onSubmit={sendEmail}
                                         >
                                             <div className="row">
                                                 <div className="col-md-12">
@@ -146,12 +172,12 @@ function Contact() {
                                                         <input
                                                             type="text"
                                                             className="form-control_contactcomponent"
-                                                            name="subject"
-                                                            placeholder="Subject"
+                                                            name="title"
+                                                            placeholder="Title"
                                                             onChange={
                                                                 handleInputChange
                                                             }
-                                                            value={subject}
+                                                            value={title}
                                                             style={{
                                                                 width: '400px',
                                                             }}
