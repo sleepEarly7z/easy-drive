@@ -1,4 +1,7 @@
+import { handleResponse } from "../utils"
+
 const API_URL = 'https://ezdrive-test-3.herokuapp.com/'
+const baseUrl = `${API_URL}students`
 
 const getStudents = async () => {
     const response = await fetch(`${API_URL}students`, {
@@ -45,41 +48,52 @@ const addStudent = async (data) => {
 }
 
 const updateStudent = async (id, patch) => {
-    const response = await fetch(`http://localhost:3001/students/${id}`, {
+    const reqOption = {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(patch),
-    })
-    return response.json()
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(patch)
+    };
+
+    return fetch(`${baseUrl}/${id}`, reqOption)
+        .then(handleResponse)
+        .catch((error) => ({ error }))
 }
 
 const deleteStudent = async (id) => {
-    const response = await fetch(
-        'http://localhost:3001/students/' + id,
-        {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }
-    );
+    const response = await fetch(`${API_URL}students/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
 
-    const data = await response.json();
+    const data = await response.json()
     if (!response.ok) {
-        const errorMsg = data?.message;
-        throw new Error(errorMsg);
+        const errorMsg = data?.message
+        throw new Error(errorMsg)
     }
 
-    return data;
+    return data
+}
+
+const getStudentById = (id) => {
+    const reqOption = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    };
+
+    return fetch(`${baseUrl}/${id}`, reqOption)
+        .then(handleResponse)
+        .then((response) => ({ info: response.data }))
+        .catch((error) => ({ error }))
 }
 
 const studentService = {
     getStudents,
     addStudent,
     updateStudent,
-    deleteStudent
+    deleteStudent,
+    getStudentById
 }
 
-export default studentService;
+export default studentService
