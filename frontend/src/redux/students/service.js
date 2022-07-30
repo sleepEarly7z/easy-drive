@@ -60,23 +60,20 @@ const updateStudent = async (id, patch) => {
 }
 
 const deleteStudent = async (id) => {
-    const response = await fetch(
-        'http://localhost:3001/students/' + id,
-        {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }
-    );
+    const response = await fetch(`${API_URL}students/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
 
-    const data = await response.json();
+    const data = await response.json()
     if (!response.ok) {
-        const errorMsg = data?.message;
-        throw new Error(errorMsg);
+        const errorMsg = data?.message
+        throw new Error(errorMsg)
     }
 
-    return data;
+    return data
 }
 
 const getStudentById = (id) => {
@@ -99,4 +96,4 @@ const studentService = {
     getStudentById
 }
 
-export default studentService;
+export default studentService
