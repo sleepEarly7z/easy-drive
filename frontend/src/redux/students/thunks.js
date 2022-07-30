@@ -18,8 +18,8 @@ export const addStudentAsync = createAsyncThunk(
 
 export const updateStudentAsync = createAsyncThunk(
     actionTypes.UPDATE_STUDENT,
-    async (data) => {
-        return await StudentService.updateStudent(data)
+    async (id, patch) => {
+        return await StudentService.updateStudent(id, patch)
     }
 )
 

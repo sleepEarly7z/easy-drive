@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import cx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
@@ -9,7 +9,6 @@ import Avatar from '@material-ui/core/Avatar'
 import Divider from '@material-ui/core/Divider'
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded'
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered'
-import axios from 'axios'
 import FollowingList from '../FollowingList/FollowingList'
 import { useParams } from 'react-router-dom'
 
@@ -52,50 +51,26 @@ const useStyles = makeStyles(({ palette }) => ({
     },
 }))
 
-const SidebarStudent = ({ section1, section2 }) => {
+const SidebarStudent = (props) => {
+    const {
+        info,
+        followedInstructors
+    } = props;
+
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        photo
+    } = info;
+
     const [show, setShow] = useState(false)
-    const [phone, setPhone] = useState('')
-    const [email, setEmail] = useState('')
-    const [first_name, setFirstName] = useState('')
-    const [last_name, setLastName] = useState('')
-    const [followingList, setFollowingList] = useState({})
-    const [followingListLength, setFollowingListLength] = useState(0)
-    const params = useParams()
 
     const handleFollowingList = (event) => {
         setShow(!show)
         console.log(show)
     }
-
-    const handlePhoneChange = (event) => {
-        setPhone(event.target.value)
-    }
-
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value)
-    }
-
-    const handleFirstNameChange = (event) => {
-        setFirstName(event.target.value)
-    }
-
-    const handleLastNameChange = (event) => {
-        setLastName(event.target.value)
-    }
-
-    useEffect(() => {
-        async function componentDidMount() {
-            const res = await axios.get(`https://ezdrive-test-3.herokuapp.com/students/${params.studentId}`)
-            setPhone(res.data.data.phone)
-            setEmail(res.data.data.email)
-            setFirstName(res.data.data.first_name)
-            setLastName(res.data.data.last_name)
-            setFollowingList(res.data.data.followedInstructors)
-            setFollowingListLength(res.data.data.followedInstructors.length)
-        }
-        componentDidMount()
-    }, [])
-
     const styles = useStyles()
     const shadowStyles = useFadedShadowStyles()
     const borderedGridStyles = useGutterBorderedGridStyles({
@@ -108,7 +83,7 @@ const SidebarStudent = ({ section1, section2 }) => {
                 <CardContent>
                     <Avatar
                         className={styles.avatar}
-                        src={'https://i.pravatar.cc/300'}
+                        src={photo}
                     />
                     <h3 className={styles.heading}>
                         {first_name + ' ' + last_name}
@@ -126,7 +101,7 @@ const SidebarStudent = ({ section1, section2 }) => {
                         onClick={handleFollowingList}
                     >
                         <p className={styles.statLabel}>Following</p>
-                        <p className={styles.statValue}>{followingListLength}</p>
+                        <p className={styles.statValue}>{followedInstructors.length}</p>
                     </Box>
                     <Box
                         p={2}
@@ -138,7 +113,10 @@ const SidebarStudent = ({ section1, section2 }) => {
                     </Box>
                 </Box>
             </Card>
-            <FollowingList showBoolean={show} onClose={() => setShow(false)} />
+            <FollowingList
+                followedInstructors={followedInstructors}
+                showBoolean={show}
+                onClose={() => setShow(false)} />
         </>
     )
 }

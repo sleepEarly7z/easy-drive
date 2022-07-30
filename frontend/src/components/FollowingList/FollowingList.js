@@ -1,47 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
-import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import { useNavigate } from 'react-router-dom';
 
 export default function FollowingList(props) {
-    const [showList, setShow] = useState(false)
-    const [followingList, setFollowingList] = useState([])
-    const [followingList2, setFollowingList2] = useState([])
-    var followingList3 = [1, 2, 3]
-    const params = useParams()
+    const { followedInstructors } = props;
 
-    const handleClose = () => {
-        setShow(false)
+    let navigate = useNavigate();
+
+    const showInstructor = (id) => {
+        navigate(`/showProfileRating/${id}`, { replace: true });
     }
-    const handleShow = () => {
-        setShow(true)
-    }
-
-    useEffect(() => {
-        async function mapIDtoName(temp2) {
-            axios.all(
-                temp2.map(async (id) => {
-                    const res = await axios.get(
-                        `https://ezdrive-test-3.herokuapp.com/${id}`,
-                    )
-                    await console.log(res)
-                    followingList.push(await res.data.data)
-                    await console.log(followingList)
-                }),
-            )
-            return followingList
-        }
-
-        async function sendGet() {
-            const res = await axios.get(
-                `https://ezdrive-test-3.herokuapp.com/students/${params.studentId}`,
-            )
-            console.log(res.data.data.followedInstructors)
-            setFollowingList(res.data.data.followedInstructors)
-        }
-        sendGet()
-    }, [])
 
     return (
         <>
@@ -50,11 +25,23 @@ export default function FollowingList(props) {
                     <Modal.Title>Following</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ol>
-                        {followingList.map((instructor) => {
-                            return <li>{instructor}</li>
+                    <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                        {followedInstructors.map((x) => {
+                            const labelId = `checkbox-list-secondary-label-${x.id}`;
+                            return (
+                                <ListItem key={x.id} disablePadding >
+                                    <ListItemButton
+                                        onClick={() => showInstructor(x.id)}
+                                    >
+                                        <ListItemAvatar>
+                                            <Avatar src={x.photoUrl} />
+                                        </ListItemAvatar>
+                                        <ListItemText id={labelId} primary={x.name} />
+                                    </ListItemButton>
+                                </ListItem>
+                            );
                         })}
-                    </ol>
+                    </List>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={props.onClose}>
