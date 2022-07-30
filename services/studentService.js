@@ -1,7 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 const Student = require('../models/studentModel');
 const service = require('../services/instructorService');
 const axios = require('axios');
@@ -78,58 +77,10 @@ const deleteStudentById = (id) => {
  *
  * @returns {object} Student updated
  */
-const updateStudentById = (id, patch) => {
-	// TODO
-	console.log('StudentService121');
-	console.log(patch.followedInstructors);
-	Student.updateOne({ _id: id }, patch, (err, stu) => {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log(stu);
-		}
-	});
-};
-
-/**
- * Update an Student's instructor follow list form database
- *
- * @param {string} id
- * @param {object} patch with properties need to update
- *
- * @returns {object} Student's instructor follow list updated
- */
-
-const followInstructorById = (id) => {
-	const exampleStudentId = '62d761535c08a0f631db58a0';
-	try {
-		Student.findById(exampleStudentId).then((student) => {
-			if (!student.followedInstructors.includes(id)) {
-				student.followedInstructors.push(id);
-				student.save();
-				console.log('new instructor is followed');
-			} else {
-				Student.updateOne(
-					{ _id: exampleStudentId },
-					{ $pull: { followedInstructors: id } }
-				).then(() => student.save());
-				console.log('instructor is unfollowed');
-			}
-		});
-		return id;
-	} catch (error) {
-		throw { type: 'DB', message: error };
-	}
-};
-
-const isInstructorFollowed = (id) => {
-	const exampleStudentId = '62d761535c08a0f631db58a0';
-	try {
-		return Student.findById(exampleStudentId);
-	} catch (error) {
-		throw { type: 'DB', message: error };
-	}
-};
+const updateStudentById = async (id, patch) => {
+	// https://mongoosejs.com/docs/documents.html#updating-using-queries
+	await Student.findOneAndUpdate({ _id: id }, patch, { runValidators: true });
+}
 
 const registerStudent = async (student) => {
 	const {
@@ -322,10 +273,8 @@ module.exports = {
 	addStudent,
 	deleteStudentById,
 	updateStudentById,
-	followInstructorById,
-	isInstructorFollowed,
-	getMe,
-	loginStudent,
 	registerStudent,
+	loginStudent,
+	getMe
 	getNearbyInstructors,
 };

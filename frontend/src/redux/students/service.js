@@ -44,37 +44,14 @@ const addStudent = async (data) => {
     return result
 }
 
-const updateStudent = async (data) => {
-    const {
-        _id,
-        first_name,
-        last_name,
-        email,
-        phone,
-        street,
-        city,
-        province,
-        country,
-        followedInstructors,
-    } = data
-    const response = await fetch(`${API_URL}students/${_id}`, {
+const updateStudent = async (id, patch) => {
+    const response = await fetch(`${API_URL}students/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            first_name,
-            last_name,
-            email,
-            phone,
-            street,
-            city,
-            province,
-            country,
-            followedInstructors,
-        }),
+        body: JSON.stringify(patch),
     })
-
     return response.json()
 }
 
@@ -95,39 +72,11 @@ const deleteStudent = async (id) => {
     return data
 }
 
-const followInstructor = async (instructorId) => {
-    const { id } = instructorId
-    // const id = JSON.stringify(instructorId);
-    const response = await fetch(
-        `${API_URL}students/followInstructor/` + instructorId._id,
-        {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id }),
-        },
-    )
-
-    return response.json()
-}
-
-const isInstructorFollowed = async (instructorId) => {
-    const response = await fetch(
-        `${API_URL}students/checkFollowList/` + instructorId._id,
-        {
-            method: 'GET',
-        },
-    )
-
-    return response.json()
-}
-
-export default {
+const studentService = {
     getStudents,
     addStudent,
     updateStudent,
     deleteStudent,
-    followInstructor,
-    isInstructorFollowed,
 }
+
+export default studentService
