@@ -61,7 +61,7 @@ const useStudent = (studentId) => {
                 setHasError(true);
                 setLoading(false);
             })
-    })
+    }, [studentId])
 
     return {
         info,
