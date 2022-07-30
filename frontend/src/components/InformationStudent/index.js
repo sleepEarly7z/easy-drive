@@ -1,7 +1,6 @@
 import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import toast from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
 import useStudent from './useStudent'
@@ -9,7 +8,6 @@ import studentService from '../../redux/students/service'
 
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 const InformationStudent = () => {
-    const dispatch = useDispatch()
     const { studentId } = useParams();
     const [updatedInfo, setUpdatedInfo] = React.useState({});
 
