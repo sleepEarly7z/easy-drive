@@ -10,6 +10,7 @@ import Divider from '@material-ui/core/Divider'
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded'
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered'
 import FollowingList from '../FollowingList/FollowingList'
+import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles(({ palette }) => ({
     card: {
@@ -70,7 +71,6 @@ const SidebarStudent = (props) => {
         setShow(!show)
         console.log(show)
     }
-
     const styles = useStyles()
     const shadowStyles = useFadedShadowStyles()
     const borderedGridStyles = useGutterBorderedGridStyles({
