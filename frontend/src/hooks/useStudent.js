@@ -1,6 +1,6 @@
 import React from 'react';
-import studentService from '../../redux/students/service';
-import instructorService from '../../redux/instructors/service';
+import studentService from '../redux/students/service';
+import instructorService from '../redux/instructors/service';
 
 /**
  * Retrive student info and instructors followed by the stdudent
