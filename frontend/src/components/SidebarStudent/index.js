@@ -66,11 +66,47 @@ const SidebarStudent = (props) => {
     } = info;
 
     const [show, setShow] = useState(false)
+    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
+    const [first_name, setFirstName] = useState('')
+    const [last_name, setLastName] = useState('')
+    const [followingList, setFollowingList] = useState({})
+    const [followingListLength, setFollowingListLength] = useState(0)
+    const params = useParams()
 
     const handleFollowingList = (event) => {
         setShow(!show)
         console.log(show)
     }
+
+    const handlePhoneChange = (event) => {
+        setPhone(event.target.value)
+    }
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value)
+    }
+
+    const handleFirstNameChange = (event) => {
+        setFirstName(event.target.value)
+    }
+
+    const handleLastNameChange = (event) => {
+        setLastName(event.target.value)
+    }
+
+    useEffect(() => {
+        async function componentDidMount() {
+            const res = await axios.get(`https://ezdrive-test-3.herokuapp.com/students/${params.studentId}`)
+            setPhone(res.data.data.phone)
+            setEmail(res.data.data.email)
+            setFirstName(res.data.data.first_name)
+            setLastName(res.data.data.last_name)
+            setFollowingList(res.data.data.followedInstructors)
+            setFollowingListLength(res.data.data.followedInstructors.length)
+        }
+        componentDidMount()
+    }, [])
     const styles = useStyles()
     const shadowStyles = useFadedShadowStyles()
     const borderedGridStyles = useGutterBorderedGridStyles({

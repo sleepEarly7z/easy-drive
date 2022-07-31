@@ -2,6 +2,8 @@ const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Student = require('../models/studentModel');
+const service = require('../services/instructorService');
+const axios = require('axios');
 
 /**
  * Get all Students from database
@@ -216,6 +218,54 @@ const generateToken = (id) => {
 	});
 };
 
+const getNearbyInstructors = async (id, city, street, province) => {
+	const promises = [];
+	const stustreet = street.split(' ').join('%20');
+	const stucity = city.split(' ').join('%20');
+	const stuprovince = province.split(' ').join('%20');
+
+	return Promise.resolve(service.getInstructors()).then((instructors) => {
+		const promiseArr = [];
+		// const res = axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=Washington%2C%20DC&destinations=New%20York%20City%2C%20NY&units=imperial&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`)
+
+		for(i of instructors) {
+			const instStreet = i.street.split(' ').join('%20');
+			const instCity = i.city.split(' ').join('%20');
+			const instProvince = i.province.split(' ').join('%20');
+			const res = axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${stustreet}%2C${stucity}%2C${stuprovince}&destinations=${instStreet}%2C${instCity}%2C${instProvince}&units=imperial&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`)
+			promiseArr.push(res);
+		}
+		return promiseArr;
+	}
+	)
+	.then((res) => {
+		const resultArray = [];
+		Promise.all(res).then((values) => {
+			for (i of values) {
+				if(i.data.rows[0].elements[0].status === 'OK') {
+					// console.log(i.data.rows[0].elements[0].distance.text);
+					if(i.data.rows[0].elements[0].distance.text.split(' ')[0] < 100) {
+						resultArray.push(i.data.rows[0].elements[0].distance.text);
+					}
+				} else {
+					console.log('no distance');
+				}
+			}
+			console.log(resultArray);
+		}
+		).catch((err) => {
+			console.log(err);
+		});
+	}
+	)
+	.catch((err) => {
+		console.log(err);
+	}
+	);
+
+}
+
+
 module.exports = {
 	Student,
 	getStudents,
@@ -225,5 +275,6 @@ module.exports = {
 	updateStudentById,
 	registerStudent,
 	loginStudent,
-	getMe
+	getMe,
+	getNearbyInstructors,
 };
