@@ -1,5 +1,6 @@
 .contact-section_contactcomponent {
-  padding: 0 10em;
+  padding: 5rem 10em;
+  padding-bottom: 0;
 }
 
 .section-title-divider {
@@ -224,4 +225,8 @@ textarea.form-control_contactcomponent {
 .form-group-btn_contactcomponent {
   display: flex;
   justify-content: center;
+}
+
+.container_contactcomponent {
+  padding-bottom: 10rem;
 }
