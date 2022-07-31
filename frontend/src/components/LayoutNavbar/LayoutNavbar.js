@@ -1,4 +1,4 @@
-import './index.css'
+import './index.scss'
 import Box from '@mui/material/Box'
 import SwipeableDrawer from '@mui/material/SwipeableDrawer'
 import Button from '@mui/material/Button'
@@ -19,13 +19,14 @@ import { ReactComponent as MenuIcon } from '../../assets/images/svg/menu.svg'
 import { ReactComponent as BellIcon } from '../../assets/images/svg/bell.svg'
 import { ReactComponent as MessengerIcon } from '../../assets/images/svg/messenger.svg'
 
-import { FaSignInAlt } from 'react-icons/fa'
+import { FaBars, FaSignInAlt } from 'react-icons/fa'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { HiX } from 'react-icons/hi'
 
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { reset } from '../../redux/authentication/reducer'
 import { logoutAsync } from '../../redux/authentication/thunks'
@@ -41,6 +42,8 @@ function LayoutNavbar() {
         bottom: false,
         right: false,
     })
+
+    const [toggleIcon, setToggleIcon] = useState(false)
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (
@@ -177,73 +180,162 @@ function LayoutNavbar() {
             </List>
         </Box>
     )
-    return (
-        <Navbar>
-            <NavItem text={'Easy'} name={'icon-button-logo'} />
-            <NavItem
-                icon={<HomeIcon />}
-                text={'Home'}
-                name={'icon-button-home'}
-                to={'/'}
-            />
-            <NavItem
-                icon={<MenuIcon />}
-                text={'Explore'}
-                name={'icon-button-explore'}
-                to={'/explore'}
-            />
-            <NavItem
-                icon={<BellIcon />}
-                text={'Notification'}
-                name={'icon-button-notification'}
-            />
-            <NavItem
-                icon={<MessengerIcon />}
-                text={'Message'}
-                name={'icon-button-message'}
-            />
 
-            {user ? (
-                <>
-                    <div>
-                        <div className="">
-                            <div className="icon-button-profile">
-                                <Button onClick={toggleDrawer('right', true)}>
-                                    <FontAwesomeIcon
-                                        icon={faUser}
-                                        color="#d7d5d5"
-                                    />
-                                </Button>
+    const handleToggleIcon = () => {
+        setToggleIcon(!toggleIcon)
+    }
+
+    return (
+        <div className="layout-navbar">
+            <nav className="navbar">
+                <ul className="navbar-nav-left">
+                    <NavItem text={'Easy'} name={'icon-button-logo'} />
+                </ul>
+                <ul className="navbar-nav-right">
+                    {/* navbar__container__menu */}
+                    <NavItem
+                        icon={<HomeIcon />}
+                        text={'Home'}
+                        name={'icon-button-home'}
+                        to={'/'}
+                    />
+                    <NavItem
+                        icon={<MenuIcon />}
+                        text={'Explore'}
+                        name={'icon-button-explore'}
+                        to={'/explore'}
+                    />
+                    <NavItem
+                        icon={<BellIcon />}
+                        text={'Notification'}
+                        name={'icon-button-notification'}
+                        to={'/explore'}
+                    />
+                    <NavItem
+                        icon={<MessengerIcon />}
+                        text={'Message'}
+                        name={'icon-button-message'}
+                        to={'/explore'}
+                    />
+
+                    {user ? (
+                        <>
+                            <div>
+                                <div className="">
+                                    <div className="icon-button-profile">
+                                        <Button
+                                            onClick={toggleDrawer(
+                                                'right',
+                                                true,
+                                            )}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faUser}
+                                                color="#d7d5d5"
+                                            />
+                                        </Button>
+                                    </div>
+                                    <div
+                                        className="icon-text-me"
+                                        style={{ color: '#d7d5d5' }}
+                                    >
+                                        Me
+                                    </div>
+                                </div>
+                                <SwipeableDrawer
+                                    anchor={'right'}
+                                    open={state['right']}
+                                    onClose={toggleDrawer('right', false)}
+                                    onOpen={toggleDrawer('right', true)}
+                                    PaperProps={{
+                                        style: {
+                                            marginTop: '5rem',
+                                            width: '25%',
+                                        },
+                                    }}
+                                >
+                                    {list('right')}
+                                </SwipeableDrawer>
                             </div>
-                            <div
-                                className="icon-text-me"
-                                style={{ color: '#d7d5d5' }}
-                            >
-                                Me
+                        </>
+                    ) : (
+                        <NavItem
+                            icon={<FaSignInAlt />}
+                            text={'Log In/Register'}
+                            name={'icon-button-signin'}
+                            to={'/sign-in'}
+                        />
+                    )}
+                </ul>
+
+                <ul
+                    className={`navbar__container__menu ${
+                        toggleIcon ? 'active' : ''
+                    }`}
+                >
+                    {/* <div className="navbar__container__menu"> */}
+                    <li className="navbar__container__menu_item">
+                        <Link
+                            className="navbar__container__menu_item_links"
+                            to="/"
+                        >
+                            Home
+                        </Link>
+                    </li>
+                    <li className="navbar__container__menu_item">
+                        <Link
+                            className="navbar__container__menu_item_links"
+                            to="/"
+                        >
+                            Explore
+                        </Link>
+                    </li>
+                    <li className="navbar__container__menu_item">
+                        <Link
+                            className="navbar__container__menu_item_links"
+                            to="/"
+                        >
+                            Notification
+                        </Link>
+                    </li>
+                    <li className="navbar__container__menu_item">
+                        <Link
+                            className="navbar__container__menu_item_links"
+                            to="/"
+                        >
+                            Message
+                        </Link>
+                    </li>
+                    <li className="navbar__container__menu_item">
+                        <Link
+                            className="navbar__container__menu_item_links"
+                            to="/"
+                        >
+                            Login/Register
+                        </Link>
+                    </li>
+                    {/* </div> */}
+                </ul>
+
+                <div className="nav-icon" onClick={handleToggleIcon}>
+                    <li className="nav-item-bar">
+                        {/* navbar__container__menu_item */}
+                        <div>
+                            <div className="icon-button-bar">
+                                {toggleIcon ? (
+                                    <HiX size={30} />
+                                ) : (
+                                    <FaBars size={30} />
+                                )}
                             </div>
                         </div>
-                        <SwipeableDrawer
-                            anchor={'right'}
-                            open={state['right']}
-                            onClose={toggleDrawer('right', false)}
-                            onOpen={toggleDrawer('right', true)}
-                            PaperProps={{
-                                style: { marginTop: '5rem', width: '25%' },
-                            }}
-                        >
-                            {list('right')}
-                        </SwipeableDrawer>
-                    </div>
-                </>
-            ) : (
-                <NavItem
-                    icon={<FaSignInAlt />}
-                    text={'Log In/Register'}
-                    name={'icon-button-signin'}
-                    to={'/sign-in'}
-                />
-            )}
-        </Navbar>
+                    </li>
+                </div>
+            </nav>
+            {/* <div className="nav-icon" onClick={handleToggleIcon}>
+                {toggleIcon ? <HiX size={30} /> : <FaBars size={30} />}
+            </div> */}
+        </div>
     )
 }
 
@@ -279,16 +371,19 @@ function NavItem(props) {
 
     return (
         <li className="nav-item">
+            {/* navbar__container__menu_item */}
             {props.icon ? (
                 <div>
-                    <a
-                        href="# "
+                    <Link
+                        to={{
+                            pathname: `${props.to}`,
+                        }}
                         className={props.name}
                         onClick={handleClick}
                         style={{ textDecoration: 'none' }}
                     >
                         {props.icon}
-                    </a>
+                    </Link>
                     <div className="icon-text">{props.text}</div>
                 </div>
             ) : (
