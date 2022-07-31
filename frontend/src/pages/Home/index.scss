@@ -2,3 +2,43 @@
     display: flex;
     margin-left: 3%;
 }
+
+.section_title {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    padding-top: 17px;
+    padding-bottom: 15px;
+}
+
+.section_title_divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .solid {
+        width: 150px;
+        height:  0.3rem;
+        margin: 1rem 0;
+        border: 3px solid #FFB000;
+        background-color: #FFB000;
+    }
+}
+
+.sectionTwo,
+.sectionThree,
+.sectionFour,
+.sectionFive,
+.sectionSix {
+    margin: 10rem auto;
+}
+
+.sectionTwo,
+.sectionThree,
+.sectionFour{
+    padding: 10rem auto;
+}
+
+.sectionFive{
+    padding: 10rem 7rem;
+}

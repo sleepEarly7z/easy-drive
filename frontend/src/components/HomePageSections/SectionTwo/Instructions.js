@@ -15,7 +15,12 @@ const Instructions = () => {
 
     return (
         <div className="wrapper_instructions">
-            <div className="section_title_two">To have a better experience</div>
+            <div className="section_title_two">
+                To have a better experience
+                <div className="section_title_divider_experience">
+                    <div className="solid" />
+                </div>
+            </div>
             <div className="accordion_instructions">
                 {dataForInstructions.map((item, idx) => (
                     <div
@@ -36,7 +41,7 @@ const Instructions = () => {
                                     : 'content_instructions'
                             }
                         >
-                            <h2>{item.content}</h2>
+                            <p>{item.content}</p>
                         </div>
                     </div>
                 ))}

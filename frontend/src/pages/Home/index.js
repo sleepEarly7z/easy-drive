@@ -36,16 +36,16 @@ const Home = () => {
                     <FollowInstructions />
                 </div>
 
+                <div ref={ourteam} className="sectionFive">
+                    <OurTeam />
+                </div>
+
                 <div ref={topinstructors} className="sectionThree">
                     <TopRecommended />
                 </div>
 
                 <div ref={topreviews} className="sectionFour">
                     <TopReivews />
-                </div>
-
-                <div ref={ourteam} className="sectionFive">
-                    <OurTeam />
                 </div>
 
                 <div ref={contactus} className="sectionSix">
