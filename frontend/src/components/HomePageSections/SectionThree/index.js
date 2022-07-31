@@ -54,7 +54,12 @@ const TopRecommended = () => {
 
     return (
         <div className="TopRecommended">
-            <div className="section_title">Top Recommended Instructors</div>
+            <div className="section_title">
+                Top Recommended Instructors
+                <div className="section_title_divider">
+                    <div className="solid" />
+                </div>
+            </div>
             <Slider {...settings}>
                 {images.map((img, idx) => (
                     <div

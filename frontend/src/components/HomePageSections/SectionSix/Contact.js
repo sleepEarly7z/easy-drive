@@ -52,6 +52,10 @@ function Contact() {
     }
     return (
         <section className="contact-section_contactcomponent">
+            <div className="section_title">
+                Contact Us
+                <div className='section_title_divider'><div className="solid" /></div>
+            </div>
             <div className="container_contactcomponent">
                 <div className="row justify-content-center">
                     <div className="col-md-10">
