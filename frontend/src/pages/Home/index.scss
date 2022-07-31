@@ -25,7 +25,6 @@
     }
 }
 
-.sectionTwo,
 .sectionThree,
 .sectionFour,
 .sectionFive,
@@ -33,12 +32,18 @@
     margin: 10rem auto;
 }
 
-.sectionTwo,
 .sectionThree,
 .sectionFour{
     padding: 10rem auto;
 }
 
+.sectionTwo {
+    padding: 10rem auto;
+}
+
 .sectionFive{
-    padding: 10rem 7rem;
+    padding: 6rem 7rem;
+    border-top: 7px solid #FFB000;
+    // background-color: rgb(0, 64, 92);
+    background-color: rgb(0, 64, 92);
 }

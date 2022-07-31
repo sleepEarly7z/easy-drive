@@ -6,8 +6,8 @@ import { v4 as uuidv4 } from 'uuid'
 
 const OurTeam = () => {
     return (
-        <div className='OurTeam'>
-            <div className="section_title">
+        <div className="OurTeam">
+            <div className="section_title" style={{ color: '#fff' }}>
                 Meet Our Team
                 <div className="section_title_divider">
                     <div className="solid" />
