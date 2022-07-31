@@ -225,7 +225,7 @@ const getNearbyInstructors = async (id, city, street, province) => {
 	const stucity = city.split(' ').join('%20');
 	const stuprovince = province.split(' ').join('%20');
 
-	return Promise.resolve(service.getQueriedInstructors()).then((instructors) => {
+	return Promise.resolve(service.getQueriedInstructors()).then(async (instructors) => {
 		// console.log(instructors);
 		const promiseArr = [];
 		// const res = axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=Washington%2C%20DC&destinations=New%20York%20City%2C%20NY&units=imperial&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`)
@@ -234,20 +234,29 @@ const getNearbyInstructors = async (id, city, street, province) => {
 			const instStreet = i.street.split(' ').join('%20');
 			const instCity = i.city.split(' ').join('%20');
 			const instProvince = i.province.split(' ').join('%20');
-			const res = axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${stustreet}%2C${stucity}%2C${stuprovince}&destinations=${instStreet}%2C${instCity}%2C${instProvince}&units=imperial&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`)
-			promiseArr.push(res);
+			const res = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${stustreet}%2C${stucity}%2C${stuprovince}&destinations=${instStreet}%2C${instCity}%2C${instProvince}&units=imperial&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`)
+			promiseArr.push({
+				instructor: i,
+				distance: res
+			});
 		}
+		// console.log(promiseArr);
 		return promiseArr;
 	}
 	)
 	.then((res) => {
+		console.log(res);
 		const resultArray = [];
 		return Promise.all(res).then((values) => {
 			for (i of values) {
-				if(i.data.rows[0].elements[0].status === 'OK') {
-					// console.log(i.data.rows[0].elements[0].distance.text);
-					if(i.data.rows[0].elements[0].distance.text.split(' ')[0] < 100) {
-						resultArray.push(i.data.rows[0].elements[0].distance.text);
+				if(i.distance.data.rows[0].elements[0].status === 'OK') {
+					// console.log(i.distance.data.rows[0]);
+					if(i.distance.data.rows[0].elements[0].distance.text.split(' ')[0] < 100) {
+						resultArray.push({
+							instructorID: i.instructor._id,
+							instructorName: i.instructor.first_name + ' ' + i.instructor.last_name,
+							distance: i.distance.data.rows[0].elements[0].distance.text,
+						});
 					}
 				} else {
 					console.log('no distance');
