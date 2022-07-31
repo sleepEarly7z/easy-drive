@@ -203,7 +203,7 @@ const Reviews = ({ idType, page }) => {
                         }}
                         onChange={handleSearch}
                     />
-                    {user ? (
+                    {user && user.data.role === 'student' ? (
                         <Controls.Button
                             text="Add New"
                             variant="outlined"
@@ -221,16 +221,7 @@ const Reviews = ({ idType, page }) => {
                             }}
                         />
                     ) : (
-                        <Controls.Button
-                            text="Add New"
-                            variant="outlined"
-                            startIcon={<AddIcon />}
-                            className={classes.newButton}
-                            onClick={() => {
-                                navigate('/sign-in')
-                                toast.error('Please sign in first!')
-                            }}
-                        />
+                        <></>
                     )}
                 </Toolbar>
                 <TblContainer>
