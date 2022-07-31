@@ -51,9 +51,18 @@ const useStyles = makeStyles(({ palette }) => ({
 }))
 
 const SidebarStudent = (props) => {
-    const { info, followedInstructors } = props
+    const {
+        info,
+        followedInstructors
+    } = props;
 
-    const { first_name, last_name, phone, email, photo } = info
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        photo
+    } = info;
 
     const [show, setShow] = useState(false)
 
@@ -72,7 +81,10 @@ const SidebarStudent = (props) => {
         <>
             <Card className={cx(styles.card, shadowStyles.root)}>
                 <CardContent>
-                    <Avatar className={styles.avatar} src={photo} />
+                    <Avatar
+                        className={styles.avatar}
+                        src={photo}
+                    />
                     <h3 className={styles.heading}>
                         {first_name + ' ' + last_name}
                     </h3>
@@ -89,9 +101,7 @@ const SidebarStudent = (props) => {
                         onClick={handleFollowingList}
                     >
                         <p className={styles.statLabel}>Following</p>
-                        <p className={styles.statValue}>
-                            {followedInstructors.length}
-                        </p>
+                        <p className={styles.statValue}>{followedInstructors.length}</p>
                     </Box>
                     <Box
                         p={2}
@@ -106,8 +116,7 @@ const SidebarStudent = (props) => {
             <FollowingList
                 followedInstructors={followedInstructors}
                 showBoolean={show}
-                onClose={() => setShow(false)}
-            />
+                onClose={() => setShow(false)} />
         </>
     )
 }

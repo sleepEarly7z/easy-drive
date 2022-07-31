@@ -1,6 +1,6 @@
-import { handleResponse } from '../utils'
+import { handleResponse } from "../utils"
 
-const API_URL = 'https://ezdrive-test-merge.herokuapp.com/'
+const API_URL = 'https://ezdrive-test-3.herokuapp.com/'
 const baseUrl = `${API_URL}students`
 
 const getStudents = async () => {
@@ -51,8 +51,8 @@ const updateStudent = async (id, patch) => {
     const reqOption = {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(patch),
-    }
+        body: JSON.stringify(patch)
+    };
 
     return fetch(`${baseUrl}/${id}`, reqOption)
         .then(handleResponse)
@@ -79,8 +79,8 @@ const deleteStudent = async (id) => {
 const getStudentById = (id) => {
     const reqOption = {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-    }
+        headers: { 'Content-Type': 'application/json' }
+    };
 
     return fetch(`${baseUrl}/${id}`, reqOption)
         .then(handleResponse)
@@ -93,7 +93,7 @@ const studentService = {
     addStudent,
     updateStudent,
     deleteStudent,
-    getStudentById,
+    getStudentById
 }
 
 export default studentService

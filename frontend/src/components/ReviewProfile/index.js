@@ -65,7 +65,7 @@ export default function ReviewProfile({ instructor }) {
 
     const renderFollowButton = () => {
         if (!user) return (
-            <NavLink to="/sign-in-student">
+            <NavLink to="/sign-in">
                 <FollowActionButton >
                     Follow
                 </FollowActionButton>

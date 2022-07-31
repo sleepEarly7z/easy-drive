@@ -1,6 +1,6 @@
-import { handleResponse } from '../utils'
-const API_URL = 'https://ezdrive-test-merge.herokuapp.com/'
-const baseUrl = `${API_URL}instructors`
+import { handleResponse } from "../utils"
+const API_URL = 'https://ezdrive-test-3.herokuapp.com/';
+const baseUrl = `${API_URL}instructors`;
 
 const getQueryString = (query) => {
     if (!query) return null
@@ -46,8 +46,8 @@ const getInstructors = async (query) => {
 const getInstructorById = (id) => {
     const reqOption = {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-    }
+        headers: { 'Content-Type': 'application/json' }
+    };
 
     return fetch(`${baseUrl}/${id}`, reqOption)
         .then(handleResponse)
@@ -127,7 +127,7 @@ const InstructorService = {
     getInstructors,
     getInstructorById,
     updateInstructor,
-    deleteInstructor,
+    deleteInstructor
 }
 
 export default InstructorService
