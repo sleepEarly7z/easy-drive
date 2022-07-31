@@ -41,7 +41,7 @@ export default function StudentMap(props) {
       });
       var config = {
         method: 'post',
-        url: `https://yizhou-ezdrive.herokuapp.com/${params.studentId}`,
+        url: `https://yizhou-ezdrive.herokuapp.com/students/nearby/62d761535c08a0f631db58a0`,
         headers: { 
           'Content-Type': 'application/x-www-form-urlencoded'
         },
