@@ -2,6 +2,8 @@ const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Student = require('../models/studentModel');
+const service = require('../services/instructorService');
+const axios = require('axios');
 
 /**
  * Get all Students from database
@@ -216,6 +218,66 @@ const generateToken = (id) => {
 	});
 };
 
+const getNearbyInstructors = async (id, city, street, province) => {
+	console.log(id, city, street, province);
+	const promises = [];
+	const stustreet = street.split(' ').join('%20');
+	const stucity = city.split(' ').join('%20');
+	const stuprovince = province.split(' ').join('%20');
+
+	return Promise.resolve(service.getQueriedInstructors()).then(async (instructors) => {
+		// console.log(instructors);
+		const promiseArr = [];
+		// const res = axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=Washington%2C%20DC&destinations=New%20York%20City%2C%20NY&units=imperial&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`)
+
+		for(i of instructors.data) {
+			const instStreet = i.street.split(' ').join('%20');
+			const instCity = i.city.split(' ').join('%20');
+			const instProvince = i.province.split(' ').join('%20');
+			const res = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${stustreet}%2C${stucity}%2C${stuprovince}&destinations=${instStreet}%2C${instCity}%2C${instProvince}&units=imperial&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`)
+			promiseArr.push({
+				instructor: i,
+				distance: res
+			});
+		}
+		// console.log(promiseArr);
+		return promiseArr;
+	}
+	)
+	.then((res) => {
+		console.log(res);
+		const resultArray = [];
+		return Promise.all(res).then((values) => {
+			for (i of values) {
+				if(i.distance.data.rows[0].elements[0].status === 'OK') {
+					// console.log(i.distance.data.rows[0]);
+					if(i.distance.data.rows[0].elements[0].distance.text.split(' ')[0] < 100) {
+						resultArray.push({
+							instructorID: i.instructor._id,
+							instructorName: i.instructor.first_name + ' ' + i.instructor.last_name,
+							distance: i.distance.data.rows[0].elements[0].distance.text,
+						});
+					}
+				} else {
+					console.log('no distance');
+				}
+			}
+			console.log(resultArray);
+			return resultArray;
+		}
+		).catch((err) => {
+			console.log(err);
+		});
+	}
+	)
+	.catch((err) => {
+		console.log(err);
+	}
+	);
+
+}
+
+
 module.exports = {
 	Student,
 	getStudents,
@@ -225,5 +287,6 @@ module.exports = {
 	updateStudentById,
 	registerStudent,
 	loginStudent,
-	getMe
+	getMe,
+	getNearbyInstructors,
 };
