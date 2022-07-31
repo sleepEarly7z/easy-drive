@@ -60,7 +60,6 @@ const studentsSlice = createSlice({
             )
             .addCase(updateStudentAsync.fulfilled, (state, action) => {
                 state.updateStudent = REQUEST_STATE.FULFILLED
-                state.list = action.payload
             }
             )
             .addCase(updateStudentAsync.rejected, (state, action) => {
