@@ -24,7 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { HiX } from 'react-icons/hi'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -285,7 +285,7 @@ function LayoutNavbar() {
                     <li className="navbar__container__menu_item">
                         <Link
                             className="navbar__container__menu_item_links"
-                            to="/"
+                            to="/explore"
                         >
                             Explore
                         </Link>
@@ -307,12 +307,21 @@ function LayoutNavbar() {
                         </Link>
                     </li>
                     <li className="navbar__container__menu_item">
-                        <Link
-                            className="navbar__container__menu_item_links"
-                            to="/"
-                        >
-                            Login/Register
-                        </Link>
+                        {user ? (
+                            <Link
+                                className="navbar__container__menu_item_links"
+                                to={`/profile-${user.data.role}/${user.data._id}`}
+                            >
+                                View Profile
+                            </Link>
+                        ) : (
+                            <Link
+                                className="navbar__container__menu_item_links"
+                                to="/sign-in"
+                            >
+                                Login/Register
+                            </Link>
+                        )}
                     </li>
                     {/* </div> */}
                 </ul>
