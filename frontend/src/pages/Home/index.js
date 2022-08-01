@@ -43,6 +43,10 @@ const Home = () => {
                     <TopReivews />
                 </div>
 
+                <div ref={ourteam} className="sectionFive">
+                    <OurTeam />
+                </div>
+
                 <div ref={contactus} className="sectionSix">
                     <Contact />
                 </div>
