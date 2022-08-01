@@ -45,7 +45,8 @@
 
 .title_instructions {
     // color: #cb9b49;
-    color: #cba055;
+    // color: #cba055;
+    color: #ffd800;
     // color: #85662b;
     display: flex;
     justify-content: space-between;
@@ -60,7 +61,8 @@
 }
 
 .content_instructions {
-    color: #8b7f75;
+    // color: #8b7f75;
+    color: #fffddb;
     max-height: 0px;
     overflow: hidden;
     transition: all 1s cubic-bezier(0, 1, 0, 1);
@@ -153,6 +155,8 @@
     padding-top: 2rem;
     position: absolute;
     left: 10vw;
+    color: #fff;
+    // background-color: #ffd800;
 }
 
 .section_title_divider_experience {
@@ -164,8 +168,8 @@
         height:  0.3rem;
         margin: 1rem 0;
         margin-left: 2rem;
-        border: 3px solid #FFB000;
-        background-color: #FFB000;
+        border: 3px solid #ffd800;
+        background-color: #ffd800;
     }
 }
 

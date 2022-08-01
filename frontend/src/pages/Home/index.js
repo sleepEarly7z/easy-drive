@@ -35,13 +35,13 @@ const Home = () => {
                 <div ref={instructions} className="sectionTwo">
                     <FollowInstructions />
                 </div>
-                <div ref={topinstructors} className="sectionThree">
+                {/* <div ref={topinstructors} className="sectionThree">
                     <TopRecommended />
                 </div>
 
                 <div ref={topreviews} className="sectionFour">
                     <TopReivews />
-                </div>
+                </div> */}
 
                 <div ref={ourteam} className="sectionFive">
                     <OurTeam />

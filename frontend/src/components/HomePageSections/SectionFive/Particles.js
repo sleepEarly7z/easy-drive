@@ -12,7 +12,8 @@ const ParticlesComponent = (props) => {
         // all options can be found here: https://particles.js.org/docs/interfaces/Options_Interfaces_IOptions.IOptions.html
         return {
             background: {
-                color: '#fff', // this sets a background color for the canvas
+                // color: '#fff', // this sets a background color for the canvas
+                color: '#000',
             },
             fullScreen: {
                 // enable: true, // enabling this will make the canvas fill the entire screen, it's enabled by default
@@ -40,10 +41,12 @@ const ParticlesComponent = (props) => {
             },
             particles: {
                 color: {
-                    value: '#000',
+                    // value: '#000',
+                    value: '#f4ca59',
                 },
                 links: {
-                    color: '#000',
+                    // color: '#000',
+                    color: '#f4ca59',
                     enable: true, // enabling this will make particles linked together
                     distance: 200, // maximum distance for linking the particles
                 },

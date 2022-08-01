@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import './Instructions.scss'
 import dataForInstructions from '../../../utils/dataForInstructions'
 import { v4 as uuidv4 } from 'uuid'
-import { Container, Row, Col } from 'react-bootstrap'
 import headerImg from './notes.svg'
 import 'animate.css'
-import TrackVisibility from 'react-on-screen'
 
 const Instructions = () => {
     const [selected, setSelected] = useState(0)

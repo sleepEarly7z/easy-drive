@@ -1,5 +1,4 @@
 import React from 'react'
-import { Grid } from '@material-ui/core'
 import './index.scss'
 
 function Footer() {
@@ -14,8 +13,8 @@ function Footer() {
                         </div>
                         <ul className="Footer-list-unstyled-footer">
                             <li>xxx-xxx-xxxx</li>
-                            <li>Vancouver, Canada</li>
-                            <li>123 Street South Vancouver</li>
+                            <li>BC V6T 1Z4, Canada</li>
+                            <li>2329 West Mall, Vancouver</li>
                         </ul>
                     </div>
                     {/* Column2 */}
@@ -32,9 +31,36 @@ function Footer() {
                         <div className="Footer-footer-heading-4">Help</div>
                         <ul className="Footer-list-unstyled-footer">
                             <li>Q&A</li>
-                            <li>Facebook</li>
-                            <li>Twitter</li>
-                            <li>Instagram</li>
+                            <li>
+                                <a
+                                    href="https://www.facebook.com/ezeasydrive"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Facebook
+                                </a>
+                            </li>
+                            {/* https://www.facebook.com/ezeasydrive */}
+                            <li>
+                                <a
+                                    href="https://twitter.com/EZEasyDrive"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Twitter
+                                </a>
+                            </li>
+                            {/* https://twitter.com/EZEasyDrive */}
+                            <li>
+                                <a
+                                    href="https://www.instagram.com/ezeasydrive/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Instagram
+                                </a>
+                            </li>
+                            {/* https://www.instagram.com/ezeasydrive/ */}
                         </ul>
                     </div>
                 </div>
