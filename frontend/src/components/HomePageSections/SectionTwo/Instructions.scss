@@ -13,11 +13,26 @@
     font-size: 40px;
     font-weight: 600;
     margin-top: 37px;
+    margin-right: 70px;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 40px;
     padding-top: 40px;
     padding-bottom: 40px;
-    width: 700px;
+    width: 600px;
+}
+
+.section_title_divider_experience {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 50px;
+    .solid {
+        width: 450px;
+        height:  0.3rem;
+        margin: 1rem 0;
+        border: 3px solid #FFB000;
+        background-color: #FFB000;
+    }
 }
 
 .accordion_instructions {
@@ -26,13 +41,13 @@
 
 .item_instructions {
     background: #00000018;
-    // background: #f0ebe1;
     margin-bottom: 5px;
     padding: 20px 30px;
 }
 
 .title_instructions {
-    color: #cb9b49;
+    // color: #cb9b49;
+    color: #cba055;
     // color: #85662b;
     display: flex;
     justify-content: space-between;
@@ -50,12 +65,12 @@
     color: #8b7f75;
     max-height: 0px;
     overflow: hidden;
-    transition: all 0.5 cubic-bezier(0, 1, 0, 1);
+    transition: all 1s cubic-bezier(0, 1, 0, 1);
 }
 
 .content_instructions.show {
     margin-top: 15px;
     height: auto;
     max-height: 9999px;
-    transition: all 0.5 cubic-bezier(1, 0, 1, 0);
+    transition: all 1s cubic-bezier(1, 0, 1, 0);
 }

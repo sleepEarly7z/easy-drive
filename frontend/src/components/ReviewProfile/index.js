@@ -19,7 +19,6 @@ import RatingStar from '../ReviewRating/RatingStar'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-
 const MessageActionButton = styled.button`
     margin: 0 5px;
     padding: 8px 19px;
@@ -94,9 +93,9 @@ export default function ReviewProfile({ instructor }) {
 
         return (
             <FollowActionButton onClick={toggleFollow}>
-                {isFollowing ? 'unfollow' : 'follow'}
+                {isFollowing ? 'Unfollow' : 'Follow'}
             </FollowActionButton>
-        );
+        )
     }
 
     return (
@@ -219,7 +218,7 @@ export default function ReviewProfile({ instructor }) {
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <div className="review-profile-info">
                                     <AiFillIdcard className="review-profile-ai-icon" />
-                                    Liscense
+                                    License
                                 </div>
                                 <div className="review-profile-info-res">
                                     {instructor.license}
