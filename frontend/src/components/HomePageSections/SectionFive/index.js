@@ -3,18 +3,11 @@ import './index.scss'
 import STCard from './STCard'
 import dataForTeam from '../../../utils/dataForTeam'
 import { v4 as uuidv4 } from 'uuid'
-import { loadFull } from 'tsparticles'
 import Particles from './Particles'
 
 const OurTeam = () => {
-    const handleInit = async (main) => {
-        await loadFull(main)
-    }
-
     return (
         <div className="OurTeam">
-            {/* <Particles id="particles" options={particles} init={handleInit} /> */}
-
             <Particles id="tsparticles" />
             <div className="section_title">
                 Meet Our Team
