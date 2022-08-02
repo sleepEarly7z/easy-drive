@@ -19,7 +19,7 @@ export default function StudentMap(props) {
     useEffect(() => {
         async function componentDidMount() {
             const firstResponce = await axios.get(
-                `https://ezdrive-test-merge.herokuapp.com/students/${params.studentId}`,
+                `https://ezdrivemain.herokuapp.com/students/${params.studentId}`,
             )
             // console.log(firstResponce.data.data);
             const streeturl = firstResponce.data.data.street
