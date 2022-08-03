@@ -70,8 +70,7 @@ const FilterCategory = (props) => {
                 <List
                     sx={{
                         width: '100%',
-                        minwidth: 'sm',
-                        bgcolor: 'background.paper',
+                        minwidth: 'sm'
                     }}
                 >
                     {options.map((option, index) => {

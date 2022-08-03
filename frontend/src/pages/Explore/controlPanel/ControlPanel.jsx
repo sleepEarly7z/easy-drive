@@ -21,7 +21,10 @@ const ControlPanel = (props) => {
                 display: { xs: 'none', md: 'flex' },
                 flexDirection: 'column',
                 alignItems: 'flex-start',
-                width: 300
+                height: '80vh',
+                overflowY: 'scroll',
+                maxWidth: 300,
+                overflowX:'hidden'
             }}
         >
 
