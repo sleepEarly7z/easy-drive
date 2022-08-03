@@ -58,6 +58,7 @@ const FollowActionButton = styled.button`
 }
 `
 
+
 export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch();
 
