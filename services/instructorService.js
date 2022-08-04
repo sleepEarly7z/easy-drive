@@ -257,7 +257,7 @@ const getQueriedInstructors = async (query) => {
 	let finalLimit = DEFAULT_LIMIT;
 
 	if (query) {
-		const { city, language, license, sortBy, sortDir, offset, limit } = query;
+		const { city, language, license, sortBy, sortDir } = query;
 
 		if (city) {
 			const cities = helpers.toArray(city);
@@ -275,27 +275,16 @@ const getQueriedInstructors = async (query) => {
 		if (sortBy && sortDir) {
 			sortQuery[sortBy] = (sortDir === 'asc') ? 1 : -1;
 		}
-
-		if (offset) finalOffset = offset;
-		if (limit) finalLimit = limit;
 	};
 
 	try {
 		const total = await Instructor.count(findQuery);
 
-		if (offset || limit) {
-			const data = await Instructor
-				.find(findQuery)
-				.sort(sortQuery)
-				.skip(finalOffset)
-				.limit(finalLimit);
-			return { total, data };
-		} else {
-			const data = await Instructor
-				.find(findQuery)
-				.sort(sortQuery)
-			return { total, data };
-		}
+		const data = await Instructor
+			.find(findQuery)
+			.sort(sortQuery);
+
+		return { total, data };
 	} catch (error) {
 		throw error;
 	}
