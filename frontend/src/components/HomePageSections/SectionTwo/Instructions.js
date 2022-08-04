@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './Instructions.scss'
 import dataForInstructions from '../../../utils/dataForInstructions'
 import { v4 as uuidv4 } from 'uuid'
+import headerImg from './notes.svg'
+import 'animate.css'
 
 const Instructions = () => {
     const [selected, setSelected] = useState(0)
@@ -15,7 +17,31 @@ const Instructions = () => {
 
     return (
         <div className="wrapper_instructions">
-            <div className="section_title_two">To have a better experience</div>
+            <div className="aligh-items-left">
+                <div className="section_title_experience">
+                    To have a better experience
+                    <div className="section_title_divider_experience">
+                        <div className="solid" />
+                    </div>
+                </div>
+                <div
+                    className="section_icon_experience"
+                    style={{
+                        alignContent: 'center',
+                        marginLeft: '6rem',
+                        paddingTop: '11rem',
+                    }}
+                >
+                    <img
+                        src={headerImg}
+                        alt="Header Img"
+                        style={{
+                            height: '15rem',
+                            width: '18rem',
+                        }}
+                    />
+                </div>
+            </div>
             <div className="accordion_instructions">
                 {dataForInstructions.map((item, idx) => (
                     <div
@@ -36,7 +62,7 @@ const Instructions = () => {
                                     : 'content_instructions'
                             }
                         >
-                            <h2>{item.content}</h2>
+                            <p>{item.content}</p>
                         </div>
                     </div>
                 ))}

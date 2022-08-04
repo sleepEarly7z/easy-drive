@@ -1,38 +1,52 @@
 .wrapper_instructions {
     display: flex;
-    height: 50vh;
-    width: 100vw;
+    height: 60vh;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
 
-.section_title_two {
+.aligh-items-left {
     font-family: 'Lato', sans-serif;
-    text-align: left;
+    text-align: center;
     justify-content: space-between;
     font-size: 40px;
     font-weight: 600;
-    margin-top: 37px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    width: 700px;
+    position: absolute;
+    left: 7vw;
+    width: 40vw;
+}
+
+.section_title_divider_experience {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 50px;
+    .solid {
+        width: 450px;
+        height:  0.3rem;
+        margin: 1rem 0;
+        border: 3px solid #FFB000;
+        background-color: #FFB000;
+    }
 }
 
 .accordion_instructions {
-    width: 500px;
+    position: absolute;
+    max-width: 40vw;
+    left: 50vw;
 }
 
 .item_instructions {
     background: #00000018;
-    // background: #f0ebe1;
     margin-bottom: 5px;
     padding: 20px 30px;
 }
 
 .title_instructions {
-    color: #cb9b49;
+    // color: #cb9b49;
+    // color: #cba055;
+    color: #ffd800;
     // color: #85662b;
     display: flex;
     justify-content: space-between;
@@ -47,15 +61,150 @@
 }
 
 .content_instructions {
-    color: #8b7f75;
+    // color: #8b7f75;
+    color: #fffddb;
     max-height: 0px;
     overflow: hidden;
-    transition: all 0.5 cubic-bezier(0, 1, 0, 1);
+    transition: all 1s cubic-bezier(0, 1, 0, 1);
 }
 
 .content_instructions.show {
     margin-top: 15px;
     height: auto;
     max-height: 9999px;
-    transition: all 0.5 cubic-bezier(1, 0, 1, 0);
+    transition: all 1s cubic-bezier(1, 0, 1, 0);
+}
+
+
+/************ Banner Css ************/
+.banner {
+    margin-top: 0;
+    // padding: 260px 0 100px 0;
+    // background-image: url('./assets/img/banner-bg.png');
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .banner .tagline {
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    padding: 8px 10px;
+    background: linear-gradient(90.21deg, rgba(170, 54, 124, 0.5) -5.91%, rgba(74, 47, 189, 0.5) 111.58%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+  .banner h1 {
+    font-size: 65px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .banner p {
+    color: #B8B8B8;
+    font-size: 18px;
+    letter-spacing: 0.8px;
+    line-height: 1.5em;
+    width: 96%;
+  }
+  .banner button {
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 60px;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+  }
+  .banner button svg {
+    font-size: 25px;
+    margin-left: 10px;
+    // transition: 0.3s ease-in-out;
+    line-height: 1;
+  }
+  .banner button:hover svg {
+    margin-left: 25px;
+  }
+  .banner img {
+    // animation: updown 3s linear infinite;
+  }
+  @keyframes updown {
+      0% {
+          transform: translateY(-20px);
+      }
+      50% {
+          transform: translateY(20px);
+      }
+      100% {
+          transform: translateY(-20px);
+      }
+  }
+  .txt-rotate > .wrap {
+    border-right: 0.08em solid #666;
+  }
+
+.section_title_experience {
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    padding-bottom: 15px;
+    padding-top: 2rem;
+    position: absolute;
+    left: 10vw;
+    color: #fff;
+    // background-color: #ffd800;
+}
+
+.section_title_divider_experience {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .solid {
+        width: 350px;
+        height:  0.3rem;
+        margin: 1rem 0;
+        margin-left: 2rem;
+        border: 3px solid #ffd800;
+        background-color: #ffd800;
+    }
+}
+
+
+@media only screen and (max-width: 1208px) {
+    .FollowInstructions {
+        padding-top: 2rem;
+    }
+    .wrapper_instructions {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .section_title_experience {
+        // position: relative;
+        // width: 100vw;
+        // margin-top: 0rem;
+        // padding-top: 0rem;
+    }
+    .section_icon_experience {
+        display: none;
+    }
+    .aligh-items-left {
+        // position: relative;
+        position: absolute;
+        top: 123vh;
+        left: 17vw;
+        width: 60vw;
+    }
+    .accordion_instructions {
+        // position: relative;
+        // position: absolute;
+        position: absolute;
+        top: 143vh;
+        left: 30vw;
+        width: 60vw;
+    }
 }

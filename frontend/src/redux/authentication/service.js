@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const INST_API_URL = 'https://ezdrive-test-3.herokuapp.com/instructors/'
-const STUD_API_URL = 'https://ezdrive-test-3.herokuapp.com/students/'
+const INST_API_URL = 'https://ezdrivemain.herokuapp.com/instructors/'
+const STUD_API_URL = 'https://ezdrivemain.herokuapp.com/students/'
 
 // Register as instructor
 const registerAsInstructor = async (userData) => {
