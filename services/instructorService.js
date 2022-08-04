@@ -253,11 +253,11 @@ const generateToken = (id) => {
 const getQueriedInstructors = async (query) => {
 	const findQuery = {};
 	const sortQuery = { DEFAULT_SORT_BY: DEFUALT_SORT_DIR };
-	let offset = DEFAULT_OFFSET;
-	let limit = DEFAULT_LIMIT;
+	let finalOffset = DEFAULT_OFFSET;
+	let finalLimit = DEFAULT_LIMIT;
 
 	if (query) {
-		const { city, language, license, sortBy, sortDir, offset, limit } = query;
+		const { city, language, license, sortBy, sortDir } = query;
 
 		if (city) {
 			const cities = helpers.toArray(city);
@@ -275,18 +275,15 @@ const getQueriedInstructors = async (query) => {
 		if (sortBy && sortDir) {
 			sortQuery[sortBy] = (sortDir === 'asc') ? 1 : -1;
 		}
-
-		if (offset) offset = offset;
-		if (limit) limit = limit;
 	};
 
 	try {
 		const total = await Instructor.count(findQuery);
+
 		const data = await Instructor
 			.find(findQuery)
-			.sort(sortQuery)
-			.skip(offset)
-			.limit(limit);
+			.sort(sortQuery);
+
 		return { total, data };
 	} catch (error) {
 		throw error;
