@@ -10,12 +10,22 @@ import {
     createTheme,
     ThemeProvider,
 } from '@material-ui/core'
-import { CssBaseline, Container, Paper, Box } from '@material-ui/core'
+import { CssBaseline, Container, Paper, Box, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import Grid from '@material-ui/core/Grid'
+import ToggleButton from '@mui/material/ToggleButton'
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
+
+import OutlinedInput from '@mui/material/OutlinedInput'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import { useTheme } from '@mui/material/styles'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
+import Chip from '@mui/material/Chip'
+
 import {
     useForm,
     Controller,
@@ -27,10 +37,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import toast from 'react-hot-toast'
 import { NavLink } from 'react-router-dom'
 
-import {
-    getInstructorsAsync,
-    addInstructorAsync,
-} from '../../redux/instructors/thunks'
+import { getInstructorsAsync } from '../../redux/instructors/thunks'
 
 import { reset } from '../../redux/authentication/reducer'
 import { registerAsync } from '../../redux/authentication/thunks'
@@ -131,6 +138,163 @@ const CarProvided = ({ control }) => {
     )
 }
 
+const ITEM_HEIGHT = 48
+const ITEM_PADDING_TOP = 8
+const MenuProps = {
+    PaperProps: {
+        style: {
+            // maxHeight: ITEM_HEIGHT * 5 + ITEM_PADDING_TOP,
+            // width: 250,
+        },
+    },
+}
+
+const languages = [
+    'English',
+    'Mandarin',
+    'Cantonese',
+    'Korean',
+    'French',
+    'Spanish',
+    'Japanese',
+]
+
+function getStyles(name, languageType, theme) {
+    return {
+        fontWeight:
+            languageType.indexOf(name) === -1
+                ? theme.typography.fontWeightRegular
+                : theme.typography.fontWeightMedium,
+    }
+}
+
+const SelectLicense = ({ control }) => {
+    const [license, setLicense] = React.useState('Class 5')
+
+    const handleChange = (event) => {
+        setLicense(event.target.value)
+    }
+
+    return (
+        <ThemeProvider theme={theme}>
+            <div>
+                <section style={{ display: 'flex' }}>
+                    <Controller
+                        render={({ field }) => (
+                            <FormControl sx={{ height: 75, width: 1200 }}>
+                                <InputLabel id="demo-simple-select-label">
+                                    License type
+                                </InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={license}
+                                    defaultValue={license}
+                                    fullWidth
+                                    onChange={handleChange}
+                                    {...field}
+                                >
+                                    <MenuItem value={'Class 5'}>
+                                        Class 5
+                                    </MenuItem>
+                                    <MenuItem value={'Class 4'}>
+                                        Class 4
+                                    </MenuItem>
+                                    <MenuItem value={'Class 7'}>
+                                        Class 7
+                                    </MenuItem>
+                                </Select>
+                            </FormControl>
+                        )}
+                        name="license"
+                        control={control}
+                    />
+                </section>
+            </div>
+        </ThemeProvider>
+    )
+}
+
+const MultipleSelectLanguage = ({ control }) => {
+    const theme = useTheme()
+    const [languageType, setLanguageType] = React.useState(['English'])
+
+    const handleChange = (event) => {
+        const {
+            target: { value },
+        } = event
+        setLanguageType(
+            // On autofill we get a stringified value.
+            typeof value === 'string' ? value.split(',') : value,
+        )
+    }
+    return (
+        <ThemeProvider theme={theme}>
+            <div>
+                <section style={{ display: 'flex' }}>
+                    <Controller
+                        render={({ field }) => (
+                            <FormControl sx={{ height: 65, width: 1200 }}>
+                                <InputLabel id="demo-simple-select-label">
+                                    Languages
+                                </InputLabel>
+                                <Select
+                                    label="Languages"
+                                    labelId="demo-multiple-chip-label"
+                                    id="demo-multiple-chip"
+                                    multiple
+                                    value={languageType}
+                                    fullWidth
+                                    onChange={handleChange}
+                                    input={
+                                        <OutlinedInput
+                                            id="select-multiple-chip"
+                                            label="Chip"
+                                        />
+                                    }
+                                    renderValue={(selected) => (
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                flexWrap: 'wrap',
+                                                gap: 0.5,
+                                            }}
+                                        >
+                                            {selected.map((value) => (
+                                                <Chip
+                                                    key={value}
+                                                    label={value}
+                                                />
+                                            ))}
+                                        </Box>
+                                    )}
+                                    {...field}
+                                >
+                                    {languages.map((itm) => (
+                                        <MenuItem
+                                            key={itm}
+                                            value={itm}
+                                            style={getStyles(
+                                                itm,
+                                                languageType,
+                                                theme,
+                                            )}
+                                        >
+                                            {itm}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        )}
+                        name="language"
+                        control={control}
+                    />
+                </section>
+            </div>
+        </ThemeProvider>
+    )
+}
+
 function getSteps() {
     return [
         'Basic information',
@@ -191,18 +355,19 @@ const BasicForm = () => {
                     />
                 )}
             />
-
             <Controller
                 control={control}
-                name="province"
+                name="description"
                 render={({ field }) => (
                     <TextField
-                        id="province"
-                        label="Province*"
-                        variant="outlined"
-                        placeholder="Re-enter Your Password"
-                        fullWidth
+                        id="outlined-multiline-static"
+                        label="Description"
+                        placeholder="Enter Your Description"
+                        multiline
+                        minrows={4}
                         margin="normal"
+                        variant="outlined"
+                        fullWidth
                         {...field}
                     />
                 )}
@@ -278,22 +443,6 @@ const ContactForm = () => {
                     />
                 )}
             />
-
-            <Controller
-                control={control}
-                name="country"
-                render={({ field }) => (
-                    <TextField
-                        id="country"
-                        label="Country*"
-                        variant="outlined"
-                        placeholder="Enter Your Country"
-                        fullWidth
-                        margin="normal"
-                        {...field}
-                    />
-                )}
-            />
         </>
     )
 }
@@ -302,21 +451,9 @@ const ProfessionalForm = () => {
     const { control } = useFormContext()
     return (
         <>
-            <Controller
-                control={control}
-                name="license"
-                render={({ field }) => (
-                    <TextField
-                        id="license"
-                        label="License*"
-                        variant="outlined"
-                        placeholder="Enter Your License"
-                        fullWidth
-                        margin="normal"
-                        {...field}
-                    />
-                )}
-            />
+            <SelectLicense control={control} />
+
+            <MultipleSelectLanguage control={control} />
 
             <Controller
                 control={control}
@@ -326,9 +463,10 @@ const ProfessionalForm = () => {
                         id="experience"
                         label="Year Of Experience*"
                         variant="outlined"
-                        placeholder="Enter Your Year Of Experience"
+                        placeholder="Enter Number"
                         fullWidth
                         margin="normal"
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                         {...field}
                     />
                 )}
@@ -350,34 +488,6 @@ const ProfessionalForm = () => {
                 )}
             />
 
-            {/* <Controller
-                control={control}
-                name="language"
-                render={({ field }) => <MultipleSelectChip />}
-            /> */}
-            {/* <MultipleSelectChip control={control} /> */}
-
-            <Controller
-                control={control}
-                name="language"
-                render={({ field }) => (
-                    <TextField
-                        id="language"
-                        label="Language"
-                        variant="outlined"
-                        placeholder="Enter Your Languages, and split using comma"
-                        fullWidth
-                        margin="normal"
-                        {...field}
-                    />
-                )}
-            />
-
-            {/* <Controller
-                control={control}
-                name="isCarProvided"
-                render={({ field }) => <CarProvided control={control} />}
-            /> */}
             <CarProvided control={control} />
         </>
     )
@@ -385,6 +495,7 @@ const ProfessionalForm = () => {
 
 const ProfileForm = () => {
     const { control } = useFormContext()
+
     return (
         <>
             <Controller
@@ -404,23 +515,68 @@ const ProfileForm = () => {
                     />
                 )}
             />
-
-            <Controller
-                control={control}
-                name="time"
-                render={({ field }) => (
-                    <TextField
-                        id="time"
-                        label="Hours Available Per Day*"
-                        variant="outlined"
-                        placeholder="Enter Your Available Hours Each Workday"
-                        fullWidth
-                        margin="normal"
-                        {...field}
-                    />
-                )}
-            />
         </>
+    )
+}
+
+const SelectAvailability = ({ control }) => {
+    const [formats, setFormats] = React.useState(() => [])
+
+    const handleFormat = (event, newFormats) => {
+        console.log(newFormats)
+        setFormats(newFormats)
+    }
+    return (
+        <ThemeProvider theme={theme}>
+            <div>
+                <section style={{ display: 'flex' }}>
+                    <>
+                        <ToggleButtonGroup
+                            value={formats}
+                            orientation="vertical"
+                            onChange={handleFormat()}
+                            aria-label="sundayslots"
+                            // {...field}
+                        >
+                            <ToggleButton
+                                value="Sunday"
+                                aria-label="Sunday"
+                                disabled
+                            >
+                                <div>Sunday</div>
+                            </ToggleButton>
+                            <ToggleButton value="8am" aria-label="8am">
+                                <div>08:00am - 09:00am</div>
+                            </ToggleButton>
+                            <ToggleButton value="9am" aria-label="9am">
+                                <div>09:00am - 10:00am</div>
+                            </ToggleButton>
+                            <ToggleButton value="10am" aria-label="10am">
+                                <div>10:00am - 11:00am</div>
+                            </ToggleButton>
+                            <ToggleButton value="11am" aria-label="11am">
+                                <div>11:00am - 12:00pm</div>
+                            </ToggleButton>
+                            <ToggleButton value="12pm" aria-label="12pm">
+                                <div>12:00pm - 13:00pm</div>
+                            </ToggleButton>
+                            <ToggleButton value="13pm" aria-label="13pm">
+                                <div>13:00pm - 14:00pm</div>
+                            </ToggleButton>
+                            <ToggleButton value="14pm" aria-label="14pm">
+                                <div>14:00pm - 15:00pm</div>
+                            </ToggleButton>
+                            <ToggleButton value="15pm" aria-label="15pm">
+                                <div>15:00pm - 16:00pm</div>
+                            </ToggleButton>
+                            <ToggleButton value="16pm" aria-label="16pm">
+                                <div>16:00pm - 17:00pm</div>
+                            </ToggleButton>
+                        </ToggleButtonGroup>
+                    </>
+                </section>
+            </div>
+        </ThemeProvider>
     )
 }
 
@@ -428,6 +584,7 @@ function getStepContent(step) {
     switch (step) {
         case 0:
             return <BasicForm />
+        // return <ProfileForm />
         case 1:
             return <ContactForm />
         case 2:
@@ -470,24 +627,22 @@ const SignUpInstructor = () => {
     const classes = useStyles()
     const methods = useForm({
         defaultValues: {
+            role: 'instructor',
             first_name: '',
             last_name: '',
             password: '',
-            // province: '',
             email: '',
             phone: '',
-            // gender: '',
             street: '',
             city: '',
-            province: '',
-            country: '',
+            province: 'British Columbia',
+            country: 'Canada',
             license: '',
             experience: '',
             company: '',
-            language: '',
+            language: [],
             isCarProvided: '',
             description: '',
-            time: '',
         },
     })
     const [activeStep, setActiveStep] = useState(0)
@@ -506,10 +661,6 @@ const SignUpInstructor = () => {
     const handleNext = (data) => {
         console.log(data)
         if (activeStep === steps.length - 1) {
-            if (!data.time) {
-                toast.error('Please fill the required space.')
-                return
-            }
             fetch('https://jsonplaceholder.typicode.com/comments')
                 .then((data) => data.json())
                 .then((res) => {
@@ -518,6 +669,8 @@ const SignUpInstructor = () => {
                 })
 
             // create an account
+            console.log(data)
+            data.language = data.language.toString()
             console.log(data)
             dispatch(registerAsync(data))
             setIsLoading(true)
@@ -531,28 +684,18 @@ const SignUpInstructor = () => {
                     !data.first_name ||
                     !data.last_name ||
                     !data.password ||
-                    !data.province
+                    !data.description
                 ) {
                     toast.error('Please fill the required space.')
                     return
                 }
-                if (data.password.length < 8) {
-                    toast.error('Passwords must be at least 8 characters long.')
+                if (data.password.length < 6) {
+                    toast.error('Passwords must be at least 6 characters long.')
                     return
                 }
-                // if (data.password !== data.province) {
-                //     toast.error('Re-entered password does not match.')
-                //     return
-                // }
             }
             if (activeStep === 1) {
-                if (
-                    !data.email ||
-                    !data.phone ||
-                    !data.street ||
-                    !data.city ||
-                    !data.country
-                ) {
+                if (!data.email || !data.phone || !data.street || !data.city) {
                     toast.error('Please fill the required space.')
                     return
                 }
