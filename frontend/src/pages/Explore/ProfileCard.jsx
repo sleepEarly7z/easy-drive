@@ -2,8 +2,6 @@ import Card from '@mui/material/Card';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { Avatar, IconButton } from '@mui/material';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -12,6 +10,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleFollowInstructorAsync } from '../../redux/authentication/thunks'
+import Grid from '@mui/material/Grid';
 
 const ProfileCard = (props) => {
     const navigate = useNavigate();
@@ -64,50 +63,52 @@ const ProfileCard = (props) => {
     }
 
     return (
-        <Card variant="outlined">
-            <CardContent sx={{ pb: 1 }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
-                        {(profileUrl)
-                            ? <Avatar alt={name} src={profileUrl} sx={{ width: 60, height: 60 }} />
-                            : <Avatar sx={{ width: 60, height: 60 }}>{getInitial(name)}</Avatar>}
-                        <Box sx={{ display: 'flex', flexDirection: 'column', ml: 2 }}>
-                            <Typography sx={{ fontSize: 20, fontWeight: 500 }}>{name}</Typography>
-                            <Typography variant='caption'> {year} years of experience</Typography>
-                        </Box>
-                    </Box>
+        <Grid container spacing={2} sx={{ mb: 3 }}>
+            <Grid item sm={4} >
+                {(profileUrl)
+                    ? <Avatar alt={name} src={profileUrl} sx={{ width: 120, height: 120, cursor: 'pointer' }} onClick={viewProfile} />
+                    : <Avatar sx={{ width: 120, height: 120, cursor: 'pointer' }} onClick={viewProfile}>{getInitial(name)}</Avatar>}
+            </Grid>
 
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'left', flexDirection: 'column', mt: 2 }}>
-                        <Box sx={{ display: 'inline-flex' }}>
-                            <LocationOnIcon sx={{ pr: 1 }} />
-                            <Typography component="span"> {location} </Typography>
-                        </Box>
-                        <Box sx={{ display: 'inline-flex' }}>
-                            <LanguageIcon sx={{ pr: 1 }} />
-                            <Typography component="span"> {language} </Typography>
-                        </Box>
-                    </Box>
-
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'left', flexDirection: 'row', mt: 2 }}>
-                        <Box>
-                            <Typography variant="h3">
-                                {rating}
-                                <Typography variant="body1" display="inline">/5</Typography>
+            <Grid item container sm={4}>
+                <Grid item container direction="column" spacing={2}>
+                    <Grid item xs>
+                        <Box sx={{ display: 'flex' }}>
+                            <Typography gutterBottom variant='h5' component="div" color='text.primary'
+                                sx={{ cursor: 'pointer' }}
+                                onClick={viewProfile}>
+                                {name}
                             </Typography>
-                        </Box>
-
-                        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
-                            <Button variant="text"
-                                onClick={viewProfile}>profile</Button>
                             {(user && user.data.role === 'student') &&
                                 <ToggleFollowButton instructorId={id} />
                             }
-
                         </Box>
-                    </Box>
-                </Box>
-            </CardContent>
-        </Card >
+
+
+                        <Typography gutterBottom color='text.primary' variant='body1' > {year} years of experience</Typography>
+
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'left', flexDirection: 'column' }}>
+                            <Box sx={{ display: 'inline-flex' }} color="text.secondary">
+                                <LocationOnIcon sx={{ pr: 1 }} />
+                                <Typography component="span" > {location} </Typography>
+                            </Box>
+                            <Box sx={{ display: 'inline-flex' }} color="text.secondary">
+                                <LanguageIcon sx={{ pr: 1 }} />
+                                <Typography component="span"> {language} </Typography>
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid item sm={4}>
+                <Typography variant="h3"  >
+                    {rating}
+                    <Typography variant="body1" display="inline" >/5</Typography>
+                </Typography>
+            </Grid>
+        </Grid >
+
     );
 }
 

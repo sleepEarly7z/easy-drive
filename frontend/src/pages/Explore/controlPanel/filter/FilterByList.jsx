@@ -11,7 +11,7 @@ const FilterByList = (props) => {
 
     return (
         <List
-            sx={{ bgcolor: 'background.paper', width: 300 }}
+            sx={{ width: 1 }}
 
             subheader={
                 <ListSubheader component="div" id="nested-list-subheader" sx={{ alignSelf: 'flex-start' }}>
