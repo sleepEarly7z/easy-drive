@@ -4,7 +4,12 @@ const jwt = require('jsonwebtoken');
 
 const Instructor = require('../models/instructorModel');
 const helpers = require('../utils/helpers');
-const { DEFAULT_SORT_BY, DEFUALT_SORT_DIR, DEFAULT_OFFSET, DEFAULT_LIMIT } = require('../utils/constants');
+const {
+	DEFAULT_SORT_BY,
+	DEFUALT_SORT_DIR,
+	DEFAULT_OFFSET,
+	DEFAULT_LIMIT,
+} = require('../utils/constants');
 
 /**
  * Get an instructor with given id from database
@@ -85,7 +90,7 @@ const registerInstructor = async (instructor) => {
 
 	// Create user
 	const newInstructor = await Instructor.create({
-		role: 'isntructor',
+		role: 'instructor',
 		first_name,
 		last_name,
 		// password: hashedPassword,
@@ -253,11 +258,19 @@ const generateToken = (id) => {
 const getQueriedInstructors = async (query) => {
 	const findQuery = {};
 	const sortQuery = { DEFAULT_SORT_BY: DEFUALT_SORT_DIR };
-	let finalOffset = DEFAULT_OFFSET;
-	let finalLimit = DEFAULT_LIMIT;
+	let offset = DEFAULT_OFFSET;
+	let limit = DEFAULT_LIMIT;
 
 	if (query) {
-		const { city, language, license, sortBy, sortDir } = query;
+		const {
+			city,
+			language,
+			license,
+			sortBy,
+			sortDir,
+			offset,
+			limit,
+		} = query;
 
 		if (city) {
 			const cities = helpers.toArray(city);
@@ -273,17 +286,19 @@ const getQueriedInstructors = async (query) => {
 		}
 
 		if (sortBy && sortDir) {
-			sortQuery[sortBy] = (sortDir === 'asc') ? 1 : -1;
+			sortQuery[sortBy] = sortDir === 'asc' ? 1 : -1;
 		}
-	};
+
+		if (offset) offset = offset;
+		if (limit) limit = limit;
+	}
 
 	try {
 		const total = await Instructor.count(findQuery);
-
-		const data = await Instructor
-			.find(findQuery)
-			.sort(sortQuery);
-
+		const data = await Instructor.find(findQuery)
+			.sort(sortQuery)
+			.skip(offset)
+			.limit(limit);
 		return { total, data };
 	} catch (error) {
 		throw error;
