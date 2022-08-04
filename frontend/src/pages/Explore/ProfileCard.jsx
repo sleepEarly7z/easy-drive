@@ -73,14 +73,17 @@ const ProfileCard = (props) => {
             <Grid item container sm={4}>
                 <Grid item container direction="column" spacing={2}>
                     <Grid item xs>
-                        <Typography gutterBottom variant='h5' component="div" color='text.primary'
-                            sx={{ cursor: 'pointer' }}
-                            onClick={viewProfile}>
-                            {name}
+                        <Box sx={{ display: 'flex' }}>
+                            <Typography gutterBottom variant='h5' component="div" color='text.primary'
+                                sx={{ cursor: 'pointer' }}
+                                onClick={viewProfile}>
+                                {name}
+                            </Typography>
                             {(user && user.data.role === 'student') &&
                                 <ToggleFollowButton instructorId={id} />
                             }
-                        </Typography>
+                        </Box>
+
 
                         <Typography gutterBottom color='text.primary' variant='body1' > {year} years of experience</Typography>
 
