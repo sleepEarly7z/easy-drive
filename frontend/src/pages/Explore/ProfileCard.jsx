@@ -64,18 +64,14 @@ const ProfileCard = (props) => {
 
     return (
         <Grid container spacing={2} sx={{ mb: 3 }}>
-            <Grid item xs={2}>
-                <Box sx={{ cursor: 'pointer' }}
-                    onClick={viewProfile}
-                >
-                    {(profileUrl)
-                        ? <Avatar alt={name} src={profileUrl} sx={{ width: 120, height: 120 }} />
-                        : <Avatar sx={{ width: 120, height: 120 }}>{getInitial(name)}</Avatar>}
-                </Box>
+            <Grid item sm={4} >
+                {(profileUrl)
+                    ? <Avatar alt={name} src={profileUrl} sx={{ width: 120, height: 120, cursor: 'pointer' }} onClick={viewProfile} />
+                    : <Avatar sx={{ width: 120, height: 120, cursor: 'pointer' }} onClick={viewProfile}>{getInitial(name)}</Avatar>}
             </Grid>
 
-            <Grid item xs={4} sm container>
-                <Grid item xs container direction="column" spacing={2}>
+            <Grid item container sm={4}>
+                <Grid item container direction="column" spacing={2}>
                     <Grid item xs>
                         <Typography gutterBottom variant='h5' component="div" color='text.primary'
                             sx={{ cursor: 'pointer' }}
@@ -90,11 +86,11 @@ const ProfileCard = (props) => {
 
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'left', flexDirection: 'column' }}>
                             <Box sx={{ display: 'inline-flex' }} color="text.secondary">
-                                <LocationOnIcon  sx={{ pr: 1 }} />
+                                <LocationOnIcon sx={{ pr: 1 }} />
                                 <Typography component="span" > {location} </Typography>
                             </Box>
                             <Box sx={{ display: 'inline-flex' }} color="text.secondary">
-                                <LanguageIcon  sx={{ pr: 1 }} />
+                                <LanguageIcon sx={{ pr: 1 }} />
                                 <Typography component="span"> {language} </Typography>
                             </Box>
                         </Box>
@@ -102,7 +98,7 @@ const ProfileCard = (props) => {
                 </Grid>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item sm={4}>
                 <Typography variant="h3"  >
                     {rating}
                     <Typography variant="body1" display="inline" >/5</Typography>

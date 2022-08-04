@@ -18,13 +18,9 @@ const ControlPanel = (props) => {
         <Box
             sx={{
                 p: 2,
-                display: { xs: 'none', md: 'flex' },
+                display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'flex-start',
-                height: '80vh',
-                overflowY: 'scroll',
-                maxWidth: 300,
-                overflowX:'hidden'
+                alignItems: 'flex-start'
             }}
         >
 

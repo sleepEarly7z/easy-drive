@@ -1,4 +1,3 @@
-import { Grid } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getInstructorsAsync } from '../../redux/instructors/thunks';
@@ -18,7 +17,7 @@ const ResultList = () => {
     const instructors = useSelector((state) => state.instructors.list);
 
     return (
-        <Box sx={{ overflowY: 'scroll', height: '70vh' }}>
+        <Box sx={{ overflowY: 'scroll', height: '100vh' }}>
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 {instructors.map((x) => (
                     <ListItem alignItems="flex-start" key={x._id}>

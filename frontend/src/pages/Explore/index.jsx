@@ -22,15 +22,15 @@ const Explore = () => {
         <ThemeProvider
             theme={theme}
         >
-                <Slider />
+            <Slider />
 
-            <Grid container spacing={2} sx={{ mt: 2 }}>
-                <Grid item xs={3}>
+            <Grid container spacing={2} sx={{ mt: 2, pl: 3 }}>
+                <Grid item xs={0} sm={3}>
                     <ControlPanel />
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={12} sm={9}>
                     <Typography gutterBottom variant='h5'>
-                        Search Results
+                        Matching Instructors
                     </Typography>
                     <Divider />
                     <ResultList />
