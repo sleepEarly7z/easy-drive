@@ -295,10 +295,9 @@ const getQueriedInstructors = async (query) => {
 
 	try {
 		const total = await Instructor.count(findQuery);
-		const data = await Instructor.find(findQuery)
+		const data = await Instructor
+			.find(findQuery)
 			.sort(sortQuery)
-			.skip(offset)
-			.limit(limit);
 		return { total, data };
 	} catch (error) {
 		throw error;
