@@ -43,6 +43,7 @@ import { reset } from '../../redux/authentication/reducer'
 import { registerAsync } from '../../redux/authentication/thunks'
 
 import Loading from '../Animation/Loading'
+import Availability from '../Calendar/Availability'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -300,7 +301,8 @@ function getSteps() {
         'Basic information',
         'Contact Information',
         'Professional Information',
-        'Profile Information',
+        // 'Profile Information',
+        'Availability',
     ]
 }
 
@@ -519,78 +521,24 @@ const ProfileForm = () => {
     )
 }
 
-const SelectAvailability = ({ control }) => {
-    const [formats, setFormats] = React.useState(() => [])
-
-    const handleFormat = (event, newFormats) => {
-        console.log(newFormats)
-        setFormats(newFormats)
-    }
-    return (
-        <ThemeProvider theme={theme}>
-            <div>
-                <section style={{ display: 'flex' }}>
-                    <>
-                        <ToggleButtonGroup
-                            value={formats}
-                            orientation="vertical"
-                            onChange={handleFormat()}
-                            aria-label="sundayslots"
-                            // {...field}
-                        >
-                            <ToggleButton
-                                value="Sunday"
-                                aria-label="Sunday"
-                                disabled
-                            >
-                                <div>Sunday</div>
-                            </ToggleButton>
-                            <ToggleButton value="8am" aria-label="8am">
-                                <div>08:00am - 09:00am</div>
-                            </ToggleButton>
-                            <ToggleButton value="9am" aria-label="9am">
-                                <div>09:00am - 10:00am</div>
-                            </ToggleButton>
-                            <ToggleButton value="10am" aria-label="10am">
-                                <div>10:00am - 11:00am</div>
-                            </ToggleButton>
-                            <ToggleButton value="11am" aria-label="11am">
-                                <div>11:00am - 12:00pm</div>
-                            </ToggleButton>
-                            <ToggleButton value="12pm" aria-label="12pm">
-                                <div>12:00pm - 13:00pm</div>
-                            </ToggleButton>
-                            <ToggleButton value="13pm" aria-label="13pm">
-                                <div>13:00pm - 14:00pm</div>
-                            </ToggleButton>
-                            <ToggleButton value="14pm" aria-label="14pm">
-                                <div>14:00pm - 15:00pm</div>
-                            </ToggleButton>
-                            <ToggleButton value="15pm" aria-label="15pm">
-                                <div>15:00pm - 16:00pm</div>
-                            </ToggleButton>
-                            <ToggleButton value="16pm" aria-label="16pm">
-                                <div>16:00pm - 17:00pm</div>
-                            </ToggleButton>
-                        </ToggleButtonGroup>
-                    </>
-                </section>
-            </div>
-        </ThemeProvider>
-    )
-}
-
-function getStepContent(step) {
+function getStepContent(step, formats, setFormats, handleFormat) {
     switch (step) {
         case 0:
             return <BasicForm />
-        // return <ProfileForm />
         case 1:
             return <ContactForm />
         case 2:
             return <ProfessionalForm />
         case 3:
-            return <ProfileForm />
+            //     return <ProfileForm />
+            // case 4:
+            return (
+                <Availability
+                    formats={formats}
+                    setFormats={setFormats}
+                    handleFormat={handleFormat}
+                />
+            )
         default:
             return 'unknown step'
     }
@@ -603,6 +551,13 @@ const SignUpInstructor = () => {
     useEffect(() => {
         dispatch(getInstructorsAsync())
     }, [dispatch])
+
+    const [formats, setFormats] = React.useState(() => [])
+
+    const handleFormat = (event, newFormats) => {
+        setFormats(newFormats)
+        console.log(newFormats)
+    }
 
     const { user, isError, isSuccess, message } = useSelector(
         (state) => state.auth,
@@ -651,7 +606,7 @@ const SignUpInstructor = () => {
     const steps = getSteps()
 
     const isStepOptional = (step) => {
-        return step === 1 || step === 2
+        return step === 3
     }
 
     const isStepSkipped = (step) => {
@@ -659,7 +614,7 @@ const SignUpInstructor = () => {
     }
 
     const handleNext = (data) => {
-        console.log(data)
+        console.log('data: ' + data)
         if (activeStep === steps.length - 1) {
             fetch('https://jsonplaceholder.typicode.com/comments')
                 .then((data) => data.json())
@@ -671,8 +626,12 @@ const SignUpInstructor = () => {
             // create an account
             console.log(data)
             data.language = data.language.toString()
-            console.log(data)
+            console.log('data: ' + data)
             dispatch(registerAsync(data))
+            if (formats.length !== 0) {
+                console.log('Need to book available time')
+            }
+            // console.log('formats: ' + formats)
             setIsLoading(true)
             // redirect after 3 seconds
             setTimeout(function () {
@@ -715,13 +674,6 @@ const SignUpInstructor = () => {
 
     const handleBack = () => {
         setActiveStep(activeStep - 1)
-    }
-
-    const handleSkip = () => {
-        if (!isStepSkipped(activeStep)) {
-            setSkippedSteps([...skippedSteps, activeStep])
-        }
-        setActiveStep(activeStep + 1)
     }
 
     const onSubmit = (data) => {
@@ -794,7 +746,12 @@ const SignUpInstructor = () => {
                                             handleNext,
                                         )}
                                     >
-                                        {getStepContent(activeStep)}
+                                        {getStepContent(
+                                            activeStep,
+                                            formats,
+                                            setFormats,
+                                            handleFormat,
+                                        )}
                                         <Grid
                                             container
                                             justifyContent="space-between"
@@ -819,25 +776,12 @@ const SignUpInstructor = () => {
                                                 variant="body1"
                                                 className={classes.rightText}
                                             >
-                                                {isStepOptional(activeStep) && (
-                                                    <Button
-                                                        className={
-                                                            classes.buttonRight
-                                                        }
-                                                        variant="contained"
-                                                        color="primary"
-                                                        onClick={handleSkip}
-                                                    >
-                                                        skip
-                                                    </Button>
-                                                )}
                                                 <Button
                                                     className={
                                                         classes.buttonRight
                                                     }
                                                     variant="contained"
                                                     color="primary"
-                                                    // onClick={handleNext}
                                                     type="submit"
                                                 >
                                                     {activeStep ===
@@ -860,7 +804,7 @@ const SignUpInstructor = () => {
                 </div>
                 <div className="SignUpRedirectLink">
                     <NavLink to="/sign-up-student">
-                        Sign up as an student
+                        Sign up as a student
                     </NavLink>
                 </div>
             </div>

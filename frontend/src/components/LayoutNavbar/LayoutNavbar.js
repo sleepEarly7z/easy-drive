@@ -306,24 +306,40 @@ function LayoutNavbar() {
                             Message
                         </Link>
                     </li> */}
-                    <li className="navbar__container__menu_item">
-                        {user ? (
-                            <Link
-                                className="navbar__container__menu_item_links"
-                                to={`/profile-${user.data.role}/${user.data._id}`}
-                            >
-                                View Profile
-                            </Link>
-                        ) : (
+                    {user ? (
+                        <>
+                            <li className="navbar__container__menu_item">
+                                <Link
+                                    className="navbar__container__menu_item_links"
+                                    to={`/profile-${user.data.role}/${user.data._id}`}
+                                >
+                                    View Profile
+                                </Link>
+                            </li>
+                            <li className="navbar__container__menu_item">
+                                <Link
+                                    className="navbar__container__menu_item_links"
+                                    to={`/`}
+                                    onClick={() => {
+                                        dispatch(logoutAsync())
+                                        dispatch(reset())
+                                        navigate('/explore')
+                                    }}
+                                >
+                                    Sign Out
+                                </Link>
+                            </li>
+                        </>
+                    ) : (
+                        <li className="navbar__container__menu_item">
                             <Link
                                 className="navbar__container__menu_item_links"
                                 to="/sign-in"
                             >
                                 Login/Register
                             </Link>
-                        )}
-                    </li>
-                    {/* </div> */}
+                        </li>
+                    )}
                 </ul>
 
                 <div className="nav-icon" onClick={handleToggleIcon}>
