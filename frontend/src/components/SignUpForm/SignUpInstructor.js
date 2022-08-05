@@ -860,7 +860,7 @@ const SignUpInstructor = () => {
                 </div>
                 <div className="SignUpRedirectLink">
                     <NavLink to="/sign-up-student">
-                        Sign up as an student
+                        Sign up as a student
                     </NavLink>
                 </div>
             </div>

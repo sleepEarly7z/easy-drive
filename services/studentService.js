@@ -19,7 +19,7 @@ const getStudents = () => {
 };
 
 /**
- * Get an Student with given id from database
+ * Get a Student with given id from database
  *
  * @param {string} id
  *
@@ -35,7 +35,7 @@ const getStudentById = async (id) => {
 };
 
 /**
- * Add an Student to the database
+ * Add a Student to the database
  *
  * @param {object} Student
  *
@@ -70,7 +70,7 @@ const deleteStudentById = (id) => {
 };
 
 /**
- * Update an Student form database
+ * Update a Student form database
  *
  * @param {string} id
  * @param {object} patch with properties need to update
