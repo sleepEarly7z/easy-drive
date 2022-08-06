@@ -11,8 +11,18 @@
 .upper-container-Yizhou {
     height: 100%;
     width: 100px;
-    background: linear-gradient(to left, #2d00f7, #ff0291);
+    background: linear-gradient(to left, #f76c01, #000000);
 }
+.upper-image-container-Yizhou{
+    display: flex;
+    justify-content: center;
+}
+.upper-container-img {
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+}
+
 
 .image-container-Yizhou {
     display: flex;

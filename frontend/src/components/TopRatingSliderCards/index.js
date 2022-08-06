@@ -8,6 +8,10 @@ function TopRatingSliderCards({ name, location, years, rate, imgSrc }) {
     return (
         <div className="ProfileCard-Yizhou">
             <div className="upper-container-Yizhou">
+                {/* <div className="upper-image-container-Yizhou">
+                    <img className="upper-container-img" src={"https://images.pexels.com/photos/12538152/pexels-photo-12538152.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} alt="dsa"
+                    />
+                </div> */}
                 <div className="image-container-Yizhou">
                     <img
                         className="image-container-img-Yizhou"
