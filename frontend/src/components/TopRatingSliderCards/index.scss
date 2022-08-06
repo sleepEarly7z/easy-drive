@@ -1,13 +1,3 @@
-.ProfileCard-Yizhou {
-    // font-family: 'Kaushan Script', cursive;
-    display: flex;
-    width: 95%;
-    height: 200px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 1px 10px 1px black;
-}
-
 .upper-image-container-Yizhou{
     display: flex;
     justify-content: center;
@@ -43,17 +33,17 @@
         font-size: 16px;
     }
 }
-// @media screen and (max-width: 910px) {
 .ProfileCard-Yizhou {
-    // font-family: 'Kaushan Script', cursive;
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 90%;
-    height: 480px;
+    height: 550px;
     background: white;
     border-radius: 10px;
-    box-shadow: 0px 1px 10px 1px black;
+    border-top-right-radius:15px;
+    border-top-left-radius: 15px;
+    box-shadow: 2px 2px 10px 1px black;
     transform: scale(0.98, 0.98);
 }
 
@@ -62,7 +52,7 @@
     height: 200px;
     border-top-right-radius:15px;
     border-top-left-radius: 15px;
-    background: linear-gradient(to left, #f76c01, #000000);
+    //background: linear-gradient(to left, #f76c01, #000000);
 }
 
 .image-container-Yizhou {
@@ -71,7 +61,7 @@
 }
 
 .image-container-img-Yizhou {
-    background: white;
+    background: rgb(222, 228, 252);
     width: 130px;
     height: 130px;
     border-radius: 50%;
@@ -81,28 +71,31 @@
 }
 
 .lower-container-Yizhou {
-    margin-left: 0%;
+    //margin-left: 0%;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-top: 30px;
+    //padding-top: 30px;
     width: 100%;
-    height: 300px;
+    height: 100%;
     background: white;
     text-align: center;
     font-family: 'Titillium Web', sans-serif;
 }
 
-.lower-container-Yizhou h2,
-h4,
-p {
+.lower-container-Yizhou p {
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
     margin: 0;
     margin-left: 25px;
+    margin-top: 4px;
     padding: 0;
 }
 
 .lower-container-Yizhou h2 {
     color: black;
+    margin-left: 25px;
     font-weight: 600;
     font-size: 20px;
 }
@@ -114,12 +107,8 @@ p {
 }
 
 .star-rating-Yizhou {
-    font-weight: 600;
-    font-size: 18px;
-}
-
-.star-rating-Yizhou {
     //color: purple;
+    margin-bottom: 3px;
     font-weight: 600;
     font-size: 20px;
 }
@@ -149,47 +138,26 @@ p {
 
 .profileButton-Yizhou {
     align-items: center;
-    margin-left: 25%;
+    margin-left: 30%;
     // margin-top: 35px;
-    width: 50%;
+    width: 40%;
     height: 60%;
-    color: rgb(252, 186, 3);
+    color: rgb(122,160,254);
     font: bold;
     font-weight: 800;
     background-color: white;
-    // border: 2px solid purple;
+    border: 2px solid grey;
     padding: 0.4rem;
-    border-radius: 6px;
+    border-radius: 30px;
     transition-duration: 0.5s;
     animation: ease-in-out;
+
+    box-shadow:  5px 5px 5px  rgb(208,217,253);
 }
 
 .profileButton-Yizhou:hover {
-    background: linear-gradient(to left, gold, rgb(255, 185, 111));
+    background: linear-gradient(to right, rgb(122,202,251), rgb(130,115,250));
     transform: scale(1.2);
     border: none;
-    color: black;
+    color: white;
 }
-
-// .favouriteButton-Yizhou {
-//     width: 50%;
-//     height: 40%;
-//     margin-left: 25%;
-//     color: rgb(252, 186, 3);
-//     font: bold;
-//     font-weight: 800;
-//     background-color: white;
-//     border: 2px solid black;
-//     padding: 0.4rem;
-//     border-radius: 6px;
-//     transition-duration: 0.5s;
-//     animation: ease-in-out;
-// }
-
-// .favouriteButton-Yizhou:hover {
-//     background: linear-gradient(to left, rgb(65, 62, 62), rgb(65, 62, 62));
-//     transform: scale(1.2);
-//     border: none;
-//     color: white;
-// }
-// }

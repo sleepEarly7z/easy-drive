@@ -1,13 +1,13 @@
 import './index.scss';
 import React, { useState } from 'react';
-import { Avatar, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 import LanguageIcon from '@mui/icons-material/Language';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Typography from '@mui/material/Typography';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
-function TopRatingSliderCards({ name, location, years, rate,backgroundImg, iconImg }) {
+function TopRatingSliderCards({ name, location, years, rate, backgroundImg, iconImg }) {
     const [rating, setRating] = useState(rate)
     const [hover, setHover] = useState(rate)
 
@@ -50,15 +50,18 @@ function TopRatingSliderCards({ name, location, years, rate,backgroundImg, iconI
                                         ? 'starOn-Yizhou'
                                         : 'starOff-Yizhou'
                                 }
-                                onClick={() => setRating(index)}
-                                onMouseEnter={() => setHover(index)}
-                                onMouseLeave={() => setHover(rating)}
+                                // onClick={() => setRating(index)}
+                                // onMouseEnter={() => setHover(index)}
+                                // onMouseLeave={() => setHover(rating)}
                             >
                                 <span className="star-Yizhou">&#9733;</span>
                             </button>
                         )
                     })}
                 </div>
+                <p>
+                    {"Driving Instructor, 2006 to Present Autobahn Driving School, Apple Valley, CA Taught mechanical operation and driving techniques of a vehicle."}
+                </p>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', mt: 2 }}>
                     <Box sx={{ display: 'inline-flex' }}>
                         <LocationOnIcon sx={{ pr: 1 }} />
@@ -66,7 +69,7 @@ function TopRatingSliderCards({ name, location, years, rate,backgroundImg, iconI
                     </Box>
                     <Box sx={{ display: 'inline-flex' }}>
                         <LanguageIcon sx={{ pr: 1 }} />
-                        <Typography component="span"> {"language"} </Typography>
+                        <Typography component="span"> {"English"} </Typography>
                     </Box>
                 </Box>
             </div>
