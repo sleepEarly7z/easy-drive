@@ -2,7 +2,6 @@ import './index.scss'
 import Carousel from 'react-elastic-carousel'
 import ProfileCard from '../ProfileCard'
 import TopRatingSliderCards from '../TopRatingSliderCards'
-import TopRatingSliderCards2 from '../TopRatingSliderCards2'
 
 // https://www.youtube.com/watch?v=eBKcGAhkZUI&t=526s
 // https://www.npmjs.com/package/react-elastic-carousel
