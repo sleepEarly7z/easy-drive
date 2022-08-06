@@ -79,18 +79,18 @@ const Reviews = ({ idType, page }) => {
     const headCells =
         page === 'reviewPage'
             ? [
-                  { id: 'fullName', label: 'Student Name', width: 300 },
-                  { id: 'rating', label: 'Rating', width: 200 },
-                  { id: 'comment', label: 'Comment', width: 600 },
-                  { id: 'reviewDate', label: 'Time', width: 300 },
-              ]
+                { id: 'fullName', label: 'Student Name', width: 300 },
+                { id: 'rating', label: 'Rating', width: 200 },
+                { id: 'comment', label: 'Comment', width: 600 },
+                { id: 'reviewDate', label: 'Time', width: 300 },
+            ]
             : [
-                  { id: 'fullName', label: 'Instructor Name', width: 300 },
-                  { id: 'rating', label: 'Rating', width: 200 },
-                  { id: 'comment', label: 'Comment', width: 600 },
-                  { id: 'reviewDate', label: 'Time', width: 300 },
-                  { id: 'actions', label: 'Actions', disableSorting: true },
-              ]
+                { id: 'fullName', label: 'Instructor Name', width: 300 },
+                { id: 'rating', label: 'Rating', width: 200 },
+                { id: 'comment', label: 'Comment', width: 600 },
+                { id: 'reviewDate', label: 'Time', width: 300 },
+                { id: 'actions', label: 'Actions', disableSorting: true },
+            ]
 
     const {
         TblContainer,
@@ -231,7 +231,7 @@ const Reviews = ({ idType, page }) => {
                             <TableRow key={item._id}>
                                 <TableCell width={headCells[0].width}>
                                     {/* {item.fullName} */}
-                                    {item.student_id}
+                                    {item.student_name}
                                 </TableCell>
                                 <TableCell width={headCells[1].width}>
                                     <RatingStar average={item.rating} />
@@ -240,7 +240,9 @@ const Reviews = ({ idType, page }) => {
                                     {item.comment_content}
                                 </TableCell>
                                 <TableCell width={headCells[3].width}>
-                                    {item.createdAt}
+                                    {
+                                        new Intl.DateTimeFormat(['ban', 'id']).format(new Date(item.createdAt))
+                                    }
                                 </TableCell>
                                 <TableCell>
                                     {page === 'profilePage' && (
