@@ -37,34 +37,9 @@ const addTimeslot = async (patch) => {
 	}
 };
 
-// const deleteTimeslotById = async (id) => {
-// 	try {
-// 		const timeslot = await Timeslot.findByIdAndDelete(id);
-// 		return getTimeslotById(timeslot.instructor_id);
-// 	} catch (error) {
-// 		throw { type: 'DB', message: error };
-// 	}
-// };
-
-// const updateTimeslotById = async (id, patch) => {
-// 	try {
-// 		const review = await Timeslot.updateOne({ _id: id }, patch, {
-// 			$set: { isVerifiedEmail: true },
-// 		}).catch((error) => {
-// 			console.log(error);
-// 		});
-// 		console.log(timeslot);
-// 		return Timeslot.findById(id);
-// 	} catch (error) {
-// 		throw { type: 'DB', message: error };
-// 	}
-// };
-
 module.exports = {
 	getTimeslots,
 	// getTimeslotById,
 	getTimeslotsByInstructorId,
 	addTimeslot,
-	// updateTimeslotById,
-	// deleteTimeslotById,
 };

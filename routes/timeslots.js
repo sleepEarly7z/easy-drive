@@ -51,32 +51,4 @@ router.post('/', function (req, res) {
 		});
 });
 
-// // DELETE
-// router.delete('/:id', function (req, res) {
-// 	const id = req.params.id;
-// 	service
-// 		.deleteReviewById(id)
-// 		.then((review) => {
-// 			// console.log(review);
-// 			res.status(200).send({ data: review });
-// 		})
-// 		.catch((error) => {
-// 			res.status(424).send({ error: error.message });
-// 		});
-// });
-
-// router.patch('/:id', function (req, res) {
-// 	const id = req.params.id;
-// 	const patch = req.body;
-// 	service
-// 		.updateReviewById(id, patch)
-// 		.then((review) => {
-// 			// console.log(review);
-// 			res.status(200).send({ data: review });
-// 		})
-// 		.catch((error) => {
-// 			res.status(424).send({ error: error.message });
-// 		});
-// });
-
 module.exports = router;
