@@ -250,7 +250,9 @@ export default function ReviewProfile({ instructor }) {
                             atings & Reviews
                         </div>
                     </div>
-                    <RateDisplay item={instructor.reviews} />
+                    <RateDisplay
+                        rating={instructor.rating}
+                        distribution={instructor.ratingDistribution} />
 
                     {/* line breaker */}
                     <div className="line-breaker-1"></div>
