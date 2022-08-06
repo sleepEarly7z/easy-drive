@@ -18,14 +18,40 @@ const Slider = () => {
         <>
             {/* <h1 style={{ textAlign: 'center' }}>Top Rated Instructors</h1> */}
             <div className="SliderMain">
-                    <TopRatingSliderCards2/>
                 <Carousel breakPoints={breakPoints}>
                     <TopRatingSliderCards
+                        name={'Rick Astley'}
+                        location={'UK'}
+                        years={'10+'}
+                        rate={'5'}
+                        backgroundImg={
+                            'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+                        }
+                        iconImg={
+                            'https://img.apmcdn.org/768cb350c59023919f564341090e3eea4970388c/square/72dd92-20180309-rick-astley.jpg'
+                        }
+                    />
+                    <TopRatingSliderCards
+                        name={'John Depp'}
+                        location={'USA'}
+                        years={'3'}
+                        rate={'5'}
+                        backgroundImg={
+                            'https://images.pexels.com/photos/167698/pexels-photo-167698.jpeg?auto=compress&cs=tinysrgb&w=1600'
+                        }
+                        iconImg={
+                            'https://media.npr.org/assets/img/2022/04/20/depp-heard_sq-f026b0bd73a37ba94e5f2f66275b1f20ab10e7cc-s800-c85.jpg'
+                        }
+                    />
+                    <TopRatingSliderCards
                         name={'Donald Trump'}
                         location={'USA'}
                         years={'3'}
                         rate={'2'}
-                        imgSrc={
+                        backgroundImg={
+                            'https://images.pexels.com/photos/1450082/pexels-photo-1450082.jpeg?auto=compress&cs=tinysrgb&w=600'
+                        }
+                        iconImg={
                             'https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg'
                         }
                     />
@@ -34,7 +60,10 @@ const Slider = () => {
                         location={'USA'}
                         years={'3'}
                         rate={'2'}
-                        imgSrc={
+                        backgroundImg={
+                            'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+                        }
+                        iconImg={
                             'https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg'
                         }
                     />
@@ -43,7 +72,10 @@ const Slider = () => {
                         location={'USA'}
                         years={'3'}
                         rate={'2'}
-                        imgSrc={
+                        backgroundImg={
+                            'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+                        }
+                        iconImg={
                             'https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg'
                         }
                     />
@@ -52,25 +84,10 @@ const Slider = () => {
                         location={'USA'}
                         years={'3'}
                         rate={'2'}
-                        imgSrc={
-                            'https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg'
+                        backgroundImg={
+                            'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
                         }
-                    />
-                    <TopRatingSliderCards
-                        name={'Donald Trump'}
-                        location={'USA'}
-                        years={'3'}
-                        rate={'2'}
-                        imgSrc={
-                            'https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg'
-                        }
-                    />
-                    <TopRatingSliderCards
-                        name={'Donald Trump'}
-                        location={'USA'}
-                        years={'3'}
-                        rate={'2'}
-                        imgSrc={
+                        iconImg={
                             'https://pinchaninch.co.uk/wp-content/uploads/2016/11/donald-trump-incapable-of-embarrassment-r_0.jpg'
                         }
                     />
