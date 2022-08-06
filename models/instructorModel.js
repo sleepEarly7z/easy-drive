@@ -77,6 +77,10 @@ const instructorSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false,
 	},
+	ratingDistribution: {
+		type: Array,
+		default: []
+	}
 });
 
 module.exports = mongoose.model('Instructor', instructorSchema);

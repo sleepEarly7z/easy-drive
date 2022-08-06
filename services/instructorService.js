@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Instructor = require('../models/instructorModel');
+const ReviewService = require('../services/reviewService');
 const helpers = require('../utils/helpers');
 const {
 	DEFAULT_SORT_BY,
@@ -21,7 +22,8 @@ const {
  */
 const getInstructorById = async (id) => {
 	try {
-		return Instructor.findById(id);
+		const instructor = await Instructor.findById(id).lean();
+		return instructor;
 	} catch (error) {
 		throw { type: 'DB', message: error };
 	}
@@ -236,8 +238,6 @@ const deleteInstructorById = (id) => {
  * @returns {object} instructor updated
  */
 const updateInstructorById = (id, patch) => {
-	// TODO
-	console.log('instrucotService 150');
 	Instructor.updateOne({ _id: id }, patch, (err, instructor) => {
 		if (err) {
 			console.log(err);
@@ -258,8 +258,6 @@ const generateToken = (id) => {
 const getQueriedInstructors = async (query) => {
 	const findQuery = {};
 	const sortQuery = { DEFAULT_SORT_BY: DEFUALT_SORT_DIR };
-	let offset = DEFAULT_OFFSET;
-	let limit = DEFAULT_LIMIT;
 
 	if (query) {
 		const {
@@ -312,5 +310,5 @@ module.exports = {
 	getMe,
 	deleteInstructorById,
 	updateInstructorById,
-	getQueriedInstructors,
+	getQueriedInstructors
 };
