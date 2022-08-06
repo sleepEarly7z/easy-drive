@@ -1,39 +1,41 @@
 const Timeslot = require('../models/timeslotModel');
 
-// const getTimeslots = async () => {
-// 	try {
-// 		return Timeslot.find({});
-// 	} catch (error) {
-// 		throw { type: 'DB', message: error };
-// 	}
-// };
-
-const getTimeslotById = async (id) => {
+const getTimeslots = async () => {
 	try {
-		return Timeslot.findById(id);
+		return Timeslot.find({});
 	} catch (error) {
 		throw { type: 'DB', message: error };
 	}
 };
 
-// const getTimeslotsByInstructorId = async (id) => {
+// const getTimeslotById = async (id) => {
 // 	try {
-// 		return Timeslot.find({ instructor_id: id });
+// 		return Timeslot.findById(id);
 // 	} catch (error) {
 // 		throw { type: 'DB', message: error };
 // 	}
 // };
 
-// const addTimeslotById = async (patch) => {
-// 	const newTimeslot = new Timeslot(patch);
+const getTimeslotsByInstructorId = async (id) => {
+	try {
+		return Timeslot.find({ instructor_id: id });
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
-// 	try {
-// 		await newTimeslot.save();
-// 		return newTimeslot;
-// 	} catch (error) {
-// 		throw { type: 'DB', message: error };
-// 	}
-// };
+const addTimeslot = async (patch) => {
+	console.log(patch);
+	const newTimeslot = new Timeslot(patch);
+	console.log(newTimeslot);
+
+	try {
+		await newTimeslot.save();
+		return newTimeslot;
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
 // const deleteTimeslotById = async (id) => {
 // 	try {
@@ -59,10 +61,10 @@ const getTimeslotById = async (id) => {
 // };
 
 module.exports = {
-	// getTimeslots,
-	getTimeslotById,
-	// getTimeslotsByInstructorId,
-	// addTimeslotById,
+	getTimeslots,
+	// getTimeslotById,
+	getTimeslotsByInstructorId,
+	addTimeslot,
 	// updateTimeslotById,
 	// deleteTimeslotById,
 };

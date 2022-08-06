@@ -26,14 +26,9 @@ const timeslotSchema = new mongoose.Schema({
 		default: 'Monday',
 	},
 	range: {
-		type: String, // '7am-8am'
+		type: String,
 		default: '9am',
 	},
 });
 
-// const Timeslot = mongoose.model('Timeslot', timeslotSchema);
 module.exports = mongoose.model('Timeslot', timeslotSchema);
-
-// module.exports = {
-// 	Timeslot,
-// };
