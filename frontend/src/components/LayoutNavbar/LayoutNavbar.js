@@ -250,7 +250,7 @@ function LayoutNavbar() {
                                     PaperProps={{
                                         style: {
                                             marginTop: '5rem',
-                                            width: '25%',
+                                            width: '400px%',
                                         },
                                     }}
                                 >
