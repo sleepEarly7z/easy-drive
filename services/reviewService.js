@@ -1,4 +1,7 @@
 const { Review } = require('../models/reviewModel');
+const {
+	ObjectId
+} = require('mongodb');
 
 const getReviewById = async (id) => {
 	try {
@@ -22,6 +25,94 @@ const getReviewsByInstructorId = async (id) => {
 	} catch (error) {
 		throw { type: 'DB', message: error };
 	}
+};
+
+
+const getReviewsByUserId = async (userType, id) => {
+	console.log(userType);
+	if (userType === 'instructor') {
+		const GET_INSTRUCTOR_REVIEWS_PIPE = [
+			{
+				'$match': {
+					'instructor_id': new ObjectId(`${id}`)
+				}
+			}, {
+				'$lookup': {
+					'from': 'students',
+					'localField': 'student_id',
+					'foreignField': '_id',
+					'as': 'student'
+				}
+			}, {
+				'$unwind': {
+					'path': '$student'
+				}
+			}, {
+				'$project': {
+					'instructor_id': '$instructor_id',
+					'student_name': {
+						'$concat': [
+							'$student.first_name', ' ', '$student.last_name'
+						]
+					},
+					'student_id': '$student_id',
+					'comment_content': '$comment_content',
+					'rating': '$rating',
+					'createdAt': '$createdAt',
+					'updatedAt': '$updatedAt'
+				}
+			}
+		];
+		try {
+			const results = await Review.aggregate(GET_INSTRUCTOR_REVIEWS_PIPE);
+			return results;
+		} catch (error) {
+			throw { type: 'DB', message: error };
+		}
+	}
+
+	if (userType === 'student') {
+		const GET_STUDENT_REVIEWS_PIPE = [
+			{
+				'$match': {
+					'student_id': new ObjectId(`${id}`)
+				}
+			}, {
+				'$lookup': {
+					'from': 'instructors',
+					'localField': 'instructor_id',
+					'foreignField': '_id',
+					'as': 'instructor'
+				}
+			}, {
+				'$unwind': {
+					'path': '$instructor'
+				}
+			}, {
+				'$project': {
+					'instructor_id': '$instructor_id',
+					'instructor_name': {
+						'$concat': [
+							'$instructor.first_name', ' ', '$instructor.last_name'
+						]
+					},
+					'student_id': '$student_id',
+					'comment_content': '$comment_content',
+					'rating': '$rating',
+					'createdAt': '$createdAt',
+					'updatedAt': '$updatedAt'
+				}
+			}
+		];
+		try {
+			const results = await Review.aggregate(GET_STUDENT_REVIEWS_PIPE);
+			return results;
+		} catch (error) {
+			throw { type: 'DB', message: error };
+		}
+	}
+
+	throw { type: 'DB', message: error };
 };
 
 /**
@@ -110,4 +201,5 @@ module.exports = {
 	addReview,
 	deleteReviewById,
 	updateReviewById,
+	getReviewsByUserId
 };
