@@ -230,8 +230,7 @@ const Reviews = ({ idType, page }) => {
                         {recordsAfterPagingAndSorting().map((item) => (
                             <TableRow key={item._id}>
                                 <TableCell width={headCells[0].width}>
-                                    {/* {item.fullName} */}
-                                    {item.student_name}
+                                    {item.student_name ? item.student_name : item.instructor_name}
                                 </TableCell>
                                 <TableCell width={headCells[1].width}>
                                     <RatingStar average={item.rating} />
