@@ -46,7 +46,6 @@ const updateAppointmentById = async (id, patch) => {
 
 module.exports = {
 	getAppointments,
-	// getTimeslotById,
 	getAppointmentsByInstructorId,
 	addAppointment,
 	updateAppointmentById,

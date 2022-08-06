@@ -39,7 +39,6 @@ const addTimeslot = async (patch) => {
 
 module.exports = {
 	getTimeslots,
-	// getTimeslotById,
 	getTimeslotsByInstructorId,
 	addTimeslot,
 };
