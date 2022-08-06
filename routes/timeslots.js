@@ -38,7 +38,7 @@ router.get('/:id', function (req, res) {
 		});
 });
 
-// add timeslots whenever register a new instructor account
+// add timeslot whenever register a new instructor account
 router.post('/', function (req, res) {
 	const patch = req.body;
 	service
