@@ -627,6 +627,7 @@ const SignUpInstructor = () => {
             // create an account
             console.log(data)
             data.language = data.language.toString()
+            data.availability = formats
             console.log('data: ' + data)
             dispatch(registerAsync(data))
             if (formats.length !== 0) {

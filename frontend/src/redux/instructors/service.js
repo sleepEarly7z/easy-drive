@@ -1,5 +1,5 @@
 import { handleResponse } from '../utils'
-const API_URL = 'https://ezdrivemain.herokuapp.com/'
+const API_URL = 'http://localhost:3001/'
 const baseUrl = `${API_URL}instructors`
 
 const getQueryString = (query) => {

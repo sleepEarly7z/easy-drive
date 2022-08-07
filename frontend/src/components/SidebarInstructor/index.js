@@ -84,9 +84,7 @@ const SidebarInstructor = () => {
     useEffect(() => {
         const sendGet = async () => {
             const res = await axios
-                .get(
-                    `https://ezdrivemain.herokuapp.com/instructors/${params.instructorId}`,
-                )
+                .get(`http://localhost:3001/instructors/${params.instructorId}`)
                 .then((res) => {
                     setPhone(res.data.data.phone)
                     setEmail(res.data.data.email)
