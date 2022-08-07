@@ -1,11 +1,10 @@
 import './index.scss';
-import React, { useState } from 'react';
-import { Avatar, IconButton } from '@mui/material';
+import React from 'react';
+import { Avatar } from '@mui/material';
 import Box from '@mui/material/Box';
 import LanguageIcon from '@mui/icons-material/Language';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Typography from '@mui/material/Typography';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { useNavigate } from 'react-router-dom'
 
 function TopRatingSliderCards({ instructor, backgroundImg }) {
@@ -31,14 +30,6 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
                             : <Avatar sx={{ width: 116, height: 116, cursor: 'pointer' }} onClick={viewProfile}>{getInitial(instructor.name)}
                             </Avatar>}
                     </div>
-
-                    {/* <img
-                        className="image-container-img-Yizhou"
-                        src={instructor.photo}
-                        alt="profilePicture"
-                        height="100px"
-                        width="100px"
-                    /> */}
                 </div>
             </div>
             <div className="lower-container-Yizhou">
@@ -48,10 +39,7 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
                                 onClick={viewProfile}>
                                 {instructor.first_name + " " + instructor.last_name}
                             </Typography>
-                    {/* {instructor.first_name + " " + instructor.last_name} */}
                 </h2>
-                {/* <h4> {'Location: ' + location} </h4>
-                <h4> {'Years of Experience: ' + years} </h4> */}
                 <div className="star-rating-Yizhou">
                     {/* {'Rate: '} */}
                     {[...Array(5)].map((star, index) => {
@@ -65,9 +53,6 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
                                         ? 'starOn-Yizhou'
                                         : 'starOff-Yizhou'
                                 }
-                            // onClick={() => setRating(index)}
-                            // onMouseEnter={() => setHover(index)}
-                            // onMouseLeave={() => setHover(rating)}
                             >
                                 <span className="star-Yizhou">&#9733;</span>
                             </button>
@@ -76,7 +61,6 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
                 </div>
                 <p>
                     {instructor.description}
-                    {/* {"Driving Instructor, 2006 to Present Autobahn Driving School, Apple Valley, CA Taught mechanical operation and driving techniques of a vehicle."} */}
                 </p>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', mt: 2 }}>
                     <Box sx={{ display: 'inline-flex' }}>
@@ -93,7 +77,6 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
                 <button className="profileButton-Yizhou"
                     onClick={viewProfile}>See Profile</button>
                 <br />
-                {/* <button className="favouriteButton-Yizhou">Favourite</button> */}
             </div>
         </div>
     )

@@ -16,7 +16,7 @@ const breakPoints = [
 
 const Slider = () => {
     const [instructors, setInstructors] = React.useState([]);
-    const [backgroundImg, setbackgroundImg] = React.useState([
+    const [backgroundImg] = React.useState([
     'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     'https://images.pexels.com/photos/167698/pexels-photo-167698.jpeg?auto=compress&cs=tinysrgb&w=1600',
     'https://images.pexels.com/photos/1450082/pexels-photo-1450082.jpeg?auto=compress&cs=tinysrgb&w=600',
@@ -30,7 +30,6 @@ const Slider = () => {
             console.log(results);
             const tops = results.data.slice(0, 5);
             setInstructors(tops);
-            console.log(tops);
         }
         fetchTopInstructors().catch(console.error);
     }, [])
@@ -44,43 +43,9 @@ const Slider = () => {
                         <TopRatingSliderCards
                         key={x._id}
                         instructor={x}
-                        backgroundImg={
-                            backgroundImg[instructors.indexOf(x)]
-                            // 'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                        }
+                        backgroundImg={backgroundImg[instructors.indexOf(x)]}
                         />
-                        
                     ))}
-                    {/* <TopRatingSliderCards
-                        instructor={instructors[0]}
-                        backgroundImg={
-                            'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                        }
-                    />
-                    <TopRatingSliderCards
-                        instructor={instructors[1]}
-                        backgroundImg={
-                            'https://images.pexels.com/photos/167698/pexels-photo-167698.jpeg?auto=compress&cs=tinysrgb&w=1600'
-                        }
-                    />
-                    <TopRatingSliderCards
-                        instructor={instructors[2]}
-                        backgroundImg={
-                            'https://images.pexels.com/photos/1450082/pexels-photo-1450082.jpeg?auto=compress&cs=tinysrgb&w=600'
-                        }
-                    />
-                    <TopRatingSliderCards
-                        instructor={instructors[3]}
-                        backgroundImg={
-                            'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                        }
-                    />
-                    <TopRatingSliderCards
-                        instructor={instructors[4]}
-                        backgroundImg={
-                            'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-                        }
-                    /> */}
                 </Carousel>
             </div>
         </>
