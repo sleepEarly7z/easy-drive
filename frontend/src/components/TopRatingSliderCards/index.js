@@ -41,21 +41,20 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
                             </Typography>
                 </h2>
                 <div className="star-rating-Yizhou">
-                    {/* {'Rate: '} */}
                     {[...Array(5)].map((star, index) => {
                         index += 1
                         return (
-                            <button
-                                type="button"
+                            <div
+                                type="text"
                                 key={index}
                                 className={
-                                    index <= (instructor.rating || instructor.rating)
+                                    index <= (instructor.rating)
                                         ? 'starOn-Yizhou'
                                         : 'starOff-Yizhou'
                                 }
                             >
                                 <span className="star-Yizhou">&#9733;</span>
-                            </button>
+                            </div>
                         )
                     })}
                 </div>
