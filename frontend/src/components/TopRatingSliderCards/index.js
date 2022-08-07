@@ -7,10 +7,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Typography from '@mui/material/Typography';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
-function TopRatingSliderCards({ name, location, years, rate, backgroundImg, iconImg }) {
-    const [rating, setRating] = useState(rate)
-    const [hover, setHover] = useState(rate)
-
+function TopRatingSliderCards({ instructor, backgroundImg }) {
     return (
         <div className="ProfileCard-Yizhou">
             <div className="upper-container-Yizhou">
@@ -21,7 +18,7 @@ function TopRatingSliderCards({ name, location, years, rate, backgroundImg, icon
                 <div className="image-container-Yizhou">
                     <img
                         className="image-container-img-Yizhou"
-                        src={iconImg}
+                        src={instructor.photo}
                         alt="profilePicture"
                         height="100px"
                         width="100px"
@@ -30,7 +27,7 @@ function TopRatingSliderCards({ name, location, years, rate, backgroundImg, icon
             </div>
             <div className="lower-container-Yizhou">
                 <h2>
-                    {name}
+                    {instructor.first_name + " " + instructor.last_name}
                     <IconButton variant="text">
                         <BookmarkIcon />
                     </IconButton>
@@ -46,7 +43,7 @@ function TopRatingSliderCards({ name, location, years, rate, backgroundImg, icon
                                 type="button"
                                 key={index}
                                 className={
-                                    index <= (hover || rating)
+                                    index <= (instructor.rating || instructor.rating)
                                         ? 'starOn-Yizhou'
                                         : 'starOff-Yizhou'
                                 }
@@ -60,16 +57,17 @@ function TopRatingSliderCards({ name, location, years, rate, backgroundImg, icon
                     })}
                 </div>
                 <p>
-                    {"Driving Instructor, 2006 to Present Autobahn Driving School, Apple Valley, CA Taught mechanical operation and driving techniques of a vehicle."}
+                    {instructor.description}
+                    {/* {"Driving Instructor, 2006 to Present Autobahn Driving School, Apple Valley, CA Taught mechanical operation and driving techniques of a vehicle."} */}
                 </p>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', mt: 2 }}>
                     <Box sx={{ display: 'inline-flex' }}>
                         <LocationOnIcon sx={{ pr: 1 }} />
-                        <Typography component="span"> {location} </Typography>
+                        <Typography component="span"> {instructor.city} </Typography>
                     </Box>
                     <Box sx={{ display: 'inline-flex' }}>
                         <LanguageIcon sx={{ pr: 1 }} />
-                        <Typography component="span"> {"English"} </Typography>
+                        <Typography component="span"> {instructor.language} </Typography>
                     </Box>
                 </Box>
             </div>
