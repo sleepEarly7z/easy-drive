@@ -170,12 +170,12 @@ router.get('/login/me', protect, function (req, res) {
 		});
 });
 
-router.get('/nearby/:id', function (req, res) {
+router.post('/nearby/:id', function (req, res) {
 	const id = req.params.id;
 	const city = req.body.city;
 	const street = req.body.street;
 	const province = req.body.province;
-	console.log(id);
+	console.log(req.body.city);
 	service
 		.getNearbyInstructors(id, city, street, province)
 		.then((nearby) => {

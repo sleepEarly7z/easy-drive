@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Instructor = require('../models/instructorModel');
 const Student = require('../models/studentModel');
 const Review = require('../models/reviewModel');
+
 const Appointment = require('../models/appointmentModel');
 const Timeslot = require('../models/timeslotModel');
 
@@ -197,50 +198,60 @@ const seedTimeslots = async () => {
 	}
 };
 
+
 const seedAppointments = async () => {
-	// get 10 random instructor ids
-	const instructorIds = await Instructor.aggregate([
-		{
-			$sample: {
-				size: 10,
-			},
-		},
-		{
-			$project: {
-				_id: 1,
-			},
-		},
-	]);
-	console.log(instructorIds);
+    // get 10 random instructor ids
+    const instructorIds = await Instructor.aggregate([
+        {
+            '$sample': {
+                'size': 10
+            }
+        }, {
+            '$project': {
+                '_id': 1
+            }
+        }
+    ])
+    console.log(instructorIds);
 
-	for (const id of instructorIds) {
-		console.log(id);
+    for (const id of instructorIds) {
+        console.log(id);
 
-		const sampleTimeSlots = [];
-		for (const slot of TIME_SLOTS) {
-			const newTimeSlot = {
-				isBooked: false,
-				range: slot,
-				studentId: null,
-			};
+        const sampleTimeSlots = [];
+        for (const slot of TIME_SLOTS) {
+            const newTimeSlot = {
+                isBooked: false,
+                range: slot,
+                studentId: null
+            }
 
-			sampleTimeSlots.push(newTimeSlot);
-		}
+            sampleTimeSlots.push(newTimeSlot);
+        }
 
-		const newAppointment = new Appointment({
-			instructor: id._id,
-		});
+        const newAppointment = new Appointment({
+            instructor: id._id,
+        });
 
-		for (const sampleTimeSlot of sampleTimeSlots) {
-			newAppointment.time_slots.push(sampleTimeSlot);
-		}
+        for (const sampleTimeSlot of sampleTimeSlots) {
+            newAppointment.time_slots.push(sampleTimeSlot);
+        }
 
-		await newAppointment.save();
-	}
+        await newAppointment.save();
+    }
 };
 
-seedTimeslots().then(() => {
-	// clearAll().then(() => {
-	mongoose.connection.close();
-	console.log('MongoDB connection closed');
-});
+const updateAllRatings = async () => {
+    // getting all ids
+    const ids = await Instructor.find().select({ _id: 1 });
+    for (const id of ids) {
+        const avg = await reviewService.getAvgRatingByInstructorId(id._id.toString());
+        const dist = await reviewService.getRatingDistributionByInstructorId(id._id.toString());
+        await Instructor.findOneAndUpdate({ _id: id }, { rating: avg ? avg : 0, ratingDistribution: dist ? dist : [] });
+    }
+    return;
+};
+
+updateAllRatings().then(() => {
+    mongoose.connection.close();
+    console.log('MongoDB connection closed');
+})

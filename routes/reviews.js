@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 
 	if (instructorId) {
 		try {
-			resultReviews = await service.getReviewsByInstructorId(instructorId);
+			resultReviews = await service.getReviewsByUserId('instructor', instructorId);
 		} catch {
 			error = errorWithMessage('instructor', instructorId)
 		}
@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
 
 	if (studentId) {
 		try {
-			resultReviews = await service.getReviewsByStudentId(studentId);
+			resultReviews = await service.getReviewsByUserId('student', studentId);
 		} catch {
 			error = errorWithMessage('student', studentId)
 		}

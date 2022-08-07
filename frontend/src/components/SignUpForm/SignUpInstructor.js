@@ -525,6 +525,7 @@ function getStepContent(step, formats, setFormats, handleFormat) {
     switch (step) {
         case 0:
             return <BasicForm />
+        // return <ProfileForm />
         case 1:
             return <ContactForm />
         case 2:
