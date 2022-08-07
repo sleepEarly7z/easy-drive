@@ -43,7 +43,12 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
             </div>
             <div className="lower-container-Yizhou">
                 <h2>
-                    {instructor.first_name + " " + instructor.last_name}
+                <Typography gutterBottom variant='h5' component="div" color='text.primary'
+                                sx={{ cursor: 'pointer' }}
+                                onClick={viewProfile}>
+                                {instructor.first_name + " " + instructor.last_name}
+                            </Typography>
+                    {/* {instructor.first_name + " " + instructor.last_name} */}
                 </h2>
                 {/* <h4> {'Location: ' + location} </h4>
                 <h4> {'Years of Experience: ' + years} </h4> */}
