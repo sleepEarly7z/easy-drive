@@ -1,13 +1,22 @@
 import './index.scss';
 import React, { useState } from 'react';
-import { IconButton } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 import LanguageIcon from '@mui/icons-material/Language';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Typography from '@mui/material/Typography';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { useNavigate } from 'react-router-dom'
 
 function TopRatingSliderCards({ instructor, backgroundImg }) {
+    const navigate = useNavigate();
+    const viewProfile = () => {
+        navigate(`/showProfileRating/${instructor._id}`)
+    }
+    const getInitial = (name) => {
+        return name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
+    }
+
     return (
         <div className="ProfileCard-Yizhou">
             <div className="upper-container-Yizhou">
@@ -16,21 +25,25 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
                     />
                 </div>
                 <div className="image-container-Yizhou">
-                    <img
+                    <div className="image-container-img-Yizhou">
+                        {(instructor.photo)
+                            ? <Avatar alt={instructor.name} src={instructor.photo} sx={{ width: 116, height: 116, cursor: 'pointer' }} onClick={viewProfile} />
+                            : <Avatar sx={{ width: 116, height: 116, cursor: 'pointer' }} onClick={viewProfile}>{getInitial(instructor.name)}
+                            </Avatar>}
+                    </div>
+
+                    {/* <img
                         className="image-container-img-Yizhou"
                         src={instructor.photo}
                         alt="profilePicture"
                         height="100px"
                         width="100px"
-                    />
+                    /> */}
                 </div>
             </div>
             <div className="lower-container-Yizhou">
                 <h2>
                     {instructor.first_name + " " + instructor.last_name}
-                    <IconButton variant="text">
-                        <BookmarkIcon />
-                    </IconButton>
                 </h2>
                 {/* <h4> {'Location: ' + location} </h4>
                 <h4> {'Years of Experience: ' + years} </h4> */}
@@ -47,9 +60,9 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
                                         ? 'starOn-Yizhou'
                                         : 'starOff-Yizhou'
                                 }
-                                // onClick={() => setRating(index)}
-                                // onMouseEnter={() => setHover(index)}
-                                // onMouseLeave={() => setHover(rating)}
+                            // onClick={() => setRating(index)}
+                            // onMouseEnter={() => setHover(index)}
+                            // onMouseLeave={() => setHover(rating)}
                             >
                                 <span className="star-Yizhou">&#9733;</span>
                             </button>
@@ -72,7 +85,8 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
                 </Box>
             </div>
             <div className="profilecard-buttons-Yizhou">
-                <button className="profileButton-Yizhou">See Profile</button>
+                <button className="profileButton-Yizhou"
+                    onClick={viewProfile}>See Profile</button>
                 <br />
                 {/* <button className="favouriteButton-Yizhou">Favourite</button> */}
             </div>
