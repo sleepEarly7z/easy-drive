@@ -139,16 +139,16 @@ function LayoutNavbar() {
                         <ListItemText primary={'View Profile'} />
                     </ListItemButton>
                 </ListItem>
-                <ListItem key={'Message'} disablePadding>
+                {/* <ListItem key={'Message'} disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
                             <MailIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Message'} />
                     </ListItemButton>
-                </ListItem>
+                </ListItem> */}
             </List>
-            <Divider />
+            {/* <Divider />
             <List>
                 <ListItem key={'Help'} disablePadding>
                     <ListItemButton>
@@ -166,7 +166,7 @@ function LayoutNavbar() {
                         <ListItemText primary={'Settings'} />
                     </ListItemButton>
                 </ListItem>
-            </List>
+            </List> */}
             <Divider />
             <List>
                 <ListItem key={'Sign Out'} disablePadding>
@@ -205,7 +205,7 @@ function LayoutNavbar() {
                         name={'icon-button-explore'}
                         to={'/explore'}
                     />
-                    <NavItem
+                    {/* <NavItem
                         icon={<BellIcon />}
                         text={'Notification'}
                         name={'icon-button-notification'}
@@ -216,7 +216,7 @@ function LayoutNavbar() {
                         text={'Message'}
                         name={'icon-button-message'}
                         to={'/explore'}
-                    />
+                    /> */}
 
                     {user ? (
                         <>
@@ -290,7 +290,7 @@ function LayoutNavbar() {
                             Explore
                         </Link>
                     </li>
-                    <li className="navbar__container__menu_item">
+                    {/* <li className="navbar__container__menu_item">
                         <Link
                             className="navbar__container__menu_item_links"
                             to="/"
@@ -305,25 +305,41 @@ function LayoutNavbar() {
                         >
                             Message
                         </Link>
-                    </li>
-                    <li className="navbar__container__menu_item">
-                        {user ? (
-                            <Link
-                                className="navbar__container__menu_item_links"
-                                to={`/profile-${user.data.role}/${user.data._id}`}
-                            >
-                                View Profile
-                            </Link>
-                        ) : (
+                    </li> */}
+                    {user ? (
+                        <>
+                            <li className="navbar__container__menu_item">
+                                <Link
+                                    className="navbar__container__menu_item_links"
+                                    to={`/profile-${user.data.role}/${user.data._id}`}
+                                >
+                                    View Profile
+                                </Link>
+                            </li>
+                            <li className="navbar__container__menu_item">
+                                <Link
+                                    className="navbar__container__menu_item_links"
+                                    to={`/`}
+                                    onClick={() => {
+                                        dispatch(logoutAsync())
+                                        dispatch(reset())
+                                        navigate('/explore')
+                                    }}
+                                >
+                                    Sign Out
+                                </Link>
+                            </li>
+                        </>
+                    ) : (
+                        <li className="navbar__container__menu_item">
                             <Link
                                 className="navbar__container__menu_item_links"
                                 to="/sign-in"
                             >
                                 Login/Register
                             </Link>
-                        )}
-                    </li>
-                    {/* </div> */}
+                        </li>
+                    )}
                 </ul>
 
                 <div className="nav-icon" onClick={handleToggleIcon}>
