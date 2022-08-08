@@ -1,5 +1,7 @@
 import * as React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import Paper from '@mui/material/Paper'
 import FormGroup from '@mui/material/FormGroup'
 import Checkbox from '@mui/material/Checkbox'
@@ -25,7 +27,8 @@ import {
     DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui'
 
-import { appointments } from '../../utils/appointments'
+// import { appointments } from '../../utils/appointments'
+import { getAppointmentsByInstructorIDAsync } from '../../redux/appointments/thunks'
 
 const PREFIX = 'Demo'
 // #FOLD_BLOCK
@@ -98,8 +101,17 @@ const EditingOptionsSelector = ({ options, onOptionsChange }) => (
     </StyledDiv>
 )
 
-const CalendarSchedular = () => {
+const CalendarSchedular = ({ appointments }) => {
+    // const CalendarSchedular = () => {
+    const dispatch = useDispatch()
+    const params = useParams()
+
+    // console.log('CalendarSchedular: ' + JSON.stringify(appointments))
+
     const [data, setData] = React.useState(appointments)
+
+    console.log('CalendarSchedular: ' + data)
+
     const [editingOptions, setEditingOptions] = React.useState({
         allowAdding: true,
         allowDeleting: true,
@@ -199,6 +211,10 @@ const CalendarSchedular = () => {
     const handleViewChange = (event) => {
         setViewmode(event.target.value)
     }
+
+    React.useEffect(() => {
+        dispatch(getAppointmentsByInstructorIDAsync(params.instructorId))
+    }, [])
 
     return (
         <React.Fragment>

@@ -1,5 +1,12 @@
 import './index.scss'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams, NavLink } from 'react-router-dom'
+
+import { WEEK_DAYS, MONTHS, TIME_SLOTS } from '../../utils/constants'
+import { getAppointmentsByInstructorIDAsync } from '../../redux/appointments/thunks'
+
 import styled from 'styled-components'
 import RateDisplay from '../ReviewRating/ReviewRating'
 import CalendarSchedular from '../Calendar/CalendarSchedular'
@@ -15,9 +22,6 @@ import {
 
 import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
-
-import { useSelector, useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -57,38 +61,183 @@ const FollowActionButton = styled.button`
     color: #fff;
 }
 `
+// const appointmentsSample = [
+//     {
+//         title: 'AAAA',
+//         startDate: new Date(2022, 8 - 1, 25, 9, 35),
+//         endDate: new Date(2022, 8 - 1, 25, 11, 30),
+//         id: 0,
+//         location: 'Room 1',
+//     },
+//     {
+//         title: 'BBBB',
+//         startDate: new Date(2022, 8 - 1, 25, 9, 35),
+//         endDate: new Date(2022, 8 - 1, 25, 11, 30),
+//         id: 0,
+//         location: 'Room 1',
+//     },
+//     {
+//         title: 'CCC Re-Design Plan',
+//         startDate: new Date(2022, 8 - 1, 23, 9, 35),
+//         endDate: new Date(2022, 8 - 1, 23, 11, 30),
+//         id: 0,
+//         location: 'Room 1',
+//     },
+//     {
+//         title: 'Book Flights to San Fran for Sales Trip',
+//         startDate: new Date(2022, 8 - 1, 25, 12, 11),
+//         endDate: new Date(2022, 8 - 1, 25, 13, 0),
+//         id: 0,
+//         location: 'Room 1',
+//     },
+//     {
+//         title: 'Install New Router in Dev Room',
+//         startDate: new Date(2022, 8 - 1, 25, 14, 30),
+//         endDate: new Date(2022, 8 - 1, 25, 15, 35),
+//         id: 0,
+//         location: 'Room 2',
+//     },
+//     {
+//         title: 'Website Re-Design Plan',
+//         startDate: new Date(2022, 8 - 1, 2, 9, 30),
+//         endDate: new Date(2022, 8 - 1, 2, 15, 30),
+//         id: 0,
+//         location: 'Room 1',
+//     },
+//     {
+//         title: 'Upgrade Server Hardware',
+//         startDate: new Date(2022, 8 - 1, 9, 14, 30),
+//         endDate: new Date(2022, 8 - 1, 9, 16, 0),
+//         id: 0,
+//         location: 'Room 3',
+//     },
+//     {
+//         title: 'Submit New Website Design',
+//         startDate: new Date(2022, 8 - 1, 9, 16, 30),
+//         endDate: new Date(2022, 8 - 1, 9, 18, 0),
+//         id: 14,
+//         location: 'Room 3',
+//     },
+//     {
+//         title: 'Launch New Website',
+//         startDate: new Date(2022, 8 - 1, 29, 12, 20),
+//         endDate: new Date(2022, 8 - 1, 29, 14, 0),
+//         id: 10,
+//         location: 'Room 2',
+//     },
+// ]
+
+function formatDate(list) {
+    var appointments = []
+    var index = 0
+    for (const item of list) {
+        const { _id, date, weekday, isBooked, range, student_lastname } = item
+
+        // 2022-08-13T06:59:51.466Z
+        var options = { year: 'numeric', month: 'long', day: 'numeric' }
+        const date_array = new Date(date).toLocaleDateString([], options)
+        const isCorrectWeekday = (element) => element === weekday
+        const weekday_index = WEEK_DAYS.findIndex(isCorrectWeekday)
+
+        const isCorrectMonth = (element) => element === date_array.split(' ')[0]
+        const month_index = MONTHS.findIndex(isCorrectMonth)
+
+        const isCorrectRange = (element) => element === range
+        const range_index = TIME_SLOTS.findIndex(isCorrectRange) + 8
+
+        const month = month_index + 1
+        const day = Number(date_array.split(' ')[1].split(',')[0]) + 1
+        const year = Number(date_array.split(' ')[2])
+
+        // console.log('_id:' + _id)
+        // console.log('weekday:' + weekday)
+        // console.log('day:' + day)
+        // console.log('month:' + month)
+        // console.log('year:' + year)
+        // console.log('isBooked:' + isBooked)
+        // console.log('student_lastname:' + student_lastname)
+        // console.log('item: ' + item)
+
+        const appointment = {
+            title:
+                isBooked === true
+                    ? `Booked by ${student_lastname}`
+                    : `Available`,
+            startDate: new Date(year, month - 1, day, range_index, 0),
+            endDate: new Date(year, month - 1, day, range_index + 1, 0),
+            id: 0,
+            location: 'Room 1',
+        }
+        index = index + 1
+
+        appointments.push(appointment)
+    }
+
+    // appointments.push({
+    //     title: 'AAAA',
+    //     startDate: new Date(2022, 8 - 1, 25, 9, 35),
+    //     endDate: new Date(2022, 8 - 1, 25, 11, 30),
+    //     id: 0,
+    //     location: 'Room 1',
+    // })
+
+    // appointments.push({
+    //     title: 'BBBB',
+    //     startDate: new Date(2022, 8 - 1, 25, 9, 35),
+    //     endDate: new Date(2022, 8 - 1, 25, 11, 30),
+    //     id: 0,
+    //     location: 'Room 1',
+    // })
+
+    return appointments
+}
 
 export default function ReviewProfile({ instructor }) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
+    const params = useParams()
 
-    const user = useSelector((state) => (state.auth.user));
+    const user = useSelector((state) => state.auth.user)
+    // const list = useSelector((state) => state.appointments.list)
+    const list = JSON.parse(localStorage.getItem('appointments'))
+    // console.log('list.data: ' + list.data)
+    // console.log('list.data.length: ' + list.data.length)
+    // console.log('list.data[0]: ' + list.data[0].date)
+    // console.log('list.data[0]: ' + list.data[0].isBooked)
+    // console.log('list.data[0]: ' + list.data[0].student_lastname)
+    // console.log('list.data[0]: ' + list.data[0]._id)
+
+    const appointments = formatDate(list.data)
+    // console.log('appointments: ' + appointments)
 
     const renderFollowButton = () => {
-        if (!user) return (
-            <NavLink to="/sign-in">
-                <FollowActionButton >
-                    Follow
-                </FollowActionButton>
-            </NavLink>
-        )
+        if (!user)
+            return (
+                <NavLink to="/sign-in">
+                    <FollowActionButton>Follow</FollowActionButton>
+                </NavLink>
+            )
         if (user && user.data.role === 'student')
-            return (<ToggleFollowButton instructorId={instructor._id} />)
+            return <ToggleFollowButton instructorId={instructor._id} />
     }
 
     // a component for toggling follow instructor
     const ToggleFollowButton = ({ instructorId }) => {
-        const followedInstructors = useSelector((state) => (state.auth.user.data.followedInstructors));
+        const followedInstructors = useSelector(
+            (state) => state.auth.user.data.followedInstructors,
+        )
 
-        const [isFollowing, setIsFollowing] = React.useState(followedInstructors.includes(instructorId));
+        const [isFollowing, setIsFollowing] = React.useState(
+            followedInstructors.includes(instructorId),
+        )
 
         const toggleFollow = () => {
             // update redux store and db
-            dispatch(toggleFollowInstructorAsync(instructorId));
+            dispatch(toggleFollowInstructorAsync(instructorId))
         }
 
         // upon change of followedInstructors redux state, change ui
         React.useEffect(() => {
-            setIsFollowing(followedInstructors.includes(instructorId));
+            setIsFollowing(followedInstructors.includes(instructorId))
         }, [followedInstructors, instructorId])
 
         return (
@@ -97,6 +246,10 @@ export default function ReviewProfile({ instructor }) {
             </FollowActionButton>
         )
     }
+
+    useEffect(() => {
+        dispatch(getAppointmentsByInstructorIDAsync(params.instructorId))
+    }, [])
 
     return (
         <div>
@@ -237,8 +390,8 @@ export default function ReviewProfile({ instructor }) {
                             chedule Preview
                         </div>
                     </div>
-                    <CalendarSchedular pageType="review" />
-                    {/* <SandboxDemo /> */}
+
+                    <CalendarSchedular appointments={appointments} />
 
                     {/* line breaker */}
                     <div className="line-breaker-1"></div>
@@ -252,7 +405,8 @@ export default function ReviewProfile({ instructor }) {
                     </div>
                     <RateDisplay
                         rating={instructor.rating}
-                        distribution={instructor.ratingDistribution} />
+                        distribution={instructor.ratingDistribution}
+                    />
 
                     {/* line breaker */}
                     <div className="line-breaker-1"></div>

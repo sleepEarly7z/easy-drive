@@ -33,12 +33,6 @@ const theme = createTheme({
 })
 
 const Availability = ({formats, setFormats, handleFormat}) => {
-    // const [formats, setFormats] = React.useState(() => [])
-
-    // const handleFormat = (event, newFormats) => {
-    //     setFormats(newFormats)
-    //     console.log(newFormats)
-    // }
 
     return (
         <>
