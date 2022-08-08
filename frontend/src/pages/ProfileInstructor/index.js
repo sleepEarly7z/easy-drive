@@ -20,8 +20,6 @@ const ProfileInstructor = () => {
                 <SidebarInstructor />
             </div>
             <div className="">
-                {/* <div className="InstSideMenuProps"> */}
-                {/* <div className='InstSideMenuSingle'> */}
                 <div className="InstSideMenuProps">
                     <InstSideMenu section1={information} />
                     <div
@@ -34,7 +32,6 @@ const ProfileInstructor = () => {
                 </div>
                 
             </div>
-            {/* </div> */}
         </>
     )
 }

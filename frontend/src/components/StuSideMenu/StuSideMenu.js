@@ -37,8 +37,8 @@ export default function StuSideMenu({section1, section2}) {
         <ListItemText primary="Edit profile" />
       </ListItem>
       <Divider />
-      <ListItem button divider>
-        <ListItemText primary="See reviews" />
+      <ListItem button divider onClick={() => scrollToSection(section2)}>
+        <ListItemText primary="To be continued" />
       </ListItem>
       <ListItem button>
         <ListItemText primary="Show Map" onClick={handleClick}/>

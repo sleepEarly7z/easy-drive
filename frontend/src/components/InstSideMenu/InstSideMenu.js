@@ -25,8 +25,8 @@ export default function InstSideMenu({section1, section2}) {
         <ListItemText primary="Edit profile" />
       </ListItem>
       <Divider />
-      <ListItem button divider>
-        <ListItemText primary="See reviews" />
+      <ListItem button divider onClick={() => scrollToSection(section2)}>
+        <ListItemText primary="To be continued" />
       </ListItem>
       <Divider light />
     </List>
