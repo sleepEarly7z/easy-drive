@@ -59,7 +59,9 @@ function LayoutNavbar() {
 
     const handleViewProfile = () => {
         navigate(`/profile-${user.data.role}/${user.data._id}`)
-        window.location.reload(false)
+        setTimeout(() => {
+            window.location.reload(false)
+        }, 500)
     }
 
     const handleSignOut = () => {

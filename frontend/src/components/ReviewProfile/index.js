@@ -167,6 +167,9 @@ function formatDate(list) {
             endDate: new Date(year, month - 1, day, range_index + 1, 0),
             id: 0,
             location: 'Room 1',
+            color: isBooked === true ? 'black' : '#001d04',
+            backgroundColor:
+                isBooked === true ? 'hsla(0, 0%, 88%, 0.432)' : '#fce7a8',
         }
         index = index + 1
 
@@ -197,17 +200,9 @@ export default function ReviewProfile({ instructor }) {
     const params = useParams()
 
     const user = useSelector((state) => state.auth.user)
-    // const list = useSelector((state) => state.appointments.list)
     const list = JSON.parse(localStorage.getItem('appointments'))
-    // console.log('list.data: ' + list.data)
-    // console.log('list.data.length: ' + list.data.length)
-    // console.log('list.data[0]: ' + list.data[0].date)
-    // console.log('list.data[0]: ' + list.data[0].isBooked)
-    // console.log('list.data[0]: ' + list.data[0].student_lastname)
-    // console.log('list.data[0]: ' + list.data[0]._id)
 
     const appointments = formatDate(list.data)
-    // console.log('appointments: ' + appointments)
 
     const renderFollowButton = () => {
         if (!user)

@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+
 import Paper from '@mui/material/Paper'
 import FormGroup from '@mui/material/FormGroup'
 import Checkbox from '@mui/material/Checkbox'
@@ -27,10 +28,10 @@ import {
     DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui'
 
-// import { appointments } from '../../utils/appointments'
 import { getAppointmentsByInstructorIDAsync } from '../../redux/appointments/thunks'
 
 const PREFIX = 'Demo'
+
 // #FOLD_BLOCK
 export const classes = {
     container: `${PREFIX}-container`,
@@ -49,6 +50,34 @@ const StyledDiv = styled('div')(({ theme }) => ({
         fontSize: '1rem',
     },
 }))
+
+const AppointmentContent = (props) => {
+    const { data, style } = props
+
+    return (
+        <Appointments.AppointmentContent
+            style={{
+                ...style,
+                color: data.color,
+            }}
+            {...props}
+        />
+    )
+}
+
+const Appointment = ({ children, style, data, ...restProps }) => (
+    <Appointments.Appointment
+        {...restProps}
+        data={data}
+        style={{
+            ...style,
+            backgroundColor: data.backgroundColor,
+            color: data.color,
+        }}
+    >
+        {children}
+    </Appointments.Appointment>
+)
 
 // const currentDate = '2018-06-27'
 const editingOptionsList = [
@@ -305,7 +334,10 @@ const CalendarSchedular = ({ appointments }) => {
                         />
                     <DayView /> */}
 
-                    <Appointments />
+                    <Appointments
+                        appointmentComponent={Appointment}
+                        appointmentContentComponent={AppointmentContent}
+                    />
 
                     <AppointmentTooltip
                         showOpenButton
