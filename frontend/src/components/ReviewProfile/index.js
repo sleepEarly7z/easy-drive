@@ -400,8 +400,7 @@ export default function ReviewProfile({ instructor }) {
                     </div>
                     <RateDisplay
                         rating={instructor.rating}
-                        distribution={instructor.ratingDistribution}
-                    />
+                        distribution={instructor.ratingDistribution} />
 
                     {/* line breaker */}
                     <div className="line-breaker-1"></div>
