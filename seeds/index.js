@@ -241,28 +241,17 @@ const seedAppointments = async () => {
 };
 
 const updateAllRatings = async () => {
-	// getting all ids
-	const ids = await Instructor.find().select({ _id: 1 });
-	for (const id of ids) {
-		const avg = await reviewService.getAvgRatingByInstructorId(
-			id._id.toString()
-		);
-		const dist =
-			await reviewService.getRatingDistributionByInstructorId(
-				id._id.toString()
-			);
-		await Instructor.findOneAndUpdate(
-			{ _id: id },
-			{
-				rating: avg ? avg : 0,
-				ratingDistribution: dist ? dist : [],
-			}
-		);
-	}
-	return;
+    // getting all ids
+    const ids = await Instructor.find().select({ _id: 1 });
+    for (const id of ids) {
+        const avg = await reviewService.getAvgRatingByInstructorId(id._id.toString());
+        const dist = await reviewService.getRatingDistributionByInstructorId(id._id.toString());
+        await Instructor.findOneAndUpdate({ _id: id }, { rating: avg ? avg : 0, ratingDistribution: dist ? dist : [] });
+    }
+    return;
 };
 
 updateAllRatings().then(() => {
-	mongoose.connection.close();
-	console.log('MongoDB connection closed');
-});
+    mongoose.connection.close();
+    console.log('MongoDB connection closed');
+})
