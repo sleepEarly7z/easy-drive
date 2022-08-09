@@ -183,9 +183,16 @@ export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch()
     const params = useParams()
 
-    const user = useSelector((state) => state.auth.user)
-    const [list, setList] = useState([])
+    const user = useSelector((state) => state.auth.user);
+
+    const [listSetting, setListSetting] = useState({
+        list: [],
+        isLoading: true,
+        hasError: false
+    })
     // const list = JSON.parse(localStorage.getItem('appointments'))
+
+    const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
         // const sendGet = async () => {
@@ -201,14 +208,26 @@ export default function ReviewProfile({ instructor }) {
         fetch(`http://localhost:3001/appointments/${params.instructorId}`)
             .then((response) => response.json())
             .then((data) => {
-                setList(data.data)
-                console.log(data)
-                console.log(list)
+                setListSetting((currSetting) => ({
+                    ...currSetting,
+                    list: data.data,
+                    isLoading: false,
+                    hasError: false
+                }))
+                console.log(listSetting.list);
             })
-        console.log('list: ' + list)
-    }, [params.instructorId])
+            .catch(() => {
+                setListSetting((currSetting) => ({
+                    ...currSetting,
+                    isLoading: false,
+                    hasError: true
+                }))
+            })
+    }, [listSetting.isLoading, params.instructorId])
 
-    // const appointments = formatDate(list.data)
+    useEffect(() => {
+        setAppointments(formatDate(listSetting.list));
+    }, [listSetting.list])
 
     const renderFollowButton = () => {
         if (!user)
@@ -397,8 +416,8 @@ export default function ReviewProfile({ instructor }) {
                         </div>
                     </div>
 
-                    <CalendarSchedular appointments={appointmentsSample} />
-                    {/* <CalendarSchedular appointments={appointments} /> */}
+                    {/* <CalendarSchedular appointments={appointmentsSample} /> */}
+                    <CalendarSchedular data={appointments} setData={setAppointments} />
 
                     {/* line breaker */}
                     <div className="line-breaker-1"></div>

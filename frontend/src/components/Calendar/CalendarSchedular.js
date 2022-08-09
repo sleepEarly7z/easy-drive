@@ -90,12 +90,7 @@ const months = [
     'December',
 ]
 
-const CalendarSchedular = ({ appointments }) => {
-    const dispatch = useDispatch()
-    const params = useParams()
-
-    const [data, setData] = React.useState(appointments)
-
+const CalendarSchedular = ({ data, setData }) => {
     const [editingOptions, setEditingOptions] = React.useState({
         allowAdding: false,
         allowDeleting: false,
@@ -172,10 +167,6 @@ const CalendarSchedular = ({ appointments }) => {
     const handleViewChange = (event) => {
         setViewmode(event.target.value)
     }
-
-    React.useEffect(() => {
-        dispatch(getAppointmentsByInstructorIDAsync(params.instructorId))
-    }, [])
 
     return (
         <React.Fragment>
