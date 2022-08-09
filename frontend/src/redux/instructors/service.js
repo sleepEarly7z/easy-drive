@@ -1,5 +1,5 @@
 import { handleResponse } from '../utils'
-const API_URL = 'https://ezdrive-test-signup.herokuapp.com/'
+const API_URL = 'https://ezdrivemain.herokuapp.com/'
 const baseUrl = `${API_URL}instructors`
 
 const getQueryString = (query) => {
@@ -101,7 +101,7 @@ const updateInstructor = async (payload) => {
             carIsProvided,
         }),
     })
-    
+
     return response.json()
 }
 

@@ -1,4 +1,4 @@
-const API_URL = 'https://ezdrive-test-signup.herokuapp.com/'
+const API_URL = 'https://ezdrivemain.herokuapp.com/'
 
 const getReviewsByUserId = async (id, idType) => {
     const response = await fetch(`${API_URL}reviews?${idType}=${id}`, {
@@ -35,7 +35,7 @@ const addReview = async (payload) => {
         const errorMsg = data?.message
         throw new Error(errorMsg)
     }
-    
+
     return data
 }
 
@@ -61,7 +61,7 @@ const updateReview = async (payload) => {
         const errorMsg = data?.message
         throw new Error(errorMsg)
     }
-    
+
     return data
 }
 
@@ -79,7 +79,7 @@ const deleteReview = async (id) => {
         const errorMsg = data?.message
         throw new Error(errorMsg)
     }
-    
+
     return data
 }
 
