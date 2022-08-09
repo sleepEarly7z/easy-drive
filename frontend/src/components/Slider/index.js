@@ -1,6 +1,5 @@
 import './index.scss'
 import Carousel from 'react-elastic-carousel'
-import ProfileCard from '../ProfileCard'
 import React from 'react'
 import InstructorService from '../../redux/instructors/service'
 import TopRatingSliderCards from '../TopRatingSliderCards'
@@ -21,7 +20,8 @@ const Slider = () => {
     'https://images.pexels.com/photos/167698/pexels-photo-167698.jpeg?auto=compress&cs=tinysrgb&w=1600',
     'https://images.pexels.com/photos/1450082/pexels-photo-1450082.jpeg?auto=compress&cs=tinysrgb&w=600',
     'https://images.pexels.com/photos/13038628/pexels-photo-13038628.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-    'https://images.pexels.com/photos/12969306/pexels-photo-12969306.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load']);
+    'https://images.pexels.com/photos/12969306/pexels-photo-12969306.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'
+    ]);
 
     React.useEffect(() => {
 

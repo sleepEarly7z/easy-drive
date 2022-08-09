@@ -8,7 +8,6 @@ import education from '../../../assets/images/jpg/IMG_1003.JPG'
 import taken from '../../../assets/images/jpg/IMG_1005.JPG'
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 
-import ProfileCard from '../../ProfileCard'
 import { NavLink } from 'react-router-dom'
 
 const images = [astronaut, celebrating, education, taken]
@@ -72,7 +71,7 @@ const TopRecommended = () => {
                     >
                         {/* <img src={img} alt={img} /> */}
 
-                        <ProfileCard
+                        {/* <ProfileCard
                             name={'Rick Astley'}
                             location={'UK'}
                             years={'10'}
@@ -80,7 +79,7 @@ const TopRecommended = () => {
                             imgSrc={
                                 'https://img.apmcdn.org/768cb350c59023919f564341090e3eea4970388c/square/72dd92-20180309-rick-astley.jpg'
                             }
-                        />
+                        /> */}
                     </div>
                 ))}
             </Slider>
