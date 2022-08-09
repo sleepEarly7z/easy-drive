@@ -1,9 +1,6 @@
-import { TIME_SLOTS, WEEK_DAYS, MONTHS } from '../../utils/constants'
-
 const API_URL = 'https://ezdrivemain.herokuapp.com/appointments/'
 
 const getAppointmentsByInstructorID = async (id) => {
-    console.log(id)
     const response = await fetch(`${API_URL}${id}`, {
         method: 'GET',
     })

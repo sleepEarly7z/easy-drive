@@ -58,9 +58,9 @@ const ProfileCard = (props) => {
 
     const viewProfile = () => {
         navigate(`/showProfileRating/${id}`)
-        setTimeout(() => {
-            window.location.reload(false)
-        }, 500)
+        // setTimeout(() => {
+        //     window.location.reload(false)
+        // }, 500)
     }
 
     return (

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Grid } from '@material-ui/core'
 import Controls from './controls/Controls'
 import { useForm, Form } from './useForm'
 import { useParams } from 'react-router-dom'
@@ -70,24 +69,6 @@ export default function ReviewForm(props) {
 
     return (
         <Form onSubmit={handleSubmit}>
-            {/* <Grid container> */}
-            {/* <Grid item xs={6}>
-                    <Controls.Input
-                        name="student_id"
-                        label="Full Name"
-                        value={values.student_id}
-                        onChange={handleInputChange}
-                        error={errors.student_id}
-                    />
-                    <Controls.Input
-                        label="comment_content"
-                        name="comment_content"
-                        value={values.comment_content}
-                        onChange={handleInputChange}
-                        error={errors.comment_content}
-                    />
-                </Grid> */}
-            {/* <Grid item xs={6}> */}
             <Controls.RadioGroup
                 name="ratingStar"
                 label="Rating Star"
@@ -110,8 +91,6 @@ export default function ReviewForm(props) {
                     onClick={resetForm}
                 />
             </div>
-            {/* </Grid> */}
-            {/* </Grid> */}
         </Form>
     )
 }

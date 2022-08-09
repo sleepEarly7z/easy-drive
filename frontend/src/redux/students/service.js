@@ -7,7 +7,6 @@ const getStudents = async () => {
     const response = await fetch(`${API_URL}students`, {
         method: 'GET',
     })
-    // console.log("getInstructors()");
     return response.json()
 }
 

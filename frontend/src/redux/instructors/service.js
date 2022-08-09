@@ -101,7 +101,7 @@ const updateInstructor = async (payload) => {
             carIsProvided,
         }),
     })
-    console.log('97 service')
+    
     return response.json()
 }
 

@@ -99,17 +99,17 @@ const Reviews = ({ idType, page }) => {
         setFilterFn({
             fn: (items) => {
                 if (target.value === '') return items
-                else return items.filter((x) => x.fullName.toLowerCase())
-
-                //     return items.filter((x) =>
-                //     x.student_name
-                //         ? x.student_name
-                //               .toLowerCase()
-                //               .includes(target.value.toLowerCase())
-                //         : x.instructor_name
-                //               .toLowerCase()
-                //               .includes(target.value.toLowerCase()),
-                // )
+                else {
+                    return items.filter((x) =>
+                        x.student_name
+                            ? x.student_name
+                                  .toLowerCase()
+                                  .includes(target.value.toLowerCase())
+                            : x.instructor_name
+                                  .toLowerCase()
+                                  .includes(target.value.toLowerCase()),
+                    )
+                }
             },
         })
     }
@@ -140,7 +140,6 @@ const Reviews = ({ idType, page }) => {
         changeRatingValue(review)
 
         if (review.id === 0) {
-            console.log('insert review: ' + review)
             dispatch(addReviewAsync(review))
         } else {
             dispatch(updateReviewAsync(review))
