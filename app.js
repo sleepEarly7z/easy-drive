@@ -12,6 +12,7 @@ const instructorsRouter = require('./routes/instructors');
 const appointmentsRouter = require('./routes/appointments');
 const reviewsRouter = require('./routes/reviews');
 const studentsRouter = require('./routes/students');
+const timeslotsRouter = require('./routes/timeslots');
 
 // Connect to database
 connectDB();
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use(express.static('frontend/build'));
 
 app.use('/instructors', instructorsRouter);
+app.use('/timeslots', timeslotsRouter);
 app.use('/appointments', appointmentsRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/students', studentsRouter);

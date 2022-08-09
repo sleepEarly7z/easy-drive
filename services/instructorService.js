@@ -3,8 +3,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Instructor = require('../models/instructorModel');
+const ReviewService = require('../services/reviewService');
 const helpers = require('../utils/helpers');
-const { DEFAULT_SORT_BY, DEFUALT_SORT_DIR, DEFAULT_OFFSET, DEFAULT_LIMIT } = require('../utils/constants');
+const {
+	DEFAULT_SORT_BY,
+	DEFUALT_SORT_DIR,
+	DEFAULT_OFFSET,
+	DEFAULT_LIMIT,
+} = require('../utils/constants');
 
 /**
  * Get an instructor with given id from database
@@ -16,7 +22,8 @@ const { DEFAULT_SORT_BY, DEFUALT_SORT_DIR, DEFAULT_OFFSET, DEFAULT_LIMIT } = req
  */
 const getInstructorById = async (id) => {
 	try {
-		return Instructor.findById(id);
+		const instructor = await Instructor.findById(id).lean();
+		return instructor;
 	} catch (error) {
 		throw { type: 'DB', message: error };
 	}
@@ -85,7 +92,7 @@ const registerInstructor = async (instructor) => {
 
 	// Create user
 	const newInstructor = await Instructor.create({
-		role: 'isntructor',
+		role: 'instructor',
 		first_name,
 		last_name,
 		// password: hashedPassword,
@@ -231,8 +238,6 @@ const deleteInstructorById = (id) => {
  * @returns {object} instructor updated
  */
 const updateInstructorById = (id, patch) => {
-	// TODO
-	console.log('instrucotService 150');
 	Instructor.updateOne({ _id: id }, patch, (err, instructor) => {
 		if (err) {
 			console.log(err);
@@ -253,11 +258,17 @@ const generateToken = (id) => {
 const getQueriedInstructors = async (query) => {
 	const findQuery = {};
 	const sortQuery = { DEFAULT_SORT_BY: DEFUALT_SORT_DIR };
-	let offset = DEFAULT_OFFSET;
-	let limit = DEFAULT_LIMIT;
 
 	if (query) {
-		const { city, language, license, sortBy, sortDir, offset, limit } = query;
+		const {
+			city,
+			language,
+			license,
+			sortBy,
+			sortDir,
+			offset,
+			limit,
+		} = query;
 
 		if (city) {
 			const cities = helpers.toArray(city);
@@ -273,20 +284,18 @@ const getQueriedInstructors = async (query) => {
 		}
 
 		if (sortBy && sortDir) {
-			sortQuery[sortBy] = (sortDir === 'asc') ? 1 : -1;
+			sortQuery[sortBy] = sortDir === 'asc' ? 1 : -1;
 		}
 
 		if (offset) offset = offset;
 		if (limit) limit = limit;
-	};
+	}
 
 	try {
 		const total = await Instructor.count(findQuery);
 		const data = await Instructor
 			.find(findQuery)
 			.sort(sortQuery)
-			.skip(offset)
-			.limit(limit);
 		return { total, data };
 	} catch (error) {
 		throw error;
@@ -301,5 +310,5 @@ module.exports = {
 	getMe,
 	deleteInstructorById,
 	updateInstructorById,
-	getQueriedInstructors,
+	getQueriedInstructors
 };

@@ -25,7 +25,6 @@ export default function StuSideMenu({section1, section2}) {
 }
 
     const handleClick = async (event) => {
-
         setShow(!show);
         console.log(show);
     }

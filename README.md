@@ -3,7 +3,7 @@
 CPSC 455 2022S **Team 405 Found**
 
 ## High-level Description
-Welcome to ezdrive! The ultimate website for finding a local driving instructor nearby you, or post our own business by registering as an instructor! The explore page contains all the instructors we have and you can filter them using the panel on the left. You can also register as a student/instructor and edit your profile. Find a great instructor? Leave him/her a review and give a 5 out 5 rating.
+Welcome to ezdrive! The ultimate website for finding a local driving instructor nearby you, or post our own business by registering as an instructor! The explore page contains all the instructors we have and you can filter them using the panel on the left. You can also register as a student/instructor and edit your profile. Find a great instructor? Leave him/her a review and give a 5 out of 5 rating.
 
 ## Project Description
 
@@ -34,8 +34,8 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
 
 **Stretch Requirements**
 
--   [ ] Have a contact instructor panel
--   [ ] Link with map API to show instructors nearby me
+-   [x] Have a contact instructor panel (changed to contact us panel)
+-   [x] Link with map API to show instructors nearby me
 -   [ ] Recommend instructor based on a user quiz (ML/AI)
 -   [ ] Write comments/reviews anonymously, and anonymous posts are only visible to us
 -   [ ] Implement an instructor profile page preview
@@ -57,18 +57,54 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
 
 ## Future requirements breakdown
 
--   [ ] Edit a review
+-   [x] Edit a review
     -   Add a review on the instructor's profile page listed on the main page
     -   Rate the instructor on the instructor's profile page listed on the main page
--   [ ] Create/Delete/Modify new instructor profiles
+-   [x] Create/Delete/Modify new instructor profiles
     -   Display the instructor's name, language, location, availability, contact email, and etc on the profile page
     -   Edit the instructor's personal information
     -   Upload/Update the instructor's profile image
--   [ ] Manage user registration/login/authentication
+-   [x] Manage user registration/login/authentication
     -   Register with email and password as a student/instructor
     -   Register with a Google account as a student/instructor
     -   Login with email and password as a student/instructor
     -   Login with a Google account as a student/instructor
+
+## Tech Usages
+### HTML, CSS, JavaScript
+- To manage the space in each page, we use flexbox by wrapping the component in a scss class. React uses HTML also, so HTML is also a important part defining the structure of the webpage. No doubt JavaScript is the most important part of the webpage, 90% of the code is written in JavaScript. We use JavaScript calling APIs, handling promises, sending requests and so on.
+
+### React & Redux
+- React is used to create all the pages by writing functional components. We not only used hooks to manage the state of the webpage, but also used React Router to manage the routing of the webpage. Evenmore, we wrote custom hooks to give us more control over the data flow of the profile pages. We also experimented with React component lifecycle methods to manage rendering and updating. Redux is also used to manage the state of the webpage. Each dispatch action goes through the reducer and the state is updated. It allows multiple components to share the same state on the main page.
+
+### Node & Express
+- We choose Node and Express to run the server. We use Express to handle the routing of the webpage. NPM is used to install all the dependencies. It provides us with a lot of useful features. Express is also a path to our backend code.
+
+### MongoDB
+- We use MongoDB to store the data. We use Mongoose to create schemas and models. We did not insert data one by one, but instead we used seeds to insert data. It saved a lot of time and created a lot of real and useful data for testing.
+
+### Release engineering
+- We chose Heroku as our deploy platform. We used CI to test our build and then Github Actions to deploy our build. We also enabled automatic deployment to Heroku after CI is passed.
+
+
+## Above and Beyond Functionalities
+- Follow/unfollow
+    -   According to the user's log in status and user's current following information from MongoDB, the follow button would be presented variously on the first               rendering of the instructor profile page. 
+    -   Firstly, Out of the consideration of the best user experience and industrial practice, we decided that an instructor cannot follow another instructor, and if a guest user clicked the follow button, the user would be redirect to a log in/register account page. Secondly when a student navigate to an instructor page, a ternary operation is used to decide the text display and functionality of the button to be follow or unfollow. 
+    -   If the follow/unfollow button is clicked by a student user, the frontend would send a patch request to our backend to update our redux reducer and MongoDB. After our backend receive the patch request and finish updating, the follow button in our frontend will change its display accordinly, and the next time when the user click it, its functionality will be switched to unfollow.
+- Add review
+- Map
+- Main page sorting
+- Social media / contact form
+
+## Next steps
+- Message system?
+
+## List of contributions
+- Cathy Yang
+- Chloe Zhang
+- Davis Qi
+- Yizhou Li
 
 ## Sketch
 

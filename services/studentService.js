@@ -245,16 +245,19 @@ const getNearbyInstructors = async (id, city, street, province) => {
 	}
 	)
 	.then((res) => {
-		console.log(res);
+		// console.log(res);
 		const resultArray = [];
 		return Promise.all(res).then((values) => {
 			for (i of values) {
 				if(i.distance.data.rows[0].elements[0].status === 'OK') {
 					// console.log(i.distance.data.rows[0]);
-					if(i.distance.data.rows[0].elements[0].distance.text.split(' ')[0] < 100) {
+					if(i.distance.data.rows[0].elements[0].distance.text.split(' ')[0] < 10) {
 						resultArray.push({
 							instructorID: i.instructor._id,
 							instructorName: i.instructor.first_name + ' ' + i.instructor.last_name,
+							instStreet: i.instructor.street,
+							instCity: i.instructor.city,
+							instProvince: i.instructor.province,
 							distance: i.distance.data.rows[0].elements[0].distance.text,
 						});
 					}
@@ -262,7 +265,7 @@ const getNearbyInstructors = async (id, city, street, province) => {
 					console.log('no distance');
 				}
 			}
-			console.log(resultArray);
+			// console.log(resultArray);
 			return resultArray;
 		}
 		).catch((err) => {

@@ -10,12 +10,22 @@ import {
     createTheme,
     ThemeProvider,
 } from '@material-ui/core'
-import { CssBaseline, Container, Paper, Box } from '@material-ui/core'
+import { CssBaseline, Container, Paper, Box, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import Grid from '@material-ui/core/Grid'
+import ToggleButton from '@mui/material/ToggleButton'
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
+
+import OutlinedInput from '@mui/material/OutlinedInput'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import { useTheme } from '@mui/material/styles'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
+import Chip from '@mui/material/Chip'
+
 import {
     useForm,
     Controller,
@@ -27,15 +37,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import toast from 'react-hot-toast'
 import { NavLink } from 'react-router-dom'
 
-import {
-    getInstructorsAsync,
-    addInstructorAsync,
-} from '../../redux/instructors/thunks'
+import { getInstructorsAsync } from '../../redux/instructors/thunks'
 
 import { reset } from '../../redux/authentication/reducer'
 import { registerAsync } from '../../redux/authentication/thunks'
 
 import Loading from '../Animation/Loading'
+import Availability from '../Calendar/Availability'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -131,12 +139,169 @@ const CarProvided = ({ control }) => {
     )
 }
 
+const ITEM_HEIGHT = 48
+const ITEM_PADDING_TOP = 8
+const MenuProps = {
+    PaperProps: {
+        style: {
+            // maxHeight: ITEM_HEIGHT * 5 + ITEM_PADDING_TOP,
+            // width: 250,
+        },
+    },
+}
+
+const languages = [
+    'English',
+    'Mandarin',
+    'Cantonese',
+    'Korean',
+    'Japanese',
+    'Punjabi',
+]
+
+function getStyles(name, languageType, theme) {
+    return {
+        fontWeight:
+            languageType.indexOf(name) === -1
+                ? theme.typography.fontWeightRegular
+                : theme.typography.fontWeightMedium,
+    }
+}
+
+const SelectLicense = ({ control }) => {
+    const [license, setLicense] = React.useState('Class 5')
+
+    const handleChange = (event) => {
+        setLicense(event.target.value)
+    }
+
+    return (
+        <ThemeProvider theme={theme}>
+            <div>
+                <section style={{ display: 'flex' }}>
+                    <Controller
+                        render={({ field }) => (
+                            <FormControl sx={{ height: 75, width: 1200 }}>
+                                <InputLabel id="demo-simple-select-label">
+                                    License type
+                                </InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={license}
+                                    defaultValue={license}
+                                    fullWidth
+                                    onChange={handleChange}
+                                    {...field}
+                                >
+                                    <MenuItem value={'Class 5'}>
+                                        Class 5
+                                    </MenuItem>
+                                    <MenuItem value={'Class 4'}>
+                                        Class 4
+                                    </MenuItem>
+                                    <MenuItem value={'Class 7'}>
+                                        Class 7
+                                    </MenuItem>
+                                </Select>
+                            </FormControl>
+                        )}
+                        name="license"
+                        control={control}
+                    />
+                </section>
+            </div>
+        </ThemeProvider>
+    )
+}
+
+const MultipleSelectLanguage = ({ control }) => {
+    const theme = useTheme()
+    const [languageType, setLanguageType] = React.useState(['English'])
+
+    const handleChange = (event) => {
+        const {
+            target: { value },
+        } = event
+        setLanguageType(
+            // On autofill we get a stringified value.
+            typeof value === 'string' ? value.split(',') : value,
+        )
+    }
+    return (
+        <ThemeProvider theme={theme}>
+            <div>
+                <section style={{ display: 'flex' }}>
+                    <Controller
+                        render={({ field }) => (
+                            <FormControl sx={{ height: 65, width: 1200 }}>
+                                <InputLabel id="demo-simple-select-label">
+                                    Languages
+                                </InputLabel>
+                                <Select
+                                    label="Languages"
+                                    labelId="demo-multiple-chip-label"
+                                    id="demo-multiple-chip"
+                                    multiple
+                                    value={languageType}
+                                    fullWidth
+                                    onChange={handleChange}
+                                    input={
+                                        <OutlinedInput
+                                            id="select-multiple-chip"
+                                            label="Chip"
+                                        />
+                                    }
+                                    renderValue={(selected) => (
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                flexWrap: 'wrap',
+                                                gap: 0.5,
+                                            }}
+                                        >
+                                            {selected.map((value) => (
+                                                <Chip
+                                                    key={value}
+                                                    label={value}
+                                                />
+                                            ))}
+                                        </Box>
+                                    )}
+                                    {...field}
+                                >
+                                    {languages.map((itm) => (
+                                        <MenuItem
+                                            key={itm}
+                                            value={itm}
+                                            style={getStyles(
+                                                itm,
+                                                languageType,
+                                                theme,
+                                            )}
+                                        >
+                                            {itm}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        )}
+                        name="language"
+                        control={control}
+                    />
+                </section>
+            </div>
+        </ThemeProvider>
+    )
+}
+
 function getSteps() {
     return [
         'Basic information',
         'Contact Information',
         'Professional Information',
-        'Profile Information',
+        // 'Profile Information',
+        'Availability',
     ]
 }
 
@@ -191,18 +356,19 @@ const BasicForm = () => {
                     />
                 )}
             />
-
             <Controller
                 control={control}
-                name="province"
+                name="description"
                 render={({ field }) => (
                     <TextField
-                        id="province"
-                        label="Province*"
-                        variant="outlined"
-                        placeholder="Re-enter Your Password"
-                        fullWidth
+                        id="outlined-multiline-static"
+                        label="Description"
+                        placeholder="Enter Your Description"
+                        multiline
+                        minrows={4}
                         margin="normal"
+                        variant="outlined"
+                        fullWidth
                         {...field}
                     />
                 )}
@@ -278,22 +444,6 @@ const ContactForm = () => {
                     />
                 )}
             />
-
-            <Controller
-                control={control}
-                name="country"
-                render={({ field }) => (
-                    <TextField
-                        id="country"
-                        label="Country*"
-                        variant="outlined"
-                        placeholder="Enter Your Country"
-                        fullWidth
-                        margin="normal"
-                        {...field}
-                    />
-                )}
-            />
         </>
     )
 }
@@ -302,21 +452,9 @@ const ProfessionalForm = () => {
     const { control } = useFormContext()
     return (
         <>
-            <Controller
-                control={control}
-                name="license"
-                render={({ field }) => (
-                    <TextField
-                        id="license"
-                        label="License*"
-                        variant="outlined"
-                        placeholder="Enter Your License"
-                        fullWidth
-                        margin="normal"
-                        {...field}
-                    />
-                )}
-            />
+            <SelectLicense control={control} />
+
+            <MultipleSelectLanguage control={control} />
 
             <Controller
                 control={control}
@@ -326,9 +464,10 @@ const ProfessionalForm = () => {
                         id="experience"
                         label="Year Of Experience*"
                         variant="outlined"
-                        placeholder="Enter Your Year Of Experience"
+                        placeholder="Enter Number"
                         fullWidth
                         margin="normal"
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                         {...field}
                     />
                 )}
@@ -350,34 +489,6 @@ const ProfessionalForm = () => {
                 )}
             />
 
-            {/* <Controller
-                control={control}
-                name="language"
-                render={({ field }) => <MultipleSelectChip />}
-            /> */}
-            {/* <MultipleSelectChip control={control} /> */}
-
-            <Controller
-                control={control}
-                name="language"
-                render={({ field }) => (
-                    <TextField
-                        id="language"
-                        label="Language"
-                        variant="outlined"
-                        placeholder="Enter Your Languages, and split using comma"
-                        fullWidth
-                        margin="normal"
-                        {...field}
-                    />
-                )}
-            />
-
-            {/* <Controller
-                control={control}
-                name="isCarProvided"
-                render={({ field }) => <CarProvided control={control} />}
-            /> */}
             <CarProvided control={control} />
         </>
     )
@@ -385,6 +496,7 @@ const ProfessionalForm = () => {
 
 const ProfileForm = () => {
     const { control } = useFormContext()
+
     return (
         <>
             <Controller
@@ -404,36 +516,29 @@ const ProfileForm = () => {
                     />
                 )}
             />
-
-            <Controller
-                control={control}
-                name="time"
-                render={({ field }) => (
-                    <TextField
-                        id="time"
-                        label="Hours Available Per Day*"
-                        variant="outlined"
-                        placeholder="Enter Your Available Hours Each Workday"
-                        fullWidth
-                        margin="normal"
-                        {...field}
-                    />
-                )}
-            />
         </>
     )
 }
 
-function getStepContent(step) {
+function getStepContent(step, formats, setFormats, handleFormat) {
     switch (step) {
         case 0:
             return <BasicForm />
+        // return <ProfileForm />
         case 1:
             return <ContactForm />
         case 2:
             return <ProfessionalForm />
         case 3:
-            return <ProfileForm />
+            //     return <ProfileForm />
+            // case 4:
+            return (
+                <Availability
+                    formats={formats}
+                    setFormats={setFormats}
+                    handleFormat={handleFormat}
+                />
+            )
         default:
             return 'unknown step'
     }
@@ -446,6 +551,13 @@ const SignUpInstructor = () => {
     useEffect(() => {
         dispatch(getInstructorsAsync())
     }, [dispatch])
+
+    const [formats, setFormats] = React.useState(() => [])
+
+    const handleFormat = (event, newFormats) => {
+        setFormats(newFormats)
+        console.log(newFormats)
+    }
 
     const { user, isError, isSuccess, message } = useSelector(
         (state) => state.auth,
@@ -470,24 +582,22 @@ const SignUpInstructor = () => {
     const classes = useStyles()
     const methods = useForm({
         defaultValues: {
+            role: 'instructor',
             first_name: '',
             last_name: '',
             password: '',
-            // province: '',
             email: '',
             phone: '',
-            // gender: '',
             street: '',
             city: '',
-            province: '',
-            country: '',
+            province: 'British Columbia',
+            country: 'Canada',
             license: '',
             experience: '',
             company: '',
-            language: '',
+            language: [],
             isCarProvided: '',
             description: '',
-            time: '',
         },
     })
     const [activeStep, setActiveStep] = useState(0)
@@ -496,7 +606,7 @@ const SignUpInstructor = () => {
     const steps = getSteps()
 
     const isStepOptional = (step) => {
-        return step === 1 || step === 2
+        return step === 3
     }
 
     const isStepSkipped = (step) => {
@@ -504,12 +614,8 @@ const SignUpInstructor = () => {
     }
 
     const handleNext = (data) => {
-        console.log(data)
+        console.log('data: ' + data)
         if (activeStep === steps.length - 1) {
-            if (!data.time) {
-                toast.error('Please fill the required space.')
-                return
-            }
             fetch('https://jsonplaceholder.typicode.com/comments')
                 .then((data) => data.json())
                 .then((res) => {
@@ -519,7 +625,14 @@ const SignUpInstructor = () => {
 
             // create an account
             console.log(data)
+            data.language = data.language.toString()
+            data.availability = formats
+            console.log('data: ' + data)
             dispatch(registerAsync(data))
+            if (formats.length !== 0) {
+                console.log('Need to book available time')
+            }
+            // console.log('formats: ' + formats)
             setIsLoading(true)
             // redirect after 3 seconds
             setTimeout(function () {
@@ -531,28 +644,18 @@ const SignUpInstructor = () => {
                     !data.first_name ||
                     !data.last_name ||
                     !data.password ||
-                    !data.province
+                    !data.description
                 ) {
                     toast.error('Please fill the required space.')
                     return
                 }
-                if (data.password.length < 8) {
-                    toast.error('Passwords must be at least 8 characters long.')
+                if (data.password.length < 6) {
+                    toast.error('Passwords must be at least 6 characters long.')
                     return
                 }
-                // if (data.password !== data.province) {
-                //     toast.error('Re-entered password does not match.')
-                //     return
-                // }
             }
             if (activeStep === 1) {
-                if (
-                    !data.email ||
-                    !data.phone ||
-                    !data.street ||
-                    !data.city ||
-                    !data.country
-                ) {
+                if (!data.email || !data.phone || !data.street || !data.city) {
                     toast.error('Please fill the required space.')
                     return
                 }
@@ -572,13 +675,6 @@ const SignUpInstructor = () => {
 
     const handleBack = () => {
         setActiveStep(activeStep - 1)
-    }
-
-    const handleSkip = () => {
-        if (!isStepSkipped(activeStep)) {
-            setSkippedSteps([...skippedSteps, activeStep])
-        }
-        setActiveStep(activeStep + 1)
     }
 
     const onSubmit = (data) => {
@@ -651,7 +747,12 @@ const SignUpInstructor = () => {
                                             handleNext,
                                         )}
                                     >
-                                        {getStepContent(activeStep)}
+                                        {getStepContent(
+                                            activeStep,
+                                            formats,
+                                            setFormats,
+                                            handleFormat,
+                                        )}
                                         <Grid
                                             container
                                             justifyContent="space-between"
@@ -676,25 +777,12 @@ const SignUpInstructor = () => {
                                                 variant="body1"
                                                 className={classes.rightText}
                                             >
-                                                {isStepOptional(activeStep) && (
-                                                    <Button
-                                                        className={
-                                                            classes.buttonRight
-                                                        }
-                                                        variant="contained"
-                                                        color="primary"
-                                                        onClick={handleSkip}
-                                                    >
-                                                        skip
-                                                    </Button>
-                                                )}
                                                 <Button
                                                     className={
                                                         classes.buttonRight
                                                     }
                                                     variant="contained"
                                                     color="primary"
-                                                    // onClick={handleNext}
                                                     type="submit"
                                                 >
                                                     {activeStep ===
@@ -717,7 +805,7 @@ const SignUpInstructor = () => {
                 </div>
                 <div className="SignUpRedirectLink">
                     <NavLink to="/sign-up-student">
-                        Sign up as an student
+                        Sign up as a student
                     </NavLink>
                 </div>
             </div>

@@ -3,6 +3,8 @@ import Carousel from 'react-elastic-carousel'
 import React from 'react'
 import InstructorService from '../../redux/instructors/service'
 import TopRatingSliderCards from '../TopRatingSliderCards'
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 // https://www.youtube.com/watch?v=eBKcGAhkZUI&t=526s
 // https://www.npmjs.com/package/react-elastic-carousel
@@ -31,12 +33,15 @@ const Slider = () => {
             const tops = results.data.slice(0, 5);
             setInstructors(tops);
         }
+
         fetchTopInstructors().catch(console.error);
     }, [])
 
     return (
         <>
-            {/* <h1 style={{ textAlign: 'center' }}>Top Rated Instructors</h1> */}
+            <Typography gutterBottom variant='h4' component="div" color='text.primary' sx={{ textAlign: 'center' }}>
+                Top Rated Instructors
+            </Typography>
             <div className="SliderMain">
                 <Carousel breakPoints={breakPoints}>
                 {instructors.map((x) => (
@@ -45,6 +50,7 @@ const Slider = () => {
                         instructor={x}
                         backgroundImg={backgroundImg[instructors.indexOf(x)]}
                         />
+
                     ))}
                 </Carousel>
             </div>

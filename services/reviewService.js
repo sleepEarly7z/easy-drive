@@ -1,4 +1,136 @@
 const { Review } = require('../models/reviewModel');
+const Instructor = require('../models/instructorModel');
+const ObjectId = require('mongodb').ObjectId;
+
+/**
+ * 
+ * @param {string} instructorId 
+ * 
+ * @returns {Number | null} avg rating of that instructor (rouded to two decimal places);
+ */
+const getAvgRatingByInstructorId = async (instructorId) => {
+	const AVG_RATING_PIPLINE = [
+		{
+			'$match': {
+				'instructor_id': ObjectId(`${instructorId}`)
+			}
+		}, {
+			'$group': {
+				'_id': '$instructor_id',
+				'avgRating': {
+					'$avg': '$rating'
+				}
+			}
+		}, {
+			'$project': {
+				'instructor_id': '$_id.instructor_id',
+				'avgRating': {
+					'$round': [
+						'$avgRating', 2
+					]
+				}
+			}
+		}
+	];
+
+	try {
+		const result = await Review.aggregate(AVG_RATING_PIPLINE);
+		const { avgRating } = result[0];
+		return avgRating;
+	} catch {
+		return null;
+	}
+}
+
+const getRatingDistributionByInstructorId = async (instructorId) => {
+	const RATING_DIST_PIPELINE = [
+		{
+			'$match': {
+				'instructor_id': ObjectId(`${instructorId}`)
+			}
+		}, {
+			'$group': {
+				'_id': {
+					'instructor_id': '$instructor_id',
+					'rating': '$rating'
+				},
+				'ratingCount': {
+					'$count': {}
+				}
+			}
+		}, {
+			'$group': {
+				'_id': {
+					'instructor_id': '$_id.instructor_id'
+				},
+				'totalRatingCounts': {
+					'$sum': '$ratingCount'
+				},
+				'ratingDistribution': {
+					'$push': {
+						'rating': '$_id.rating',
+						'ratingCounts': '$ratingCount'
+					}
+				}
+			}
+		}, {
+			'$unwind': {
+				'path': '$ratingDistribution'
+			}
+		}, {
+			'$project': {
+				'instructor_id': '$_id.instructor_id',
+				'avgRating': '$avgRating',
+				'rating': '$ratingDistribution.rating',
+				'ratingCounts': '$ratingDistribution.ratingCounts',
+				'ratingRatio': {
+					'$round': [
+						{
+							'$divide': [
+								'$ratingDistribution.ratingCounts', '$totalRatingCounts'
+							]
+						}, 2
+					]
+				}
+			}
+		}, {
+			'$sort': {
+				'rating': 1
+			}
+		}, {
+			'$group': {
+				'_id': {
+					'instructor_id': '$instructor_id'
+				},
+				'ratingDistribution': {
+					'$push': {
+						'rating': '$rating',
+						'ratingCounts': '$ratingCounts',
+						'ratingRatio': '$ratingRatio'
+					}
+				}
+			}
+		}
+	];
+
+	try {
+		const result = await Review.aggregate(RATING_DIST_PIPELINE);
+		const { ratingDistribution } = result[0];
+		return ratingDistribution;
+	} catch {
+		return null;
+	}
+}
+
+const updateRatingByInstructorId = async (instructorId) => {
+	const avg = await getAvgRatingByInstructorId(instructorId);
+	const dist = await getRatingDistributionByInstructorId(instructorId);
+	await Instructor.findOneAndUpdate(
+		{ _id: instructorId },
+		{ rating: avg ? avg : 0, ratingDistribution: dist ? dist : [] }
+	);
+	return;
+}
 
 const getReviewById = async (id) => {
 	try {
@@ -22,6 +154,94 @@ const getReviewsByInstructorId = async (id) => {
 	} catch (error) {
 		throw { type: 'DB', message: error };
 	}
+};
+
+
+const getReviewsByUserId = async (userType, id) => {
+	console.log(userType);
+	if (userType === 'instructor') {
+		const GET_INSTRUCTOR_REVIEWS_PIPE = [
+			{
+				'$match': {
+					'instructor_id': new ObjectId(`${id}`)
+				}
+			}, {
+				'$lookup': {
+					'from': 'students',
+					'localField': 'student_id',
+					'foreignField': '_id',
+					'as': 'student'
+				}
+			}, {
+				'$unwind': {
+					'path': '$student'
+				}
+			}, {
+				'$project': {
+					'instructor_id': '$instructor_id',
+					'student_name': {
+						'$concat': [
+							'$student.first_name', ' ', '$student.last_name'
+						]
+					},
+					'student_id': '$student_id',
+					'comment_content': '$comment_content',
+					'rating': '$rating',
+					'createdAt': '$createdAt',
+					'updatedAt': '$updatedAt'
+				}
+			}
+		];
+		try {
+			const results = await Review.aggregate(GET_INSTRUCTOR_REVIEWS_PIPE);
+			return results;
+		} catch (error) {
+			throw { type: 'DB', message: error };
+		}
+	}
+
+	if (userType === 'student') {
+		const GET_STUDENT_REVIEWS_PIPE = [
+			{
+				'$match': {
+					'student_id': new ObjectId(`${id}`)
+				}
+			}, {
+				'$lookup': {
+					'from': 'instructors',
+					'localField': 'instructor_id',
+					'foreignField': '_id',
+					'as': 'instructor'
+				}
+			}, {
+				'$unwind': {
+					'path': '$instructor'
+				}
+			}, {
+				'$project': {
+					'instructor_id': '$instructor_id',
+					'instructor_name': {
+						'$concat': [
+							'$instructor.first_name', ' ', '$instructor.last_name'
+						]
+					},
+					'student_id': '$student_id',
+					'comment_content': '$comment_content',
+					'rating': '$rating',
+					'createdAt': '$createdAt',
+					'updatedAt': '$updatedAt'
+				}
+			}
+		];
+		try {
+			const results = await Review.aggregate(GET_STUDENT_REVIEWS_PIPE);
+			return results;
+		} catch (error) {
+			throw { type: 'DB', message: error };
+		}
+	}
+
+	throw { type: 'DB', message: error };
 };
 
 /**
@@ -50,7 +270,6 @@ const getReviewsByStudentId = async (id) => {
  */
 const addReview = async (review) => {
 	const newReview = new Review(review);
-
 	// validation https://mongoosejs.com/docs/api.html#document_Document-validateSync
 	const validationError = newReview.validateSync();
 	if (validationError) {
@@ -59,6 +278,8 @@ const addReview = async (review) => {
 
 	try {
 		await newReview.save();
+		const instructorId = newReview.instructor_id.toString();
+		await updateRatingByInstructorId(instructorId);
 		return newReview;
 	} catch (error) {
 		throw { type: 'DB', message: error };
@@ -74,6 +295,7 @@ const addReview = async (review) => {
  */
 const deleteReviewById = async (id) => {
 	try {
+		const reviewToDelete = await Review.findById(id);
 		const review = await Review.findByIdAndDelete(id);
 		return getReviewsByInstructorId(review.instructor_id);
 	} catch (error) {
@@ -96,12 +318,15 @@ const updateReviewById = async (id, patch) => {
 		}).catch((error) => {
 			console.log(error);
 		});
-		console.log(review);
-		return Review.findById(id);
+		const updatedReview = await Review.findById(id);
+		const instructorId = updatedReview.instructor_id.toString();
+		await updateRatingByInstructorId(instructorId);
+		return updatedReview;
 	} catch (error) {
 		throw { type: 'DB', message: error };
 	}
 };
+
 
 module.exports = {
 	getReviewsByInstructorId,
@@ -110,4 +335,7 @@ module.exports = {
 	addReview,
 	deleteReviewById,
 	updateReviewById,
+	getReviewsByUserId,
+	getAvgRatingByInstructorId,
+	getRatingDistributionByInstructorId
 };
