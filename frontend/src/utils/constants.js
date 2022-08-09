@@ -2,12 +2,27 @@ export const FILTER_CATEGORIES = [
     {
         id: 1,
         name: 'city',
-        options: ['Vancouver', 'Richmond', 'Burnaby', 'Surrey', 'Coquitlam', 'North Vancouver', 'West Vancouver'],
+        options: [
+            'Vancouver',
+            'Richmond',
+            'Burnaby',
+            'Surrey',
+            'Coquitlam',
+            'North Vancouver',
+            'West Vancouver',
+        ],
     },
     {
         id: 2,
         name: 'language',
-        options: ['English', 'Mandarin', 'Cantonese', 'Korean', 'Japanese', 'Punjabi'],
+        options: [
+            'English',
+            'Mandarin',
+            'Cantonese',
+            'Korean',
+            'Japanese',
+            'Punjabi',
+        ],
     },
     {
         id: 3,

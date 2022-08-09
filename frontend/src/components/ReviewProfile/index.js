@@ -325,9 +325,12 @@ export default function ReviewProfile({ instructor }) {
                                     <AiFillMail className="review-profile-ai-icon" />
                                     Email
                                 </div>
-                                <a className="review-profile-info-res" href="/">
+                                {/* <a className="review-profile-info-res" href="/">
                                     {instructor.email}
-                                </a>
+                                </a> */}
+                                <div className="review-profile-info-res">
+                                    {instructor.email}
+                                </div>
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <div className="review-profile-info">
@@ -343,7 +346,9 @@ export default function ReviewProfile({ instructor }) {
                                     <AiTwotoneBank className="review-profile-ai-icon" />
                                     Company
                                 </div>
-                                <NavLink to="/">{instructor.company}</NavLink>
+                                <div className="review-profile-info-res">
+                                    {instructor.company}
+                                </div>
                             </div>
                             <div className="FollowActionButton d-flex justify-content-between border-bottom py-2 px-3">
                                 <div className="review-profile-info">
@@ -400,7 +405,8 @@ export default function ReviewProfile({ instructor }) {
                     </div>
                     <RateDisplay
                         rating={instructor.rating}
-                        distribution={instructor.ratingDistribution} />
+                        distribution={instructor.ratingDistribution}
+                    />
 
                     {/* line breaker */}
                     <div className="line-breaker-1"></div>

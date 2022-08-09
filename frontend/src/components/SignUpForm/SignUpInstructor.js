@@ -155,9 +155,8 @@ const languages = [
     'Mandarin',
     'Cantonese',
     'Korean',
-    'French',
-    'Spanish',
     'Japanese',
+    'Punjabi',
 ]
 
 function getStyles(name, languageType, theme) {
