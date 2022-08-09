@@ -6,25 +6,8 @@ import {
     updateAppointmentAsync,
 } from './thunks'
 
-import { prefillJson } from '../../utils/data'
-
-// const list = JSON.parse(localStorage.getItem('appointments'))
-
-const getInitialAppointments = () => {
-    const localAppointmentList = window.localStorage.getItem('appointments')
-    if (
-        localAppointmentList &&
-        localAppointmentList.length !== 0 &&
-        localAppointmentList !== '[]'
-    ) {
-        return JSON.parse(localAppointmentList)
-    }
-    window.localStorage.setItem('appointments', JSON.stringify(prefillJson))
-    return prefillJson
-}
-
 const INITIAL_STATE = {
-    list: getInitialAppointments(),
+    list: [],
     addAppointment: REQUEST_STATE.IDLE,
     getAppointmentsByInstructorID: REQUEST_STATE.IDLE,
     error: null,

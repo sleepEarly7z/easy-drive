@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
 
 import Paper from '@mui/material/Paper'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -23,8 +21,6 @@ import {
     AppointmentTooltip,
     DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui'
-
-import { getAppointmentsByInstructorIDAsync } from '../../redux/appointments/thunks'
 
 const PREFIX = 'Demo'
 
@@ -155,6 +151,7 @@ const CalendarSchedular = ({ data, setData }) => {
         () => allowDragging && allowUpdating,
         [allowDragging, allowUpdating],
     )
+    
     const allowResize = React.useCallback(
         () => allowResizing && allowUpdating,
         [allowResizing, allowUpdating],

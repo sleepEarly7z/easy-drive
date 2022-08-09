@@ -1,11 +1,9 @@
 import './index.scss'
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, NavLink } from 'react-router-dom'
 
 import { WEEK_DAYS, MONTHS, TIME_SLOTS } from '../../utils/constants'
-import { getAppointmentsByInstructorIDAsync } from '../../redux/appointments/thunks'
 
 import styled from 'styled-components'
 import RateDisplay from '../ReviewRating/ReviewRating'
@@ -22,6 +20,7 @@ import {
 
 import Reviews from '../ReviewsList/Reviews'
 import RatingStar from '../ReviewRating/RatingStar'
+import toast from 'react-hot-toast'
 
 const MessageActionButton = styled.button`
     margin: 0 5px;
@@ -61,71 +60,6 @@ const FollowActionButton = styled.button`
     color: #fff;
 }
 `
-const appointmentsSample = [
-    {
-        title: 'AAAA',
-        startDate: new Date(2022, 8 - 1, 25, 9, 35),
-        endDate: new Date(2022, 8 - 1, 25, 11, 30),
-        id: 0,
-        location: 'Room 1',
-    },
-    {
-        title: 'BBBB',
-        startDate: new Date(2022, 8 - 1, 25, 9, 35),
-        endDate: new Date(2022, 8 - 1, 25, 11, 30),
-        id: 0,
-        location: 'Room 1',
-    },
-    {
-        title: 'CCC Re-Design Plan',
-        startDate: new Date(2022, 8 - 1, 23, 9, 35),
-        endDate: new Date(2022, 8 - 1, 23, 11, 30),
-        id: 0,
-        location: 'Room 1',
-    },
-    {
-        title: 'Book Flights to San Fran for Sales Trip',
-        startDate: new Date(2022, 8 - 1, 25, 12, 11),
-        endDate: new Date(2022, 8 - 1, 25, 13, 0),
-        id: 0,
-        location: 'Room 1',
-    },
-    {
-        title: 'Install New Router in Dev Room',
-        startDate: new Date(2022, 8 - 1, 25, 14, 30),
-        endDate: new Date(2022, 8 - 1, 25, 15, 35),
-        id: 0,
-        location: 'Room 2',
-    },
-    {
-        title: 'Website Re-Design Plan',
-        startDate: new Date(2022, 8 - 1, 2, 9, 30),
-        endDate: new Date(2022, 8 - 1, 2, 15, 30),
-        id: 0,
-        location: 'Room 1',
-    },
-    {
-        title: 'Upgrade Server Hardware',
-        startDate: new Date(2022, 8 - 1, 9, 14, 30),
-        endDate: new Date(2022, 8 - 1, 9, 16, 0),
-        id: 0,
-        location: 'Room 3',
-    },
-    {
-        title: 'Submit New Website Design',
-        startDate: new Date(2022, 8 - 1, 9, 16, 30),
-        endDate: new Date(2022, 8 - 1, 9, 18, 0),
-        id: 14,
-        location: 'Room 3',
-    },
-    {
-        title: 'Launch New Website',
-        startDate: new Date(2022, 8 - 1, 29, 12, 20),
-        endDate: new Date(2022, 8 - 1, 29, 14, 0),
-        id: 10,
-        location: 'Room 2',
-    },
-]
 
 function formatDate(list) {
     var appointments = []
@@ -148,15 +82,6 @@ function formatDate(list) {
         const month = month_index + 1
         const day = Number(date_array.split(' ')[1].split(',')[0]) + 1
         const year = Number(date_array.split(' ')[2])
-
-        // console.log('_id:' + _id)
-        // console.log('weekday:' + weekday)
-        // console.log('day:' + day)
-        // console.log('month:' + month)
-        // console.log('year:' + year)
-        // console.log('isBooked:' + isBooked)
-        // console.log('student_lastname:' + student_lastname)
-        // console.log('item: ' + item)
 
         const appointment = {
             title:
@@ -183,28 +108,17 @@ export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch()
     const params = useParams()
 
-    const user = useSelector((state) => state.auth.user);
+    const user = useSelector((state) => state.auth.user)
 
     const [listSetting, setListSetting] = useState({
         list: [],
         isLoading: true,
-        hasError: false
+        hasError: false,
     })
-    // const list = JSON.parse(localStorage.getItem('appointments'))
 
-    const [appointments, setAppointments] = useState([]);
+    const [appointments, setAppointments] = useState([])
 
     useEffect(() => {
-        // const sendGet = async () => {
-        //     const res = fetch(
-        //         `http://localhost:3001/appointments/${params.instructorId}`,
-        //     )
-        //     setList(res.data.data)
-        //     console.log(res.data.data)
-        //     // console.log('res: ' + JSON.stringify(res))
-        //     // console.log(list)
-        // }
-        // sendGet()
         fetch(`http://localhost:3001/appointments/${params.instructorId}`)
             .then((response) => response.json())
             .then((data) => {
@@ -212,21 +126,21 @@ export default function ReviewProfile({ instructor }) {
                     ...currSetting,
                     list: data.data,
                     isLoading: false,
-                    hasError: false
+                    hasError: false,
                 }))
-                console.log(listSetting.list);
             })
             .catch(() => {
                 setListSetting((currSetting) => ({
                     ...currSetting,
                     isLoading: false,
-                    hasError: true
+                    hasError: true,
                 }))
+                toast.error('No appointments fetched.')
             })
     }, [listSetting.isLoading, params.instructorId])
 
     useEffect(() => {
-        setAppointments(formatDate(listSetting.list));
+        setAppointments(formatDate(listSetting.list))
     }, [listSetting.list])
 
     const renderFollowButton = () => {
@@ -266,10 +180,6 @@ export default function ReviewProfile({ instructor }) {
             </FollowActionButton>
         )
     }
-
-    // useEffect(() => {
-    //     dispatch(getAppointmentsByInstructorIDAsync(params.instructorId))
-    // }, [])
 
     return (
         <div>
@@ -417,7 +327,10 @@ export default function ReviewProfile({ instructor }) {
                     </div>
 
                     {/* <CalendarSchedular appointments={appointmentsSample} /> */}
-                    <CalendarSchedular data={appointments} setData={setAppointments} />
+                    <CalendarSchedular
+                        data={appointments}
+                        setData={setAppointments}
+                    />
 
                     {/* line breaker */}
                     <div className="line-breaker-1"></div>
