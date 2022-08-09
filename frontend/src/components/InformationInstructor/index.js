@@ -2,22 +2,17 @@ import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import {
     updateInstructorAsync,
-    deleteInstructorAsync,
 } from '../../redux/instructors/thunks'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
 import { useParams } from 'react-router-dom'
 
 // https://bbbootstrap.com/snippets/bootstrap-5-myprofile-90806631
 
 const InformationInstructor = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const params = useParams()
 
     const [first_name, setfirst_name] = useState('')
@@ -70,9 +65,6 @@ const InformationInstructor = () => {
     const handleDescription = (e) => {
         setDescription(e.target.value)
     }
-    const handleIsCarProvided = (e) => {
-        setIsCarProvided(e.target.checked)
-    }
     const handleCompany = (e) => {
         setCompany(e.target.value)
     }
@@ -85,7 +77,7 @@ const InformationInstructor = () => {
 
     useEffect(() => {
         const sendGet = async () => {
-            const res = await axios
+            await axios
                 .get(
                     `https://ezdrive-test-signup.herokuapp.com/instructors/${params.instructorId}`,
                 )
@@ -111,14 +103,11 @@ const InformationInstructor = () => {
                 .catch((err) => {
                     alert(err)
                 })
-            // console.log(this.state.allRecipes);
         }
         sendGet()
-    }, [])
+    }, [params.instructorId])
 
     const handleSave = (e) => {
-        // e.preventDefault()
-
         let instData = {
             _id: params.instructorId,
             first_name: first_name,
@@ -159,44 +148,10 @@ const InformationInstructor = () => {
         toast.success('Save the changes successfully.')
     }
 
-    const handleDelete = (e) => {
-        e.preventDefault()
-
-        let instData = {
-            _id: '62d76018f36c6973468ba796',
-            first_name: first_name,
-            last_name: last_name,
-            email: email,
-            phone: phone,
-            gender: gender,
-            street: street,
-            city: city,
-            province: province,
-            language: language,
-            experience: experience,
-            license: license,
-            description: description,
-            isCarProvided: isCarProvided,
-            country: country,
-            company: company,
-        }
-        dispatch(deleteInstructorAsync(instData._id))
-
-        console.log('delete successfully')
-
-        setTimeout(function () {
-            navigate('/explore')
-            toast.success('Delete the account successfully.')
-        }, 1000)
-    }
-
     return (
         <>
             <div className="container rounded bg-white mt-5 mb-5">
                 <div className="row">
-                    {/* <div className="col-md-3 border-right">
-            <div className="d-flex flex-column align-items-center text-center p-3 py-5"><img className="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/><span className="font-weight-bold">Edogaru</span><span className="text-black-50">edogaru@mail.com.my</span><span> </span></div>
-        </div> */}
                     <div className="col-md-5 border-right">
                         <div className="p-3 py-5">
                             <div className="d-flex justify-content-between align-items-center mb-3">
@@ -378,40 +333,10 @@ const InformationInstructor = () => {
                             >
                                 Save Profile
                             </button>
-                            {/* <button
-                                    className="btn btn-primary profile-button"
-                                    type="button"
-                                    onClick={handleDelete}
-                                >
-                                    Delete Profile
-                                </button> */}
                         </div>
                     </div>
                 </div>
             </div>
-            {/* <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '30ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          required
-          id="outlined-required"
-          label="First Name"
-          defaultValue="Hello World"
-        />
-        <TextField
-          required
-          id="outlined-required"
-          label="Last Name"
-          defaultValue="Hello World"
-        />
-      </div>
-    </Box> */}
         </>
     )
 }
