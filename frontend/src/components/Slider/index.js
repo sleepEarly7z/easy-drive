@@ -39,9 +39,6 @@ const Slider = () => {
 
     return (
         <>
-            <Typography gutterBottom variant='h4' component="div" color='text.primary' sx={{ textAlign: 'center' }}>
-                Top Rated Instructors
-            </Typography>
             <div className="SliderMain">
                 <Carousel breakPoints={breakPoints}>
                 {instructors.map((x) => (
