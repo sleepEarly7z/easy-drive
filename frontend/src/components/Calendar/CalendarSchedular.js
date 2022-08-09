@@ -1,13 +1,10 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import Paper from '@mui/material/Paper'
-import FormGroup from '@mui/material/FormGroup'
-import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import Typography from '@mui/material/FormControl'
 import { styled } from '@mui/material/styles'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
@@ -23,7 +20,6 @@ import {
     WeekView,
     MonthView,
     Appointments,
-    AppointmentForm,
     AppointmentTooltip,
     DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui'
@@ -79,15 +75,6 @@ const Appointment = ({ children, style, data, ...restProps }) => (
     </Appointments.Appointment>
 )
 
-// const currentDate = '2018-06-27'
-const editingOptionsList = [
-    { id: 'allowAdding', text: 'Adding' },
-    { id: 'allowDeleting', text: 'Deleting' },
-    { id: 'allowUpdating', text: 'Updating' },
-    { id: 'allowResizing', text: 'Resizing' },
-    { id: 'allowDragging', text: 'Dragging' },
-]
-
 const months = [
     'January',
     'February',
@@ -103,50 +90,18 @@ const months = [
     'December',
 ]
 
-const EditingOptionsSelector = ({ options, onOptionsChange }) => (
-    <StyledDiv className={classes.container}>
-        <Typography className={classes.text}>Enabled Options</Typography>
-        <FormGroup row>
-            {editingOptionsList.map(({ id, text }) => (
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={options[id]}
-                            onChange={onOptionsChange}
-                            value={id}
-                            color="primary"
-                        />
-                    }
-                    classes={{ label: classes.formControlLabel }}
-                    label={text}
-                    key={id}
-                    disabled={
-                        (id === 'allowDragging' || id === 'allowResizing') &&
-                        !options.allowUpdating
-                    }
-                />
-            ))}
-        </FormGroup>
-    </StyledDiv>
-)
-
 const CalendarSchedular = ({ appointments }) => {
-    // const CalendarSchedular = () => {
     const dispatch = useDispatch()
     const params = useParams()
 
-    // console.log('CalendarSchedular: ' + JSON.stringify(appointments))
-
     const [data, setData] = React.useState(appointments)
 
-    console.log('CalendarSchedular: ' + data)
-
     const [editingOptions, setEditingOptions] = React.useState({
-        allowAdding: true,
-        allowDeleting: true,
-        allowUpdating: true,
-        allowDragging: true,
-        allowResizing: true,
+        allowAdding: false,
+        allowDeleting: false,
+        allowUpdating: false,
+        allowDragging: false,
+        allowResizing: false,
     })
     const [addedAppointment, setAddedAppointment] = React.useState({})
     const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] =
@@ -185,17 +140,10 @@ const CalendarSchedular = ({ appointments }) => {
         },
         [setData, setIsAppointmentBeingCreated, data],
     )
+
     const onAddedAppointmentChange = React.useCallback((appointment) => {
         setAddedAppointment(appointment)
         setIsAppointmentBeingCreated(true)
-    })
-    const handleEditingOptionsChange = React.useCallback(({ target }) => {
-        const { value } = target
-        const { [value]: checked } = editingOptions
-        setEditingOptions({
-            ...editingOptions,
-            [value]: !checked,
-        })
     })
 
     const TimeTableCell = React.useCallback(
@@ -206,22 +154,6 @@ const CalendarSchedular = ({ appointments }) => {
             />
         )),
         [allowAdding],
-    )
-
-    const CommandButton = React.useCallback(
-        ({ id, ...restProps }) => {
-            if (id === 'deleteButton') {
-                return (
-                    <AppointmentForm.CommandButton
-                        id={id}
-                        {...restProps}
-                        disabled={!allowDeleting}
-                    />
-                )
-            }
-            return <AppointmentForm.CommandButton id={id} {...restProps} />
-        },
-        [allowDeleting],
     )
 
     const allowDrag = React.useCallback(
@@ -247,10 +179,6 @@ const CalendarSchedular = ({ appointments }) => {
 
     return (
         <React.Fragment>
-            <EditingOptionsSelector
-                options={editingOptions}
-                onOptionsChange={handleEditingOptionsChange}
-            />
             <div
                 style={{
                     display: 'flex',
@@ -272,9 +200,6 @@ const CalendarSchedular = ({ appointments }) => {
                     {currentDate.getFullYear()}
                 </div>
                 <FormControl>
-                    {/* <FormLabel id="demo-radio-buttons-group-label">
-                        View
-                    </FormLabel> */}
                     <RadioGroup
                         row
                         aria-labelledby="demo-radio-buttons-group-label"
@@ -330,12 +255,6 @@ const CalendarSchedular = ({ appointments }) => {
                     <AppointmentTooltip
                         showOpenButton
                         showDeleteButton={allowDeleting}
-                    />
-                    <AppointmentForm
-                        commandButtonComponent={CommandButton}
-                        readOnly={
-                            isAppointmentBeingCreated ? false : !allowUpdating
-                        }
                     />
                     <DragDropProvider
                         allowDrag={allowDrag}
