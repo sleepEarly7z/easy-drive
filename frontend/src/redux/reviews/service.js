@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001/'
+const API_URL = 'https://ezdrive-test-signup.herokuapp.com/'
 
 const getReviewsByUserId = async (id, idType) => {
     console.log(idType)

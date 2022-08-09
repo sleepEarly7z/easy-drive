@@ -86,7 +86,9 @@ const InformationInstructor = () => {
     useEffect(() => {
         const sendGet = async () => {
             const res = await axios
-                .get(`http://localhost:3001/instructors/${params.instructorId}`)
+                .get(
+                    `https://ezdrive-test-signup.herokuapp.com/instructors/${params.instructorId}`,
+                )
                 .then((res) => {
                     console.log(res.data)
                     console.log(res.data.data)

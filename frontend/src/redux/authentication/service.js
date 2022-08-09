@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { WEEK_DAYS } from '../../utils/constants'
 
-const INST_API_URL = 'http://localhost:3001/instructors/'
-const STUD_API_URL = 'http://localhost:3001/students/'
-const TIME_API_URL = 'http://localhost:3001/timeslots/'
-const APPO_API_URL = 'http://localhost:3001/appointments/'
+const INST_API_URL = 'https://ezdrive-test-signup.herokuapp.com/instructors/'
+const STUD_API_URL = 'https://ezdrive-test-signup.herokuapp.com/students/'
+const TIME_API_URL = 'https://ezdrive-test-signup.herokuapp.com/timeslots/'
+const APPO_API_URL = 'https://ezdrive-test-signup.herokuapp.com/appointments/'
 
 const calDay = async (weekday) => {
     const current_date = new Date()

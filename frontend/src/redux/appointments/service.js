@@ -1,6 +1,6 @@
 import { TIME_SLOTS, WEEK_DAYS, MONTHS } from '../../utils/constants'
 
-const API_URL = 'http://localhost:3001/appointments/'
+const API_URL = 'https://ezdrive-test-signup.herokuapp.com/appointments/'
 
 const getAppointmentsByInstructorID = async (id) => {
     console.log(id)

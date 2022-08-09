@@ -1,6 +1,6 @@
 import { handleResponse } from '../utils'
 
-const API_URL = 'http://localhost:3001/'
+const API_URL = 'https://ezdrive-test-signup.herokuapp.com/'
 const baseUrl = `${API_URL}students`
 
 const getStudents = async () => {
