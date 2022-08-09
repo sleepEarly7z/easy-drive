@@ -106,6 +106,29 @@ router.post('/', function (req, res) {
 		});
 });
 
+/**
+ *  Login as an instructor
+ *
+ *  @description Login as an instructor using token
+ *
+ *  @verb POST
+ *  @endpoint /instructors
+ *
+ *  Request:
+ *  @payload { Instructor }
+ *
+ *  Response:
+ *  Success:
+ *  @status 201 OK
+ *  @data { Instructor } instructor token created
+ *
+ *  Error:
+ *  @status 401 BAD REQUEST
+ * 	@error error messages
+ *
+ *  @status 500 SERVER ERROR
+ *  @error error messages
+ */
 router.post('/login', function (req, res) {
 	const { email, password } = req.body;
 	service

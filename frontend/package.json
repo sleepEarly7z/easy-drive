@@ -12,6 +12,7 @@
     "@devexpress/dx-react-core": "^3.0.4",
     "@devexpress/dx-react-scheduler": "^3.0.3",
     "@devexpress/dx-react-scheduler-material-ui": "^3.0.4",
+    "@emailjs/browser": "^3.6.2",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",

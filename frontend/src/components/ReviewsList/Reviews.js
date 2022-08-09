@@ -13,7 +13,6 @@ import { Search } from '@material-ui/icons'
 import AddIcon from '@material-ui/icons/Add'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
-import Notification from './Notification'
 import ConfirmDialog from './ConfirmDialog'
 
 import ReviewService from '../../redux/reviews/service'
@@ -24,7 +23,6 @@ import ReviewForm from './ReviewForm'
 import RatingStar from './RatingStar'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 
 import {
     addReviewAsync,
@@ -40,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     searchInput: {
         width: '75%',
     },
+    searchInputFullWidth: {
+        width: '100%',
+    },
     newButton: {
         position: 'absolute',
         right: '10px',
@@ -47,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Reviews = ({ idType, page }) => {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const params = useParams()
     const classes = useStyles()
@@ -65,11 +65,6 @@ const Reviews = ({ idType, page }) => {
         },
     })
     const [openPopup, setOpenPopup] = useState(false)
-    const [notify, setNotify] = useState({
-        isOpen: false,
-        message: '',
-        type: '',
-    })
     const [confirmDialog, setConfirmDialog] = useState({
         isOpen: false,
         title: '',
@@ -104,13 +99,7 @@ const Reviews = ({ idType, page }) => {
         setFilterFn({
             fn: (items) => {
                 if (target.value === '') return items
-                else
-                    return items.filter(
-                        (x) => x.fullName,
-                        // TODO: convert id to student name
-                        // .toLowerCase()
-                        // .includes(target.value.toLowerCase()),
-                    )
+                else return items.filter((x) => x.fullName)
             },
         })
     }
@@ -149,13 +138,7 @@ const Reviews = ({ idType, page }) => {
         resetForm()
         setRecordForEdit(null)
         setOpenPopup(false)
-        setNotify({
-            isOpen: true,
-            message: 'Submitted Successfully',
-            type: 'success',
-        })
-        // setRecords(reviewService.getAllReviews())
-        // setRecords(dispatch(getReviewsByInstructorIdAsync(params.instructorId)))
+        toast.success('Submitted Successfully')
     }
 
     const openInPopup = (item) => {
@@ -169,14 +152,7 @@ const Reviews = ({ idType, page }) => {
             isOpen: false,
         })
         dispatch(deleteReviewAsync(id))
-        // setRecords(employeeService.getAllEmployees())
-        // const reviews = ReviewService.getReviewsByUserId(id, idType)
-        // setRecords(reviews)
-        setNotify({
-            isOpen: true,
-            message: 'Deleted Successfully',
-            type: 'error',
-        })
+        toast.success('Deleted Successfully')
     }
 
     useEffect(() => {
@@ -193,7 +169,11 @@ const Reviews = ({ idType, page }) => {
                 <Toolbar>
                     <Controls.SearchInput
                         label="Search Reviews"
-                        className={classes.searchInput}
+                        className={
+                            page === 'reviewPage'
+                                ? classes.searchInput
+                                : classes.searchInputFullWidth
+                        }
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -203,16 +183,18 @@ const Reviews = ({ idType, page }) => {
                         }}
                         onChange={handleSearch}
                     />
-                    {user && user.data.role === 'student' ? (
+                    {page === 'reviewPage' ? (
                         <Controls.Button
                             text="Add New"
                             variant="outlined"
                             startIcon={<AddIcon />}
                             className={classes.newButton}
                             onClick={() => {
-                                if (user.data.role === 'instructor') {
+                                if (!user) {
+                                    toast.error('Sorry, please sign in first.')
+                                } else if (user.data.role === 'instructor') {
                                     toast.error(
-                                        'Sorry, instructors cannot write reviews',
+                                        'Sorry, instructors cannot write reviews.',
                                     )
                                 } else {
                                     setOpenPopup(true)
@@ -230,8 +212,9 @@ const Reviews = ({ idType, page }) => {
                         {recordsAfterPagingAndSorting().map((item) => (
                             <TableRow key={item._id}>
                                 <TableCell width={headCells[0].width}>
-                                    {/* {item.fullName} */}
-                                    {item.student_id}
+                                    {item.student_name
+                                        ? item.student_name
+                                        : item.instructor_name}
                                 </TableCell>
                                 <TableCell width={headCells[1].width}>
                                     <RatingStar average={item.rating} />
@@ -240,7 +223,10 @@ const Reviews = ({ idType, page }) => {
                                     {item.comment_content}
                                 </TableCell>
                                 <TableCell width={headCells[3].width}>
-                                    {item.createdAt}
+                                    {new Intl.DateTimeFormat([
+                                        'ban',
+                                        'id',
+                                    ]).format(new Date(item.createdAt))}
                                 </TableCell>
                                 <TableCell>
                                     {page === 'profilePage' && (
@@ -289,7 +275,6 @@ const Reviews = ({ idType, page }) => {
                     addOrEdit={addOrEdit}
                 />
             </Popup>
-            <Notification notify={notify} setNotify={setNotify} />
             <ConfirmDialog
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}

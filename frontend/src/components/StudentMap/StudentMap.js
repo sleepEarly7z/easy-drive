@@ -26,10 +26,12 @@ export default function StudentMap(props) {
 
     async function componentDidMount() {
       const firstResponce = await axios.get(`https://ezdrive-test-3.herokuapp.com/students/${params.studentId}`);
+
       const streeturl = firstResponce.data.data.street.split(' ').join('+');
       const cityurl = firstResponce.data.data.city.split(' ').join('+');
       const provinceurl = firstResponce.data.data.province.split(' ').join('+');
       const secondResponce = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${streeturl},+${cityurl},+${provinceurl}&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`);
+
       setLat(secondResponce.data.results[0].geometry.location.lat);
       setLng(secondResponce.data.results[0].geometry.location.lng);
       var data = qs.stringify({
@@ -49,6 +51,7 @@ export default function StudentMap(props) {
       const nearbyInsts = await axios(config);
       for (let i = 0; i < nearbyInsts.data.nearby.length; i++) {
         const nearbyMarks = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${nearbyInsts.data.nearby[i].instStreet},+${nearbyInsts.data.nearby[i].instCity},+${nearbyInsts.data.nearby[i].instProvince}&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`);
+
         if (nearbyMarks.data.status !== 'ZERO_RESULTS') {
           if(nearbyMarks.data.results[0].geometry.location.lat !== undefined && nearbyMarks.data.results[0].geometry.location.lng !== undefined) {
             let inst = {

@@ -6,15 +6,15 @@ const service = require('../services/studentService');
 const { protect } = require('../middleware/authMiddlewareStud');
 
 /**
- * Get all instructors
+ * Get all students
  *
  * @verb GET
- * @endpoint /instructors
+ * @endpoint /students
  *
  * Responses:
  * Success:
  * @status 200 OK
- * @data instructors[]
+ * @data students[]
  *
  * Error:
  * @status 500 SERVER ERROR
@@ -29,7 +29,7 @@ router.get('/', function (req, res) {
 		.catch((error) => {
 			res.status(500).send({ error: error.message });
 		});
-});
+});0939
 
 /**
  *  Get a student
@@ -46,7 +46,7 @@ router.get('/', function (req, res) {
  *  Response:
  *  Success:
  *  @status 200 OK
- *  @data instructor
+ *  @data student
  *
  * 	@status 404 NOT FOUND
  *  @error message
@@ -139,6 +139,29 @@ router.post('/', function (req, res) {
 		});
 });
 
+/**
+ *  Login as a student
+ *
+ *  @description Login as a student using token
+ *
+ *  @verb POST
+ *  @endpoint /students
+ *
+ *  Request:
+ *  @payload { Student }
+ *
+ *  Response:
+ *  Success:
+ *  @status 201 OK
+ *  @data { Student } student token created
+ *
+ *  Error:
+ *  @status 401 BAD REQUEST
+ * 	@error error messages
+ *
+ *  @status 500 SERVER ERROR
+ *  @error error messages
+ */
 router.post('/login', function (req, res) {
 	const { email, password } = req.body;
 	service

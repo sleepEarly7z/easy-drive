@@ -28,25 +28,25 @@ const Container = Styled.div`
 `
 
 const ProgressBar = ({ value }) => {
-    return (
-        <Container color={'#ff7979'} width={'450px'}>
-            <progress value={value} max={100} />
-            <span>{(value / 100) * 100}%</span>
-        </Container>
-    )
+  return (
+    <Container color={'#ff7979'} width={'450px'}>
+      <progress value={value} max={100} />
+      <span>{value.toFixed(0)}%</span>
+    </Container>
+  )
 }
 
 ProgressBar.propTypes = {
-    value: PropTypes.number.isRequired,
-    max: PropTypes.number,
-    color: PropTypes.string,
-    width: PropTypes.string,
+  value: PropTypes.number.isRequired,
+  max: PropTypes.number,
+  color: PropTypes.string,
+  width: PropTypes.string,
 }
 
 ProgressBar.defaultProps = {
-    max: 100,
-    color: 'lightBlue',
-    width: '250px',
+  max: 100,
+  color: 'lightBlue',
+  width: '250px',
 }
 
 export default ProgressBar
