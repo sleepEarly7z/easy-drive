@@ -311,11 +311,6 @@ const CalendarSchedular = ({ appointments }) => {
                     />
 
                     <IntegratedEditing />
-                    {/* <WeekView
-                        startDayHour={9}
-                        endDayHour={19}
-                        timeTableCellComponent={TimeTableCell}
-                    /> */}
 
                     {viewmode === 'month' && <MonthView />}
                     {viewmode === 'week' && (
@@ -325,29 +320,17 @@ const CalendarSchedular = ({ appointments }) => {
                             timeTableCellComponent={TimeTableCell}
                         />
                     )}
+
                     {viewmode === 'day' && <DayView />}
-                    {/* <MonthView />
-                    <WeekView
-                            startDayHour={9}
-                            endDayHour={19}
-                            timeTableCellComponent={TimeTableCell}
-                        />
-                    <DayView /> */}
 
                     <Appointments
                         appointmentComponent={Appointment}
                         appointmentContentComponent={AppointmentContent}
                     />
-
                     <AppointmentTooltip
                         showOpenButton
                         showDeleteButton={allowDeleting}
                     />
-
-                    {/* <Toolbar />
-                    <DateNavigator />
-                    <ViewSwitcher /> */}
-
                     <AppointmentForm
                         commandButtonComponent={CommandButton}
                         readOnly={
