@@ -35,7 +35,7 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
 **Stretch Requirements**
 
 -   [x] Have a contact instructor panel (changed to contact us panel)
--   [x] Link with map API to show instructors nearby me
+-   [x] Link with map API
 -   [ ] Recommend instructor based on a user quiz (ML/AI)
 -   [ ] Write comments/reviews anonymously, and anonymous posts are only visible to us
 -   [ ] Implement an instructor profile page preview
@@ -94,17 +94,24 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
     -   If the follow/unfollow button is clicked by a student user, the frontend would send a patch request to our backend to update our redux reducer and MongoDB. After our backend receive the patch request and finish updating, the follow button in our frontend will change its display accordinly, and the next time when the user click it, its functionality will be switched to unfollow.
 - Add review
 - Map
+    - Based on the current student location, we used Google Map API to show the current location of the student. First, we need to get a API key from Google then calling the service using axios.
+    - We first used the Geolocation API to convert the current location to a latitude and longitude. Then we used the react-google-maps package to display the map.
+    - Backend API is also completed to show all the instructors nearby the student, but it is taking too long to respond. We used Distance Matrix API to get the distance between the student and the instructors.
+
 - Main page sorting
 - Social media / contact form
 
 ## Next steps
-- Message system?
+- In the future, we probably want to add a direct message system to send messages to instructors. In that way, we are able to resolve any issues that students may have by tracking the messages. Moreover, we would like to implement a recommendation system to recommend instructors to the student. It should be based on the user's quiz result.
 
 ## List of contributions
 - Cathy Yang
 - Chloe Zhang
 - Davis Qi
 - Yizhou Li
+    - Link with map API, external APIs calling and handling
+    - Worked with the deployment, fixed package/version bugs on Heroku and successfully deployed the build to Heroku
+    - Worked on profile pages, from frontend using bootstrap to backend using Mongoose and MongoDB. Wrote routes, reducers and actions.
 
 ## Sketch
 
