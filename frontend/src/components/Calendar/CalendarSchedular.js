@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
+
 import Paper from '@mui/material/Paper'
-import FormGroup from '@mui/material/FormGroup'
-import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import Typography from '@mui/material/FormControl'
 import { styled } from '@mui/material/styles'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
@@ -20,14 +20,14 @@ import {
     WeekView,
     MonthView,
     Appointments,
-    AppointmentForm,
     AppointmentTooltip,
     DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui'
 
-import { appointments } from '../../utils/appointments'
+import { getAppointmentsByInstructorIDAsync } from '../../redux/appointments/thunks'
 
 const PREFIX = 'Demo'
+
 // #FOLD_BLOCK
 export const classes = {
     container: `${PREFIX}-container`,
@@ -47,14 +47,33 @@ const StyledDiv = styled('div')(({ theme }) => ({
     },
 }))
 
-// const currentDate = '2018-06-27'
-const editingOptionsList = [
-    { id: 'allowAdding', text: 'Adding' },
-    { id: 'allowDeleting', text: 'Deleting' },
-    { id: 'allowUpdating', text: 'Updating' },
-    { id: 'allowResizing', text: 'Resizing' },
-    { id: 'allowDragging', text: 'Dragging' },
-]
+const AppointmentContent = (props) => {
+    const { data, style } = props
+
+    return (
+        <Appointments.AppointmentContent
+            style={{
+                ...style,
+                color: data.color,
+            }}
+            {...props}
+        />
+    )
+}
+
+const Appointment = ({ children, style, data, ...restProps }) => (
+    <Appointments.Appointment
+        {...restProps}
+        data={data}
+        style={{
+            ...style,
+            backgroundColor: data.backgroundColor,
+            color: data.color,
+        }}
+    >
+        {children}
+    </Appointments.Appointment>
+)
 
 const months = [
     'January',
@@ -71,41 +90,18 @@ const months = [
     'December',
 ]
 
-const EditingOptionsSelector = ({ options, onOptionsChange }) => (
-    <StyledDiv className={classes.container}>
-        <Typography className={classes.text}>Enabled Options</Typography>
-        <FormGroup row>
-            {editingOptionsList.map(({ id, text }) => (
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={options[id]}
-                            onChange={onOptionsChange}
-                            value={id}
-                            color="primary"
-                        />
-                    }
-                    classes={{ label: classes.formControlLabel }}
-                    label={text}
-                    key={id}
-                    disabled={
-                        (id === 'allowDragging' || id === 'allowResizing') &&
-                        !options.allowUpdating
-                    }
-                />
-            ))}
-        </FormGroup>
-    </StyledDiv>
-)
+const CalendarSchedular = ({ appointments }) => {
+    const dispatch = useDispatch()
+    const params = useParams()
 
-const CalendarSchedular = () => {
     const [data, setData] = React.useState(appointments)
+
     const [editingOptions, setEditingOptions] = React.useState({
-        allowAdding: true,
-        allowDeleting: true,
-        allowUpdating: true,
-        allowDragging: true,
-        allowResizing: true,
+        allowAdding: false,
+        allowDeleting: false,
+        allowUpdating: false,
+        allowDragging: false,
+        allowResizing: false,
     })
     const [addedAppointment, setAddedAppointment] = React.useState({})
     const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] =
@@ -144,17 +140,10 @@ const CalendarSchedular = () => {
         },
         [setData, setIsAppointmentBeingCreated, data],
     )
+
     const onAddedAppointmentChange = React.useCallback((appointment) => {
         setAddedAppointment(appointment)
         setIsAppointmentBeingCreated(true)
-    })
-    const handleEditingOptionsChange = React.useCallback(({ target }) => {
-        const { value } = target
-        const { [value]: checked } = editingOptions
-        setEditingOptions({
-            ...editingOptions,
-            [value]: !checked,
-        })
     })
 
     const TimeTableCell = React.useCallback(
@@ -165,22 +154,6 @@ const CalendarSchedular = () => {
             />
         )),
         [allowAdding],
-    )
-
-    const CommandButton = React.useCallback(
-        ({ id, ...restProps }) => {
-            if (id === 'deleteButton') {
-                return (
-                    <AppointmentForm.CommandButton
-                        id={id}
-                        {...restProps}
-                        disabled={!allowDeleting}
-                    />
-                )
-            }
-            return <AppointmentForm.CommandButton id={id} {...restProps} />
-        },
-        [allowDeleting],
     )
 
     const allowDrag = React.useCallback(
@@ -200,12 +173,12 @@ const CalendarSchedular = () => {
         setViewmode(event.target.value)
     }
 
+    React.useEffect(() => {
+        dispatch(getAppointmentsByInstructorIDAsync(params.instructorId))
+    }, [])
+
     return (
         <React.Fragment>
-            <EditingOptionsSelector
-                options={editingOptions}
-                onOptionsChange={handleEditingOptionsChange}
-            />
             <div
                 style={{
                     display: 'flex',
@@ -227,9 +200,6 @@ const CalendarSchedular = () => {
                     {currentDate.getFullYear()}
                 </div>
                 <FormControl>
-                    {/* <FormLabel id="demo-radio-buttons-group-label">
-                        View
-                    </FormLabel> */}
                     <RadioGroup
                         row
                         aria-labelledby="demo-radio-buttons-group-label"
@@ -266,11 +236,6 @@ const CalendarSchedular = () => {
                     />
 
                     <IntegratedEditing />
-                    {/* <WeekView
-                        startDayHour={9}
-                        endDayHour={19}
-                        timeTableCellComponent={TimeTableCell}
-                    /> */}
 
                     {viewmode === 'month' && <MonthView />}
                     {viewmode === 'week' && (
@@ -280,31 +245,16 @@ const CalendarSchedular = () => {
                             timeTableCellComponent={TimeTableCell}
                         />
                     )}
+
                     {viewmode === 'day' && <DayView />}
-                    {/* <MonthView />
-                    <WeekView
-                            startDayHour={9}
-                            endDayHour={19}
-                            timeTableCellComponent={TimeTableCell}
-                        />
-                    <DayView /> */}
 
-                    <Appointments />
-
+                    <Appointments
+                        appointmentComponent={Appointment}
+                        appointmentContentComponent={AppointmentContent}
+                    />
                     <AppointmentTooltip
                         showOpenButton
                         showDeleteButton={allowDeleting}
-                    />
-
-                    {/* <Toolbar />
-                    <DateNavigator />
-                    <ViewSwitcher /> */}
-
-                    <AppointmentForm
-                        commandButtonComponent={CommandButton}
-                        readOnly={
-                            isAppointmentBeingCreated ? false : !allowUpdating
-                        }
                     />
                     <DragDropProvider
                         allowDrag={allowDrag}

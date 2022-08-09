@@ -2,12 +2,27 @@ export const FILTER_CATEGORIES = [
     {
         id: 1,
         name: 'city',
-        options: ['Vancouver', 'Richmond', 'Burnaby', 'Surrey', 'Coquitlam', 'North Vancouver', 'West Vancouver'],
+        options: [
+            'Vancouver',
+            'Richmond',
+            'Burnaby',
+            'Surrey',
+            'Coquitlam',
+            'North Vancouver',
+            'West Vancouver',
+        ],
     },
     {
         id: 2,
         name: 'language',
-        options: ['English', 'Mandarin', 'Cantonese', 'Korean', 'Japanese', 'Punjabi'],
+        options: [
+            'English',
+            'Mandarin',
+            'Cantonese',
+            'Korean',
+            'Japanese',
+            'Punjabi',
+        ],
     },
     {
         id: 3,
@@ -18,35 +33,73 @@ export const FILTER_CATEGORIES = [
 
 export const SORT_OPTIONS = [
     {
-        label: "rating (high to low)",
-        value: "ratingDesc",
+        label: 'rating (high to low)',
+        value: 'ratingDesc',
         payload: {
             sortBy: 'rating',
-            sortDir: 'desc'
-        }
+            sortDir: 'desc',
+        },
     },
     {
-        label: "rating (low to high)",
-        value: "ratingAsc",
+        label: 'rating (low to high)',
+        value: 'ratingAsc',
         payload: {
             sortBy: 'rating',
-            sortDir: 'asc'
-        }
+            sortDir: 'asc',
+        },
     },
     {
-        label: "experience (less to more)",
-        value: "experienceAsc",
+        label: 'experience (less to more)',
+        value: 'experienceAsc',
         payload: {
             sortBy: 'experience',
-            sortDir: 'asc'
-        }
+            sortDir: 'asc',
+        },
     },
     {
-        label: "experience (more to less)",
-        value: "experienceDesc",
+        label: 'experience (more to less)',
+        value: 'experienceDesc',
         payload: {
             sortBy: 'experience',
-            sortDir: 'desc'
-        }
-    }
+            sortDir: 'desc',
+        },
+    },
+]
+
+export const TIME_SLOTS = [
+    '8am',
+    '9am',
+    '10am',
+    '11am',
+    '12noon',
+    '1pm',
+    '2pm',
+    '3pm',
+    '4pm',
+    '5pm',
+]
+
+export const WEEK_DAYS = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+]
+
+export const MONTHS = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
 ]

@@ -1,53 +1,52 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const Appointment = require('../models/appointmentModel');
 
-const express = require('express');
-const router = express.Router();
+const getAppointments = async () => {
+	try {
+		return Appointment.find({});
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
-/**
- * timeSlot is a subdocument of appointment
- * 
- * useful references
- * https://mongoosejs.com/docs/subdocs.html#finding-a-subdocument
- * https://mongoosejs.com/docs/subdocs.html#adding-subdocs-to-arrays
- * https://mongoosejs.com/docs/subdocs.html#removing-subdocs
- */
-const timeSlotSchema = new mongoose.Schema({
-    range: {
-        type: String // '7am-8am'
-    },
-    isBooked: {
-        type: Boolean,
-        default: false
-    },
-    studentId: {
-        // TODO add reference to student schema
-        type: String
-    }
-});
+const getAppointmentsByInstructorId = async (id) => {
+	try {
+		return Appointment.find({ instructor_id: id });
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
-const TimeSlot = mongoose.model('TimeSlot', timeSlotSchema);
+const addAppointment = async (patch) => {
+	console.log(patch);
+	const newAppointment = new Appointment(patch);
+	console.log(Appointment);
 
-const appointmentSchema = new mongoose.Schema({
-    instructor: {
-        type: Schema.Types.ObjectId, ref: 'Instructor'
-    },
-    time_slots: [timeSlotSchema]
-})
+	try {
+		await newAppointment.save();
+		return newAppointment;
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
-const Appointment = mongoose.model('Appointment', appointmentSchema);
-
-/**
- * Get all appointments with given instructor id
- * 
- * @returns {Array}
- */
-const getAppointmentsByInstructorId = (id) => {
-    // TODO
-}
+const updateAppointmentById = async (id, patch) => {
+	try {
+		const appointment = await Appointment.findOneAndUpdate(
+			{ _id: id },
+			patch,
+			{
+				runValidators: true,
+			}
+		);
+		return appointment;
+	} catch (error) {
+		throw { type: 'DB', message: error };
+	}
+};
 
 module.exports = {
-    TimeSlot,
-    Appointment,
-    getAppointmentsByInstructorId
-}
+	getAppointments,
+	getAppointmentsByInstructorId,
+	addAppointment,
+	updateAppointmentById,
+};
