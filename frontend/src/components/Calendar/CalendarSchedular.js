@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
 
 import Paper from '@mui/material/Paper'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -23,8 +21,6 @@ import {
     AppointmentTooltip,
     DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui'
-
-import { getAppointmentsByInstructorIDAsync } from '../../redux/appointments/thunks'
 
 const PREFIX = 'Demo'
 
@@ -90,12 +86,7 @@ const months = [
     'December',
 ]
 
-const CalendarSchedular = ({ appointments }) => {
-    const dispatch = useDispatch()
-    const params = useParams()
-
-    const [data, setData] = React.useState(appointments)
-
+const CalendarSchedular = ({ data, setData }) => {
     const [editingOptions, setEditingOptions] = React.useState({
         allowAdding: false,
         allowDeleting: false,
@@ -160,6 +151,7 @@ const CalendarSchedular = ({ appointments }) => {
         () => allowDragging && allowUpdating,
         [allowDragging, allowUpdating],
     )
+    
     const allowResize = React.useCallback(
         () => allowResizing && allowUpdating,
         [allowResizing, allowUpdating],
@@ -172,10 +164,6 @@ const CalendarSchedular = ({ appointments }) => {
     const handleViewChange = (event) => {
         setViewmode(event.target.value)
     }
-
-    React.useEffect(() => {
-        dispatch(getAppointmentsByInstructorIDAsync(params.instructorId))
-    }, [])
 
     return (
         <React.Fragment>

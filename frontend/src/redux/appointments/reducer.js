@@ -6,8 +6,6 @@ import {
     updateAppointmentAsync,
 } from './thunks'
 
-const list = JSON.parse(localStorage.getItem('appointments'))
-
 const INITIAL_STATE = {
     list: [],
     addAppointment: REQUEST_STATE.IDLE,
