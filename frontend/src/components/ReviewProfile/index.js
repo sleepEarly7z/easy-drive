@@ -195,6 +195,7 @@ function formatDate(list) {
     return appointments
 }
 
+
 export default function ReviewProfile({ instructor }) {
     const dispatch = useDispatch()
     const params = useParams()

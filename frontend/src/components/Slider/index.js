@@ -1,8 +1,8 @@
 import './index.scss'
 import Carousel from 'react-elastic-carousel'
-import ProfileCard from '../../pages/Explore/ProfileCard'
 import React from 'react'
 import InstructorService from '../../redux/instructors/service'
+import TopRatingSliderCards from '../TopRatingSliderCards'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
@@ -17,6 +17,13 @@ const breakPoints = [
 
 const Slider = () => {
     const [instructors, setInstructors] = React.useState([]);
+    const [backgroundImg] = React.useState([
+    'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/167698/pexels-photo-167698.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/1450082/pexels-photo-1450082.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/13038628/pexels-photo-13038628.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
+    'https://images.pexels.com/photos/12969306/pexels-photo-12969306.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'
+    ]);
 
     React.useEffect(() => {
 
@@ -32,24 +39,15 @@ const Slider = () => {
 
     return (
         <>
-            <Typography gutterBottom variant='h4' component="div" color='text.primary' sx={{ textAlign: 'center' }}>
-                Top Rated Instructors
-            </Typography>
             <div className="SliderMain">
                 <Carousel breakPoints={breakPoints}>
-                    {instructors.map((x) => (
-                        <Box key={x._id} >
-                            <ProfileCard
-                                id={x._id}
-                                name={`${x.first_name} ${x.last_name}`}
-                                location={x.city}
-                                year={x.experience}
-                                rating={x.rating}
-                                language={x.language}
-                                profileUrl={x.photo}
-                                instructorId={x._id}
-                            />
-                        </Box>
+                {instructors.map((x) => (
+                        <TopRatingSliderCards
+                        key={x._id}
+                        instructor={x}
+                        backgroundImg={backgroundImg[instructors.indexOf(x)]}
+                        />
+
                     ))}
                 </Carousel>
             </div>
