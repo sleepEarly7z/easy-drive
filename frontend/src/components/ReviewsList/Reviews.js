@@ -99,7 +99,17 @@ const Reviews = ({ idType, page }) => {
         setFilterFn({
             fn: (items) => {
                 if (target.value === '') return items
-                else return items.filter((x) => x.fullName)
+                else return items.filter((x) => x.fullName.toLowerCase())
+
+                //     return items.filter((x) =>
+                //     x.student_name
+                //         ? x.student_name
+                //               .toLowerCase()
+                //               .includes(target.value.toLowerCase())
+                //         : x.instructor_name
+                //               .toLowerCase()
+                //               .includes(target.value.toLowerCase()),
+                // )
             },
         })
     }
