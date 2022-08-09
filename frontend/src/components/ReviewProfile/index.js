@@ -195,16 +195,6 @@ export default function ReviewProfile({ instructor }) {
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
-        // const sendGet = async () => {
-        //     const res = fetch(
-        //         `http://localhost:3001/appointments/${params.instructorId}`,
-        //     )
-        //     setList(res.data.data)
-        //     console.log(res.data.data)
-        //     // console.log('res: ' + JSON.stringify(res))
-        //     // console.log(list)
-        // }
-        // sendGet()
         fetch(`http://localhost:3001/appointments/${params.instructorId}`)
             .then((response) => response.json())
             .then((data) => {
@@ -223,6 +213,7 @@ export default function ReviewProfile({ instructor }) {
                     hasError: true
                 }))
             })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [listSetting.isLoading, params.instructorId])
 
     useEffect(() => {
