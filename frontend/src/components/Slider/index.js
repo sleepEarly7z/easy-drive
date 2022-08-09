@@ -29,7 +29,6 @@ const Slider = () => {
 
         const fetchTopInstructors = async () => {
             const results = await InstructorService.getInstructors({ sortBy: { sortBy: 'rating', sortDir: 'desc' } });
-            console.log(results);
             const tops = results.data.slice(0, 5);
             setInstructors(tops);
         }
