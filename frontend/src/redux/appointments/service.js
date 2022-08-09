@@ -1,6 +1,6 @@
 import { TIME_SLOTS, WEEK_DAYS, MONTHS } from '../../utils/constants'
 
-const API_URL = 'https://ezdrive-test-signup.herokuapp.com/appointments/'
+const API_URL = 'https://ezdrivemain.herokuapp.com/appointments/'
 
 const getAppointmentsByInstructorID = async (id) => {
     console.log(id)
@@ -17,7 +17,7 @@ const getAppointmentsByInstructorID = async (id) => {
     if (data) {
         localStorage.setItem('appointments', JSON.stringify(data))
     }
-
+    
     return data
 }
 

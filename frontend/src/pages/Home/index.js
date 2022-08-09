@@ -28,8 +28,8 @@ const Home = () => {
 
                 <div className="sectionTabs">
                     <STTab title={'What To Do'} section={instructions} />
-                    <STTab title={'Top Instructors'} section={topinstructors} />
                     <STTab title={'About Us'} section={ourteam} />
+                    <STTab title={'Contact Us'} section={contactus} />
                 </div>
 
                 <div ref={instructions} className="sectionTwo">
