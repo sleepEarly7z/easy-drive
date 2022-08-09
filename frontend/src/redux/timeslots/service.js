@@ -1,4 +1,4 @@
-const API_URL = 'https://ezdrive-test-signup.herokuapp.com/timeslots/'
+const API_URL = 'https://ezdrivemain.herokuapp.com/timeslots/'
 
 const addTimeslot = async (timeslot) => {
     const {
