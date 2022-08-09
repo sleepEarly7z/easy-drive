@@ -17,7 +17,6 @@ const getAppointmentsByInstructorID = async (id) => {
     if (data) {
         localStorage.setItem('appointments', JSON.stringify(data))
     }
-    console.log('getAppointmentsByInstructorID: ' + data)
 
     return data
 }
