@@ -251,7 +251,7 @@ const getNearbyInstructors = async (id, city, street, province) => {
 			for (i of values) {
 				if(i.distance.data.rows[0].elements[0].status === 'OK') {
 					// console.log(i.distance.data.rows[0]);
-					if(i.distance.data.rows[0].elements[0].distance.text.split(' ')[0] < 100) {
+					if(i.distance.data.rows[0].elements[0].distance.text.split(' ')[0] < 10) {
 						resultArray.push({
 							instructorID: i.instructor._id,
 							instructorName: i.instructor.first_name + ' ' + i.instructor.last_name,
