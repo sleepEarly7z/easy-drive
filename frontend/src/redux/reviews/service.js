@@ -1,7 +1,17 @@
 const API_URL = 'https://ezdrivemain.herokuapp.com/'
 
 const getReviewsByUserId = async (id, idType) => {
-    const response = await fetch(`${API_URL}reviews?${idType}=${id}`, {
+    let url = '';
+
+    if (idType === 'instructorId') {
+        url = `${API_URL}reviews?instructorId=${id}`;
+    } else if (idType === 'studentId') {
+        url = `${API_URL}reviews?studentId=${id}`;
+    } else {
+        return;
+    }
+
+    const response = await fetch(url, {
         method: 'GET',
     })
 

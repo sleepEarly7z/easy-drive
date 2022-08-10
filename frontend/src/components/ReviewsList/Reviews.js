@@ -74,18 +74,18 @@ const Reviews = ({ idType, page }) => {
     const headCells =
         page === 'reviewPage'
             ? [
-                  { id: 'fullName', label: 'Student Name', width: 300 },
-                  { id: 'rating', label: 'Rating', width: 200 },
-                  { id: 'comment', label: 'Comment', width: 600 },
-                  { id: 'reviewDate', label: 'Time', width: 300 },
-              ]
+                { id: 'fullName', label: 'Student Name', width: 300 },
+                { id: 'rating', label: 'Rating', width: 200 },
+                { id: 'comment', label: 'Comment', width: 600 },
+                { id: 'reviewDate', label: 'Time', width: 300 },
+            ]
             : [
-                  { id: 'fullName', label: 'Instructor Name', width: 300 },
-                  { id: 'rating', label: 'Rating', width: 200 },
-                  { id: 'comment', label: 'Comment', width: 600 },
-                  { id: 'reviewDate', label: 'Time', width: 300 },
-                  { id: 'actions', label: 'Actions', disableSorting: true },
-              ]
+                { id: 'fullName', label: 'Instructor Name', width: 300 },
+                { id: 'rating', label: 'Rating', width: 200 },
+                { id: 'comment', label: 'Comment', width: 600 },
+                { id: 'reviewDate', label: 'Time', width: 300 },
+                { id: 'actions', label: 'Actions', disableSorting: true },
+            ]
 
     const {
         TblContainer,
@@ -103,11 +103,11 @@ const Reviews = ({ idType, page }) => {
                     return items.filter((x) =>
                         x.student_name
                             ? x.student_name
-                                  .toLowerCase()
-                                  .includes(target.value.toLowerCase())
+                                .toLowerCase()
+                                .includes(target.value.toLowerCase())
                             : x.instructor_name
-                                  .toLowerCase()
-                                  .includes(target.value.toLowerCase()),
+                                .toLowerCase()
+                                .includes(target.value.toLowerCase()),
                     )
                 }
             },
@@ -165,12 +165,14 @@ const Reviews = ({ idType, page }) => {
     }
 
     useEffect(() => {
-        const getReviews = async () => {
-            const reviews = await ReviewService.getReviewsByUserId(id, idType)
-            setRecords(reviews)
+        if (idType === "instructorId" || idType === "studentId") {
+            const getReviews = async () => {
+                const reviews = await ReviewService.getReviewsByUserId(id, idType)
+                setRecords(reviews)
+            }
+            getReviews()
         }
-        getReviews()
-    }, [])
+    }, [id, idType])
 
     return (
         <>
