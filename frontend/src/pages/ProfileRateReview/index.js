@@ -12,8 +12,7 @@ const ProfileRateReview = () => {
 
     useEffect(() => {
         dispatch(getInstructorByIdAsync(params.instructorId))
-        dispatch(getReviewsByIdAsync(params.instructorId, 'instructor'))
-    }, [])
+    }, [params.instructorId])
 
     const currentInstructor = useSelector(
         (state) => state.instructors.viewCurrentInstructor,
