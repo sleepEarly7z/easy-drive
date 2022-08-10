@@ -3,8 +3,6 @@ import { REQUEST_STATE } from '../utils'
 import {
     getInstructorsAsync,
     getInstructorByIdAsync,
-    getReviewsByIdAsync,
-    addInstructorAsync,
     updateInstructorAsync,
     deleteInstructorAsync,
     getFiltersAsync,

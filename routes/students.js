@@ -29,7 +29,7 @@ router.get('/', function (req, res) {
 		.catch((error) => {
 			res.status(500).send({ error: error.message });
 		});
-});0939
+});
 
 /**
  *  Get a student
@@ -202,11 +202,11 @@ router.post('/nearby/:id', function (req, res) {
 	service
 		.getNearbyInstructors(id, city, street, province)
 		.then((nearby) => {
-			res.status(200).send({nearby});
+			res.status(200).send({ nearby });
 		})
 		.catch((error) => {
 		});
-	}
+}
 );
 
 

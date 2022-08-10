@@ -13,7 +13,7 @@ const theme = createTheme({
     },
 });
 
-const Loading = () => {
+const LinearLoading = () => {
     return (
         <Box sx={{ width: '100%' }}>
             <ThemeProvider theme={theme}>
@@ -23,4 +23,4 @@ const Loading = () => {
     );
 }
 
-export default Loading;
+export default LinearLoading;

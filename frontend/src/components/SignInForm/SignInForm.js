@@ -67,10 +67,6 @@ const SignInForm = () => {
     const [isLoading, setIsLoading] = useState(false)
     const classes = useStyles()
 
-    // useEffect(() => {
-    //     dispatch(getInstructorsAsync())
-    // }, [dispatch])
-
     const { user, isError, isSuccess, message } = useSelector(
         (state) => state.auth,
     )
@@ -113,7 +109,6 @@ const SignInForm = () => {
 
     const handleSwitch = (event) => {
         setState(event.target.checked)
-        // console.log("state: " + state)
     }
 
     return isLoading ? (
@@ -151,7 +146,6 @@ const SignInForm = () => {
                             name="email"
                             autoComplete="email"
                             autoFocus
-                            // value="billieeasd@gmail.com"
                         />
                         <TextField
                             margin="normal"
@@ -162,12 +156,9 @@ const SignInForm = () => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            // value="1asdj12"
                         />
                         <Grid
                             container
-                            // alignItems="center"
-                            // justifyContent="center"
                             justifyContent="flex-end"
                         >
                             <Switch

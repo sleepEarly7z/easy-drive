@@ -81,7 +81,7 @@ const SidebarInstructor = () => {
                 })
         }
         sendGet()
-    }, [])
+    }, [params.instructorId])
 
     const styles = useStyles()
     const shadowStyles = useFadedShadowStyles()

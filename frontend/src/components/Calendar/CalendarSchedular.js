@@ -81,8 +81,8 @@ const CalendarSchedular = ({ data, setData }) => {
         allowResizing: false,
     }
     const [addedAppointment, setAddedAppointment] = React.useState({})
-    const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] =
-        React.useState(false)
+    // const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] =
+    //     React.useState(false)
 
     const {
         allowAdding,
@@ -113,15 +113,15 @@ const CalendarSchedular = ({ data, setData }) => {
                     data.filter((appointment) => appointment.id !== deleted),
                 )
             }
-            setIsAppointmentBeingCreated(false)
+            // setIsAppointmentBeingCreated(false)
         },
-        [setData, setIsAppointmentBeingCreated, data],
+        [setData, data],
     )
 
     const onAddedAppointmentChange = React.useCallback((appointment) => {
         setAddedAppointment(appointment)
-        setIsAppointmentBeingCreated(true)
-    })
+        // setIsAppointmentBeingCreated(true)
+    },[])
 
     const TimeTableCell = React.useCallback(
         React.memo(({ onDoubleClick, ...restProps }) => (

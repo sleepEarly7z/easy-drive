@@ -8,14 +8,6 @@ const getTimeslots = async () => {
 	}
 };
 
-// const getTimeslotById = async (id) => {
-// 	try {
-// 		return Timeslot.findById(id);
-// 	} catch (error) {
-// 		throw { type: 'DB', message: error };
-// 	}
-// };
-
 const getTimeslotsByInstructorId = async (id) => {
 	try {
 		return Timeslot.find({ instructor_id: id });
@@ -25,9 +17,7 @@ const getTimeslotsByInstructorId = async (id) => {
 };
 
 const addTimeslot = async (patch) => {
-	console.log(patch);
 	const newTimeslot = new Timeslot(patch);
-	console.log(newTimeslot);
 
 	try {
 		await newTimeslot.save();

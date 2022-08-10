@@ -31,8 +31,6 @@ const getInstructors = async (query) => {
         ? `${API_URL}instructors?${queryString}`
         : `${API_URL}instructors`
 
-    console.log(url)
-
     try {
         const response = await fetch(url, {
             method: 'GET',

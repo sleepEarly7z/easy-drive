@@ -1,5 +1,3 @@
-const { v4: uuidv4 } = require('uuid');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Student = require('../models/studentModel');
 const service = require('../services/instructorService');
@@ -58,16 +56,6 @@ const addStudent = async (Student) => {
 	}
 };
 
-/**
- * delete Student with given id from db
- *
- * @param {string} id
- *
- * @returns {object} Student deleted
- */
-const deleteStudentById = (id) => {
-	// TODO
-};
 
 /**
  * Update an Student form database
@@ -106,11 +94,6 @@ const registerStudent = async (student) => {
 			message: 'Student already exists',
 		};
 	}
-
-	// Hash password
-	// TODO: later after change all password in db into hashed password
-	const salt = await bcrypt.genSalt(10);
-	const hashedPassword = await bcrypt.hash(password, salt);
 
 	// Create user
 	const newStudent = await Student.create({
@@ -162,7 +145,6 @@ const loginStudent = async (email, password) => {
 	// Find if user and passwords match
 	if (
 		studentFound &&
-		// (await bcrypt.compare(password, studentFound.password))
 		password === studentFound.password
 	) {
 		return {
@@ -205,7 +187,6 @@ const getMe = async (req) => {
 		country: req.student.country,
 		followedInstructors: req.student.followedInstructors,
 	};
-	console.log(student);
 
 	return student;
 };
@@ -226,11 +207,8 @@ const getNearbyInstructors = async (id, city, street, province) => {
 	const stuprovince = province.split(' ').join('%20');
 
 	return Promise.resolve(service.getQueriedInstructors()).then(async (instructors) => {
-		// console.log(instructors);
 		const promiseArr = [];
-		// const res = axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=Washington%2C%20DC&destinations=New%20York%20City%2C%20NY&units=imperial&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`)
-
-		for(i of instructors.data) {
+		for (i of instructors.data) {
 			const instStreet = i.street.split(' ').join('%20');
 			const instCity = i.city.split(' ').join('%20');
 			const instProvince = i.province.split(' ').join('%20');
@@ -240,43 +218,39 @@ const getNearbyInstructors = async (id, city, street, province) => {
 				distance: res
 			});
 		}
-		// console.log(promiseArr);
 		return promiseArr;
 	}
 	)
-	.then((res) => {
-		// console.log(res);
-		const resultArray = [];
-		return Promise.all(res).then((values) => {
-			for (i of values) {
-				if(i.distance.data.rows[0].elements[0].status === 'OK') {
-					// console.log(i.distance.data.rows[0]);
-					if(i.distance.data.rows[0].elements[0].distance.text.split(' ')[0] < 10) {
-						resultArray.push({
-							instructorID: i.instructor._id,
-							instructorName: i.instructor.first_name + ' ' + i.instructor.last_name,
-							instStreet: i.instructor.street,
-							instCity: i.instructor.city,
-							instProvince: i.instructor.province,
-							distance: i.distance.data.rows[0].elements[0].distance.text,
-						});
+		.then((res) => {
+			const resultArray = [];
+			return Promise.all(res).then((values) => {
+				for (i of values) {
+					if (i.distance.data.rows[0].elements[0].status === 'OK') {
+						if (i.distance.data.rows[0].elements[0].distance.text.split(' ')[0] < 10) {
+							resultArray.push({
+								instructorID: i.instructor._id,
+								instructorName: i.instructor.first_name + ' ' + i.instructor.last_name,
+								instStreet: i.instructor.street,
+								instCity: i.instructor.city,
+								instProvince: i.instructor.province,
+								distance: i.distance.data.rows[0].elements[0].distance.text,
+							});
+						}
+					} else {
+						console.log('no distance');
 					}
-				} else {
-					console.log('no distance');
 				}
+				return resultArray;
 			}
-			// console.log(resultArray);
-			return resultArray;
+			).catch((err) => {
+				console.log(err);
+			});
 		}
-		).catch((err) => {
+		)
+		.catch((err) => {
 			console.log(err);
-		});
-	}
-	)
-	.catch((err) => {
-		console.log(err);
-	}
-	);
+		}
+		);
 
 }
 
@@ -286,7 +260,6 @@ module.exports = {
 	getStudents,
 	getStudentById,
 	addStudent,
-	deleteStudentById,
 	updateStudentById,
 	registerStudent,
 	loginStudent,

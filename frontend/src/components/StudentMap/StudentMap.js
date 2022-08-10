@@ -1,6 +1,5 @@
 import React, { useMemo, useEffect, useState } from 'react'
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
-import { withScriptjs, withGoogleMap } from 'react-google-maps'
 import './StudentMap.scss'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
@@ -23,7 +22,6 @@ export default function StudentMap(props) {
             const firstResponce = await axios.get(
                 `https://ezdrivemain.herokuapp.com/students/${params.studentId}`,
             )
-            // console.log(firstResponce.data.data);
             const streeturl = firstResponce.data.data.street
                 .split(' ')
                 .join('+')
@@ -34,7 +32,6 @@ export default function StudentMap(props) {
             const secondResponce = await axios.get(
                 `https://maps.googleapis.com/maps/api/geocode/json?address=${streeturl},+${cityurl},+${provinceurl}&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`,
             )
-            // console.log(secondResponce);
             setLat(secondResponce.data.results[0].geometry.location.lat)
             setLng(secondResponce.data.results[0].geometry.location.lng)
             var data = qs.stringify({
@@ -56,13 +53,12 @@ export default function StudentMap(props) {
                 const nearbyMarks = await axios.get(
                     `https://maps.googleapis.com/maps/api/geocode/json?address=${nearbyInsts.data.nearby[i].instStreet},+${nearbyInsts.data.nearby[i].instCity},+${nearbyInsts.data.nearby[i].instProvince}&key=AIzaSyA_-GRrfKO0phA9S28YpLrmeGZFvH3Jjgk`,
                 )
-                // console.log(nearbyMarks);
                 if (nearbyMarks.data.status !== 'ZERO_RESULTS') {
                     if (
                         nearbyMarks.data.results[0].geometry.location.lat !==
-                            undefined &&
+                        undefined &&
                         nearbyMarks.data.results[0].geometry.location.lng !==
-                            undefined
+                        undefined
                     ) {
                         let inst = {
                             lat: nearbyMarks.data.results[0].geometry.location
@@ -72,16 +68,17 @@ export default function StudentMap(props) {
                             name: nearbyInsts.data.nearby[i].instructorName,
                             id: nearbyInsts.data.nearby[i].instructorID,
                         }
-                        nearbyInstructors.push(inst)
-                        // console.log(inst);
+                        setNearbyInstructors((currState) => ({
+                            ...currState,
+                            inst
+                        }));
                     }
                 }
             }
-            // console.log(nearbyInstructors);
         }
 
         componentDidMount()
-    }, [])
+    }, [params.studentId])
 
     if (!isLoaded) return <div>Loading...</div>
     return (
@@ -109,8 +106,7 @@ export default function StudentMap(props) {
 }
 
 function Map(props) {
-    const center = useMemo(() => ({ lat: props.lat, lng: props.lng }), [])
-    console.log(props.nearby)
+    const center = useMemo(() => ({ lat: props.lat, lng: props.lng }), [props.lat, props.lng])
 
     return (
         <GoogleMap

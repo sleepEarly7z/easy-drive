@@ -135,34 +135,7 @@ function LayoutNavbar() {
                         <ListItemText primary={'View Profile'} />
                     </ListItemButton>
                 </ListItem>
-                {/* <ListItem key={'Message'} disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <MailIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={'Message'} />
-                    </ListItemButton>
-                </ListItem> */}
             </List>
-            {/* <Divider />
-            <List>
-                <ListItem key={'Help'} disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={'Help'} />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem key={'Settings'} disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <SettingsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={'Settings'} />
-                    </ListItemButton>
-                </ListItem>
-            </List> */}
             <Divider />
             <List>
                 <ListItem key={'Sign Out'} disablePadding>

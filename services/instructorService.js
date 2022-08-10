@@ -1,15 +1,9 @@
-const { v4: uuidv4 } = require('uuid');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Instructor = require('../models/instructorModel');
-const ReviewService = require('../services/reviewService');
 const helpers = require('../utils/helpers');
 const {
-	DEFAULT_SORT_BY,
 	DEFUALT_SORT_DIR,
-	DEFAULT_OFFSET,
-	DEFAULT_LIMIT,
 } = require('../utils/constants');
 
 /**
@@ -85,17 +79,11 @@ const registerInstructor = async (instructor) => {
 		};
 	}
 
-	// Hash password
-	// TODO: later after change all password in db into hashed password
-	const salt = await bcrypt.genSalt(10);
-	const hashedPassword = await bcrypt.hash(password, salt);
-
 	// Create user
 	const newInstructor = await Instructor.create({
 		role: 'instructor',
 		first_name,
 		last_name,
-		// password: hashedPassword,
 		password,
 		email,
 		phone,
@@ -155,7 +143,6 @@ const loginInstructor = async (email, password) => {
 	// Find if user and passwords match
 	if (
 		instructorFound &&
-		// (await bcrypt.compare(password, instructorFound.password))
 		password === instructorFound.password
 	) {
 		return {
@@ -196,7 +183,6 @@ const getMe = async (req) => {
 		email: req.instructor.email,
 		first_name: req.instructor.first_name,
 		last_name: req.instructor.last_name,
-		// password: hashedPassword,
 		password: req.instructor.password,
 		email: req.instructor.email,
 		phone: req.instructor.phone,
@@ -218,16 +204,6 @@ const getMe = async (req) => {
 	return instructor;
 };
 
-/**
- * delete instructor with given id from db
- *
- * @param {string} id
- *
- * @returns {object} instructor deleted
- */
-const deleteInstructorById = (id) => {
-	// TODO
-};
 
 /**
  * Update an instructor from database
@@ -308,7 +284,6 @@ module.exports = {
 	registerInstructor,
 	loginInstructor,
 	getMe,
-	deleteInstructorById,
 	updateInstructorById,
 	getQueriedInstructors
 };

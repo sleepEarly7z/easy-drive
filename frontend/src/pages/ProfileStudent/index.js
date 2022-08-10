@@ -8,7 +8,7 @@ import StuSideMenu from '../../components/StuSideMenu/StuSideMenu'
 import StudentMap from '../../components/StudentMap/StudentMap'
 import useStudent from '../../hooks/useStudent'
 import toast from 'react-hot-toast'
-import Loading from '../../components/Loading'
+import LinearLoading from '../../components/Animation/LinearLoading'
 import { Navigate, useParams } from 'react-router-dom'
 
 const ProfileStudent = () => {
@@ -29,7 +29,7 @@ const ProfileStudent = () => {
 
     return (
         <>
-            {loading && <Loading />}
+            {loading && <LinearLoading />}
             {hasError && <Navigate to='/' replace='true' />}
 
             {(!loading && !hasError) &&

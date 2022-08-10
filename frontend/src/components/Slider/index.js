@@ -3,8 +3,6 @@ import Carousel from 'react-elastic-carousel'
 import React from 'react'
 import InstructorService from '../../redux/instructors/service'
 import TopRatingSliderCards from '../TopRatingSliderCards'
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 // https://www.youtube.com/watch?v=eBKcGAhkZUI&t=526s
 // https://www.npmjs.com/package/react-elastic-carousel
