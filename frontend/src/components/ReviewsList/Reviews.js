@@ -164,6 +164,8 @@ const Reviews = ({ idType, page }) => {
         })
         dispatch(deleteReviewAsync(id))
         toast.success('Deleted Successfully')
+
+        window.location.reload(false)
     }
 
     useEffect(() => {
