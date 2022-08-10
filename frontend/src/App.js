@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom'
 import Layout from './pages/Layout'
 import Home from './pages/Home'
 import ProfileRateReview from './pages/ProfileRateReview'
-import About from './pages/About'
 import ProfileStudent from './pages/ProfileStudent'
 import ProfileInstructor from './pages/ProfileInstructor'
 import SignIn from './pages/SignInUp/SignIn'
@@ -23,7 +22,6 @@ function App() {
                         element={<ProfileRateReview />}
                     />
                     <Route path="explore" element={<Explore />} />
-                    <Route path="about" element={<About />} />
                     <Route
                         path="profile-student/:studentId"
                         element={<ProfileStudent />}

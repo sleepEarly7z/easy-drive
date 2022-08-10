@@ -30,11 +30,9 @@ const ProfileCard = (props) => {
         )
 
         const toggleFollow = () => {
-            // update redux store, db, locals
             dispatch(toggleFollowInstructorAsync(instructorId))
         }
 
-        // upon change of followedInstructors redux state, change ui
         React.useEffect(() => {
             setIsFollowing(followedInstructors.includes(instructorId))
         }, [followedInstructors, instructorId])

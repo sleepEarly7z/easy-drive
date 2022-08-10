@@ -211,7 +211,6 @@ const MultipleSelectLanguage = ({ control }) => {
             target: { value },
         } = event
         setLanguageType(
-            // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         )
     }
@@ -480,7 +479,6 @@ const ProfessionalForm = () => {
     )
 }
 
-
 function getStepContent(step, formats, handleFormat) {
     switch (step) {
         case 0:
@@ -491,10 +489,7 @@ function getStepContent(step, formats, handleFormat) {
             return <ProfessionalForm />
         case 3:
             return (
-                <Availability
-                    formats={formats}
-                    handleFormat={handleFormat}
-                />
+                <Availability formats={formats} handleFormat={handleFormat} />
             )
         default:
             return 'unknown step'
@@ -571,22 +566,17 @@ const SignUpInstructor = () => {
     }
 
     const handleNext = (data) => {
-        console.log('data: ' + data)
         if (activeStep === steps.length - 1) {
-            fetch('https://jsonplaceholder.typicode.com/comments')
-                .then((data) => data.json())
-                .then((res) => {
-                    console.log(res)
-                    setActiveStep(activeStep + 1)
-                })
+            fetch('https://jsonplaceholder.typicode.com/comments').then(
+                (data) => data.json(),
+            )
 
             // create an account
-            console.log(data)
             data.language = data.language.toString()
             data.availability = formats
-            console.log('data: ' + data)
             dispatch(registerAsync(data))
             setIsLoading(true)
+
             // redirect after 3 seconds
             setTimeout(function () {
                 navigate('/explore')

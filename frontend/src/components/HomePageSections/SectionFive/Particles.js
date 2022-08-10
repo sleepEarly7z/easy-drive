@@ -1,6 +1,5 @@
 import Particles from 'react-tsparticles'
 import { loadSlim } from 'tsparticles-slim' // loads tsparticles-slim
-//import { loadFull } from "tsparticles"; // loads tsparticles
 import { useCallback, useMemo } from 'react'
 
 // tsParticles Repository: https://github.com/matteobruni/tsparticles
@@ -12,8 +11,7 @@ const ParticlesComponent = (props) => {
         // all options can be found here: https://particles.js.org/docs/interfaces/Options_Interfaces_IOptions.IOptions.html
         return {
             background: {
-                // color: '#fff', // this sets a background color for the canvas
-                color: '#000',
+                color: '#000', // this sets a background color for the canvas
             },
             fullScreen: {
                 // enable: true, // enabling this will make the canvas fill the entire screen, it's enabled by default
@@ -41,11 +39,9 @@ const ParticlesComponent = (props) => {
             },
             particles: {
                 color: {
-                    // value: '#000',
                     value: '#f4ca59',
                 },
                 links: {
-                    // color: '#000',
                     color: '#f4ca59',
                     enable: true, // enabling this will make particles linked together
                     distance: 200, // maximum distance for linking the particles
@@ -66,8 +62,7 @@ const ParticlesComponent = (props) => {
 
     // useCallback is not mandatory, but it's recommended since this callback can be memoized if static
     const particlesInit = useCallback((engine) => {
-        loadSlim(engine)
-        // loadFull(engine); // for this sample the slim version is enough, choose whatever you prefer, slim is smaller in size but doesn't have all the plugins and the mouse trail feature
+        loadSlim(engine) // for this sample the slim version is enough, choose whatever you prefer, slim is smaller in size but doesn't have all the plugins and the mouse trail feature
     }, [])
 
     // setting an id can be useful for identifying the right particles component, this is useful for multiple instances or reusable components
