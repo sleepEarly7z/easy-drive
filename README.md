@@ -124,8 +124,9 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
 - Kaiqian(Cathy) Yang
     - Designed home page and added a Contact Us box using EmailJS API.
     - Added navbar and footer to website, and registered social media account and email account for our website.
-    - Worked on backend and frontend of Rate&Review profile page for instructors, with functionalities of Add/Delete/Update/Read/Sort/Search reviews, and allowing user to view appointments in a Calendar.
-    - Implemented user registration/login/authentication functionalities, and allow new instrutors to choose their available timeslots every week when signup their account.
+    - Implemented user registration/login/authentication functionalities in Signin/Signup page, which contained custom Express.js middleware in project backend routes to protect logged-in and newly-registered users.
+    - Setted up schemas (appointments, timeslots) in MongoDB, and implemented redux/reducer, actions, and routes for instructor's availabilities and booked appointments, which can all be viewed in a Calendar in Rate&Review profile page.
+    - Worked on the entire Rate&Review profile page for instructors from frontend (ui, redux/reducer) and backend (routes), with functionalities of Add/Delete/Update/Read reviews, Sort reviews based on ratings and Search reviews based on reviewer's name.
 - Chloe Zhang
     - set up schemas (instructor, student, reviews) in MongoDB.
     - seeded the database with fake data for testing purpose.
