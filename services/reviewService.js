@@ -36,6 +36,7 @@ const getAvgRatingByInstructorId = async (instructorId) => {
 	try {
 		const result = await Review.aggregate(AVG_RATING_PIPLINE);
 		const { avgRating } = result[0];
+		console.log(`avgRating: ${avgRating}`);
 		return avgRating;
 	} catch {
 		return null;
@@ -116,6 +117,8 @@ const getRatingDistributionByInstructorId = async (instructorId) => {
 	try {
 		const result = await Review.aggregate(RATING_DIST_PIPELINE);
 		const { ratingDistribution } = result[0];
+		console.log(`ratingDistribution`);
+		console.log(ratingDistribution);
 		return ratingDistribution;
 	} catch {
 		return null;
@@ -123,12 +126,17 @@ const getRatingDistributionByInstructorId = async (instructorId) => {
 }
 
 const updateRatingByInstructorId = async (instructorId) => {
+	console.log(`updateRatingByInstructorId():`);
 	const avg = await getAvgRatingByInstructorId(instructorId);
+	console.log(`avg: ${avg}`);
 	const dist = await getRatingDistributionByInstructorId(instructorId);
+	console.log(`dist:`);
+	console.log(dist);
 	await Instructor.findOneAndUpdate(
 		{ _id: instructorId },
 		{ rating: avg ? avg : 0, ratingDistribution: dist ? dist : [] }
 	);
+	console.log('updatedRating');
 	return;
 }
 
@@ -158,7 +166,7 @@ const getReviewsByInstructorId = async (id) => {
 
 
 const getReviewsByUserId = async (userType, id) => {
-	console.log(userType);
+	// console.log(userType);
 	if (userType === 'instructor') {
 		const GET_INSTRUCTOR_REVIEWS_PIPE = [
 			{

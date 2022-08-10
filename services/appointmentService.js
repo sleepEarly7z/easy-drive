@@ -17,9 +17,9 @@ const getAppointmentsByInstructorId = async (id) => {
 };
 
 const addAppointment = async (patch) => {
-	console.log(patch);
+	// console.log(patch);
 	const newAppointment = new Appointment(patch);
-	console.log(Appointment);
+	// console.log(Appointment);
 
 	try {
 		await newAppointment.save();

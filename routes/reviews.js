@@ -122,7 +122,7 @@ router.delete('/:id', function (req, res) {
 	service
 		.deleteReviewById(id)
 		.then((review) => {
-			console.log(review);
+			// console.log(review);
 			res.status(200).send({ data: review });
 		})
 		.catch((error) => {
@@ -136,7 +136,7 @@ router.patch('/:id', function (req, res) {
 	service
 		.updateReviewById(id, patch)
 		.then((review) => {
-			console.log(review);
+			// console.log(review);
 			res.status(200).send({ data: review });
 		})
 		.catch((error) => {
