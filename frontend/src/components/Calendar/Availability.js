@@ -1,39 +1,9 @@
 import * as React from 'react'
-import { styled } from '@mui/material/styles'
-import {
-    Typography,
-    TextField,
-    Button,
-    Stepper,
-    Step,
-    StepLabel,
-    createTheme,
-    ThemeProvider,
-} from '@material-ui/core'
-import FormatBoldIcon from '@mui/icons-material/FormatBold'
-import FormatItalicIcon from '@mui/icons-material/FormatItalic'
-import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
-import FormatColorFillIcon from '@mui/icons-material/FormatColorFill'
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            // This is yellow #f4ca59.
-            main: '#f4ca59',
-        },
-        secondary: {
-            // This is yellow #f4ca59.
-            main: '#f4ca59',
-        },
-    },
-})
-
-const Availability = ({formats, setFormats, handleFormat}) => {
-
+const Availability = ({ formats, handleFormat }) => {
     return (
         <>
             <ToggleButtonGroup
@@ -45,16 +15,10 @@ const Availability = ({formats, setFormats, handleFormat}) => {
                 <ToggleButton value="Sunday" aria-label="Sunday" disabled>
                     <div>Sunday</div>
                 </ToggleButton>
-                <ToggleButton
-                    value="Sunday-8am"
-                    aria-label="Sunday-8am"
-                >
+                <ToggleButton value="Sunday-8am" aria-label="Sunday-8am">
                     <div>08:00am - 09:00am</div>
                 </ToggleButton>
-                <ToggleButton
-                    value="Sunday-9am"
-                    aria-label="Sunday-9am"
-                >
+                <ToggleButton value="Sunday-9am" aria-label="Sunday-9am">
                     <div>09:00am - 10:00am</div>
                 </ToggleButton>
                 <ToggleButton value="Sunday-10am" aria-label="Sunday-10am">

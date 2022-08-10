@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 import Paper from '@mui/material/Paper'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { styled } from '@mui/material/styles'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControl from '@mui/material/FormControl'
@@ -30,18 +29,6 @@ export const classes = {
     text: `${PREFIX}-text`,
     formControlLabel: `${PREFIX}-formControlLabel`,
 }
-// #FOLD_BLOCK
-const StyledDiv = styled('div')(({ theme }) => ({
-    [`&.${classes.container}`]: {
-        margin: theme.spacing(2),
-        padding: theme.spacing(2),
-    },
-    [`& .${classes.text}`]: theme.typography.h6,
-    [`& .${classes.formControlLabel}`]: {
-        ...theme.typography.caption,
-        fontSize: '1rem',
-    },
-}))
 
 const AppointmentContent = (props) => {
     const { data, style } = props

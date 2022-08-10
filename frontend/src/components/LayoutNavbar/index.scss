@@ -139,9 +139,6 @@ code {
   margin-top: 13px
 }
 
-.icon-button-profile {
-}
-
 .icon-button-signout {
   margin-left: 9px;
 }
@@ -319,7 +316,6 @@ code {
 }
 
 .menu-item:hover {
-  // background-color: #525357;
   background-color: #000;
 }
 
@@ -349,9 +345,6 @@ code {
 .menu-secondary-enter-active {
   transform: translateX(0%);
   transition: all var(--speed) ease;
-}
-.menu-secondary-exit {
-
 }
 .menu-secondary-exit-active {
   transform: translateX(110%);

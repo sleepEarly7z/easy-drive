@@ -1,4 +1,3 @@
-import Card from '@mui/material/Card'
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import { Avatar, IconButton } from '@mui/material'
