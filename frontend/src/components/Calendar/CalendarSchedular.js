@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useState } from 'react'
 
 import Paper from '@mui/material/Paper'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -74,13 +73,13 @@ const months = [
 ]
 
 const CalendarSchedular = ({ data, setData }) => {
-    const [editingOptions, setEditingOptions] = React.useState({
+    const editingOptions = {
         allowAdding: false,
         allowDeleting: false,
         allowUpdating: false,
         allowDragging: false,
         allowResizing: false,
-    })
+    }
     const [addedAppointment, setAddedAppointment] = React.useState({})
     const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] =
         React.useState(false)
@@ -138,13 +137,13 @@ const CalendarSchedular = ({ data, setData }) => {
         () => allowDragging && allowUpdating,
         [allowDragging, allowUpdating],
     )
-    
+
     const allowResize = React.useCallback(
         () => allowResizing && allowUpdating,
         [allowResizing, allowUpdating],
     )
 
-    const [currentDate, setCurrentDate] = useState(new Date())
+    const currentDate = new Date()
 
     const [viewmode, setViewmode] = React.useState('month')
 

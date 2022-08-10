@@ -69,17 +69,6 @@ const TopRecommended = () => {
                         }
                         key={uuidv4()}
                     >
-                        {/* <img src={img} alt={img} /> */}
-
-                        {/* <ProfileCard
-                            name={'Rick Astley'}
-                            location={'UK'}
-                            years={'10'}
-                            rate={'5'}
-                            imgSrc={
-                                'https://img.apmcdn.org/768cb350c59023919f564341090e3eea4970388c/square/72dd92-20180309-rick-astley.jpg'
-                            }
-                        /> */}
                     </div>
                 ))}
             </Slider>

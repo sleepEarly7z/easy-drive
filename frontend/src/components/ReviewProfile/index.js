@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, NavLink } from 'react-router-dom'
 
-import { WEEK_DAYS, MONTHS, TIME_SLOTS } from '../../utils/constants'
+import { MONTHS, TIME_SLOTS } from '../../utils/constants'
 
 import styled from 'styled-components'
 import RateDisplay from '../ReviewRating/ReviewRating'
@@ -65,13 +65,11 @@ function formatDate(list) {
     var appointments = []
     var index = 0
     for (const item of list) {
-        const { _id, date, weekday, isBooked, range, student_lastname } = item
+        const { date, isBooked, range, student_lastname } = item
 
         // 2022-08-13T06:59:51.466Z
         var options = { year: 'numeric', month: 'long', day: 'numeric' }
         const date_array = new Date(date).toLocaleDateString([], options)
-        const isCorrectWeekday = (element) => element === weekday
-        const weekday_index = WEEK_DAYS.findIndex(isCorrectWeekday)
 
         const isCorrectMonth = (element) => element === date_array.split(' ')[0]
         const month_index = MONTHS.findIndex(isCorrectMonth)
@@ -168,11 +166,9 @@ export default function ReviewProfile({ instructor }) {
         )
 
         const toggleFollow = () => {
-            // update redux store and db
             dispatch(toggleFollowInstructorAsync(instructorId))
         }
 
-        // upon change of followedInstructors redux state, change ui
         React.useEffect(() => {
             setIsFollowing(followedInstructors.includes(instructorId))
         }, [followedInstructors, instructorId])
@@ -263,9 +259,7 @@ export default function ReviewProfile({ instructor }) {
                                     <AiFillMail className="review-profile-ai-icon" />
                                     Email
                                 </div>
-                                {/* <a className="review-profile-info-res" href="/">
-                                    {instructor.email}
-                                </a> */}
+
                                 <div className="review-profile-info-res">
                                     {instructor.email}
                                 </div>
@@ -329,7 +323,6 @@ export default function ReviewProfile({ instructor }) {
                         </div>
                     </div>
 
-                    {/* <CalendarSchedular appointments={appointmentsSample} /> */}
                     <CalendarSchedular
                         data={appointments}
                         setData={setAppointments}

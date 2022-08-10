@@ -7,7 +7,6 @@ import ProfileStudent from './pages/ProfileStudent'
 import ProfileInstructor from './pages/ProfileInstructor'
 import SignIn from './pages/SignInUp/SignIn'
 import SignUp from './pages/SignInUp/SignUp'
-import ForgotPassword from './pages/ForgotPassword'
 import Explore from './pages/Explore'
 import { Toaster } from 'react-hot-toast'
 
@@ -38,10 +37,6 @@ function App() {
                     <Route
                         path="sign-up-student"
                         element={<SignUp role="student" />}
-                    />
-                    <Route
-                        path="forgot-password"
-                        element={<ForgotPassword />}
                     />
                 </Route>
             </Routes>

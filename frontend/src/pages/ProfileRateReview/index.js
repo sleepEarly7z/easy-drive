@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import ReviewProfile from '../../components/ReviewProfile'
 
 import { getInstructorByIdAsync } from '../../redux/instructors/thunks'
-import { getReviewsByIdAsync } from '../../redux/reviews/thunks'
 
 const ProfileRateReview = () => {
     const dispatch = useDispatch()
@@ -12,7 +11,7 @@ const ProfileRateReview = () => {
 
     useEffect(() => {
         dispatch(getInstructorByIdAsync(params.instructorId))
-    }, [params.instructorId])
+    }, [dispatch, params.instructorId])
 
     const currentInstructor = useSelector(
         (state) => state.instructors.viewCurrentInstructor,

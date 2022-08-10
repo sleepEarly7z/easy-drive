@@ -307,7 +307,6 @@ function LayoutNavbar() {
 
                 <div className="nav-icon" onClick={handleToggleIcon}>
                     <li className="nav-item-bar">
-                        {/* navbar__container__menu_item */}
                         <div>
                             <div className="icon-button-bar">
                                 {toggleIcon ? (
