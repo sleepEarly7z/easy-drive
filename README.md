@@ -66,7 +66,6 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
     -   Upload/Update the instructor's profile image
 -   [x] Manage user registration/login/authentication
     -   Register with email and password as a student/instructor
-    -   Register with a Google account as a student/instructor
     -   Login with email and password as a student/instructor
     -   Login with a Google account as a student/instructor
 
