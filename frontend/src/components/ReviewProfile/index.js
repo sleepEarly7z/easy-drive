@@ -119,7 +119,9 @@ export default function ReviewProfile({ instructor }) {
     const [appointments, setAppointments] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:3001/appointments/${params.instructorId}`)
+        fetch(
+            `https://ezdrivemain.herokuapp.com/appointments/${params.instructorId}`,
+        )
             .then((response) => response.json())
             .then((data) => {
                 setListSetting((currSetting) => ({
@@ -137,7 +139,7 @@ export default function ReviewProfile({ instructor }) {
                 }))
                 toast.error('No appointments fetched.')
             })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [listSetting.isLoading, params.instructorId])
 
     useEffect(() => {
