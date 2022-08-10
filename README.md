@@ -124,6 +124,9 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
     - Implemented user registration/login/authentication functionalities, and allow new instrutors to choose their available timeslots every week when signup their account.
 - Chloe Zhang
 - Davis Qi
+    - Design and created slider's profile card and the earlier version of profile cards on explore page.
+    - Worked on follow/unfollow function that send a patch request to backend using routes,reducer, and action; the results are stored in MongoDB.
+    - worked on side filter bar/search function at the beginning of the project, and worked on responsive on some components.
 - Yizhou Li
     - Link with map API, external APIs calling and handling
     - Worked with the deployment, fixed package/version bugs on Heroku and successfully deployed the build to Heroku
