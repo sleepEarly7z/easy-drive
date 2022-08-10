@@ -10,21 +10,17 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
-import SettingsIcon from '@material-ui/icons/Settings'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 import { ReactComponent as HomeIcon } from '../../assets/images/svg/home.svg'
 import { ReactComponent as MenuIcon } from '../../assets/images/svg/menu.svg'
-import { ReactComponent as BellIcon } from '../../assets/images/svg/bell.svg'
-import { ReactComponent as MessengerIcon } from '../../assets/images/svg/messenger.svg'
 
 import { FaBars, FaSignInAlt } from 'react-icons/fa'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { HiX } from 'react-icons/hi'
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -236,7 +232,7 @@ function LayoutNavbar() {
                                     PaperProps={{
                                         style: {
                                             marginTop: '5rem',
-                                            width: '400px%',
+                                            width: '400px',
                                         },
                                     }}
                                 >
@@ -254,9 +250,8 @@ function LayoutNavbar() {
                     )}
                 </ul>
                 <ul
-                    className={`navbar__container__menu ${
-                        toggleIcon ? 'active' : ''
-                    }`}
+                    className={`navbar__container__menu ${toggleIcon ? 'active' : ''
+                        }`}
                 >
                     <li className="navbar__container__menu_item">
                         <Link
