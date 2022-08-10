@@ -28,7 +28,6 @@ const InformationStudent = () => {
     }
 
     const handleSave = () => {
-        console.log(updatedInfo);
         studentService.updateStudent(studentId, updatedInfo)
             .then(() => {
                 toast.success('Updated successfully!');
@@ -36,6 +35,9 @@ const InformationStudent = () => {
             .catch(() => {
                 toast.error('Unable to update')
             })
+        setTimeout(function () {
+            window.location.reload(false)
+        }, 500)
     }
 
     React.useEffect(() => {
