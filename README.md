@@ -94,10 +94,14 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
     -   If the follow/unfollow button is clicked by a student user, the frontend would send a patch request to our backend to update our redux reducer and MongoDB. After our backend receive the patch request and finish updating, the follow button in our frontend will change its display accordinly, and the next time when the user click it, its functionality will be switched to unfollow.    
 - Registration/Authentication
     - Inserted custom Express.js middleware into project backend routes to protect them against unauthorized use as well as provide login function.
-    - To be able to create an instructor account, except providing regular information, new instructor can also provide their available timeslots from Monday to Sunday and store them in MongoDB for others to view once they enter instructor's profile page.
+    - To create an instructor account, new instructor can provide their available timeslots from Monday to Sunday and store them in MongoDB. Once information received by MongoDB, all users will have access to view the time schedule of one instructor in one week if they view instructor's Rate&Review profile page.
 - Rating and reviews
-    - Fetched detailed information of each instructors such as name, experience of teaching, what class type will be taught by this instructor.
-    - Get reviews and rating from MongoDB, and instructor's appointments and available timeslots for the current week.
+    - Fetched detailed information of each instructors such as name, experience of teaching years, and what class license the instructor holds.
+    - Retrieved all available and booked timeslots based on the current instructor's Rate&Review profile page and display them in a Calendar view. Users can also choose Calendar types to view appointments in one day/week/month.
+    - Display reviews and rating based on data collected from MongoDB. Logged-in students will have access to Add a new review and give ratings to every instructor they see, and the rating distribution will actively change its data once receiving a new review and rating.
+    - In Student profile page, students can view all the reviews they have written and have access to Delete/Update reviews written by them
+    - In Instructor profile page, instructors can view all the reviews they have received.
+    - Sort reviews by sorting the ratings is available to all users, and users can also search reviews based on reviewer's names.
 - Map
     - Based on the current student location, we used Google Map API to show the current location of the student. First, we need to get a API key from Google then calling the service using axios.
     - We first used the Geolocation API to convert the current location to a latitude and longitude. Then we used the react-google-maps package to display the map.
@@ -114,10 +118,10 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
 
 ## List of contributions
 - Kaiqian(Cathy) Yang
-    - Added navbar and footer to website.
-    - Designed home page and added a Contact Us box using EmailJS.
-    - Worked on Rate&Review profile page for instructors, with functionalities of Add/Delete/Update/Read reviews, and allowing user to view appointments in a Calendar.
-    - Implemented user registration/login/authentication functionalities.
+    - Designed home page and added a Contact Us box using EmailJS API.
+    - Added navbar and footer to website, and registered social media account and email account for our website.
+    - Worked on backend and frontend of Rate&Review profile page for instructors, with functionalities of Add/Delete/Update/Read/Sort/Search reviews, and allowing user to view appointments in a Calendar.
+    - Implemented user registration/login/authentication functionalities, and allow new instrutors to choose their available timeslots every week when signup their account.
 - Chloe Zhang
 - Davis Qi
 - Yizhou Li
