@@ -91,21 +91,33 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
 - Follow/unfollow
     -   According to the user's log in status and user's current following information from MongoDB, the follow button would be presented variously on the first               rendering of the instructor profile page. 
     -   Firstly, Out of the consideration of the best user experience and industrial practice, we decided that an instructor cannot follow another instructor, and if a guest user clicked the follow button, the user would be redirect to a log in/register account page. Secondly when a student navigate to an instructor page, a ternary operation is used to decide the text display and functionality of the button to be follow or unfollow. 
-    -   If the follow/unfollow button is clicked by a student user, the frontend would send a patch request to our backend to update our redux reducer and MongoDB. After our backend receive the patch request and finish updating, the follow button in our frontend will change its display accordinly, and the next time when the user click it, its functionality will be switched to unfollow.
-- Add review
+    -   If the follow/unfollow button is clicked by a student user, the frontend would send a patch request to our backend to update our redux reducer and MongoDB. After our backend receive the patch request and finish updating, the follow button in our frontend will change its display accordinly, and the next time when the user click it, its functionality will be switched to unfollow.    
+- Registration/Authentication
+    - Inserted custom Express.js middleware into project backend routes to protect them against unauthorized use as well as provide login function.
+    - To be able to create an instructor account, except providing regular information, new instructor can also provide their available timeslots from Monday to Sunday and store them in MongoDB for others to view once they enter instructor's profile page.
+- Rating and reviews
+    - Fetched detailed information of each instructors such as name, experience of teaching, what class type will be taught by this instructor.
+    - Get reviews and rating from MongoDB, and instructor's appointments and available timeslots for the current week.
 - Map
     - Based on the current student location, we used Google Map API to show the current location of the student. First, we need to get a API key from Google then calling the service using axios.
     - We first used the Geolocation API to convert the current location to a latitude and longitude. Then we used the react-google-maps package to display the map.
     - Backend API is also completed to show all the instructors nearby the student, but it is taking too long to respond. We used Distance Matrix API to get the distance between the student and the instructors.
 
 - Main page sorting
+
 - Social media / contact form
+    - Registered social media account and email account for our website.
+    - Added a Contact Us box using EmailJS API, so that users are able to send direct message to our official email address though our website
 
 ## Next steps
 - In the future, we probably want to add a direct message system to send messages to instructors. In that way, we are able to resolve any issues that students may have by tracking the messages. Moreover, we would like to implement a recommendation system to recommend instructors to the student. It should be based on the user's quiz result.
 
 ## List of contributions
-- Cathy Yang
+- Kaiqian(Cathy) Yang
+    - Added navbar and footer to website.
+    - Designed home page and added a Contact Us box using EmailJS.
+    - Worked on Rate&Review profile page for instructors, with functionalities of Add/Delete/Update/Read reviews, and allowing user to view appointments in a Calendar.
+    - Implemented user registration/login/authentication functionalities.
 - Chloe Zhang
 - Davis Qi
 - Yizhou Li
