@@ -3,9 +3,9 @@ const { Schema } = mongoose;
 
 const StudentSchema = new mongoose.Schema({
     role: {
-		type: String,
-		default: "student"
-	},
+        type: String,
+        default: "student"
+    },
     first_name: {
         type: String,
         required: true
@@ -27,7 +27,7 @@ const StudentSchema = new mongoose.Schema({
         required: true
     },
     photo: {
-        type: String, default: 'https://picsum.photos/200'
+        type: String, default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKVgdPnMdBjCdxkKFnwvfzcvEA6RTfYRMuEA&usqp=CAU'
     },
     street: {
         type: String

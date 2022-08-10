@@ -60,30 +60,11 @@ const SidebarInstructor = () => {
     const [first_name, setFirstName] = useState('')
     const [last_name, setLastName] = useState('')
     const [rating, setRating] = useState('')
-
-    const handlePhoneChange = (event) => {
-        setPhone(event.target.value)
-    }
-
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value)
-    }
-
-    const handleFirstNameChange = (event) => {
-        setFirstName(event.target.value)
-    }
-
-    const handleLastNameChange = (event) => {
-        setLastName(event.target.value)
-    }
-
-    const handleRatingChange = (event) => {
-        setRating(event.target.value)
-    }
+    const [photo, setPhoto] = useState('');
 
     useEffect(() => {
         const sendGet = async () => {
-            const res = await axios
+            await axios
                 .get(
                     `https://ezdrivemain.herokuapp.com/instructors/${params.instructorId}`,
                 )
@@ -93,11 +74,11 @@ const SidebarInstructor = () => {
                     setFirstName(res.data.data.first_name)
                     setLastName(res.data.data.last_name)
                     setRating(res.data.data.rating)
+                    setPhoto(res.data.data.photo)
                 })
                 .catch((err) => {
                     alert(err)
                 })
-            // console.log(this.state.allRecipes);
         }
         sendGet()
     }, [])
@@ -114,7 +95,7 @@ const SidebarInstructor = () => {
                 <CardContent>
                     <Avatar
                         className={styles.avatar}
-                        src={'https://i.pravatar.cc/300'}
+                        src={photo}
                     />
                     <h3 className={styles.heading}>
                         {first_name + ' ' + last_name}
