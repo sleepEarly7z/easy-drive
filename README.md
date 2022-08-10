@@ -107,7 +107,12 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
     - We first used the Geolocation API to convert the current location to a latitude and longitude. Then we used the react-google-maps package to display the map.
     - Backend API is also completed to show all the instructors nearby the student, but it is taking too long to respond. We used Distance Matrix API to get the distance between the student and the instructors.
 
-- Main page sorting
+- Explore page sorting, and filtering instructors
+   - Users can filter the instructors by city, language, license type and sort instructors by rating or year of experience.
+   - The client app manages `filterBy` and `sortBy` in redux store, and send a `GET /instructors` request to API with query parameters when user click apply.
+   - Express server parse the query params and pass them to mongoose to query instructors in MongoDB.
+   - API sends OK response with queried instructors, or error code if fails.
+   - The client app displays the result instructors.
 
 - Social media / contact form
     - Registered social media account and email account for our website.
@@ -123,6 +128,16 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
     - Worked on backend and frontend of Rate&Review profile page for instructors, with functionalities of Add/Delete/Update/Read/Sort/Search reviews, and allowing user to view appointments in a Calendar.
     - Implemented user registration/login/authentication functionalities, and allow new instrutors to choose their available timeslots every week when signup their account.
 - Chloe Zhang
+    - set up schemas (instructor, student, reviews) in MongoDB.
+    - seeded the database with fake data for testing purpose.
+    - set up the express server and made a template for the team to follow the router-service-database structrue.
+    - implemented the filtering and sorting functionality on Explore page, both frontend and backend.
+    - refactored the follow/unfollow functionality with redux managing the state.
+    - implemented the useStudent() hook to fetch student infomation and data of the followed instructors.
+    - displayed followed instructors' names from a student's profile page.
+    - implemented the update of an instructor's average rating and rating distribution upon a review is added, deleted or updated.
+    - added the MongoDB url as an enviroment variable for deployment.
+    - drafted user case stories for final presentation.
 - Davis Qi
     - Design and created slider's profile card and the earlier version of profile cards on explore page.
     - Worked on follow/unfollow function that send a patch request to backend using routes,reducer, and action; the results are stored in MongoDB.
