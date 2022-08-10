@@ -135,9 +135,8 @@ export default function ReviewProfile({ instructor }) {
                     isLoading: false,
                     hasError: true,
                 }))
-                toast.error('No appointments fetched.')
             })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [listSetting.isLoading, params.instructorId])
 
     useEffect(() => {

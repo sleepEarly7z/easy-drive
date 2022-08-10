@@ -208,6 +208,7 @@ const Reviews = ({ idType, page }) => {
                                 } else {
                                     setOpenPopup(true)
                                     setRecordForEdit(null)
+                                    window.location.reload(false)
                                 }
                             }}
                         />
