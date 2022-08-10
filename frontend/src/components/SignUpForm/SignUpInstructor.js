@@ -137,17 +137,6 @@ const CarProvided = ({ control }) => {
     )
 }
 
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-const MenuProps = {
-    PaperProps: {
-        style: {
-            // maxHeight: ITEM_HEIGHT * 5 + ITEM_PADDING_TOP,
-            // width: 250,
-        },
-    },
-}
-
 const languages = [
     'English',
     'Mandarin',
@@ -491,48 +480,19 @@ const ProfessionalForm = () => {
     )
 }
 
-const ProfileForm = () => {
-    const { control } = useFormContext()
 
-    return (
-        <>
-            <Controller
-                control={control}
-                name="description"
-                render={({ field }) => (
-                    <TextField
-                        id="outlined-multiline-static"
-                        label="Description"
-                        placeholder="Enter Your Description"
-                        multiline
-                        minrows={4}
-                        margin="normal"
-                        variant="outlined"
-                        fullWidth
-                        {...field}
-                    />
-                )}
-            />
-        </>
-    )
-}
-
-function getStepContent(step, formats, setFormats, handleFormat) {
+function getStepContent(step, formats, handleFormat) {
     switch (step) {
         case 0:
             return <BasicForm />
-        // return <ProfileForm />
         case 1:
             return <ContactForm />
         case 2:
             return <ProfessionalForm />
         case 3:
-            //     return <ProfileForm />
-            // case 4:
             return (
                 <Availability
                     formats={formats}
-                    setFormats={setFormats}
                     handleFormat={handleFormat}
                 />
             )
@@ -553,7 +513,6 @@ const SignUpInstructor = () => {
 
     const handleFormat = (event, newFormats) => {
         setFormats(newFormats)
-        console.log(newFormats)
     }
 
     const { user, isError, isSuccess, message } = useSelector(
@@ -741,7 +700,6 @@ const SignUpInstructor = () => {
                                         {getStepContent(
                                             activeStep,
                                             formats,
-                                            setFormats,
                                             handleFormat,
                                         )}
                                         <Grid
