@@ -30,7 +30,7 @@ const instructorSchema = new mongoose.Schema({
 	},
 	photo: {
 		type: String,
-		default: 'https://picsum.photos/200',
+		default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKVgdPnMdBjCdxkKFnwvfzcvEA6RTfYRMuEA&usqp=CAU',
 	},
 	rating: {
 		type: Number,
