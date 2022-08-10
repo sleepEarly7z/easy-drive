@@ -77,9 +77,12 @@ const registerAsInstructor = async (data) => {
     }
     // register instructor account
     const response = await axios.post(INST_API_URL, userData)
-    
+
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
+    }
+    if (availability === []) {
+        return response.data
     }
 
     for (const avail_slot of availability) {
@@ -119,7 +122,7 @@ const logout = () => localStorage.removeItem('user')
 // Login as instructor
 const loginAsInstructor = async (userData) => {
     const response = await axios.post(INST_API_URL + 'login', userData)
-    
+
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
     }
@@ -130,7 +133,7 @@ const loginAsInstructor = async (userData) => {
 // Login as student
 const loginAsStudent = async (userData) => {
     const response = await axios.post(STUD_API_URL + 'login', userData)
-    
+
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
     }

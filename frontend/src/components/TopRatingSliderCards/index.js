@@ -11,6 +11,7 @@ function TopRatingSliderCards({ instructor, backgroundImg }) {
     const navigate = useNavigate();
     const viewProfile = () => {
         navigate(`/showProfileRating/${instructor._id}`)
+        window.location.reload(false)
     }
     const getInitial = (name) => {
         return name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()

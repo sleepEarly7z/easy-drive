@@ -59,9 +59,7 @@ function LayoutNavbar() {
 
     const handleViewProfile = () => {
         navigate(`/profile-${user.data.role}/${user.data._id}`)
-        setTimeout(() => {
-            window.location.reload(false)
-        }, 500)
+        window.location.reload(false)
     }
 
     const handleSignOut = () => {
@@ -194,7 +192,6 @@ function LayoutNavbar() {
                     <NavItem text={'Easy'} name={'icon-button-logo'} />
                 </ul>
                 <ul className="navbar-nav-right">
-                    {/* navbar__container__menu */}
                     <NavItem
                         icon={<HomeIcon />}
                         text={'Home'}
@@ -207,19 +204,6 @@ function LayoutNavbar() {
                         name={'icon-button-explore'}
                         to={'/explore'}
                     />
-                    {/* <NavItem
-                        icon={<BellIcon />}
-                        text={'Notification'}
-                        name={'icon-button-notification'}
-                        to={'/explore'}
-                    />
-                    <NavItem
-                        icon={<MessengerIcon />}
-                        text={'Message'}
-                        name={'icon-button-message'}
-                        to={'/explore'}
-                    /> */}
-
                     {user ? (
                         <>
                             <div>
@@ -269,13 +253,11 @@ function LayoutNavbar() {
                         />
                     )}
                 </ul>
-
                 <ul
                     className={`navbar__container__menu ${
                         toggleIcon ? 'active' : ''
                     }`}
                 >
-                    {/* <div className="navbar__container__menu"> */}
                     <li className="navbar__container__menu_item">
                         <Link
                             className="navbar__container__menu_item_links"
@@ -292,22 +274,6 @@ function LayoutNavbar() {
                             Explore
                         </Link>
                     </li>
-                    {/* <li className="navbar__container__menu_item">
-                        <Link
-                            className="navbar__container__menu_item_links"
-                            to="/"
-                        >
-                            Notification
-                        </Link>
-                    </li>
-                    <li className="navbar__container__menu_item">
-                        <Link
-                            className="navbar__container__menu_item_links"
-                            to="/"
-                        >
-                            Message
-                        </Link>
-                    </li> */}
                     {user ? (
                         <>
                             <li className="navbar__container__menu_item">
@@ -359,23 +325,7 @@ function LayoutNavbar() {
                     </li>
                 </div>
             </nav>
-            {/* <div className="nav-icon" onClick={handleToggleIcon}>
-                {toggleIcon ? <HiX size={30} /> : <FaBars size={30} />}
-            </div> */}
         </div>
-    )
-}
-
-function Navbar(props) {
-    const leftItems = props.children[0]
-    const rightItems = Array.from(props.children).slice(1)
-    return (
-        <>
-            <nav className="navbar">
-                <ul className="navbar-nav-left">{leftItems}</ul>
-                <ul className="navbar-nav-right">{rightItems}</ul>
-            </nav>
-        </>
     )
 }
 
@@ -388,6 +338,7 @@ function NavItem(props) {
         setOpen(!open)
         if (props.to) {
             navigate(props.to)
+            window.location.reload(false)
         }
         if (props.name === 'icon-button-signout') {
             dispatch(logoutAsync())
@@ -398,7 +349,6 @@ function NavItem(props) {
 
     return (
         <li className="nav-item">
-            {/* navbar__container__menu_item */}
             {props.icon ? (
                 <div>
                     <Link

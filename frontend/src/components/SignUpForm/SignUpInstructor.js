@@ -15,8 +15,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import ToggleButton from '@mui/material/ToggleButton'
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
@@ -300,7 +298,6 @@ function getSteps() {
         'Basic information',
         'Contact Information',
         'Professional Information',
-        // 'Profile Information',
         'Availability',
     ]
 }
@@ -573,6 +570,7 @@ const SignUpInstructor = () => {
             setIsLoading(true)
             setTimeout(function () {
                 navigate('/explore')
+                window.location.reload(false)
             }, 3000) //run this after 3 seconds
         }
 
@@ -629,14 +627,11 @@ const SignUpInstructor = () => {
             data.availability = formats
             console.log('data: ' + data)
             dispatch(registerAsync(data))
-            if (formats.length !== 0) {
-                console.log('Need to book available time')
-            }
-            // console.log('formats: ' + formats)
             setIsLoading(true)
             // redirect after 3 seconds
             setTimeout(function () {
                 navigate('/explore')
+                window.location.reload(false)
             }, 3000) //run this after 3 seconds
         } else {
             if (activeStep === 0) {
@@ -675,10 +670,6 @@ const SignUpInstructor = () => {
 
     const handleBack = () => {
         setActiveStep(activeStep - 1)
-    }
-
-    const onSubmit = (data) => {
-        console.log(data)
     }
 
     return isLoading ? (
