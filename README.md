@@ -66,7 +66,6 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
     -   Upload/Update the instructor's profile image
 -   [x] Manage user registration/login/authentication
     -   Register with email and password as a student/instructor
-    -   Register with a Google account as a student/instructor
     -   Login with email and password as a student/instructor
     -   Login with a Google account as a student/instructor
 
@@ -91,23 +90,57 @@ Welcome to ezdrive! The ultimate website for finding a local driving instructor 
 - Follow/unfollow
     -   According to the user's log in status and user's current following information from MongoDB, the follow button would be presented variously on the first               rendering of the instructor profile page. 
     -   Firstly, Out of the consideration of the best user experience and industrial practice, we decided that an instructor cannot follow another instructor, and if a guest user clicked the follow button, the user would be redirect to a log in/register account page. Secondly when a student navigate to an instructor page, a ternary operation is used to decide the text display and functionality of the button to be follow or unfollow. 
-    -   If the follow/unfollow button is clicked by a student user, the frontend would send a patch request to our backend to update our redux reducer and MongoDB. After our backend receive the patch request and finish updating, the follow button in our frontend will change its display accordinly, and the next time when the user click it, its functionality will be switched to unfollow.
-- Add review
+    -   If the follow/unfollow button is clicked by a student user, the frontend would send a patch request to our backend to update our redux reducer and MongoDB. After our backend receive the patch request and finish updating, the follow button in our frontend will change its display accordinly, and the next time when the user click it, its functionality will be switched to unfollow.    
+- Registration/Authentication
+    - Inserted custom Express.js middleware into project backend routes to protect them against unauthorized use as well as provide login function.
+    - To create an instructor account, new instructor can provide their available timeslots from Monday to Sunday and store them in MongoDB. Once information received by MongoDB, all users will have access to view the time schedule of one instructor in one week if they view instructor's Rate&Review profile page.
+- Rating and reviews
+    - Fetched detailed information of each instructors such as name, experience of teaching years, and what class license the instructor holds.
+    - Retrieved all available and booked timeslots based on the current instructor's Rate&Review profile page and display them in a Calendar view. Users can also choose Calendar types to view appointments in one day/week/month.
+    - Display reviews and rating based on data collected from MongoDB. Logged-in students will have access to Add a new review and give ratings to every instructor they see, and the rating distribution will actively change its data once receiving a new review and rating.
+    - In Student profile page, students can view all the reviews they have written and have access to Delete/Update reviews written by them
+    - In Instructor profile page, instructors can view all the reviews they have received.
+    - Sort reviews by sorting the ratings is available to all users, and users can also search reviews based on reviewer's names.
 - Map
     - Based on the current student location, we used Google Map API to show the current location of the student. First, we need to get a API key from Google then calling the service using axios.
     - We first used the Geolocation API to convert the current location to a latitude and longitude. Then we used the react-google-maps package to display the map.
     - Backend API is also completed to show all the instructors nearby the student, but it is taking too long to respond. We used Distance Matrix API to get the distance between the student and the instructors.
 
-- Main page sorting
+- Explore page sorting, and filtering instructors
+   - Users can filter the instructors by city, language, license type and sort instructors by rating or year of experience.
+   - The client app manages `filterBy` and `sortBy` in redux store, and send a `GET /instructors` request to API with query parameters when user click apply.
+   - Express server parse the query params and pass them to mongoose to query instructors in MongoDB.
+   - API sends OK response with queried instructors, or error code if fails.
+   - The client app displays the result instructors.
+
 - Social media / contact form
+    - Registered social media account and email account for our website.
+    - Added a Contact Us box using EmailJS API, so that users are able to send direct message to our official email address though our website
 
 ## Next steps
 - In the future, we probably want to add a direct message system to send messages to instructors. In that way, we are able to resolve any issues that students may have by tracking the messages. Moreover, we would like to implement a recommendation system to recommend instructors to the student. It should be based on the user's quiz result.
 
 ## List of contributions
-- Cathy Yang
+- Kaiqian(Cathy) Yang
+    - Designed home page and added a Contact Us box using EmailJS API.
+    - Added navbar and footer to website, and registered social media account and email account for our website.
+    - Worked on backend and frontend of Rate&Review profile page for instructors, with functionalities of Add/Delete/Update/Read/Sort/Search reviews, and allowing user to view appointments in a Calendar.
+    - Implemented user registration/login/authentication functionalities, and allow new instrutors to choose their available timeslots every week when signup their account.
 - Chloe Zhang
+    - set up schemas (instructor, student, reviews) in MongoDB.
+    - seeded the database with fake data for testing purpose.
+    - set up the express server and made a template for the team to follow the router-service-database structrue.
+    - implemented the filtering and sorting functionality on Explore page, both frontend and backend.
+    - refactored the follow/unfollow functionality with redux managing the state.
+    - implemented the useStudent() hook to fetch student infomation and data of the followed instructors.
+    - displayed followed instructors' names from a student's profile page.
+    - implemented the update of an instructor's average rating and rating distribution upon a review is added, deleted or updated.
+    - added the MongoDB url as an enviroment variable for deployment.
+    - drafted user case stories for final presentation.
 - Davis Qi
+    - Design and created slider's profile card and the earlier version of profile cards on explore page.
+    - Worked on follow/unfollow function that send a patch request to backend using routes,reducer, and action; the results are stored in MongoDB.
+    - Worked on the side filter bar/search function at the beginning of the project, and worked on responsive on some components.
 - Yizhou Li
     - Link with map API, external APIs calling and handling
     - Worked with the deployment, fixed package/version bugs on Heroku and successfully deployed the build to Heroku
